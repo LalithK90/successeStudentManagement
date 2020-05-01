@@ -1,0 +1,192 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Update</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+
+</head>
+<body>
+
+<div class="container- p-3 my-2 bg-primary text-white">
+    <h2>Teacher Update</h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5">
+            <form method="POST">
+
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="Name">Full Name</label></b>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="lname">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="Gender">Gender</label></b>
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" id="example-select-one">
+                            <option selected="">Select</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="Date of Birth">Date of birth</label></b>
+                    </div>
+                    <div class="col-8">
+                        <input type="date" class="form-control" id="example-date-input">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b> <label for="Name">Address</label></b>
+                    </div>
+                    <div class="col-8">
+                        <textarea class="form-control" id="example-textarea" rows="5" placeholder="Type the Address"></textarea>
+                        <p></p>
+                        <select class="form-control" id="city">
+                            <option selected=""> Select the City</option>
+                            <option value="Mirigama">Mirigama</option>
+                            <option value="Gampaha">Gampaha</option>
+                            <option value="Giriulla">Giriulla</option>
+                            <option value="Divulapitiya">Divulapitiya</option>
+                            <option value="Loluwagoda">Loluwagoda</option>
+                            <option value="pasyala">pasyala</option>
+                            <option value="Nittambuwa">Nittambuwa</option>
+                            <option value="Pallewela">Pallewela</option>
+                            <option value="Giriulla">Giriulla</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="email">Email Address</label></b>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="form-control" placeholder="Enter Email Address" id="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b> <label for="Name">Subject</label></b>
+                    </div>
+                    <div class="col-8">
+
+                        <select class="form-control" id="subject">
+                            <option selected=""> Select the Subject</option>
+                            <option value="mathematics">Mathematics</option>
+                            <option value="sinhala">Sinhala</option>
+                            <option value="english">English</option>
+                            <option value="science">Science</option>
+                            <option value="history">History</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="ict">ICT</option>
+                            <option value="arts">Arts</option>
+                            <option value="music">Music</option>
+                            <option value="dancing">Dancing</option>
+                            <option value="tamil">Tamil</option>
+                            <option value="sin-lit">Sinhala-Literature</option>
+                            <option value="eng-lit">English Literature</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="fee">Fee</label></b>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="form-control" placeholder="Enter Fee amount" id="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b>  <label for="conatactNum">Contact number</label></b>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="fname" placeholder="Enter Mobile Number" name="mobile">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="lname" placeholder="Enter fixed number" name="fixed">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="photo">Take a photo</label></b>
+                    </div>
+                    <div class="col-8">
+                        <div class="custom-file">
+                            <input type="file" id="example-file-custom-button" class="custom-file-input">
+                            <label class="custom-file-label" for="example-file-custom-button" data-browse="Select file">Pick the photo</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-4 ">
+
+                    </div>
+                    <div class="col-8">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="col-4">
+            <h2>Teacher Profile</h2>
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="avatar2.png" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">View profile</h4>
+                    <button data-toggle="collapse" class="btn btn-outline-info" data-target="#demo">View Teacher Details</button>
+
+                    <div id="demo" class="collapse">
+                        <form method="post">
+                            <br>
+                            <input type="text" class="form-control" placeholder="Search by Registration ID" aria-label="Text input with button"><p></p>
+                            <button type="submit" class="btn btn-outline-warning">View</button>
+                            <a href="#" class="btn btn-outline-secondary" role="button">Print</a>
+                            <button type="reset" class="btn btn-outline-danger">Delete Teacher</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="=col-3">
+            <h5>Reserved for Display Teacher Details</h5>
+            <button type="Delete Teacher" class="btn btn-danger" data-toggle="collapse" data-target="#demo">Click Me</button>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>subject Management</title>
+</head>
+<body>
+<div class="container- p-3 my-2 bg-primary text-white">
+    <h2>Subject Management</h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 bg rounded" style="height: 500px;background-color:#F0F8FF;">
+            <h1 align="center" class="display-6" style="font-family: 'Segoe UI Light'; font-size:33px">Add New Subject</h1>
+            <p></p>
+
+            <form method="post">
+
+
+            <div class="row form-group">
+                <div class="col-4 ">
+                    <b><label for="subjectCode">Subject Code</label></b>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Enter Subject Code" id="">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-4 ">
+                    <b><label for="subjectName">Subject Name</label></b>
+                </div>
+                <div class="col-8">
+                    <input type="text" class="form-control" placeholder="Enter Subject Name" id="">
+                </div>
+            </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+
+                    </div>
+                    <div class="col-8">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+
+                        <input type="reset" class="btn btn-danger" value="Clear All">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-7">
+            <h1 class="display-4" align="center">View All Subjects</h1>
+            <p></p>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Index</th>
+                    <th scope="col">Subject Code</th>
+                    <th scope="col">Subject Name</th>
+                    <th scope="col">Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>001</td>
+                    <td>Mathematics</td>
+                    <td>
+                        <input type="submit" class="btn btn-success btn-sm" value="Modify">
+                        <input type="submit" class="btn btn-warning btn-sm" value="Delete">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>002</td>
+                    <td>Sinhala</td>
+                    <td>
+                        <input type="submit" class="btn btn-success btn-sm" value="Modify">
+                        <input type="submit" class="btn btn-warning btn-sm" value="Delete">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

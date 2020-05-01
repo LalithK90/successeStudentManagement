@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hall management</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container- p-3 my-2 bg-primary text-white">
+    <h2>Hall Management</h2>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5">
+            <form method="POST">
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="hallNo">Hall Number</label></b>
+
+                    </div>
+                    <div class="col-8">
+                        <input type="hallNo" class="form-control" placeholder="Enter the Hall Number" id="">
+
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="condition">Hall Condition</label></b>
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" id="example-select-one">
+                            <option selected="">Select</option>
+                            <option value="1">Air Conditioned</option>
+                            <option value="2">Non A/C</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="seatingCount">Seat Count</label></b>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="form-control" placeholder="Enter Number of Seats" id="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-4 ">
+                        <b><label for="location">Hall Location</label></b>
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" id="example-select-one">
+                            <option selected="">Select</option>
+                            <option value="1">1<sup>st</sup> Floor</option>
+                            <option value="2">2<sup>nd</sup> Floor</option>
+                            <option value="3">3<sup>rd</sup> Floor</option>
+                            <option value="4">Ground Floor</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-4 ">
+
+                    </div>
+                    <div class="col-8">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+
+                        <input type="reset" class="btn btn-danger" value="Clear All">
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="col-4">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" src="h2.png" alt="Card image">
+                <div class="card-body">
+                    <h4 class="card-title">View Hall Details</h4>
+                    <button data-toggle="collapse" class="btn btn-outline-info" data-target="#demo">View Student Details</button>
+
+                    <div id="demo" class="collapse">
+                        <form method="post">
+                            <br>
+                            <input type="text" class="form-control" placeholder="Search by Hall Number" aria-label="Text input with button"><p></p>
+                            <button type="submit" class="btn btn-outline-warning">View</button>
+                            <a href="hallUpdate.html" class="btn btn-outline-success" role="button">Update</a>
+                            <a href="#" class="btn btn-outline-secondary" role="button">Print</a>
+                            <button type="reset" class="btn btn-outline-danger">Remove Hall</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="=col-3">
+
+            <div class="col-8" align="right">
+                <a href="hallViewAll.html" class="btn btn-dark" role="button">View All Halls</a>
+                <p></p>
+            </div>
+            <h5>Reserved for Display Hall Details</h5>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>
