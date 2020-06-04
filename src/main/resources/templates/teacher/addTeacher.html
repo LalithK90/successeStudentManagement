@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Teacher Management - Add New Teacher</h1>
+    </div>
+    <div class="col-4">
+        <a href="/teacher">
+            <button class="btn btn-primary">All Teacher</button>
+        </a>
+    </div>
+</div>
+<div class="container-fluid">
+    <form action="/teacher/save" data-th-object="${teacher}" method="post">
+        <!--teacher id-->
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
+            <div class="col-md-4">
+                <label data-th-for="${id}">Id</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{id}" readonly type="text">
+            </div>
+        </div>
+        <!--registration number-->
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
+            <div class="col-md-4">
+                <label data-th-for="${registrationId}"></label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{registrationId}" readonly type="text">
+            </div>
+        </div>
+        <!--First Name-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${firstName}">First Name :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{firstName}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{firstName}"
+                      data-th-if="${#fields.hasErrors('firstName')}">Error Name</span>
+            </div>
+        </div>
+        <!--Last Name-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${lastName}">Last Name :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{lastName}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{lastName}"
+                      data-th-if="${#fields.hasErrors('lastName')}">Error Name</span>
+            </div>
+        </div>
+        <!--Gender-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="gender">Gender :</label>
+            </div>
+            <div class="col-md-8">
+                <select class="form-control" data-th-field="*{gender}" id="gender" required tabindex="7">
+                    <option value="">Please select</option>
+                    <option data-th-each="genders : ${gender}"
+                            data-th-selected="${genders==teacher.gender?'selected':'unselected'}"
+                            data-th-text="${genders.gender}"
+                            data-th-value="${genders}"></option>
+                </select>
+            </div>
+        </div>
+        <!--Date of birth-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="dateOfBirth">Birth date :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{dateOfBirth}" id="dateOfBirth"
+                       placeholder="Ex: 1990 - 01 - 20"
+                       required
+                       tabindex="8" type="date"/>
+                <span class="error" data-th-errors="*{dateOfBirth}"
+                      data-th-if="${#fields.hasErrors('dateOfBirth')}" id="dateOfBirthError">Error Birthday</span>
+            </div>
+        </div>
+        <!--Email-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="email">Email :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{email}" id="email" required tabindex="16" type="email"/>
+                <span class="error" data-th-errors="*{email}"
+                      data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Email</span>
+            </div>
+        </div>
+        <!--Address-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="address">Address :</label>
+            </div>
+            <div class="col-md-8">
+                <textarea class="form-control" data-th-field="*{address}" id="address" required
+                          tabindex="12"></textarea>
+                <span class="error" data-th-errors="*{address}"
+                      data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
+            </div>
+        </div>
+        <!--Mobile Number One-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${mobile}">Mobile One No :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control mobile" data-th-field="*{mobile}" maxlength="10" min="9"
+                       required tabindex="13"
+                       type="text"/>
+                <span class="error" data-th-errors="*{mobile}"
+                      data-th-if="${#fields.hasErrors('mobile')}">Error Mobile Number</span>
+            </div>
+        </div>
+        <!--Subject-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${subject}">Subject :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{subject}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{subject}"
+                      data-th-if="${#fields.hasErrors('subject')}">Error Name</span>
+            </div>
+        </div>
+        <!--Fee-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${fee}">Tuition Fee :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{fee}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{fee}"
+                      data-th-if="${#fields.hasErrors('fee')}">Error Name</span>
+            </div>
+        </div>
+
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" tabindex="21" type="submit">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                    data-th-text="${addStatus==true?'Save': 'Update'}"
+                    id="submit"></span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>
