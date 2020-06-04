@@ -29,7 +29,9 @@
                 <label data-th-for="${id}">Id</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{id}" readonly type="text">
+                <label>
+                    <input class="form-control" data-th-field="*{id}" readonly type="text">
+                </label>
             </div>
         </div>
         <!-- Name-->
@@ -38,7 +40,9 @@
                 <label class="control-label" data-th-for="${name}">Name :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{name}" required tabindex="4" type="text"/>
+                <label>
+                    <input class="form-control" data-th-field="*{name}" required tabindex="4" type="text"/>
+                </label>
                 <span data-th-errors="*{name}"
                       data-th-if="${#fields.hasErrors('name')}">Error Name</span>
             </div>
