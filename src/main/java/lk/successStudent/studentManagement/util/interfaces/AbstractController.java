@@ -1,24 +1,42 @@
 package lk.successStudent.studentManagement.util.interfaces;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import javax.validation.Valid;
 
 public interface AbstractController<E, I> {
-// this is most help to create REST API
-    List<E> findAll();
+    /**
+     * 1. Find All relevant things belongs provided entity {}
+     */
+    String findAll(Model model);
 
-    E findById(I id);
+    /**
+     * 2. send form to add new detail
+     */
+    String form(Model model);
 
-    E persist(E e);
 
-    ResponseEntity<String> delete(I id);
+    /**
+     * 3. Find One relevant things belongs provided entity {} id
+     */
+    String findById(I id, Model model);
 
-    List<E> search(E e);
+    /**
+     * 4. Find One and send data to frontend to Edit relevant things belongs provided entity {} id
+     */
+    String edit(I id, Model model);
 
-    E modifyResource(E e);
+    /**
+     * 5. Save and Update {} data using relevant entity belongs to model Attribute
+     */
+    String persist(@Valid @ModelAttribute E e, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model);
 
-    List<E> modifyResources(List<E> eList);
-
+    /**
+     * 6. Remove One relevant things belongs provided entity {} id
+     */
+    String delete(I id, Model model);
 
 }
