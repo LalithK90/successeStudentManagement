@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Hall Management - Add New Hall</h1>
+    </div>
+    <div class="col-4">
+        <a href="/hall">
+            <button class="btn btn-primary">All Hall</button>
+        </a>
+    </div>
+</div>
+<div class="container-fluid">
+    <form action="/hall/save" data-th-object="${hall}" method="post">
+        <!--hall id-->
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
+            <div class="col-md-4">
+                <label data-th-for="${id}">Id</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{id}" readonly type="text">
+                </label>
+            </div>
+        </div>
+        <!-- Number-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${number}">Hall Number :</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{number}" required tabindex="4" type="text"/>
+                </label>
+                <span data-th-errors="*{number}"
+                      data-th-if="${#fields.hasErrors('number')}">Error Name</span>
+            </div>
+        </div>
+        <!--Condition-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${hallCondition}">Hall Condition :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{hallCondition}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{hallCondition}"
+                      data-th-if="${#fields.hasErrors('hallCondition')}">Error Name</span>
+            </div>
+        </div>
+        <!-- hallName-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${hallName}">Hall Name :</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{hallName}" required tabindex="4" type="text"/>
+                </label>
+                <span data-th-errors="*{hallName}"
+                      data-th-if="${#fields.hasErrors('hallName')}">Error Name</span>
+            </div>
+        </div>
+
+        <!--Count-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${seatCount}">Seating Count :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{seatCount}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{seatCount}"
+                      data-th-if="${#fields.hasErrors('seatCount')}">Error Name</span>
+            </div>
+        </div>
+        <!--Location-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${HallLocation}">Location:</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{HallLocation}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{HallLocation}"
+                      data-th-if="${#fields.hasErrors('HallLocation')}">Error Name</span>
+            </div>
+        </div>
+
+        <!--Button-->
+        <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" tabindex="21" type="submit">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                    data-th-text="${addStatus==true?'Save': 'Update'}"
+                    id="submit"></span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

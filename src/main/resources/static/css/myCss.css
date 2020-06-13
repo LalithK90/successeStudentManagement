@@ -8,13 +8,13 @@
 }
 
 #loginBack {
-    background-image: url('../img/loginBackground.jpg');
+    background-image: url('../img/loginBackground.png');
 }
 
 
 /*html Background - start*/
 body {
-    background-image: url('../img/loginBackground.jpg');
+    background-image: url('../img/loginBackground.png');
     background-size: cover;
     background-repeat: no-repeat;
 }

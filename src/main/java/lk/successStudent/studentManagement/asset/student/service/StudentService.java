@@ -2,10 +2,10 @@ package lk.successStudent.studentManagement.asset.student.service;
 
 
 import lk.successStudent.studentManagement.asset.student.dao.StudentDao;
-import lk.successStudent.studentManagement.asset.student.entity.Student;
 import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
+import lk.successStudent.studentManagement.asset.student.entity.Student;
 import java.util.List;
 
 @Service
@@ -24,10 +24,8 @@ public class StudentService implements AbstractService<Student, Integer> {
         return studentDao.getOne(id);
     }
 
-    public Student persist(Student student
-    ) {
-        return studentDao.save(student
-        );
+    public Student persist(Student student) {
+        return studentDao.save(student);
     }
 
     public boolean delete(Integer id) {
@@ -35,14 +33,10 @@ public class StudentService implements AbstractService<Student, Integer> {
         return false;
     }
 
-    public List<Student> search(Student student
-    ) {
+    public List<Student> search(Student student) {
         return null;
     }
 
 
-    public Student lastStudent() {
-        return studentDao.findFirstByOrderByIdDesc();
-    }
 
 }

@@ -26,26 +26,32 @@
         <thead class="thead-inverse">
         <tr>
             <th>Index</th>
+            <th>Registration ID</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Gender</th>
+            <th>Date of Birth</th>
             <th>City</th>
             <th>School</th>
             <th>Guardian</th>
-            <th>Contact Number</th>
+            <th>Mobile Number</th>
+            <th>Home Number</th>
             <th>Modify</th>
         </tr>
         </thead>
         <tbody>
         <tr data-th-each="student, index : ${students}">
             <td data-th-text="${index.count}"></td>
+            <td data-th-text="${student.regNo}"></td>
             <td data-th-text="${student.firstName}"></td>
             <td data-th-text="${student.lastName}"></td>
-            <td data-th-text="${student.gender}"></td>
+            <td data-th-text="${student.dob}"></td>
+            <td data-th-text="${student.address}"></td>
             <td data-th-text="${student.city}"></td>
             <td data-th-text="${student.school}"></td>
             <td data-th-text="${student.guardian}"></td>
             <td data-th-text="${student.mobile}"></td>
+            <td data-th-text="${student.home}"></td>
             <td>
                 <a data-th-href="${'/student/view/'+ student.id}"><button class="btn btn-info">View</button></a>
                 <a data-th-href="${'/student/edit/'+ student.id}"><button class="btn btn-success">Update</button></a>

@@ -1,6 +1,7 @@
 package lk.successStudent.studentManagement.asset.subject.controller;
 
 
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.asset.subject.entity.Subject;
 import lk.successStudent.studentManagement.asset.subject.service.SubjectService;
 import lk.successStudent.studentManagement.util.interfaces.AbstractController;
@@ -23,7 +24,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("subjects", subjectService.findAll());
+        model.addAttribute("teachers", subjectService.findAll());
         return "subject/subject";
     }
 
@@ -32,7 +33,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
         model.addAttribute("subject", new Subject());
 
         model.addAttribute("addStatus",true);
-        return "subject/addSubject";
+        return "subject/addTeacher";
     }
 
     @GetMapping("/view/{id}")
@@ -46,7 +47,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
         model.addAttribute("subject", subjectService.findById(id));
 
         model.addAttribute("addStatus",false);
-        return "subject/addSubject";
+        return "subject/addTeacher";
     }
 
     @PostMapping("/save")
@@ -55,7 +56,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
             model.addAttribute("subject", subject);
 
             model.addAttribute("addStatus",true);
-            return "subject/addSubject";
+            return "subject/addTeacher";
         }
 
         subjectService.persist(subject);
@@ -69,3 +70,5 @@ public class SubjectController implements AbstractController<Subject, Integer> {
         return "redirect:/subject";
     }
 }
+
+

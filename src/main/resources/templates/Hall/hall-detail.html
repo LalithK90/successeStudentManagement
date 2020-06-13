@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+        <a href="/hall/new">
+            <button class="btn btn-info">New Hall</button>
+        </a>
+    </div>
+    <div class="col-4">
+        <h1>Hall Management - Hall Detail</h1>
+    </div>
+    <div class="col-4">
+        <a href="/hall">
+            <button class="btn btn-primary">All Hall</button>
+        </a>
+    </div>
+</div>
+<!--Hall detail-->
+<div class="container-fluid" data-th-fragment="hallDetail">
+    <!--hall id-->
+    <div class="form-group">
+        <label data-th-for="${id}">Id</label>
+        <p class="form-control" data-th-text="${hallDetail.id}"></p>
+    </div>
+    <!--number-->
+    <div class="form-group">
+        <label data-th-for="${number}"></label>
+        <p class="form-control" data-th-text="${hallDetail.number}"></p>
+    </div>
+    <!--Condition-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${hallCondition}">Hall Condition:</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${hallDetail.hallCondition}"></p>
+        </div>
+    </div>
+    <!--Count-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${seatCount}">Seating count:</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${hallDetail.seatCount}"></p>
+        </div>
+    </div>
+    <!--location-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${HallLocation}">Hall location:</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${hallDetail.HallLocation}"></p>
+        </div>
+    </div>
+</div>
+<!--Button-->
+<div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+    <a href="/hall">
+        <button class="btn btn-success" tabindex="21" type="submit">
+            Back
+        </button>
+    </a>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

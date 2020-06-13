@@ -33,8 +33,8 @@
     </div>
     <!--registration number-->
     <div class="form-group">
-        <label data-th-for="${registrationId}"></label>
-        <p class="form-control" data-th-text="${studentDetail.registrationId}"></p>
+        <label data-th-for="${regNo}"></label>
+        <p class="form-control" data-th-text="${studentDetail.regNo}"></p>
     </div>
     <!--First Name-->
     <div class="form-row text-right">
@@ -69,7 +69,7 @@
             <label class="control-label">Birth date :</label>
         </div>
         <div class="col-md-8">
-            <p class="form-control" data-th-text="${studentDetail.dateOfBirth}"></p>
+            <p class="form-control" data-th-text="${studentDetail.dob}"></p>
         </div>
     </div>
 
@@ -80,6 +80,15 @@
         </div>
         <div class="col-md-8">
             <p class="form-control" data-th-utext="${studentDetail.address}"></p>
+        </div>
+    </div>
+    <!--City-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label">School :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${studentDetail.city}"></p>
         </div>
     </div>
     <!--School-->
@@ -115,10 +124,10 @@
     <!--fixed Number One-->
     <div class="form-row text-right">
         <div class="col-md-4">
-            <label class="control-label" data-th-for="${fixed}">fixed No :</label>
+            <label class="control-label" data-th-for="${home}">fixed No :</label>
         </div>
         <div class="col-md-8">
-            <p class="form-control mobile" data-th-text="${studentDetail.fixed}"></p>
+            <p class="form-control mobile" data-th-text="${studentDetail.home}"></p>
         </div>
     </div>
 

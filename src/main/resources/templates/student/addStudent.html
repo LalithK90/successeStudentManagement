@@ -17,7 +17,7 @@
     </div>
     <div class="col-4">
         <a href="/student">
-            <button class="btn btn-primary">All Student</button>
+            <button class="btn btn-primary">All Students</button>
         </a>
     </div>
 </div>
@@ -35,10 +35,10 @@
         <!--registration number-->
         <div class="form-row text-right" data-th-if="${addStatus==false}">
             <div class="col-md-4">
-                <label data-th-for="${registrationId}"></label>
+                <label data-th-for="${regNo}"></label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{registrationId}" readonly type="text">
+                <input class="form-control" data-th-field="*{regNo}" readonly type="text">
             </div>
         </div>
         <!--First Name-->
@@ -81,15 +81,15 @@
         <!--Date of birth-->
         <div class="form-row text-right">
             <div class="col-md-4">
-                <label class="control-label" for="dateOfBirth">Birth date :</label>
+                <label class="control-label" for="dob">Birth date :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{dateOfBirth}" id="dateOfBirth"
-                       placeholder="Ex: 1990 - 01 - 20"
+                <input class="form-control" data-th-field="*{dob}" id="dateOfBirth"
+                       placeholder="Enter Your B'day"
                        required
                        tabindex="8" type="date"/>
-                <span class="error" data-th-errors="*{dateOfBirth}"
-                      data-th-if="${#fields.hasErrors('dateOfBirth')}" id="dateOfBirthError">Error Birthday</span>
+                <span class="error" data-th-errors="*{dob}"
+                      data-th-if="${#fields.hasErrors('dob')}" id="dateOfBirthError">Error Birthday</span>
             </div>
         </div>
         <!--School-->
@@ -114,6 +114,17 @@
                       data-th-if="${#fields.hasErrors('address')}" id="addressError">Error Address</span>
             </div>
         </div>
+
+        <!--city-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="city">Name of School:</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{city}" id="city" required tabindex="32" type="school"/>
+
+            </div>
+        </div>
         <!--Mobile Number One-->
         <div class="form-row text-right">
             <div class="col-md-4">
@@ -129,14 +140,14 @@
             <!--Fixed LAN-->
             <div class="form-row text-right">
                 <div class="col-md-4">
-                    <label class="control-label" data-th-for="${mobile2}">Fixed Number :</label>
+                    <label class="control-label" data-th-for="${home}">Fixed Number :</label>
                 </div>
                 <div class="col-md-8">
-                    <input class="form-control mobile" data-th-field="*{fixed}" maxlength="10" min="9"
+                    <input class="form-control mobile" data-th-field="*{home}" maxlength="10" min="9"
                            required tabindex="13"
                            type="text"/>
-                    <span class="error" data-th-errors="*{fixed}"
-                          data-th-if="${#fields.hasErrors('fixed')}">Error Fixed Number</span>
+                    <span class="error" data-th-errors="*{home}"
+                          data-th-if="${#fields.hasErrors('home')}">Error Fixed Number</span>
                 </div>
         </div>
         <!--Guardian-->

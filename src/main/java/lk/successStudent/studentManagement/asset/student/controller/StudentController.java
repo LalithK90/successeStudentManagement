@@ -1,7 +1,6 @@
 package lk.successStudent.studentManagement.asset.student.controller;
 
 
-import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.asset.student.entity.Student;
 import lk.successStudent.studentManagement.asset.student.service.StudentService;
 import lk.successStudent.studentManagement.util.interfaces.AbstractController;
@@ -31,7 +30,7 @@ public class StudentController implements AbstractController<Student, Integer> {
     @GetMapping("/new")
     public String form(Model model) {
         model.addAttribute("student", new Student());
-        model.addAttribute("gender", Gender.values());
+
         model.addAttribute("addStatus",true);
         return "student/addStudent";
     }
@@ -45,7 +44,7 @@ public class StudentController implements AbstractController<Student, Integer> {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("student", studentService.findById(id));
-        model.addAttribute("gender", Gender.values());
+
         model.addAttribute("addStatus",false);
         return "student/addStudent";
     }
@@ -54,11 +53,11 @@ public class StudentController implements AbstractController<Student, Integer> {
     public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("student", student);
-            model.addAttribute("gender", Gender.values());
+
             model.addAttribute("addStatus",true);
             return "student/addStudent";
         }
-//todo-> student registration number need make
+
         studentService.persist(student);
         return "redirect:/student";
 

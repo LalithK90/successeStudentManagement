@@ -2,7 +2,6 @@ package lk.successStudent.studentManagement.asset.student.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,29 +9,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import java.time.LocalDate;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonFilter( "Student" )
 public class Student extends AuditEntity {
-    private String registrationId;
 
-
+    private String regNo;
 
     private String firstName;
 
     private String lastName;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private String gender;
 
     @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate dateOfBirth;
+    private LocalDate dob;
 
     private String address;
 
@@ -42,9 +39,11 @@ public class Student extends AuditEntity {
 
     private String guardian;
 
-    @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobile;
 
-// TODO: 6/5/2020  add the picture for profile picture here 
+    private String home;
+
+    // TODO: 6/13/2020  add the student picture
+
 
 }
