@@ -33,12 +33,14 @@
             </div>
         </div>
         <!--registration number-->
-        <div class="form-row text-right" data-th-if="${addStatus==false}">
+        <div class="form-row text-right">
             <div class="col-md-4">
-                <label data-th-for="${regNo}"></label>
+                <label class="control-label" data-th-for="${regNo}">Registration ID :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{regNo}" readonly type="text">
+                <input class="form-control" data-th-field="*{regNo}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{regNo}"
+                      data-th-if="${#fields.hasErrors('regNo')}">Error Name</span>
             </div>
         </div>
         <!--First Name-->
@@ -71,10 +73,8 @@
             <div class="col-md-8">
                 <select class="form-control" data-th-field="*{gender}" id="gender" required tabindex="7">
                     <option value="">Please select</option>
-                    <option data-th-each="genders : ${gender}"
-                            data-th-selected="${genders==student.gender?'selected':'unselected'}"
-                            data-th-text="${genders.gender}"
-                            data-th-value="${genders}"></option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
             </div>
         </div>
@@ -95,11 +95,12 @@
         <!--School-->
         <div class="form-row text-right">
             <div class="col-md-4">
-                <label class="control-label" for="school">Name of School:</label>
+                <label class="control-label" data-th-for="${school}">School :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{school}" id="school" required tabindex="32" type="school"/>
-
+                <input class="form-control" data-th-field="*{school}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{school}"
+                      data-th-if="${#fields.hasErrors('school')}">Error Name</span>
             </div>
         </div>
         <!--Address-->
@@ -118,11 +119,12 @@
         <!--city-->
         <div class="form-row text-right">
             <div class="col-md-4">
-                <label class="control-label" for="city">Name of School:</label>
+                <label class="control-label" data-th-for="${city}">city :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{city}" id="city" required tabindex="32" type="school"/>
-
+                <input class="form-control" data-th-field="*{city}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{city}"
+                      data-th-if="${#fields.hasErrors('city')}">Error Name</span>
             </div>
         </div>
         <!--Mobile Number One-->
@@ -137,19 +139,21 @@
                 <span class="error" data-th-errors="*{mobile}"
                       data-th-if="${#fields.hasErrors('mobile')}">Error Mobile Number</span>
             </div>
-            <!--Fixed LAN-->
-            <div class="form-row text-right">
-                <div class="col-md-4">
-                    <label class="control-label" data-th-for="${home}">Fixed Number :</label>
-                </div>
-                <div class="col-md-8">
-                    <input class="form-control mobile" data-th-field="*{home}" maxlength="10" min="9"
-                           required tabindex="13"
-                           type="text"/>
-                    <span class="error" data-th-errors="*{home}"
-                          data-th-if="${#fields.hasErrors('home')}">Error Fixed Number</span>
-                </div>
         </div>
+        <!--Fixed LAN-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${home}">Fixed Number :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control mobile" data-th-field="*{home}" maxlength="10" min="9"
+                       required tabindex="13"
+                       type="text"/>
+                <span class="error" data-th-errors="*{home}"
+                      data-th-if="${#fields.hasErrors('home')}">Error Fixed Number</span>
+            </div>
+        </div>
+
         <!--Guardian-->
         <div class="form-row text-right">
             <div class="col-md-4">
