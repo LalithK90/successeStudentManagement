@@ -27,12 +27,12 @@
 <!--Subject detail-->
 <div class="container-fluid" data-th-fragment="subjectDetail">
     <!--subject id-->
-    <div class="form-group">
+    <div class="form-batch">
         <label data-th-for="${id}">Id</label>
         <p class="form-control" data-th-text="${subjectDetail.id}"></p>
     </div>
     <!--code-->
-    <div class="form-group">
+    <div class="form-batch">
         <label data-th-for="${code}"></label>
         <p class="form-control" data-th-text="${subjectDetail.code}"></p>
     </div>
@@ -48,7 +48,7 @@
 
 </div>
 <!--Button-->
-<div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
     <a href="/subject">
         <button class="btn btn-success" tabindex="21" type="submit">
             Back

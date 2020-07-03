@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Batch Management - Add New Batch</h1>
+    </div>
+    <div class="col-4">
+        <a href="/batch">
+            <button class="btn btn-primary">All Batch</button>
+        </a>
+    </div>
+</div>
+<div class="container-fluid">
+    <form action="/batch/save" data-th-object="${batch}" method="post">
+        <!--batch id-->
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
+            <div class="col-md-4">
+                <label data-th-for="${id}">Id</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{id}" readonly type="text">
+                </label>
+            </div>
+        </div>
+        <!-- Class Reference-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${classReferance}">Class Referance :</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{classReferance}" required tabindex="4" type="text"/>
+                </label>
+                <span data-th-errors="*{classReferance}"
+                      data-th-if="${#fields.hasErrors('classReferance')}">Error Name</span>
+            </div>
+        </div>
+        <!--Grade-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${grade}">Grade :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{grade}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{grade}"
+                      data-th-if="${#fields.hasErrors('grade')}">Error Name</span>
+            </div>
+        </div>
+        <!--Year-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${year}">Year :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{year}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{year}"
+                      data-th-if="${#fields.hasErrors('year')}">Error Name</span>
+            </div>
+        </div>
+        <!--Subject Name-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${subjectName}">Subject Name :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{subjectName}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{subjectName}"
+                      data-th-if="${#fields.hasErrors('subjectName')}">Error Name</span>
+            </div>
+        </div>
+        <!--Teacher Name-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${teacherName}">Teacher Name</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{teacherName}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{teacherName}"
+                      data-th-if="${#fields.hasErrors('teacherName')}">Error Name</span>
+            </div>
+        </div>
+
+        <!--Button-->
+        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" tabindex="21" type="submit">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                    data-th-text="${addStatus==true?'Save': 'Update'}"
+                    id="submit"></span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

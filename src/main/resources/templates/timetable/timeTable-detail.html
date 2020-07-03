@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+        <a href="/timeTable/new">
+            <button class="btn btn-info">New Time Slot Add</button>
+        </a>
+    </div>
+    <div class="col-4">
+        <h1>Time Table Management</h1>
+    </div>
+    <div class="col-4">
+        <a href="/timeTable">
+            <button class="btn btn-primary">View All Student</button>
+        </a>
+    </div>
+</div>
+<!--Student detail-->
+<div class="container-fluid" data-th-fragment="timeTableDetail">
+    <!--timeTable id-->
+    <div class="form-batch">
+        <label data-th-for="${id}">Id</label>
+        <p class="form-control" data-th-text="${timeTableDetail.id}"></p>
+    </div>
+    <!--Date-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${date}">Date:</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${timeTableDetail.date}"></p>
+        </div>
+    </div>
+    <!--Time-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${time}">Time :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${timeTableDetail.time}"></p>
+        </div>
+    </div>
+    <!--Teacher-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label">Teacher :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${timeTableDetail.teacher}"></p>
+        </div>
+    </div>
+    <!--Hall Number-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label">Hall Number :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${timeTableDetail.hallNumber}"></p>
+        </div>
+    </div>
+</div>
+<!--Button-->
+<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
+    <a href="/timeTable">
+        <button class="btn btn-success" tabindex="21" type="submit">
+            Back
+        </button>
+    </a>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

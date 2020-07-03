@@ -28,7 +28,7 @@
             <form method="post">
 
 
-                <div class="row form-group">
+                <div class="row form-batch">
                 <div class="col-4 ">
                     <b><label for="sessionRef">Session Reference</label></b>
                 </div>
@@ -36,7 +36,7 @@
                     <input type="text" class="form-control" placeholder="Enter Session Reference" id="">
                 </div>
             </div>
-                <div class="row form-group">
+                <div class="row form-batch">
                     <div class="col-4 ">
                         <b><label for="classRef">Class Reference</label></b>
                     </div>
@@ -44,15 +44,15 @@
                         <input type="text" class="form-control" placeholder="Enter class Reference" id="">
                     </div>
                 </div>
-                <div class="row form-group">
+                <div class="row form-batch">
                     <div class="col-4 ">
                         <b><label for="Name">Select the Day</label></b>
                     </div>
-                    <div class="col">
+                    <div class="col" data-th-field="*{day}" required tabindex="4" type="text">
                         <select class="form-control" id="Day">
                             <option selected="">Day</option>
                             <option value="2020">Monday</option>
-                            <option value="2021">Tuesday/option>
+                            <option value="2021">Tuesday</option>
                             <option value="2022">Wednesday</option>
                             <option value="2023">Thursday</option>
                             <option value="2024">Friday</option>
@@ -61,7 +61,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row form-group">
+                <div class="row form-batch">
                     <div class="col-4 ">
                         <b><label for="appt">Select the Time</label></b>
                     </div>
@@ -70,7 +70,7 @@
                         <input type="time" id="appt" name="appt" class="form-control">
                     </div>
                 </div>
-                <div class="row form-group">
+                <div class="row form-batch">
                     <div class="col-4 ">
                         <b><label for="duratiom">Class Duration</label></b>
                     </div>
@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <div class="row form-group">
+                <div class="row form-batch">
                     <div class="col-4 ">
                         <b><label for="hallNumber">Hall Number</label></b>
                     </div>
@@ -87,7 +87,7 @@
                         <input type="text" class="form-control" placeholder="Enter Hall Number Name" id="">
                     </div>
                 </div>
-                <div class="row form-group">
+                <div class="row form-batch">
                     <div class="col-4 ">
 
                     </div>

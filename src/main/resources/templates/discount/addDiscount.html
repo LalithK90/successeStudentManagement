@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Discount Management - Add New Discount</h1>
+    </div>
+    <div class="col-4">
+        <a href="/discount">
+            <button class="btn btn-primary">All Discount</button>
+        </a>
+    </div>
+</div>
+<div class="container-fluid">
+    <form action="/discount/save" data-th-object="${discount}" method="post">
+        <!--discount id-->
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
+            <div class="col-md-4">
+                <label data-th-for="${id}">Id</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{id}" readonly type="text">
+                </label>
+            </div>
+        </div>
+        <!-- discountName-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${discountName}">Discount Name :</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{discountName}" required tabindex="4" type="text"/>
+                </label>
+                <span data-th-errors="*{discountName}"
+                      data-th-if="${#fields.hasErrors('discountName')}">Error Name</span>
+            </div>
+        </div>
+        <!--discountType-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${discountType}">discount Type :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{discountType}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{discountType}"
+                      data-th-if="${#fields.hasErrors('discountType')}">Error Name</span>
+            </div>
+        </div>
+        <!--discountAmount-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${discountAmount}">discount Amount :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{discountAmount}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{discountAmount}"
+                      data-th-if="${#fields.hasErrors('discountAmount')}">Error Name</span>
+            </div>
+        </div>
+        <!--approvedBy-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${approvedBy}">approved By :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{approvedBy}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{approvedBy}"
+                      data-th-if="${#fields.hasErrors('approvedBy')}">Error Name</span>
+            </div>
+        </div>
+        <!--discountStatus-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${discountStatus}">discount Status</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{discountStatus}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{discountStatus}"
+                      data-th-if="${#fields.hasErrors('discountStatus')}">Error Name</span>
+            </div>
+        </div>
+
+        <!--Button-->
+        <div class="form-discount col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" tabindex="21" type="submit">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                    data-th-text="${addStatus==true?'Save': 'Update'}"
+                    id="submit"></span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

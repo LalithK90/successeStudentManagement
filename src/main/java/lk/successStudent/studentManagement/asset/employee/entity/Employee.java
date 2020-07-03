@@ -28,8 +28,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
 @JsonFilter( "Employee" )
 public class Employee extends AuditEntity {
 
