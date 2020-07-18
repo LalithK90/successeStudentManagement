@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+        <a href="/discount/new">
+            <button class="btn btn-info">New Discount</button>
+        </a>
+    </div>
+    <div class="col-4">
+        <h1>Discount Management - Discount Detail</h1>
+    </div>
+    <div class="col-4">
+        <a href="/discount">
+            <button class="btn btn-primary">All Discount</button>
+        </a>
+    </div>
+</div>
+<!--Discount detail-->
+<div class="container-fluid" data-th-fragment="discountDetail">
+    <!-- Discount Name-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${discountName}">Discount Name :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${discountDetail.discountName}"></p>
+        </div>
+    </div>
+    <!--Discount Type-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${discountType}">Discount type :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${discountDetail.discountType}"></p>
+        </div>
+    </div>
+    <!--Amount-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${discountAmount}">Discount Amount :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${discountDetail.discountAmount}"></p>
+        </div>
+    </div>
+    <!--Approved By-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${approvedBy}">Approved by</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${approvedBy.approved}"></p>
+        </div>
+    </div>
+    <!--current Status-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${discountStatus}">Current status</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${discountStatus.status}"></p>
+        </div>
+    </div>
+
+
+</div>
+<!--Button-->
+<div class="form-discount col-md-12 col-sm-12 text-center flex-column ">
+    <a href="/discount">
+        <button class="btn btn-success" tabindex="21" type="submit">
+            Back
+        </button>
+    </a>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

@@ -48,6 +48,9 @@ public class User extends AuditEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
+
+
+
     /*@ManyToMany(fetch = FetchType.EAGER)
     //@Fetch( FetchMode.SUBSELECT)
     @JoinTable(name = "user_working_place",

@@ -20,8 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class EmailMessage extends AuditEntity {
 
-    @Column( nullable = false, columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL", length =
-            20000 )
+    @Column( nullable = false, columnDefinition = "VARCHAR(20000) CHARACTER SET utf8 COLLATE utf8_bin NULL", length =            20000 )
     @NotNull
     private String message;
 

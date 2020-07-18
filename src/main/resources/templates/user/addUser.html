@@ -36,7 +36,7 @@
               enctype="multipart/form-data">
             <div class="form-row">
                 <div class="col-5 flex-column">
-                    <div class="form-group">
+                    <div class="form-batch">
                         <div class="col-4">
                             <label class="control-label" for="selectParameter">Parameter :</label>
                         </div>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="col-4 flex-column">
-                    <div class="form-group">
+                    <div class="form-batch">
                         <div class="col-5">
                             <label class="control-label" for="valueEmployee">Value :</label>
                         </div>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="col-3 flex-column">
-                    <div class="form-group">
+                    <div class="form-batch">
                         <div class="">
                             <div class="col-2">
                                 <label class="control-label"></label>
@@ -98,7 +98,7 @@
           class="form-horizontal" method="POST" autocomplete="false">
         <div class="row">
             <!--Left Side-->
-            <div class="form-group col-md-5 col-sm-7 text-left flex-column">
+            <div class="form-batch col-md-5 col-sm-7 text-left flex-column">
                 <div id="idHide" th:if="${addStatus==false}" class="form-row">
                     <div class="col-md-4">
                         <label class="control-label" for="id">ID :</label>
@@ -160,7 +160,7 @@
                 </div>
             </div>
             <!--Right Side-->
-            <div class="form-group col-md-5 col-sm-7 text-left flex-column">
+            <div class="form-batch col-md-5 col-sm-7 text-left flex-column">
                 <!--Roles Display-->
                 <div class="form-row">
                     <label class="control-label" for="roles">Roles :</label>
@@ -174,7 +174,7 @@
             </div>
 
             <!--Button-->
-            <div class="form-group col-md-12 col-sm-12 text-center flex-column">
+            <div class="form-batch col-md-12 col-sm-12 text-center flex-column">
                 <button class="btn btn-success" type="submit">
                     <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
                         id="submit" th:text="${addStatus==true?'Save': 'Update'}">                        </span>

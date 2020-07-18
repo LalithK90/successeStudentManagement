@@ -23,4 +23,8 @@ public class Role extends AuditEntity {
 
     @ManyToMany(mappedBy = "roles")
     private List< User > users;
+
+    public String getName() {
+        return null;
+    }
 }

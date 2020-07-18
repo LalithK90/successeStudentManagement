@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+        <a href="/subject/new">
+            <button class="btn btn-info">New Subject</button>
+        </a>
+    </div>
+    <div class="col-4">
+        <h1>Subject Management - Subject Detail</h1>
+    </div>
+    <div class="col-4">
+        <a href="/subject">
+            <button class="btn btn-primary">All Subject</button>
+        </a>
+    </div>
+</div>
+<!--Subject detail-->
+<div class="container-fluid" data-th-fragment="subjectDetail">
+    <!--subject id-->
+    <div class="form-batch">
+        <label data-th-for="${id}">Id</label>
+        <p class="form-control" data-th-text="${subjectDetail.id}"></p>
+    </div>
+    <!--code-->
+    <div class="form-batch">
+        <label data-th-for="${code}"></label>
+        <p class="form-control" data-th-text="${subjectDetail.code}"></p>
+    </div>
+    <!--Name-->
+    <div class="form-row text-right">
+        <div class="col-md-4">
+            <label class="control-label" data-th-for="${name}">Name :</label>
+        </div>
+        <div class="col-md-8">
+            <p class="form-control" data-th-text="${subjectDetail.name}"></p>
+        </div>
+    </div>
+
+</div>
+<!--Button-->
+<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
+    <a href="/subject">
+        <button class="btn btn-success" tabindex="21" type="submit">
+            Back
+        </button>
+    </a>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>

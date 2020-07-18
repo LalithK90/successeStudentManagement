@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-secondary">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Subject Management - Add New Subject</h1>
+    </div>
+    <div class="col-4">
+        <a href="/subject">
+            <button class="btn btn-primary">All Subject</button>
+        </a>
+    </div>
+</div>
+<div class="container-fluid">
+    <form action="/subject/save" data-th-object="${subject}" method="post">
+        <!--subject id-->
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
+            <div class="col-md-4">
+                <label data-th-for="${id}">Id</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{id}" readonly type="text">
+                </label>
+            </div>
+        </div>
+        <!-- Name-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${name}">Name :</label>
+            </div>
+            <div class="col-md-8">
+                <label>
+                    <input class="form-control" data-th-field="*{name}" required tabindex="4" type="text"/>
+                </label>
+                <span data-th-errors="*{name}"
+                      data-th-if="${#fields.hasErrors('name')}">Error Name</span>
+            </div>
+        </div>
+        <!--Code-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${code}">code :</label>
+            </div>
+            <div class="col-md-8">
+                <input class="form-control" data-th-field="*{code}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{code}"
+                      data-th-if="${#fields.hasErrors('code')}">Error Name</span>
+            </div>
+        </div>
+
+        <!--Button-->
+        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
+            <button class="btn btn-success" tabindex="21" type="submit">
+                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                    data-th-text="${addStatus==true?'Save': 'Update'}"
+                    id="submit"></span>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!--footer is included-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script is included-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+</body>
+</html>
