@@ -1,6 +1,11 @@
 package lk.studentManagement.configuration;
 
+<<<<<<< HEAD:src/main/java/lk/studentManagement/configuration/SecurityConfig.java
 import lk.studentManagement.asset.userManagement.service.UserDetailsServiceImpl;
+=======
+
+import lk.successStudent.studentManagement.asset.userManagement.service.UserDetailsServiceImpl;
+>>>>>>> 2620e6f6a389a3cc3a95251fa10504462b0eeb03:src/main/java/lk/successStudent/studentManagement/configuration/SecurityConfig.java
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -8,8 +13,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
