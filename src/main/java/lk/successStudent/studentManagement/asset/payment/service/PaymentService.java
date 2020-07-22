@@ -1,9 +1,9 @@
 package lk.successStudent.studentManagement.asset.payment.service;
 
 
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import lk.successStudent.studentManagement.asset.payment.dao.PaymentDao;
 import lk.successStudent.studentManagement.asset.payment.entity.Payment;
-import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

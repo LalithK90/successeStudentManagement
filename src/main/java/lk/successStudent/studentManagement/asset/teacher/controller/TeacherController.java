@@ -1,6 +1,5 @@
 package lk.successStudent.studentManagement.asset.teacher.controller;
 
-
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.asset.teacher.entity.Teacher;
 import lk.successStudent.studentManagement.asset.teacher.service.TeacherService;

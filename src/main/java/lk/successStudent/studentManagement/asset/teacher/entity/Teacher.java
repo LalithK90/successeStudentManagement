@@ -1,6 +1,5 @@
 package lk.successStudent.studentManagement.asset.teacher.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.util.audit.AuditEntity;
@@ -16,7 +15,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-
 @Entity
 @Getter
 @Setter
