@@ -1,7 +1,9 @@
 package lk.successStudent.studentManagement.asset.teacher.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.successStudent.studentManagement.asset.batch.entity.Batch;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
+import lk.successStudent.studentManagement.asset.subject.entity.Subject;
 import lk.successStudent.studentManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,12 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -46,7 +46,15 @@ public class Teacher extends AuditEntity {
     @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobile;
 
-    private String subject;
-
     private String fee;
+
+    /*One particular batch*/
+    @ManyToOne
+    private Batch batch;
+
+   @ManyToOne
+    private Subject subject;
+
+
+
 }

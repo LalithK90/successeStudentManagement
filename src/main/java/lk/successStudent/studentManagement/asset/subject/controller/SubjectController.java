@@ -23,7 +23,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("teachers", subjectService.findAll());
+        model.addAttribute("subjects", subjectService.findAll());
         return "subject/subject";
     }
 
@@ -32,7 +32,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
         model.addAttribute("subject", new Subject());
 
         model.addAttribute("addStatus",true);
-        return "subject/addTeacher";
+        return "subject/addSubject";
     }
 
     @GetMapping("/view/{id}")
@@ -46,7 +46,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
         model.addAttribute("subject", subjectService.findById(id));
 
         model.addAttribute("addStatus",false);
-        return "subject/addTeacher";
+        return "subject/addSubject";
     }
 
     @PostMapping("/save")
@@ -55,7 +55,7 @@ public class SubjectController implements AbstractController<Subject, Integer> {
             model.addAttribute("subject", subject);
 
             model.addAttribute("addStatus",true);
-            return "subject/addTeacher";
+            return "subject/addSubject";
         }
 
         subjectService.persist(subject);
@@ -69,5 +69,3 @@ public class SubjectController implements AbstractController<Subject, Integer> {
         return "redirect:/subject";
     }
 }
-
-

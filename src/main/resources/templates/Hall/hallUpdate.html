@@ -117,3 +117,107 @@
 
 </body>
 </html>
+
+
+
+
+
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <div class="col-8">
+                    <a href="/hall">
+                        <h2 class="title">Hall Management</h2>
+                    </a>
+                </div>
+
+                <div class="col-4">
+                    <a href="/hall">
+                        <button class="btn btn-primary">All Hall</button>
+                    </a>
+                </div>
+                <form action="/hall/save" data-th-object="${hall}" method="post">
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label form-row text-right" data-th-for="${id}">Hall ID</label>
+                                <input class="input--style-4 form-control"  data-th-field="*{id}"type="text" name="first_name">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label form-row text-right" data-th-for="${number}">Hall Number</label>
+                                <input class="input--style-4 form-control"  data-th-field="*{number}" type="text" name="Hall Number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label form-row text-right" data-th-for="${seatCount}">Seat Count</label>
+                                <input class="input--style-4 form-control"  data-th-field="*{seatCount}"type="text" name="first_name">
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label form-row text-right" data-th-for="${number}">Hall Number</label>
+                                <input class="input--style-4 form-control"  data-th-field="*{number}" type="text" name="Hall Number">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label form-row text-right" data-th-for="${hallName}">Hall Name</label>
+                            <input class="input--style-4 form-control"  data-th-field="*{hallName}"type="text" name="first_name">
+                        </div>
+                    </div>
+            </div>
+            <div class="row row-space">
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Email</label>
+                        <input class="input--style-4" type="email" name="email">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="input-group">
+                        <label class="label">Phone Number</label>
+                        <input class="input--style-4" type="text" name="phone">
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="label">Subject</label>
+                <div class="rs-select2 js-select-simple select--no-search">
+                    <select name="subject">
+                        <option disabled="disabled" selected="selected">Choose option</option>
+                        <option>Subject 1</option>
+                        <option>Subject 2</option>
+                        <option>Subject 3</option>
+                    </select>
+                    <div class="select-dropdown"></div>
+                </div>
+            </div>
+            <div class="p-t-15">
+                <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Jquery JS-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="vendor/select2/select2.min.js"></script>
+<script src="vendor/datepicker/moment.min.js"></script>
+<script src="vendor/datepicker/daterangepicker.js"></script>
+
+<!-- Main JS-->
+<script src="js/global.js"></script>
+
+</body>
