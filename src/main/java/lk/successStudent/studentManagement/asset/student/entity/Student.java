@@ -49,7 +49,7 @@ public class Student extends AuditEntity {
 
     // TODO: 6/13/2020  add the student picture
     /*One particular batch*/
-    @ManyToOn
+    @ManyToOne
     private Batch batch;
 
     @ManyToMany

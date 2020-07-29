@@ -65,7 +65,7 @@ public class StudentController implements AbstractController< Student, Integer >
 //there are two different situation
         //1. new Student -> need to generate new number
         //2. update student -> no required to generate number
-        if ( student.getId() != null ) {
+        if ( student.getId() == null ) {
 
             // need to create auto generated registration number
             Student lastStudent = studentService.lastStudentOnDB();
