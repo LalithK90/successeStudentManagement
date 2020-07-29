@@ -27,6 +27,7 @@
         <tr>
             <th>Index</th>
             <th>Name</th>
+            <th>Batch</th>
             <th>Subject</th>
             <th>Contact Number</th>
             <th>Modify</th>
@@ -36,7 +37,8 @@
         <tr data-th-each="teacher, index : ${teachers}">
             <td data-th-text="${index.count}"></td>
             <td data-th-text="${teacher.firstName}"></td>
-            <td data-th-text="${teacher.subject}"></td>
+            <td data-th-text="${teacher.batch.classReferance}"></td>
+            <td data-th-text="${teacher.subject.name}"></td>
             <td data-th-text="${teacher.mobile}"></td>
             <td>
                 <a data-th-href="${'/teacher/view/'+ teacher.id}"><button class="btn btn-info">View</button></a>

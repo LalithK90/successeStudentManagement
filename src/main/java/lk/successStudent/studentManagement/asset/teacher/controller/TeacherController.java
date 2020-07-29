@@ -1,7 +1,9 @@
 package lk.successStudent.studentManagement.asset.teacher.controller;
 
 
+import lk.successStudent.studentManagement.asset.batch.service.BatchService;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
+import lk.successStudent.studentManagement.asset.subject.service.SubjectService;
 import lk.successStudent.studentManagement.asset.teacher.entity.Teacher;
 import lk.successStudent.studentManagement.asset.teacher.service.TeacherService;
 import lk.successStudent.studentManagement.util.interfaces.AbstractController;
@@ -17,9 +19,13 @@ import javax.validation.Valid;
 @RequestMapping("/teacher")
 public class TeacherController implements AbstractController<Teacher, Integer> {
     private final TeacherService teacherService;
+    private final SubjectService subjectService;
+    private final BatchService batchService;
 
-    public TeacherController(TeacherService teacherService) {
+    public TeacherController(TeacherService teacherService, SubjectService subjectService, BatchService batchService) {
         this.teacherService = teacherService;
+        this.subjectService = subjectService;
+        this.batchService = batchService;
     }
 
     @GetMapping
@@ -33,6 +39,8 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
         model.addAttribute("teacher", new Teacher());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus",true);
+        model.addAttribute("batches",batchService.findAll());
+        model.addAttribute("subjects",subjectService.findAll());
         return "teacher/addTeacher";
     }
 
@@ -47,6 +55,8 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
         model.addAttribute("teacher", teacherService.findById(id));
         model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus",false);
+        model.addAttribute("batches",batchService.findAll());
+        model.addAttribute("subjects",subjectService.findAll());
         return "teacher/addTeacher";
     }
 
@@ -56,6 +66,8 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
             model.addAttribute("teacher", teacher);
             model.addAttribute("gender", Gender.values());
             model.addAttribute("addStatus",true);
+            model.addAttribute("batches",batchService.findAll());
+            model.addAttribute("subjects",subjectService.findAll());
             return "teacher/addTeacher";
         }
 //todo-> teacher registration number need make
