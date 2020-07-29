@@ -41,6 +41,34 @@
                 <input class="form-control" data-th-field="*{registrationId}" readonly type="text">
             </div>
         </div>
+        <!--Batch-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="batch">Batch :</label>
+            </div>
+            <div class="col-md-8">
+                <select class="form-control" data-th-field="*{batch}" id="batch" required tabindex="7">
+                    <option value="">Please select</option>
+                    <option data-th-each="batch : ${batches}"
+                            data-th-text="${batch.classReferance}"
+                            data-th-value="${batch.id}"></option>
+                </select>
+            </div>
+        </div>
+        <!--Subject-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" for="subject">Subject :</label>
+            </div>
+            <div class="col-md-8">
+                <select class="form-control" data-th-field="*{subject}" id="subject" required tabindex="7">
+                    <option value="">Please select</option>
+                    <option data-th-each="subject : ${subjects}"
+                            data-th-text="${subject.name}"
+                            data-th-value="${subject.id}"></option>
+                </select>
+            </div>
+        </div>
         <!--First Name-->
         <div class="form-row text-right">
             <div class="col-md-4">
@@ -126,17 +154,6 @@
                        type="text"/>
                 <span class="error" data-th-errors="*{mobile}"
                       data-th-if="${#fields.hasErrors('mobile')}">Error Mobile Number</span>
-            </div>
-        </div>
-        <!--Subject-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${subject}">Subject :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{subject}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{subject}"
-                      data-th-if="${#fields.hasErrors('subject')}">Error Name</span>
             </div>
         </div>
         <!--Fee-->
