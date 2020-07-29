@@ -1,6 +1,5 @@
 package lk.successStudent.studentManagement.asset.teacher.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.successStudent.studentManagement.asset.batch.entity.Batch;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
@@ -15,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter

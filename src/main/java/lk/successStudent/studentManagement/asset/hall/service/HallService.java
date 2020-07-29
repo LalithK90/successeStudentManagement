@@ -1,9 +1,9 @@
 package lk.successStudent.studentManagement.asset.hall.service;
 
 
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import lk.successStudent.studentManagement.asset.hall.dao.HallDao;
 import lk.successStudent.studentManagement.asset.hall.entity.Hall;
-import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

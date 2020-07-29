@@ -1,9 +1,9 @@
 package lk.successStudent.studentManagement.asset.timeTable.service;
 
 
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import lk.successStudent.studentManagement.asset.timeTable.dao.TimeTableDao;
 import lk.successStudent.studentManagement.asset.timeTable.entity.TimeTable;
-import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

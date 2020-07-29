@@ -1,9 +1,9 @@
 package lk.successStudent.studentManagement.asset.subject.service;
 
 
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import lk.successStudent.studentManagement.asset.subject.dao.SubjectDao;
 import lk.successStudent.studentManagement.asset.subject.entity.Subject;
-import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

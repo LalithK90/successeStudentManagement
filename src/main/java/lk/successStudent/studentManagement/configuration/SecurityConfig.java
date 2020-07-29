@@ -1,6 +1,4 @@
 package lk.successStudent.studentManagement.configuration;
-
-
 import lk.successStudent.studentManagement.asset.userManagement.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

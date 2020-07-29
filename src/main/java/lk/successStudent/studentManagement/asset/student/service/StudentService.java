@@ -1,22 +1,23 @@
 package lk.successStudent.studentManagement.asset.student.service;
 
 
-import lk.successStudent.studentManagement.asset.student.dao.StudentDao;
 import lk.successStudent.studentManagement.util.interfaces.AbstractService;
+import lk.successStudent.studentManagement.asset.student.dao.StudentDao;
 import org.springframework.stereotype.Service;
 
 import lk.successStudent.studentManagement.asset.student.entity.Student;
+
 import java.util.List;
 
 @Service
-public class StudentService implements AbstractService<Student, Integer> {
+public class StudentService implements AbstractService< Student, Integer > {
     private final StudentDao studentDao;
 
     public StudentService(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
 
-    public List<Student> findAll() {
+    public List< Student > findAll() {
         return studentDao.findAll();
     }
 
@@ -33,10 +34,12 @@ public class StudentService implements AbstractService<Student, Integer> {
         return false;
     }
 
-    public List<Student> search(Student student) {
+    public List< Student > search(Student student) {
         return null;
     }
 
-
+    public Student lastStudentOnDB() {
+        return studentDao.findFirstByOrderByIdDesc();
+    }
 
 }
