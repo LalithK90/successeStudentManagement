@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class DiscountService implements AbstractService<Discount,Integer> {
     private final DiscountDao discountDao;
 
