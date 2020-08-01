@@ -10,12 +10,8 @@ import lk.successStudent.studentManagement.asset.employee.entity.Enum.Designatio
 import lk.successStudent.studentManagement.asset.employee.entity.Enum.EmployeeStatus;
 import lk.successStudent.studentManagement.asset.message.entity.EmailMessage;
 import lk.successStudent.studentManagement.util.audit.AuditEntity;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 

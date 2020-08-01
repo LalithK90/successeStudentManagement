@@ -1,9 +1,9 @@
 package lk.successStudent.studentManagement.asset.discount.service;
 
 
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import lk.successStudent.studentManagement.asset.discount.dao.DiscountDao;
 import lk.successStudent.studentManagement.asset.discount.entity.Discount;
-import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class DiscountService implements AbstractService<Discount,Integer> {
     private final DiscountDao discountDao;
 

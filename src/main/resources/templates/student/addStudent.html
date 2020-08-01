@@ -33,12 +33,12 @@
             </div>
         </div>
         <!--registration number-->
-        <div class="form-row text-right">
+        <div class="form-row text-right" data-th-if="${addStatus==false}" >
             <div class="col-md-4">
                 <label class="control-label" data-th-for="${regNo}">Registration ID :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{regNo}" required tabindex="4" type="text"/>
+                <input class="form-control" data-th-field="*{regNo}" required tabindex="4" type="text" readonly/>
                 <span data-th-errors="*{regNo}"
                       data-th-if="${#fields.hasErrors('regNo')}">Error Name</span>
             </div>

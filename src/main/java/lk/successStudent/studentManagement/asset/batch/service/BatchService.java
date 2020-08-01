@@ -1,9 +1,9 @@
 package lk.successStudent.studentManagement.asset.batch.service;
 
 
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import lk.successStudent.studentManagement.asset.batch.dao.BatchDao;
 import lk.successStudent.studentManagement.asset.batch.entity.Batch;
-import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

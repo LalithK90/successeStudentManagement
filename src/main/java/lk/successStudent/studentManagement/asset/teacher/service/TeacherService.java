@@ -1,6 +1,5 @@
 package lk.successStudent.studentManagement.asset.teacher.service;
 
-
 import lk.successStudent.studentManagement.asset.teacher.dao.TeacherDao;
 import lk.successStudent.studentManagement.asset.teacher.entity.Teacher;
 import lk.successStudent.studentManagement.util.interfaces.AbstractService;
@@ -42,4 +41,6 @@ public class TeacherService implements AbstractService<Teacher, Integer> {
         return teacherDao.findFirstByOrderByIdDesc();
     }
 
+    public Teacher lastTeacherOnDB() {return teacherDao.findFirstByOrderByIdDesc();
+    }
 }

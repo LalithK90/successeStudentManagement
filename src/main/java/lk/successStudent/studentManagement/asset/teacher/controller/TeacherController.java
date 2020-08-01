@@ -3,10 +3,12 @@ package lk.successStudent.studentManagement.asset.teacher.controller;
 
 import lk.successStudent.studentManagement.asset.batch.service.BatchService;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
+import lk.successStudent.studentManagement.asset.student.entity.Student;
 import lk.successStudent.studentManagement.asset.subject.service.SubjectService;
 import lk.successStudent.studentManagement.asset.teacher.entity.Teacher;
 import lk.successStudent.studentManagement.asset.teacher.service.TeacherService;
 import lk.successStudent.studentManagement.util.interfaces.AbstractController;
+import lk.successStudent.studentManagement.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,12 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
     private final TeacherService teacherService;
     private final SubjectService subjectService;
     private final BatchService batchService;
+    private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+    public TeacherController(TeacherService teacherService,
+                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+        this.teacherService = teacherService;
+        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    }
 
     public TeacherController(TeacherService teacherService, SubjectService subjectService, BatchService batchService) {
         this.teacherService = teacherService;
@@ -70,6 +78,25 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
             model.addAttribute("subjects",subjectService.findAll());
             return "teacher/addTeacher";
         }
+
+        //there are two different situation
+        //1. new Teacher -> need to generate new number
+        //2. update Teacher -> no required to generate number
+        if ( teacher.getId() == null ) {
+
+            // need to create auto generated registration number
+            Teacher lastTeacher = teacherService.lastTeacherOnDB();
+            //registration number format => ST200001
+            if ( lastTeacher != null ) {
+                String lastNumber = lastTeacher.getRegistrationId).substring(2);
+                teacher.setRegistrationId"ST" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+            } else {
+                teacher.setRegistrationId"ST" + makeAutoGenerateNumberService.numberAutoGen(null
+            ));
+            }
+
+        }
+
 //todo-> teacher registration number need make
         teacherService.persist(teacher);
         return "redirect:/teacher";
