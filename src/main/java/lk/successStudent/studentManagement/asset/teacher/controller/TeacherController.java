@@ -3,7 +3,6 @@ package lk.successStudent.studentManagement.asset.teacher.controller;
 
 import lk.successStudent.studentManagement.asset.batch.service.BatchService;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
-import lk.successStudent.studentManagement.asset.student.entity.Student;
 import lk.successStudent.studentManagement.asset.subject.service.SubjectService;
 import lk.successStudent.studentManagement.asset.teacher.entity.Teacher;
 import lk.successStudent.studentManagement.asset.teacher.service.TeacherService;
@@ -24,16 +23,13 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
     private final SubjectService subjectService;
     private final BatchService batchService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
-    public TeacherController(TeacherService teacherService,
-                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
-        this.teacherService = teacherService;
-        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
-    }
 
-    public TeacherController(TeacherService teacherService, SubjectService subjectService, BatchService batchService) {
+
+    public TeacherController(TeacherService teacherService, SubjectService subjectService, BatchService batchService,MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
         this.teacherService = teacherService;
         this.subjectService = subjectService;
         this.batchService = batchService;
+        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     }
 
     @GetMapping
@@ -88,10 +84,10 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
             Teacher lastTeacher = teacherService.lastTeacherOnDB();
             //registration number format => ST200001
             if ( lastTeacher != null ) {
-                String lastNumber = lastTeacher.getRegistrationId).substring(2);
-                teacher.setRegistrationId"ST" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+                String lastNumber = lastTeacher.getRegistrationId().substring(2);
+                teacher.setRegistrationId("ST" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
             } else {
-                teacher.setRegistrationId"ST" + makeAutoGenerateNumberService.numberAutoGen(null
+                teacher.setRegistrationId("ST" + makeAutoGenerateNumberService.numberAutoGen(null
             ));
             }
 
