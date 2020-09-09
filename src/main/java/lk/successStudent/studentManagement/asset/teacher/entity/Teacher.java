@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -46,7 +47,8 @@ public class Teacher extends AuditEntity {
     @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobile;
 
-    private String fee;
+
+    private BigDecimal fee;
 
     /*One particular batch*/
     @ManyToOne
