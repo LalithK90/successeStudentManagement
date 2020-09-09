@@ -1,5 +1,7 @@
 package lk.successStudent.studentManagement.asset.employee.dao;
 
+import lk.successStudent.studentManagement.asset.employee.entity.Employee;
+import lk.successStudent.studentManagement.asset.employee.entity.EmployeeFiles;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

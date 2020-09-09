@@ -1,5 +1,20 @@
 package lk.successStudent.studentManagement.asset.employee.controller;
 
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.BloodGroup;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.CivilStatus;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Title;
+import lk.successStudent.studentManagement.asset.commonAsset.service.CommonService;
+import lk.successStudent.studentManagement.asset.employee.entity.Employee;
+import lk.successStudent.studentManagement.asset.employee.entity.EmployeeFiles;
+import lk.successStudent.studentManagement.asset.employee.entity.Enum.Designation;
+import lk.successStudent.studentManagement.asset.employee.entity.Enum.EmployeeStatus;
+import lk.successStudent.studentManagement.asset.employee.service.EmployeeFilesService;
+import lk.successStudent.studentManagement.asset.employee.service.EmployeeService;
+import lk.successStudent.studentManagement.asset.userManagement.entity.User;
+import lk.successStudent.studentManagement.asset.userManagement.service.UserService;
+import lk.successStudent.studentManagement.util.service.DateTimeAgeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
