@@ -1,5 +1,8 @@
 package lk.successStudent.studentManagement.asset.employee.service;
 
+import lk.successStudent.studentManagement.asset.employee.dao.EmployeeDao;
+import lk.successStudent.studentManagement.asset.employee.entity.Employee;
+import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
 import org.springframework.data.domain.Example;
@@ -22,7 +25,7 @@ public class EmployeeService implements AbstractService< Employee, Integer> {
     }
 
     @Cacheable
-    public List<Employee> findAll() {
+    public List< Employee > findAll() {
         return employeeDao.findAll();
     }
 

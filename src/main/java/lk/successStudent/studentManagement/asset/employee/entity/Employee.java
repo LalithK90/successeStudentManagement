@@ -2,10 +2,19 @@ package lk.successStudent.studentManagement.asset.employee.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.BloodGroup;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.CivilStatus;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
+import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Title;
+import lk.successStudent.studentManagement.asset.commonAsset.model.FileInfo;
+import lk.successStudent.studentManagement.asset.employee.entity.Enum.Designation;
+import lk.successStudent.studentManagement.asset.employee.entity.Enum.EmployeeStatus;
+import lk.successStudent.studentManagement.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.dom4j.Branch;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -80,8 +89,6 @@ public class Employee extends AuditEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfAssignment;
 
-    @ManyToOne
-    private Branch branch;
 
     @Transient
     private List<MultipartFile> files = new ArrayList<>();
