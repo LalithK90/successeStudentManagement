@@ -58,6 +58,24 @@ public class StudentController implements AbstractController<Student, Integer> {
             return "student/addStudent";
         }
 
+//there are two different situation
+        //1. new Student -> need to generate new number
+        //2. update student -> no required to generate number
+        if ( student.getId() == null ) {
+
+            // need to create auto generated registration number
+            Student lastStudent = studentService.lastStudentOnDB();
+            //registration number format => SS200001
+            if ( lastStudent != null ) {
+                String lastNumber = lastStudent.getRegNo().substring(2);
+                student.setRegNo("SS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+            } else {
+                student.setRegNo("SS" + makeAutoGenerateNumberService.numberAutoGen(null));
+            }
+
+        }
+
+
         studentService.persist(student);
         return "redirect:/student";
 
