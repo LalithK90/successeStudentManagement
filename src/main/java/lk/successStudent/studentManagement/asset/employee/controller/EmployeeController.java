@@ -78,7 +78,7 @@ public class EmployeeController {
         return "employee/employee";
     }
 
-    //Send on employee details
+    //Send on employee details as
     @GetMapping(value = "/{id}")
     public String employeeView(@PathVariable("id") Integer id, Model model) {
         Employee employee = employeeService.findById(id);
