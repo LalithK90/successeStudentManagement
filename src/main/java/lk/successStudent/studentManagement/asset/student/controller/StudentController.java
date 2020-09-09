@@ -57,7 +57,7 @@ public class StudentController implements AbstractController<Student, Integer> {
             model.addAttribute("addStatus",true);
             return "student/addStudent";
         }
-<<<<<<< HEAD
+
 //there are two different situation
         //1. new Student -> need to generate new number
         //2. update student -> no required to generate number
@@ -75,8 +75,6 @@ public class StudentController implements AbstractController<Student, Integer> {
 
         }
 
-=======
->>>>>>> 2f77991fe5c0db8101ef41038f9b8225067eeca5
 
         studentService.persist(student);
         return "redirect:/student";
