@@ -9,9 +9,8 @@
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-secondary">
-    <div class="col-4">
-    </div>
+<div class="bg-secondary">
+    <div class="col-4"></div>
     <div class="col-4">
         <h1>Subject Management - Add New Subject</h1>
     </div>
@@ -21,7 +20,7 @@
         </a>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container">
     <form action="/subject/save" data-th-object="${subject}" method="post">
         <!--subject id-->
         <div class="form-row text-right" data-th-if="${addStatus==false}">
@@ -60,7 +59,7 @@
         </div>
 
         <!--Button-->
-        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
+        <div class="container-fluid">
             <button class="btn btn-success" tabindex="21" type="submit">
                 <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
                     data-th-text="${addStatus==true?'Save': 'Update'}"

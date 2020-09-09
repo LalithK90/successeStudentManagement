@@ -47,4 +47,6 @@ public abstract class AuditEntity {
     @Basic( optional = false )
     @Column( nullable = false )
     private String updatedBy;
+
+
 }

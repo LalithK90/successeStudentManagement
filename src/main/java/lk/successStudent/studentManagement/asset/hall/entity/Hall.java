@@ -25,7 +25,7 @@ public class Hall extends AuditEntity {
     private String number;
     private String hallCondition;
     private String seatCount;
-    private String HallLocation;
+    private String hallLocation;
 
     @ManyToMany(mappedBy = "halls")
     private List<Batch> batches;
