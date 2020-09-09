@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @JsonFilter( "Teacher" )
 public class Teacher extends AuditEntity {
-    private String registrationId;
+    private String RegistrationId;
 
     @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
     @Column( unique = true )
