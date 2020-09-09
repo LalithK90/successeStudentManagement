@@ -1,6 +1,6 @@
 package lk.successStudent.studentManagement.asset.employee.entity;
 
-import lk.successStudent.studentManagement.util.audit.AuditEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
