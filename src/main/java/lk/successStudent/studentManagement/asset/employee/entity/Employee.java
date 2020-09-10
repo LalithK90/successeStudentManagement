@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.dom4j.Branch;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -97,6 +96,6 @@ public class Employee extends AuditEntity {
     private List<String> removeImages = new ArrayList<>();
 
     @Transient
-    private List< FileInfo > fileInfos = new ArrayList<>();
+    private List<FileInfo> fileInfos = new ArrayList<>();
 
 }

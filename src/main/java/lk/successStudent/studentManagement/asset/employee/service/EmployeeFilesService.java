@@ -54,7 +54,7 @@ public class EmployeeFilesService {
     }
 
     @Cacheable
-    public List< FileInfo > employeeFileDownloadLinks(Employee employee) {
+    public List<FileInfo> employeeFileDownloadLinks(Employee employee) {
         return employeeFilesDao.findByEmployeeOrderByIdDesc(employee)
                 .stream()
                 .map(employeeFiles -> {

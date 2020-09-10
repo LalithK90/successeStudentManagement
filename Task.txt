@@ -5,12 +5,12 @@ Assigment -> Need to recheck {CRUD Operation, Interface Edit, End date 11/09/202
 1.User Management
 2.Employee Management
 3.Role Management -> Teacher, Manager, Owner, Cashier
-4.Batch Management
-5.Discount Management
-6.Hall Management
-7.Subject Management
-8.Teacher Management
-9.Student Management
+4.Batch Management ( CRUD Operations - done )
+5.Discount Management ( CRUD Operations - done )
+6.Hall Management ( Error found in Data appending  - Not Displaying some data in "hall detail table")
+7.Subject Management (CRUD Operations - done )
+8.Teacher Management ( (CRUD Operations - done )
+9.Student Management (CRUD Operations - done )
 
 Not Done Upto Now {Start date 12/11/2020}
 =================
