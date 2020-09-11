@@ -26,12 +26,16 @@
                 </div>
                 <form action="/hall/save" data-th-object="${hall}" method="post">
                     <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label form-row text-right" data-th-for="${id}">Hall ID</label>
-                                <input class="input--style-4 form-control"  data-th-field="*{id}"type="text" name="first_name">
+                        <div class="form-row text-right" data-th-if="${addStatus==false}">
+                            <div class="col-md-4">
+                                <label data-th-for="${id}">Hall ID</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" data-th-field="*{id}" readonly type="text">
                             </div>
                         </div>
+                    </div>
+                    <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label form-row text-right" data-th-for="${number}">Hall Number</label>
@@ -46,43 +50,33 @@
                                 <input class="input--style-4 form-control"  data-th-field="*{seatCount}"type="text" name="first_name">
                             </div>
                         </div>
+                    </div>
+                    <div class="row row-space">
                         <div class="col-2">
                             <div class="input-group">
-                                <label class="label form-row text-right" data-th-for="${number}">Hall Number</label>
-                                <input class="input--style-4 form-control"  data-th-field="*{number}" type="text" name="Hall Number">
+                                <label class="label form-row text-right" data-th-for="${hallCondition}">Hall Condition</label>
+                                <select name="cars" class="custom-select">
+                                    <option selected>Select the hall Condition</option>
+                                    <option value="ac">A/C</option>
+                                    <option value="nonAc">Non-A/C</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="input-group">
-                            <label class="label form-row text-right" data-th-for="${hallName}">Hall Name</label>
-                            <input class="input--style-4 form-control"  data-th-field="*{hallName}"type="text" name="first_name">
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label form-row text-right" data-th-for="${hallLocation}">Hall Location</label>
+                                <select name="location" class="custom-select">
+                                    <option selected>Select the floor</option>
+                                    <option value="1st">First floor</option>
+                                    <option value="2nd">Second floor</option>
+                                    <option value="3rd">Third floor</option>
+                                    <option value="4th">Fourth floor</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-            </div>
-            <div class="row row-space">
-                <div class="col-2">
-                    <div class="input-group">
-                        <label class="label">Email</label>
-                        <input class="input--style-4" type="email" name="email">
-                    </div>
-                </div>
-                <div class="col-2">
-                    <div class="input-group">
-                        <label class="label">Phone Number</label>
-                        <input class="input--style-4" type="text" name="phone">
-                    </div>
-                </div>
-            </div>
-            <div class="input-group">
-                <label class="label">Subject</label>
-                <div class="rs-select2 js-select-simple select--no-search">
-                    <select name="subject">
-                        <option disabled="disabled" selected="selected">Choose option</option>
-                        <option>Subject 1</option>
-                        <option>Subject 2</option>
-                        <option>Subject 3</option>
-                    </select>
-                    <div class="select-dropdown"></div>
-                </div>
             </div>
             <div class="p-t-15">
                 <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
