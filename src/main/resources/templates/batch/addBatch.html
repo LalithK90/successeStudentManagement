@@ -9,11 +9,11 @@
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-secondary">
+<div class="row bg-light">
     <div class="col-4">
     </div>
     <div class="col-4">
-        <h1>Batch Management - Add New Batch</h1>
+        <h1>Create a Batch</h1>
     </div>
     <div class="col-4">
         <a href="/batch">
@@ -21,91 +21,185 @@
         </a>
     </div>
 </div>
-<div class="container-fluid">
+<!--<div class="container-fluid">-->
+<!--    <form action="/batch/save" data-th-object="${batch}" method="post">-->
+<!--        &lt;!&ndash;batch id&ndash;&gt;-->
+<!--        <div class="form-row text-right" data-th-if="${addStatus==false}">-->
+<!--            <div class="col-md-4">-->
+<!--                <label data-th-for="${id}">Id</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <label>-->
+<!--                    <input class="form-control" data-th-field="*{id}" readonly type="text">-->
+<!--                </label>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Class Reference&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${classReferance}">Class Referance :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <label>-->
+<!--                    <input class="form-control" data-th-field="*{classReferance}" required tabindex="4" type="text"/>-->
+<!--                </label>-->
+<!--                <span data-th-errors="*{classReferance}"-->
+<!--                      data-th-if="${#fields.hasErrors('classReferance')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;Grade&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${grade}">Grade :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{grade}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{grade}"-->
+<!--                      data-th-if="${#fields.hasErrors('grade')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;Year&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${year}">Year :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{year}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{year}"-->
+<!--                      data-th-if="${#fields.hasErrors('year')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;Subject Name&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${subjectName}">Subject Name :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{subjectName}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{subjectName}"-->
+<!--                      data-th-if="${#fields.hasErrors('subjectName')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;Teacher Name&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${teacherName}">Teacher Name</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{teacherName}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{teacherName}"-->
+<!--                      data-th-if="${#fields.hasErrors('teacherName')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;Button&ndash;&gt;-->
+<!--        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">-->
+<!--            <button class="btn btn-success" tabindex="21" type="submit">-->
+<!--                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span-->
+<!--                    data-th-text="${addStatus==true?'Save': 'Update'}"-->
+<!--                    id="submit"></span>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;footer is included&ndash;&gt;-->
+<!--<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>-->
+<!--&lt;!&ndash;script is included&ndash;&gt;-->
+<!--<script data-th-replace="~{fragments/script :: scriptFragment}"></script>-->
+<!--</body>-->
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
     <form action="/batch/save" data-th-object="${batch}" method="post">
-        <!--batch id-->
-        <div class="form-row text-right" data-th-if="${addStatus==false}">
-            <div class="col-md-4">
-                <label data-th-for="${id}">Id</label>
-            </div>
-            <div class="col-md-8">
-                <label>
-                    <input class="form-control" data-th-field="*{id}" readonly type="text">
-                </label>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" data-th-for="${classReferance}">Batch ID</label>
+            <div class="col-sm-9">
+                <input type="text" data-th-field="*{classReferance}" id="batchId" placeholder="Batch ID" class="form-control" autofocus>
             </div>
         </div>
-        <!-- Class Reference-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${classReferance}">Class Referance :</label>
+        <div class="form-group">
+            <label class="col-sm-1 control-label" data-th-for="${year}">Academic Year</label>
+            <div class="col-sm-5">
+                <select id="year" class="form-control" data-th-field="*{year}">
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                </select>
             </div>
-            <div class="col-md-8">
-                <label>
-                    <input class="form-control" data-th-field="*{classReferance}" required tabindex="4" type="text"/>
-                </label>
-                <span data-th-errors="*{classReferance}"
-                      data-th-if="${#fields.hasErrors('classReferance')}">Error Name</span>
-            </div>
-        </div>
-        <!--Grade-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${grade}">Grade :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{grade}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{grade}"
-                      data-th-if="${#fields.hasErrors('grade')}">Error Name</span>
-            </div>
-        </div>
-        <!--Year-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${year}">Year :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{year}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{year}"
-                      data-th-if="${#fields.hasErrors('year')}">Error Name</span>
-            </div>
-        </div>
-        <!--Subject Name-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${subjectName}">Subject Name :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{subjectName}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{subjectName}"
-                      data-th-if="${#fields.hasErrors('subjectName')}">Error Name</span>
-            </div>
-        </div>
-        <!--Teacher Name-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${teacherName}">Teacher Name</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{teacherName}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{teacherName}"
-                      data-th-if="${#fields.hasErrors('teacherName')}">Error Name</span>
-            </div>
-        </div>
 
-        <!--Button-->
-        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
-            <button class="btn btn-success" tabindex="21" type="submit">
-                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
-                    data-th-text="${addStatus==true?'Save': 'Update'}"
-                    id="submit"></span>
-            </button>
+            <label class="col-sm-1 control-label" data-th-for="${grade}">Grade</label>
+            <div class="col-sm-5">
+                <select id="grade" class="form-control" data-th-field="*{grade}">
+                    <option value="g6">Grade 6</option>
+                    <option value="g7">Grade 7</option>
+                    <option value="g8">Grade 8</option>
+                    <option value="g9">Grade 9</option>
+                    <option value="g10">Grade 10</option>
+                    <option value="g11">Grade 11</option>
+                </select>
+            </div>
         </div>
-    </form>
-</div>
+        <div class="form-group">
+            <label data-th-for="${teacherName}" class="col-sm-3 control-label">Teacher Name</label>
+            <div class="col-sm-9">
+                <select id="teacherName" class="form-control" data-th-field="*{teacherName}">
+                    <option value="">Select the Teacher</option>
+                    <option data-th-each="teachers : ${teacher}"
+                            data-th-selected="$teachers==teacher.firstName?'selected':'unselected'}"
+                            data-th-text="${teachers.teacher}"
+                            data-th-value="${teachers}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label data-th-for="${subjectName}" class="col-sm-3 control-label">Subject Name</label>
+            <div class="col-sm-9">
+                <select id="subjectName" class="form-control" data-th-field="*{subjectName}">
+                    <option value="">Select the Subject</option>
+                    <option data-th-each="subjects : ${subject}"
+                            data-th-selected="subjects==subject.name?'selected':'unselected'}"
+                            data-th-text="${subjects.subject}"
+                            data-th-value="${subjects}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="country" class="col-sm-3 control-label">Country</label>
+            <div class="col-sm-9">
+                <select id="country" class="form-control" >
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                </select>
+            </div>
+        </div>
+        <div class="row container-fluid">
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="link" class="btn btn-danger btn-block">Back</button>
+            </div>
 
-<!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
+            </div>
+
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </div>
+        </div>
+    </form> <!-- /form -->
+</div> <!-- ./container -->
 </body>
 </html>
