@@ -9,25 +9,16 @@
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid  form-Border" style="background-color:Tomato;">
-    <div class="row text-center formManagement border-info">
-        <div class="col">
-            <a class="btn btn-primary" href="/home">
-                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
-            </a>
-        </div>
-        <div class="col">
-            <h4 class="text-light text-center">
-                <strong>
-                    <span data-th-text="${addStatus==true?'Create a Discount':'Update Discount Details'}"></span>
-                </strong>
-            </h4>
-        </div>
-        <div class="col">
-            <a href="/discount" class="btn btn-primary">
-                <i class="fa fa-list"></i>&nbsp;View list
-            </a>
-        </div>
+<div class="row bg-light">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Create a Discount</h1>
+    </div>
+    <div class="col-4">
+        <a href="/discount">
+            <button class="btn btn-primary">View all Discounts</button>
+        </a>
     </div>
 </div>
 <!--<div class="container-fluid">-->
