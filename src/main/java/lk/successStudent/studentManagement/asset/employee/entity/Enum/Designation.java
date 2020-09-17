@@ -12,7 +12,7 @@ public enum Designation {
     TEST("Test User"),
     TEMPORY("Tempory Staff"),
     ADMIN("Administrative Officer )"),
-    CLRK("Office clerk)"),
+    CLRK("Office clerk)")
 //    //Normal every thing belong to his - able to check more than one work station
 //    ACE("Assistant Commissioner Of Excise"),
 //    //Below guy has check station belong to him
@@ -25,7 +25,8 @@ public enum Designation {
 //    //There is no authority to logo in to the system
 //    EC("Excise Corporal"),
 //    EG("Excise Guard"),
-//    ED("Excise Driver"), Owner("");
+//    ED("Excise Driver"), Owner("")
+    ;
 
     private final String designation;
 }
