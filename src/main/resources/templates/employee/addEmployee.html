@@ -21,7 +21,8 @@
 </div>
 <form action="/employee/save" data-th-object="${employee}" method="post">
     <div class="container-fluid row">
-        <div class="col-sm-6">
+<!--        <div class="col-sm-1"></div>-->
+        <div class="col-sm-5">
             <div class="form-group">
                 <label class="col-sm-6 control-label" data-th-for="${id}">Employee ID</label>
                 <div class="col-sm-6">
@@ -91,15 +92,84 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
-                <label class="col-sm-6 control-label" data-th-for="${address}">Address</label>
+                <label class="col-sm-6 control-label">Martial Status</label>
                 <div class="col-sm-6">
-                    <textarea data-th-field="*{address}" id="address" placeholder="Address" class="form-control" autofocus></textarea>
+                    <select id="civilStatus" class="form-control" data-th-field="*{civilStatus}" >
+                        <option value="Single">A+</option>
+                        <option value="Married">o+</option>
+                        <option value="Widowed">B+</option>
+                    </select>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">2nd Half</div>
-        <div class="col-sm-3">3rd  half</div>
+        <div class="col-sm-4">
+            <div class="form-group">
+            <label class="col-sm-6 control-label" data-th-for="${address}">Address</label>
+            <div class="col-sm-6">
+                <textarea rows="3" data-th-field="*{address}" id="address" placeholder="Address" class="form-control" autofocus></textarea>
+            </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label" data-th-for="${mobileOne}">Mobile Number</label>
+                <div class="col-sm-6">
+                    <input type="text" data-th-field="*{mobileOne}" id="mobileOne" placeholder="Mobile Number" class="form-control" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label" data-th-for="${land}">Fixed Number</label>
+                <div class="col-sm-6">
+                    <input type="tel" data-th-field="*{land}" id="land" placeholder="Fixed Number" class="form-control" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label" data-th-for="${email}">Email</label>
+                <div class="col-sm-6">
+                    <input type="email" data-th-field="*{email}" id="email" placeholder="Email" class="form-control" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label">Designation</label>
+                <div class="col-6">
+                <select id="designation" data-th-field="*{designation}" class="form-control">
+                    <option value="Please select">Please select</option>
+                    <option data-th-each="designations : ${designation}"
+                            data-th-text="${designations.designation}"
+                            data-th-value="${designations}"
+                            data-th-selected="${designations==employee.designation?'selected':'unselected'}"></option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label" data-th-for="${dateOfAssignment}">Date of Assignment</label>
+                <div class="col-sm-6">
+                    <input type="date" data-th-field="*{dateOfAssignment}" id="dateOfAssignment" placeholder="Date of Assigning" class="form-control" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label" data-th-for="${createdBy}">User Added by</label>
+                <div class="col-sm-6">
+                    <input type="text" data-th-field="*{createdBy}" id="createdBy" placeholder="Cretae by" class="form-control" autofocus>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group col-sm-2 col-sm-12 text-left flex-column ">
+
+                <div class="input-field">
+                    <div class="card input-img" style="widdata-th- 20rem;margin-top: 30px;padding-top: .5rem;">
+                        <img class="card-img-top" src="../img/index.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Add the Staff ID photograph</h5>
+                            <p class="card-text">Itz nice </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 <!--Form Content - start -->
