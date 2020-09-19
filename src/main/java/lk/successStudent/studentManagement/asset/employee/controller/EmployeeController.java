@@ -5,6 +5,7 @@ import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.CivilSta
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Title;
 import lk.successStudent.studentManagement.asset.commonAsset.service.CommonService;
+import lk.successStudent.studentManagement.asset.discount.entity.Discount;
 import lk.successStudent.studentManagement.asset.employee.entity.Employee;
 import lk.successStudent.studentManagement.asset.employee.entity.EmployeeFiles;
 import lk.successStudent.studentManagement.asset.employee.entity.Enum.Designation;
@@ -23,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -188,6 +190,20 @@ public class EmployeeController {
         model.addAttribute("employee", new Employee());
         model.addAttribute("employeeDetailShow", false);
         return "employeeWorkingPlace/addEmployeeWorkingPlace";
+    }
+
+    @PostMapping("/save")
+    public String persist(@Valid @ModelAttribute Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("employee", employee);
+
+            model.addAttribute("addStatus",true);
+            return "employee/addEmployee";
+        }
+
+        employeeService.persist(employee);
+        return "redirect:/employee";
+
     }
 
     //Send a searched employee to add working place

@@ -138,7 +138,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-th-each="employee, rowCount : ${employees}">
+            <tr data-th-each="employee, index : ${employees}">
                 <td data-th-text="${index.count}"></td>
                 <td data-th-text="${employee.payRoleNumber}"></td>
                 <td data-th-text="${employee.callingName}"></td>

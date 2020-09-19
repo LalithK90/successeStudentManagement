@@ -5,7 +5,6 @@ import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.CivilSta
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Gender;
 import lk.successStudent.studentManagement.asset.commonAsset.model.Enum.Title;
 import lk.successStudent.studentManagement.asset.employee.entity.Employee;
-import lk.successStudent.studentManagement.asset.employee.entity.Enum.Designation;
 import lk.successStudent.studentManagement.asset.employee.entity.Enum.EmployeeStatus;
 import lk.successStudent.studentManagement.asset.employee.service.EmployeeService;
 import lk.successStudent.studentManagement.asset.userManagement.entity.Role;
