@@ -1,101 +1,177 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--&lt;!&ndash;Styles, meta data, and title are included&ndash;&gt;-->
+<!--<head data-th-replace="~{fragments/header :: headerFragment}">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Thymeleaf Springboot </title>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;Nav bar is included&ndash;&gt;-->
+<!--<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>-->
+
+<!--<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">-->
+<!--    <div class="wrapper wrapper&#45;&#45;w680">-->
+<!--        <div class="card card-4">-->
+<!--            <div class="card-body">-->
+<!--                <div class="col-8">-->
+<!--                    <a href="/hall">-->
+<!--                        <h2 class="title">Hall Management</h2>-->
+<!--                    </a>-->
+<!--                </div>-->
+
+<!--                <div class="col-4">-->
+<!--                    <a href="/hall">-->
+<!--                        <button class="btn btn-primary">All Hall</button>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <form action="/hall/save" data-th-object="${hall}" method="post">-->
+<!--                    <div class="row row-space">-->
+<!--                        <div class="form-row text-right" data-th-if="${addStatus==false}">-->
+<!--                            <div class="col-md-4">-->
+<!--                                <label data-th-for="${id}">Hall ID</label>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-8">-->
+<!--                                <input class="form-control" data-th-field="*{id}" readonly type="text">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row row-space">-->
+<!--                        <div class="col-2">-->
+<!--                            <div class="input-group">-->
+<!--                                <label class="label form-row text-right" data-th-for="${number}">Hall Number</label>-->
+<!--                                <input class="input&#45;&#45;style-4 form-control"  data-th-field="*{number}" type="text" name="Hall Number">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row row-space">-->
+<!--                        <div class="col-2">-->
+<!--                            <div class="input-group">-->
+<!--                                <label class="label form-row text-right" data-th-for="${seatCount}">Seat Count</label>-->
+<!--                                <input class="input&#45;&#45;style-4 form-control"  data-th-field="*{seatCount}"type="text" name="first_name">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row row-space">-->
+<!--                        <div class="col-2">-->
+<!--                            <div class="input-group">-->
+<!--                                <label class="label form-row text-right" data-th-for="${hallCondition}">Hall Condition</label>-->
+<!--                                <select name="cars" class="custom-select">-->
+<!--                                    <option selected>Select the hall Condition</option>-->
+<!--                                    <option value="ac">A/C</option>-->
+<!--                                    <option value="nonAc">Non-A/C</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row row-space">-->
+<!--                        <div class="col-2">-->
+<!--                            <div class="input-group">-->
+<!--                                <label class="label form-row text-right" data-th-for="${hallLocation}">Hall Location</label>-->
+<!--                                <select name="location" class="custom-select">-->
+<!--                                    <option selected>Select the floor</option>-->
+<!--                                    <option value="1st">First floor</option>-->
+<!--                                    <option value="2nd">Second floor</option>-->
+<!--                                    <option value="3rd">Third floor</option>-->
+<!--                                    <option value="4th">Fourth floor</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--            <div class="p-t-15">-->
+<!--                <button class="btn btn&#45;&#45;radius-2 btn&#45;&#45;blue" type="submit">Submit</button>-->
+<!--            </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Jquery JS&ndash;&gt;-->
+<!--<script src="vendor/jquery/jquery.min.js"></script>-->
+<!--&lt;!&ndash; Vendor JS&ndash;&gt;-->
+<!--<script src="vendor/select2/select2.min.js"></script>-->
+<!--<script src="vendor/datepicker/moment.min.js"></script>-->
+<!--<script src="vendor/datepicker/daterangepicker.js"></script>-->
+
+<!--&lt;!&ndash; Main JS&ndash;&gt;-->
+<!--<script src="js/global.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Success Student Management System</title>
 </head>
 <body>
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-    <div class="wrapper wrapper--w680">
-        <div class="card card-4">
-            <div class="card-body">
-                <div class="col-8">
-                    <a href="/hall">
-                        <h2 class="title">Hall Management</h2>
-                    </a>
-                </div>
-
-                <div class="col-4">
-                    <a href="/hall">
-                        <button class="btn btn-primary">All Hall</button>
-                    </a>
-                </div>
-                <form action="/hall/save" data-th-object="${hall}" method="post">
-                    <div class="row row-space">
-                        <div class="form-row text-right" data-th-if="${addStatus==false}">
-                            <div class="col-md-4">
-                                <label data-th-for="${id}">Hall ID</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input class="form-control" data-th-field="*{id}" readonly type="text">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label form-row text-right" data-th-for="${number}">Hall Number</label>
-                                <input class="input--style-4 form-control"  data-th-field="*{number}" type="text" name="Hall Number">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label form-row text-right" data-th-for="${seatCount}">Seat Count</label>
-                                <input class="input--style-4 form-control"  data-th-field="*{seatCount}"type="text" name="first_name">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label form-row text-right" data-th-for="${hallCondition}">Hall Condition</label>
-                                <select name="cars" class="custom-select">
-                                    <option selected>Select the hall Condition</option>
-                                    <option value="ac">A/C</option>
-                                    <option value="nonAc">Non-A/C</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label form-row text-right" data-th-for="${hallLocation}">Hall Location</label>
-                                <select name="location" class="custom-select">
-                                    <option selected>Select the floor</option>
-                                    <option value="1st">First floor</option>
-                                    <option value="2nd">Second floor</option>
-                                    <option value="3rd">Third floor</option>
-                                    <option value="4th">Fourth floor</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div class="p-t-15">
-                <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
-            </div>
-            </form>
-        </div>
+<div class="row bg-light">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Add a Hall</h1>
+    </div>
+    <div class="col-4">
+        <a href="/hall">
+            <button class="btn btn-primary">View All</button>
+        </a>
     </div>
 </div>
-</div>
 
-<!-- Jquery JS-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<!-- Vendor JS-->
-<script src="vendor/select2/select2.min.js"></script>
-<script src="vendor/datepicker/moment.min.js"></script>
-<script src="vendor/datepicker/daterangepicker.js"></script>
+<div class="container">
+    <form action="/hall/save" data-th-object="${hall}" method="post">
+        <div class="form-group">
+            <label class="col-sm-3 control-label" data-th-for="${number}">Hall ID</label>
+            <div class="col-sm-5">
+                <input type="text" data-th-field="*{number}" id="hallId" placeholder="Hall Number" class="form-control" autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" data-th-for="${seatCount}">Seating Count</label>
+            <div class="col-sm-5">
+                <input type="text" data-th-field="*{seatCount}" id="seatCount" placeholder="Seating Count" class="form-control" autofocus>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" data-th-for="${hallCondition}">Hall Condition</label>
+            <div class="col-sm-5">
+                <select id="hallCondition" class="form-control" data-th-field="*{hallCondition}">
+                    <option value="A/C">Air Conditioned</option>
+                    <option value="Non-A/C">Non A/C</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" data-th-for="${hallLocation}">Hall Location</label>
+            <div class="col-sm-5">
+                <select id="hallLocation" class="form-control" data-th-field="*{hallLocation}">
+                    <option value="1st Floor">First floor</option>
+                    <option value="2nd Floor">Second floor</option>
+                    <option value="3rd Floor">Third floor</option>
+                </select>
+            </div>
+        </div>
 
-<!-- Main JS-->
-<script src="js/global.js"></script>
+        <div class="row container-fluid">
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="link" class="btn btn-danger btn-block">Back</button>
+            </div>
 
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
+            </div>
+
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </div>
+        </div>
+    </form> <!-- /form -->
+</div> <!-- ./container -->
 </body>
 </html>
