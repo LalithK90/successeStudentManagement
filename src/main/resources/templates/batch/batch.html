@@ -48,16 +48,20 @@
 
 
                 <td>
-                    <a data-th-href="${'/batch/view/'+ batch.id}"><button class="btn btn-info">View</button></a>
-                    <a data-th-href="${'/batch/edit/'+ batch.id}"><button class="btn btn-success">Edit</button></a>
-                    <a data-th-href="${'/batch/delete/'+ batch.id}"><button class="btn btn-danger">Delete</button></a>
+                    <a data-th-href="${'/batch/view/'+ batch.id}">
+                        <button class="btn btn-info">View</button>
+                    </a>
+                    <a data-th-href="${'/batch/edit/'+ batch.id}">
+                        <button class="btn btn-success">Edit</button>
+                    </a>
+                    <a data-th-href="${'/batch/delete/'+ batch.id}">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div class="col-2"></div>
-
 </div>
 
 <!--footer is included-->
