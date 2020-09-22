@@ -1,111 +1,193 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--&lt;!&ndash;Styles, meta data, and title are included&ndash;&gt;-->
+<!--<head data-th-replace="~{fragments/header :: headerFragment}">-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Thymeleaf Springboot </title>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;Nav bar is included&ndash;&gt;-->
+<!--<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>-->
+
+<!--<div class="row bg-secondary">-->
+<!--    <div class="col-4">-->
+<!--    </div>-->
+<!--    <div class="col-4">-->
+<!--        <h1>Payment Management - Make a Payment</h1>-->
+<!--    </div>-->
+<!--    <div class="col-4">-->
+<!--        <a href="/payment">-->
+<!--            <button class="btn btn-primary">View All Payment</button>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="container-fluid">-->
+<!--    <form action="/payment/save" data-th-object="${payment}" method="post">-->
+<!--        &lt;!&ndash;payment id&ndash;&gt;-->
+<!--        <div class="form-row text-right" data-th-if="${addStatus==false}">-->
+<!--            <div class="col-md-4">-->
+<!--                <label data-th-for="${id}">Referance</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <label>-->
+<!--                    <input class="form-control" data-th-field="*{id}" readonly type="text">-->
+<!--                </label>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; discount Status&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${discountStatus}">Discount Status :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <label>-->
+<!--                    <input class="form-control" data-th-field="*{discountStatus}" required tabindex="4" type="text"/>-->
+<!--                </label>-->
+<!--                <span data-th-errors="*{discountStatus}"-->
+<!--                      data-th-if="${#fields.hasErrors('discountStatus')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;amount&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${amount}">amount :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{amount}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{amount}"-->
+<!--                      data-th-if="${#fields.hasErrors('amount')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;time&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${createdTime}">Time :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{createdTime}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{createdTime}"-->
+<!--                      data-th-if="${#fields.hasErrors('createdTime')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;date&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${createdDate}">Date :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{createdDate}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{createdDate}"-->
+<!--                      data-th-if="${#fields.hasErrors('createdDate')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;created By&ndash;&gt;-->
+<!--        <div class="form-row text-right">-->
+<!--            <div class="col-md-4">-->
+<!--                <label class="control-label" data-th-for="${createdBy}">Created User :</label>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <input class="form-control" data-th-field="*{createdBy}" required tabindex="4" type="text"/>-->
+<!--                <span data-th-errors="*{createdBy}"-->
+<!--                      data-th-if="${#fields.hasErrors('createdBy')}">Error Name</span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;Button&ndash;&gt;-->
+<!--        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">-->
+<!--            <button class="btn btn-success" tabindex="21" type="submit">-->
+<!--                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span-->
+<!--                    data-th-text="${addStatus==true?'Save': 'Update'}"-->
+<!--                    id="submit"></span>-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;footer is included&ndash;&gt;-->
+<!--<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>-->
+<!--&lt;!&ndash;script is included&ndash;&gt;-->
+<!--<script data-th-replace="~{fragments/script :: scriptFragment}"></script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Success Student Management System</title>
 </head>
 <body>
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-secondary">
+<div class="row bg-light">
     <div class="col-4">
     </div>
     <div class="col-4">
-        <h1>Payment Management - Make a Payment</h1>
+        <h1>Make a Payment</h1>
     </div>
     <div class="col-4">
         <a href="/payment">
-            <button class="btn btn-primary">View All Payment</button>
+            <button class="btn btn-primary">View all Payments</button>
         </a>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container">
     <form action="/payment/save" data-th-object="${payment}" method="post">
-        <!--payment id-->
-        <div class="form-row text-right" data-th-if="${addStatus==false}">
-            <div class="col-md-4">
-                <label data-th-for="${id}">Referance</label>
-            </div>
-            <div class="col-md-8">
-                <label>
-                    <input class="form-control" data-th-field="*{id}" readonly type="text">
-                </label>
+        <div class="form-group">
+            <label class="col-sm-3 control-label" data-th-for="${id}">Tran ID</label>
+            <div class="col-sm-9">
+                <input data-th-field="*{id}" id="id" placeholder="Transaction ID" class="form-control"  type="text" autofocus>
             </div>
         </div>
-        <!-- discount Status-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${discountStatus}">Discount Status :</label>
-            </div>
-            <div class="col-md-8">
-                <label>
-                    <input class="form-control" data-th-field="*{discountStatus}" required tabindex="4" type="text"/>
-                </label>
-                <span data-th-errors="*{discountStatus}"
-                      data-th-if="${#fields.hasErrors('discountStatus')}">Error Name</span>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${discountStatus}">Discount Status</label>
+            <div class="col-sm-5">
+                <select id="discountStatus" class="form-control" data-th-field="*{discountStatus}">
+                    <option value="Applicable">Applicable</option>
+                    <option value="Not Applicable">Not applicable</option>
+                </select>
             </div>
         </div>
-        <!--amount-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${amount}">amount :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{amount}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{amount}"
-                      data-th-if="${#fields.hasErrors('amount')}">Error Name</span>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${amount}">Amount</label>
+            <div class="col-sm-5">
+                <input type="text" id="amount" class="form-control" data-th-field="*{amount}">
             </div>
         </div>
-        <!--time-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${createdTime}">Time :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{createdTime}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{createdTime}"
-                      data-th-if="${#fields.hasErrors('createdTime')}">Error Name</span>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${createdTime}">Created Time</label>
+            <div class="col-sm-4">
+                <input type="time" id="createdTime" class="form-control" data-th-field="*{createdTime}">
             </div>
         </div>
-        <!--date-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${createdDate}">Date :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{createdDate}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{createdDate}"
-                      data-th-if="${#fields.hasErrors('createdDate')}">Error Name</span>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${createdDate}">Created Date</label>
+            <div class="col-sm-4">
+                <input type="date" id="createdDate" class="form-control" data-th-field="*{createdDate}">
             </div>
         </div>
-        <!--created By-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${createdBy}">Created User :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{createdBy}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{createdBy}"
-                      data-th-if="${#fields.hasErrors('createdBy')}">Error Name</span>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${createdBy}">Created by</label>
+            <div class="col-sm-4">
+                <input type="text" id="createdBy" class="form-control" data-th-field="*{createdBy}">
             </div>
         </div>
+        <div class="row container-fluid">
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="link" class="btn btn-danger btn-block">Back</button>
+            </div>
 
-        <!--Button-->
-        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
-            <button class="btn btn-success" tabindex="21" type="submit">
-                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
-                    data-th-text="${addStatus==true?'Save': 'Update'}"
-                    id="submit"></span>
-            </button>
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
+            </div>
+
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </div>
         </div>
-    </form>
+    </form> <!-- /form -->
 </div>
-
-<!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 </body>
 </html>
