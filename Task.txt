@@ -14,6 +14,8 @@ Assigment -> Need to recheck {CRUD Operation, Interface Edit, End date 11/09/202
 
 Not Done Upto Now {Start date 12/11/2020}
 =================
-1.Process Management, {Attendance, Payment, Class or Batch registration, time table}
+1.Process Management,
+{Attendance, Payment, Class or Batch registration, time table}
+
 2.Payment report {cashier, manager, owner, teacher}
 3. {{Student login and payment and attendance details }}
