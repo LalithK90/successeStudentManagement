@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Student Management system</title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-light">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+        <h1>Add a School</h1>
+    </div>
+    <div class="col-4">
+        <a href="/school">
+            <button class="btn btn-primary">View all Schools</button>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <form action="/school/save" data-th-object="${school}" method="post">
+<!--        <div class="form-group">-->
+<!--            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>-->
+<!--            <div class="col-sm-9">-->
+<!--                <input type="text" data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${schoolId}">School ID</label>
+            <div class="col-sm-4">
+                <input type="text" id="code" placeholder="School ID" class="form-control" data-th-field="*{schoolId}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${name}">School name</label>
+            <div class="col-sm-5">
+                <input type="text" id="name" class="form-control" data-th-field="*{name}" placeholder="School name">
+            </div>
+        </div>
+        <div class="row container-fluid">
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="link" class="btn btn-danger btn-block">Back</button>
+            </div>
+
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
+            </div>
+
+            <div class="col-sm-2 col-sm-offset-2">
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

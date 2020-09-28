@@ -203,12 +203,12 @@
 </div>
 <div class="container">
     <form action="/student/save" data-th-object="${student}" method="post">
-        <div class="form-group">
-            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>
-            <div class="col-sm-9">
-                <input type="text" readonly data-th-field="*{id}" id="id" placeholder="Discount code" class="form-control" autofocus>
-            </div>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>-->
+<!--            <div class="col-sm-9">-->
+<!--                <input type="text" readonly data-th-field="*{id}" id="id" placeholder="IndeX" class="form-control" autofocus>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${regNo}">Registration ID</label>
             <div class="col-sm-5">
@@ -253,6 +253,16 @@
             <label class="col-sm-2 control-label" data-th-for="${city}">City</label>
             <div class="col-sm-4">
                 <input type="text" id="city" class="form-control" data-th-field="*{city}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">School</label>
+            <div class="col-sm-9">
+                <select id="school" class="form-control" data-th-field="*{school}" >
+                    <option value="D.S">D.S</option>
+                    <option value="Ananda">Ananada</option>
+                    <option value="Nalanda">Nalanda</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
