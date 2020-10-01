@@ -19,3 +19,7 @@ Not Done Upto Now {Start date 12/11/2020}
 
 2.Payment report {cashier, manager, owner, teacher}
 3. {{Student login and payment and attendance details }}
+
+
+
+

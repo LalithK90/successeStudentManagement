@@ -1,53 +1,97 @@
+
+
+<!--<div class="container-fluid">-->
+<!--    <table class="table table-striped table-inverse table-responsive" id="myTable">-->
+<!--        <thead class="thead-inverse">-->
+<!--        <tr>-->
+<!--            <th>Index</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Batch</th>-->
+<!--            <th>Subject</th>-->
+<!--            <th>Contact Number</th>-->
+<!--            <th>Modify</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr data-th-each="teacher, index : ${teachers}">-->
+<!--            <td data-th-text="${index.count}"></td>-->
+<!--            <td data-th-text="${teacher.firstName}"></td>-->
+<!--            <td data-th-text="${teacher.batch.classReferance}"></td>-->
+<!--            <td data-th-text="${teacher.subject.name}"></td>-->
+<!--            <td data-th-text="${teacher.mobile}"></td>-->
+<!--            <td>-->
+<!--                <a data-th-href="${'/teacher/view/'+ teacher.id}"><button class="btn btn-info">View</button></a>-->
+<!--                <a data-th-href="${'/teacher/edit/'+ teacher.id}"><button class="btn btn-success">Edit</button></a>-->
+<!--                <a data-th-href="${'/teacher/delete/'+ teacher.id}"><button class="btn btn-danger">Delete</button></a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;footer is included&ndash;&gt;-->
+<!--<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>-->
+<!--&lt;!&ndash;script is included&ndash;&gt;-->
+<!--<script data-th-replace="~{fragments/script :: scriptFragment}"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Success Student Management System</title>
 </head>
 <body>
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-secondary">
-    <div class="col-4">
-        <a href="/teacher/new">
-            <button class="btn btn-primary">New Teacher</button>
-        </a>
-    </div>
-    <div class="col-4">
-        <h1>Teacher Management</h1>
-    </div>
+<div class="row bg-light">
     <div class="col-4"></div>
+    <div class="col-4">
+        <h1>Student Management</h1>
+    </div>
+    <div class="col-4"> <a href="/teacher/new">
+        <button class="btn btn-primary">Register a new Teacher</button>
+    </a></div>
 </div>
 
-<div class="container-fluid">
-    <table class="table table-striped table-inverse table-responsive" id="myTable">
-        <thead class="thead-inverse">
-        <tr>
-            <th>Index</th>
-            <th>Name</th>
-            <th>Batch</th>
-            <th>Subject</th>
-            <th>Contact Number</th>
-            <th>Modify</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-th-each="teacher, index : ${teachers}">
-            <td data-th-text="${index.count}"></td>
-            <td data-th-text="${teacher.firstName}"></td>
-            <td data-th-text="${teacher.batch.classReferance}"></td>
-            <td data-th-text="${teacher.subject.name}"></td>
-            <td data-th-text="${teacher.mobile}"></td>
-            <td>
-                <a data-th-href="${'/teacher/view/'+ teacher.id}"><button class="btn btn-info">View</button></a>
-                <a data-th-href="${'/teacher/edit/'+ teacher.id}"><button class="btn btn-success">Edit</button></a>
-                <a data-th-href="${'/teacher/delete/'+ teacher.id}"><button class="btn btn-danger">Delete</button></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container-fluid row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <table class="table table-striped table-inverse table-responsive container" id="myTable"  >
+            <thead class="thead-inverse">
+            <tr>
+                <th>Index</th>
+                <th>Registration ID</th>
+                <th>Name</th>
+                <th>Batch</th>
+                <th>Subject</th>
+                <th>Contact Number</th>
+                <th>Modify</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="teacher, index : ${teachers}">
+                <td data-th-text="${index.count}"></td>
+                <td data-th-text="${teacher.RegistrationId}"></td>
+                <td data-th-text="${teacher.firstName}"></td>
+                <td data-th-text="${teacher.batch.classReferance}"></td>
+                <td data-th-text="${teacher.subject.name}"></td>
+                <td data-th-text="${teacher.mobile}"></td>
+                <td>
+                    <a data-th-href="${'/teacher/view/'+ teacher.id}"><button class="btn btn-info">View</button></a>
+                    <a data-th-href="${'/teacher/edit/'+ teacher.id}"><button class="btn btn-success">Edit</button></a>
+                    <a data-th-href="${'/teacher/delete/'+ teacher.id}"><button class="btn btn-danger">Delete</button></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-1"></div>
 </div>
 
 <!--footer is included-->
