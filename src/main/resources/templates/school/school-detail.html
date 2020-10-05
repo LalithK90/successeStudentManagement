@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Success Student Management System</title>
+    <title>Success Student Management</title>
 </head>
 <body>
 <!--Nav bar is included-->
@@ -35,20 +33,26 @@
             </div>
         </div>
         <div class="form-group">
-            <label data-th-for="${name}" class="col-sm-3 control-label">School name</label>
+            <label data-th-for="${schoolId}" class="col-sm-3 control-label">School ID</label>
             <div class="col-sm-6">
-                <p type="text" id="name" class="form-control" data-th-text="*{schoolDetail.name}">
+                <p type="text" id="schoolId" class="form-control" data-th-text="*{schoolDetail.schoolId}">
             </div>
         </div>
         <div class="form-group">
-            <label data-th-for="${schoolId}" class="col-sm-3 control-label">School ID</label>
+            <label data-th-for="${schoolName}" class="col-sm-3 control-label">School Name</label>
             <div class="col-sm-6">
-                <p type="text" id="School ID" class="form-control" data-th-text="*{schoolDetail.name}">
+                <p type="text" id="schoolName" class="form-control" data-th-text="*{schooltDetail.schoolName}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label data-th-for="${district}" class="col-sm-3 control-label">Dictrict</label>
+            <div class="col-sm-6">
+                <p type="text" id="district" class="form-control" data-th-text="*{schooltDetail.district}">
             </div>
         </div>
         <div class="row container-fluid">
             <div class="col-sm-2 col-sm-offset-2">
-                <a href="/school">
+                <a href="/discount">
                     <button type="link"  class="btn btn-danger btn-block" >Back</button>
                 </a>
             </div>

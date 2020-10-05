@@ -1,29 +1,30 @@
 package lk.successStudent.studentManagement.asset.school.service;
 
 
-import lk.successStudent.studentManagement.asset.school.entity.school;
+import lk.successStudent.studentManagement.asset.school.dao.SchoolDao;
+import lk.successStudent.studentManagement.asset.school.entity.School;
 import lk.successStudent.studentManagement.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public abstract class schoolService implements AbstractService<school, Integer> {
-    private final lk.successStudent.studentManagement.asset.school.dao.schoolDao schoolDao;
+public class SchoolService implements AbstractService<School, Integer> {
+    private final SchoolDao schoolDao;
 
-    public schoolService(lk.successStudent.studentManagement.asset.school.dao.schoolDao schoolDao) {
+    public SchoolService(SchoolDao schoolDao) {
         this.schoolDao = schoolDao;
     }
 
-    public List<school> findAll() {
+    public List<School> findAll() {
         return schoolDao.findAll();
     }
 
-    public school findById(Integer id) {
+    public School findById(Integer id) {
         return schoolDao.getOne(id);
     }
 
-    public school persist(school school) {
+    public School persist(School school) {
         return schoolDao.save(school);
     }
 
@@ -32,7 +33,7 @@ public abstract class schoolService implements AbstractService<school, Integer> 
         return false;
     }
 
-    public List<school> search(school school) {
+    public List<School> search(School school) {
         return null;
     }
 

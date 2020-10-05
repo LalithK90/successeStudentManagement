@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Student Management System</title>
+    <title>Success Student Management System</title>
 </head>
 <body>
 <!--Nav bar is included-->
@@ -16,7 +15,7 @@
         <h1>School Management</h1>
     </div>
     <div class="col-4"> <a href="/school/new">
-        <button class="btn btn-primary">Add a School</button>
+        <button class="btn btn-primary">Add new School</button>
     </a></div>
 </div>
 
@@ -28,15 +27,21 @@
             <tr>
                 <th>Index</th>
                 <th>School ID</th>
-                <th>name</th>
-                <th>Modify</th>
+                <th>Name</th>
+                <th>District</th>
+                <th>Status</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr data-th-each="school, index : ${Schools}">
+            <tr data-th-each="discount, index : ${discounts }">
                 <td data-th-text="${index.count}"></td>
-                <td data-th-text="${school.schooId}"></td>
-                <td data-th-text="${school.name}"></td>
+                <td data-th-text="${school.schoolId}"></td>
+                <td data-th-text="${school.schoolName}"></td>
+                <td data-th-text="${school.district}"></td>
+                <td data-th-text="${school.schoolStatus}"></td>
+
+
                 <td>
                     <a data-th-href="${'/school/view/'+ school.id}"><button class="btn btn-info">View</button></a>
                     <a data-th-href="${'/school/edit/'+ school.id}"><button class="btn btn-success">Edit</button></a>
@@ -54,4 +59,4 @@
 <!--script is included-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
 </body>
-</html>
+</h>

@@ -1,7 +1,8 @@
 package lk.successStudent.studentManagement.asset.school.controller;
 
-import lk.successStudent.studentManagement.asset.school.entity.school;
-import lk.successStudent.studentManagement.asset.school.service.schoolService;
+
+import lk.successStudent.studentManagement.asset.school.entity.School;
+import lk.successStudent.studentManagement.asset.school.service.SchoolService;
 import lk.successStudent.studentManagement.util.interfaces.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/School")
-public class schoolController implements AbstractController<school, Integer> {
-    private final lk.successStudent.studentManagement.asset.school.service.schoolService schoolService;
+@RequestMapping("/school")
+public class SchoolController implements AbstractController<School, Integer> {
+    private SchoolService schoolService;
 
-    public schoolController(lk.successStudent.studentManagement.asset.school.service.schoolService schoolService) {
-        this.schoolService = schoolService;
+    public void Controller(SchoolService schoolService) {this.schoolService = schoolService;
     }
 
     @GetMapping
@@ -28,7 +28,7 @@ public class schoolController implements AbstractController<school, Integer> {
 
     @GetMapping("/new")
     public String form(Model model) {
-        model.addAttribute("school", new school());
+        model.addAttribute("school", new School());
 
         model.addAttribute("addStatus",true);
         return "school/addSchool";
@@ -49,7 +49,7 @@ public class schoolController implements AbstractController<school, Integer> {
     }
 
     @PostMapping("/save")
-    public String persist(@Valid @ModelAttribute school school, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String persist(@Valid @ModelAttribute School school, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("school", school);
 
