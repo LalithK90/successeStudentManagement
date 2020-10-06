@@ -11,13 +11,14 @@ Assigment -> Need to recheck {CRUD Operation, Interface Edit, End date 11/09/202
 7.Subject Management (CRUD Operations - done )
 8.Teacher Management ( (CRUD Operations - done )
 9.Student Management (CRUD Operations - done )
+10. School Management (CRUD Operations - done)
 
 Not Done Upto Now {Start date 12/11/2020}
 =================
-1.Process Management,
+1. Process Management =>
 {Attendance, Payment, Class or Batch registration, time table}
 
-2.Payment report {cashier, manager, owner, teacher}
+2. Payment report {cashier, manager, owner, teacher}
 3. {{Student login and payment and attendance details }}
 
 

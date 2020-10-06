@@ -1,27 +1,30 @@
 package lk.successStudent.studentManagement.asset.school.entity;
 
 
+import lk.sonali.bookshop.asset.item.entity.Item;
+import lombok.*;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.successStudent.studentManagement.util.audit.AuditEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonFilter("School")
-public class school extends AuditEntity {
-    private String schoolName;
-    private String schoolCode;
-    private String district;
+@EqualsAndHashCode
+public class School {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false, length = 45, unique = true)
+    private String name;
+
+
+    @ManyToMany(mappedBy = "authors")
+    private List< Item > items;
 
 
 }
