@@ -23,7 +23,7 @@ public class SchoolService implements AbstractService< School, Integer> {
     }
 
 
-    @Cacheable(value = "SampleCollectingTube")
+
     public List< School > findAll() {
         return schoolDao.findAll();
     }
@@ -33,12 +33,12 @@ public class SchoolService implements AbstractService< School, Integer> {
         return schoolDao.getOne(id);
     }
 
-    @Transactional
+
     public School persist(School school) {
         return schoolDao.save(school);
     }
 
-    @Transactional
+
     public boolean delete(Integer id) {
         schoolDao.deleteById(id);
         return false;
