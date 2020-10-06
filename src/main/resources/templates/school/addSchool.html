@@ -1,62 +1,85 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Student Management system</title>
+    <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-light">
-    <div class="col-4">
-    </div>
-    <div class="col-4">
-        <h1>Add a School</h1>
-    </div>
-    <div class="col-4">
-        <a href="/school">
-            <button class="btn btn-primary">View all Schools</button>
-        </a>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-primary" href="/home">
+                <i class="fa fa-home" style="font-size: 20px"></i> &nbsp; Home
+            </a>
+        </div>
+        <div class="col">
+            <h4 class="text-light text-center">
+                <strong>
+                    <span
+                            data-th-text="${addStatus==true?'New School Tube Add':'Update School Tube Details'}"></span>
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <a class="btn btn-primary" href="/school">
+                <i class="fa fa-list"></i>&nbsp; View List
+            </a>
+        </div>
     </div>
 </div>
+<!--Form Content - start -->
+<div class="container-fluid bg-dark formBorder">
+    <div class="col-sm-12 flex-column ">
+        <form data-th-action="${addStatus==true?'/school/save':'/school/update'}"
+              data-th-object="${school}"
+              method="POST">
+            <div class="row">
+                <!--Left Side-->
+                <div class="form-group col-md-6 col-sm-6 text-left flex-column">
+                    <input data-th-field="*{id}" data-th-if="${addStatus==false}" hidden type="text"/>
 
-<div class="container">
-    <form action="/school/save" data-th-object="${school}" method="post">
-<!--        <div class="form-group">-->
-<!--            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>-->
-<!--            <div class="col-sm-9">-->
-<!--                <input type="text" data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${schoolId}">School ID</label>
-            <div class="col-sm-4">
-                <input type="text" id="code" placeholder="School ID" class="form-control" data-th-field="*{schoolId}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${name}">School name</label>
-            <div class="col-sm-5">
-                <input type="text" id="name" class="form-control" data-th-field="*{name}" placeholder="School name">
-            </div>
-        </div>
-        <div class="row container-fluid">
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
-            </div>
+                    <!--Name-->
+                    <div class="form-row text-right">
+                        <div class="col-md-4">
+                            <label class="control-label" for="name">Name :</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input class="form-control" data-th-field="*{name}" id="name" required tabindex="4"
+                                   type="text"/>
+                            <span class="error" data-th-errors="*{name}"
+                                  data-th-if="${#fields.hasErrors('name')}" id="nameError">Error Name</span>
+                        </div>
+                    </div>
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
-            </div>
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="submit" class="btn btn-success btn-block">Submit</button>
+                </div>
+
+                <!--Button-->
+                <div class="form-group col-md-12 col-sm-12 text-center flex-column ">
+                    <button class="btn btn-success" tabindex="21" type="submit">
+                        <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
+                            data-th-text="${addStatus==true?'Save': 'Update'}"
+                            id="submit"></span>
+                    </button>
+                </div>
+                <div class="form-row">
+                    <label data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '"
+                           id="errorLabel">Errors: </label>
+                    <ul>
+                        <li class="error" data-th-each="err: ${#fields.errors('*')}" data-th-text="${err}"
+                            id="error"></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+<!--footer include-->
+<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script include-->
+<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+
 </body>
 </html>
