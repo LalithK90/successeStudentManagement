@@ -1,57 +1,87 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Student Management System</title>
+    <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-light">
-    <div class="col-4"></div>
-    <div class="col-4">
-        <h1>School Management</h1>
+<div class="container-fluid bg-secondary form-Border">
+    <div class="row text-center formManagement border-info">
+        <div class="col">
+            <a class="btn btn-success" href="/school/add"><i class="fa fa-user-plus"></i>
+                &nbsp; New Author</a>
+        </div>
+        <div class="col">
+            <h4 class="text-info text-center">
+                <strong>
+                    Author Management
+                </strong>
+            </h4>
+        </div>
+        <div class="col">
+            <!-- <a href="/school/workingPlace" id="searchShow" class="btn btn-primary">
+                 <i class="fa fa-user " style="font-size: 20px"></i>&nbsp;Add&nbsp;
+                 <i class="fas fa-store-alt" style="font-size: 20px"></i>
+                 &nbsp;
+             </a>-->
+        </div>
     </div>
-    <div class="col-4"> <a href="/school/new">
-        <button class="btn btn-primary">Add a School</button>
-    </a></div>
 </div>
-
-<div class="container-fluid row">
-    <div class="col-lg-1"></div>
-    <div class="col-lg-10">
-        <table class="table table-striped table-inverse table-responsive container" id="myTable"  >
-            <thead class="thead-inverse">
-            <tr>
-                <th>Index</th>
-                <th>School ID</th>
-                <th>name</th>
-                <th>Modify</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-th-each="school, index : ${Schools}">
-                <td data-th-text="${index.count}"></td>
-                <td data-th-text="${school.schooId}"></td>
-                <td data-th-text="${school.name}"></td>
-                <td>
-                    <a data-th-href="${'/school/view/'+ school.id}"><button class="btn btn-info">View</button></a>
-                    <a data-th-href="${'/school/edit/'+ school.id}"><button class="btn btn-success">Edit</button></a>
-                    <a data-th-href="${'/school/delete/'+ school.id}"><button class="btn btn-danger">Delete</button></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+<div class="container-fluid bg-dark formBorder text-center">
+    <div class="col">
+        <div class="col" id="authorListPresent" data-th-if="${not #lists.isEmpty(schools)}">
+            <table class="table table-hover table-striped" id="myTable">
+                <thead>
+                <tr>
+                    <th> Index</th>
+                    <th> Name</th>
+                    <th> Modify</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="school, rowCount : ${schools}">
+                    <th data-th-text="${rowCount.count}"></th>
+                    <th data-th-text="${school.name}"></th>
+                    <th>
+                        <a data-th-href="${'/school/edit/' + school.id}"
+                           class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+                        <a data-th-href="${'/school/delete/' + school.id}"
+                           data-th-if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+                           class="btn btn-danger btn-sm">
+                            <i class="fa fa-trash"></i>
+                            Delete</a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-lg-1"></div>
+    <div class="row" data-th-if="${ #lists.isEmpty(schools)}">
+        <div class="col-sm-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="text-center text-danger">
+                    <strong>There is no school upto now please add school to the system
+                            using add user button.
+                    </strong>
+                </h3>
+            </div>
+        </div>
+        <script>
+            /*active boostrap alert - start*/
+            $(".alert").alert();
+            /*active boostrap alert - end*/
+        </script>
+    </div>
 </div>
-
-<!--footer is included-->
+<!--footer include-->
 <footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script is included-->
+<!--script include-->
 <script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+
 </body>
 </html>
