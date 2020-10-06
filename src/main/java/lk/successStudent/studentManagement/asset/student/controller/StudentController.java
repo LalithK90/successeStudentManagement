@@ -1,6 +1,7 @@
 package lk.successStudent.studentManagement.asset.student.controller;
 
 
+import lk.successStudent.studentManagement.asset.school.service.SchoolService;
 import lk.successStudent.studentManagement.asset.student.entity.Student;
 import lk.successStudent.studentManagement.asset.student.service.StudentService;
 import lk.successStudent.studentManagement.util.interfaces.AbstractController;
@@ -17,11 +18,14 @@ import javax.validation.Valid;
 @RequestMapping( "/student" )
 public class StudentController implements AbstractController< Student, Integer > {
     private final StudentService studentService;
+
+    private final SchoolService schoolService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
     public StudentController(StudentService studentService,
-                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                             SchoolService schoolService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
         this.studentService = studentService;
+        this.schoolService = schoolService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     }
 
@@ -34,7 +38,7 @@ public class StudentController implements AbstractController< Student, Integer >
     @GetMapping( "/new" )
     public String form(Model model) {
         model.addAttribute("student", new Student());
-
+        model.addAttribute("schools", schoolService.findAll());
         model.addAttribute("addStatus", true);
         return "student/addStudent";
     }
@@ -48,7 +52,7 @@ public class StudentController implements AbstractController< Student, Integer >
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("student", studentService.findById(id));
-
+        model.addAttribute("schools", schoolService.findAll());
         model.addAttribute("addStatus", false);
         return "student/addStudent";
     }
@@ -58,7 +62,7 @@ public class StudentController implements AbstractController< Student, Integer >
                           RedirectAttributes redirectAttributes, Model model) {
         if ( bindingResult.hasErrors() ) {
             model.addAttribute("student", student);
-
+            model.addAttribute("schools", schoolService.findAll());
             model.addAttribute("addStatus", true);
             return "student/addStudent";
         }
