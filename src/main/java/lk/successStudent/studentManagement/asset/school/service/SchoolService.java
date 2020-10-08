@@ -14,19 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-<<<<<<< HEAD:src/main/java/lk/successStudent/studentManagement/asset/school/service/SchoolService.java
-public class SchoolService implements AbstractService<School, Integer> {
-    private final SchoolDao schoolDao;
-
-    public SchoolService(SchoolDao schoolDao) {
-        this.schoolDao = schoolDao;
-    }
-
-    public List<School> findAll() {
-        return schoolDao.findAll();
-    }
-
-=======
 public class SchoolService implements AbstractService< School, Integer> {
 
     private final SchoolDao schoolDao;
@@ -42,15 +29,11 @@ public class SchoolService implements AbstractService< School, Integer> {
     }
 
 
->>>>>>> 6ef0968a98609e6d872fa41c862bb74404f03f56:src/main/java/lk/successStudent/studentManagement/asset/school/service/schoolService.java
     public School findById(Integer id) {
         return schoolDao.getOne(id);
     }
 
-<<<<<<< HEAD:src/main/java/lk/successStudent/studentManagement/asset/school/service/SchoolService.java
-=======
 
->>>>>>> 6ef0968a98609e6d872fa41c862bb74404f03f56:src/main/java/lk/successStudent/studentManagement/asset/school/service/schoolService.java
     public School persist(School school) {
         return schoolDao.save(school);
     }
@@ -61,14 +44,6 @@ public class SchoolService implements AbstractService< School, Integer> {
         return false;
     }
 
-<<<<<<< HEAD:src/main/java/lk/successStudent/studentManagement/asset/school/service/SchoolService.java
-    public List<School> search(School school) {
-        return null;
-    }
-
-
-=======
->>>>>>> 6ef0968a98609e6d872fa41c862bb74404f03f56:src/main/java/lk/successStudent/studentManagement/asset/school/service/schoolService.java
 
     public List< School > search(School school) {
         ExampleMatcher matcher = ExampleMatcher
