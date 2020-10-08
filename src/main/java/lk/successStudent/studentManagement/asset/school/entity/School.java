@@ -18,6 +18,7 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @Column(nullable = false, length = 45, unique = true)
     private String name;
 
