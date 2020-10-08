@@ -1,68 +1,70 @@
-package lk.successStudent.studentManagement.asset.school.controller;
-
+package lk.successStudent.studentManagement.asset.batch.controller;
 
 import lk.successStudent.studentManagement.asset.school.entity.School;
 import lk.successStudent.studentManagement.asset.school.service.SchoolService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lk.successStudent.studentManagement.util.interfaces.AbstractController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping( "/school" )
-public class SchoolController {
+@RequestMapping("/school")
+public class SchoolController implements AbstractController<School, Integer> {
     private final SchoolService schoolService;
 
-    @Autowired
     public SchoolController(SchoolService schoolService) {
         this.schoolService = schoolService;
     }
 
-    private String commonMethod(Model model, boolean addStatus, School school) {
-        model.addAttribute("school", school);
-        model.addAttribute("addStatus", addStatus);
-        return "school/addSchool";
-    }
-
     @GetMapping
-    public String schoolPage(Model model) {
+    public String findAll(Model model) {
         model.addAttribute("schools", schoolService.findAll());
         return "school/school";
     }
 
-
-    @GetMapping( "/edit/{id}" )
-    public String edit(@PathVariable( "id" ) Integer id, Model model) {
-        return commonMethod(model, false, schoolService.findById(id));
-    }
-
-    @GetMapping( "/add" )
+    @GetMapping("/new")
     public String form(Model model) {
-        return commonMethod(model, true, new School());
+        model.addAttribute("school", new School());
+
+        model.addAttribute("addStatus",true);
+        return "school/addSchool";
     }
 
-    // Above method support to send data to front end - All List, update, edit
-    //Bellow method support to do back end function save, delete, update, search
+    @GetMapping("/view/{id}")
+    public String findById(@PathVariable Integer id, Model model) {
+        model.addAttribute("schoolDetail", schoolService.findById(id));
+        return "school/school-detail";
+    }
 
-    @PostMapping( value = {"/save", "/update"} )
-    public String addSchool(@Valid @ModelAttribute School school,
-                            BindingResult result, Model model) {
-        if ( result.hasErrors() ) {
-            return commonMethod(model, true, school);
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("school", schoolService.findById(id));
+
+        model.addAttribute("addStatus",false);
+        return "school/addSchool";
+    }
+
+    @PostMapping("/save")
+    public String persist(@Valid @ModelAttribute School school, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("school", school);
+
+            model.addAttribute("addStatus",true);
+            return "school/addSchool";
         }
+
         schoolService.persist(school);
         return "redirect:/school";
+
     }
 
-
-    @RequestMapping( value = "/delete/{id}", method = RequestMethod.GET )
-    public String delete(@PathVariable Integer id) {
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, Model model) {
         schoolService.delete(id);
         return "redirect:/school";
     }
-
-
 }
