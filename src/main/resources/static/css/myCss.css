@@ -1,0 +1,99 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Comic Sans", "Courier New",
+    georgia, helvetica, impact, "times new roman", "trebuchet ms", verdana,
+    "Iskoola Pota";
+    --error-color: #fa370d;
+}
+/* for login form - start*/
+#loginBack {
+    background-image: url('../img/12.jpg');
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+
+
+}
+
+#loginPage .logo1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(200%,-20%);
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    border-radius: 10px;
+
+}
+#loginPage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 800px;
+    padding: 20px;
+    background: rgba(0,0,0,.2);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.8);
+    border-radius: 10px;
+
+
+}
+
+#loginPage h1{
+    margin: 0 0 30px;
+    padding: 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+#loginPage  .form-label-group {
+    position: relative;
+}
+
+#loginPage  .form-label-group input {
+    width: 100%;
+    padding: 0 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    outline: none;
+    background: transparent;
+}
+
+#loginPage .form-label-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 20px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    pointer-events: none;
+    transition: .5s;
+}
+
+#loginPage .form-label-group input:focus ~ label,
+#loginPage .form-label-group input:valid ~ label{
+    top: -18px;
+    left: 0;
+    color: #ffffff;
+    font-size: 12px;
+}
+
+#loginPage input [type="submit"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f7b200;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+/* for login form - end*/
