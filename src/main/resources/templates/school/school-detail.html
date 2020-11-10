@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>School Management</title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-link">
+    <div class="col-4">
+
+    </div>
+    <div class="col-4">
+        <h1>School Details</h1>
+    </div>
+    <div class="col-4">
+        <a href="/school/add">
+            <button class="btn btn-primary" align="center">New School</button>
+        </a>
+    </div>
+</div>
+
+<div class="row container-fluid">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-8">
+        <div class="form-group">
+            <label data-th-for="${id}" class="col-sm-3 control-label">School ID</label>
+            <div class="col-sm-6">
+                <p type="text" id="ID" class="form-control" data-th-text="*{schoolDetail.id}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label data-th-for="${school}" class="col-sm-3 control-label">School name</label>
+            <div class="col-sm-6">
+                <p type="text" id="school" class="form-control" data-th-text="*{schoolDetail.school}">
+            </div>
+        </div>
+
+        <div class="row container-fluid">
+            <div class="col-sm-2 col-sm-offset-2">
+                <a href="/school">
+                    <button type="link"  class="btn btn-danger btn-block" >Back</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+
+</body>
+</html>
