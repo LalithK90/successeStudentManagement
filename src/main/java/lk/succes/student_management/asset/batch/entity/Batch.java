@@ -2,6 +2,7 @@ package lk.succes.student_management.asset.batch.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.hall.entity.Hall;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.subject.entity.Subject;
@@ -23,7 +24,8 @@ import java.util.List;
 public class Batch extends AuditEntity {
 
     private String classReferance;
-    private String grade;
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
     private String year;
     private String subjectName;
     private String teacherName;
