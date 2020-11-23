@@ -89,7 +89,7 @@
     </div>
 </header>-->
 
-<nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgba(164,12,231,0.49);height:60px;" th:fragment="navBarFragment">
+<nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(58,212,76);height:60px;" th:fragment="navBarFragment">
     <a class="navbar-brand" href="#">
 
         <img src="../img/logo.png" style="width:50px;height:50px;" id="logo" class="alert-success">
@@ -99,7 +99,7 @@
             aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
 
-        <form class="form-inline my-1 my-lg-0" style="margin-left:850px;">
+        <form class="form-inline my-1 my-lg-0" style="margin-left:1500px;">
             <input class="form-control mr-sm-2 mt-4" type="text" placeholder="Search" style="height:30px">
             <button class="btn btn-lg my-lg-1 my-sm-0 " type="submit" style="padding:10px"><i class="fa fa-search" style="font-size: medium;color: white"></i> </button>
         </form>
@@ -108,7 +108,7 @@
 
 </nav>
 
-<nav class="navbar navbar-expand-sm navbar-dark " style="background-color:rgba(38,142,183,0.91);" th:fragment="navBarFragment">
+<nav class="navbar navbar-expand-sm navbar-dark " style="background-color:rgb(33,29,152);" th:fragment="navBarFragment">
     <a class="navbar-brand" href="#"><i class="fa fa-home" style="font-size: 18px"></i></a>
 
 
@@ -122,16 +122,16 @@
 
             <li class="nav-itemBatch dropdown active">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"> <i class="fa fa-user"></i> General</a>
+                   aria-expanded="false"> <i class="fa fa-user"></i> Profile</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a data-th-href="@{'/employee'}" class="nav-link"> Employee</a>
+                    <a data-th-href="@{'/employee'}" class="nav-link">Managemet</a>
                     <a class="dropdown-itemBatch" href="#">Action 2</a>
                 </div>
             </li>
 
             <li class="nav-itemBatch dropdown active">
                 <a class="nav-link dropdown-toggle" href="#"  data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"> <i class="fa fa-bell"></i> Transaction</a>
+                   aria-expanded="false"> <i class="fa fa-bell"></i> Payments</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
                     <a data-th-href="@{'/employee'}" class="nav-link"> Employee</a>
                     <a class="dropdown-itemBatch" href="#">Action 2</a>

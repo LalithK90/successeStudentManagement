@@ -2,15 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Index Page</title>
 </head>
 <body>
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <div class="container-fluid">
     <div class="main-section">
-        <p class="welcome-Notes">Welcome To Complaint Management System of Department of
-                                 Excise</p>
+        <p class="welcome-Notes">Welcome to Student Management System of Success Educational Institute</p>
         <div class="col-12">
             <div class="row">
                 <div class="col-7">
@@ -23,32 +22,11 @@
                                             <div class="count">
                                                 <i class="fa fa-street-view" aria-hidden="true"></i>
                                             </div>
-                                            <div class="title">Employees</div>
+                                            <div class="title">Students</div>
                                         </div>
-                                        <a href="/employee">
+                                        <a href="/student">
                                             <div class="body">
-                                                <div class="title">Manage Employees</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-shopping-cart"
-                                                                      aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Petitions</div>
-                                            </div>
-                                        </div>
-                                        <a href="/petition">
-                                            <div class="body">
-                                                <div class="title">Inspect Petitions</div>
+                                                <div class="title">Manage Students</div>
                                             </div>
                                         </a>
                                     </div>
@@ -63,19 +41,40 @@
                                             <div class="">
                                                 <div class="count"><i class="fa fa-newspaper" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="title">Crime</div>
+                                                <div class="title">Teachers</div>
                                             </div>
 
                                         </div>
-                                        <a href="/crime">
+                                        <a href="/teacher">
                                             <div class="body">
-                                                <div class="title">Observe Crimes</div>
+                                                <div class="title">Manage Teachers</div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tile wide resource">
+                                        <div class="header">
+                                            <div class="">
+                                                <div class="count"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="title">Batchs</div>
+                                            </div>
+                                        </div>
+                                        <a href="/batch">
+                                            <div class="body">
+                                                <div class="title">Manage Batches</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-row">
                         <div class="col-4">
@@ -87,13 +86,13 @@
                                                 <div class="count"><i class="fa fa-universal-access"
                                                                       aria-hidden="true"></i>
                                                 </div>
-                                                <div class="title">Offenders</div>
+                                                <div class="title">Payments</div>
                                             </div>
 
                                         </div>
-                                        <a class href="/offender">
+                                        <a class href="/payment">
                                             <div class="body">
-                                                <div class="title">View Offenders</div>
+                                                <div class="title">Manage Payments</div>
                                             </div>
                                         </a>
                                     </div>
@@ -108,13 +107,13 @@
                                             <div class="">
                                                 <div class="count"><i class="fa fa-home" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="title">Working Place</div>
+                                                <div class="title">Time table</div>
                                             </div>
 
                                         </div>
-                                        <a href="/workingPlace">
+                                        <a href="/timeTable">
                                             <div class="body">
-                                                <div class="title">Manage Working Places</div>
+                                                <div class="title">Manage Time Table </div>
                                             </div>
                                         </a>
                                     </div>
@@ -129,13 +128,13 @@
                                             <div class="">
                                                 <div class="count"><i class="fa fa-bug" aria-hidden="true"></i>
                                                 </div>
-                                                <div class="title">Contravene</div>
+                                                <div class="title">Subject</div>
                                             </div>
 
                                         </div>
-                                        <a href="/workingPlace">
+                                        <a href="/subject">
                                             <div class="body">
-                                                <div class="title">Edit Contravene</div>
+                                                <div class="title">Subject Management</div>
                                             </div>
                                         </a>
                                     </div>
@@ -144,29 +143,31 @@
                         </div>
                     </div>
                 </div>
-                <!--To day petition list-->
-                <div class="col-5 bg-dark formBorder">
-                    <p class="welcome-Notes">To Day Petitions</p>
-                    <!--Petition Lists -->
-                    <div class="container-fluid text-center" id="petitionListPresent">
+                <!--To day Class list-->
+                <div class="col-5 formBorder">
+                    <p class="welcome-Notes">Today Classes</p>
+                    <!--ClassList -->
+                    <div class="container-fluid text-center" id="todayClasses">
                         <table class="table table-hover table-striped" id="myTable">
                             <thead>
                             <tr>
-                                <th> Petition Number</th>
-                                <th> Petition Priority</th>
-                                <th> Working Place</th>
-                                <th> State</th>
+                                <th> Time</th>
+                                <th> HallNumber</th>
+                                <th> Grade</th>
+                                <th> Subject</th>
+                                <th> Teacher</th>
                                 <th> Modify</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr id="petitionList">
-                                <th id="petitionNumber"></th>
-                                <th id="petitionPriority"></th>
-                                <th id="workingPlace"></th>
-                                <th id="petitionState"></th>
+                            <tr id="classList">
+                                <th id="time"></th>
+                                <th id="hallNumber"></th>
+                                <th id="grade"></th>
+                                <th id="subject"></th>
+                                <th id="teacher"></th>
                                 <th>
-                                    <a id="petitionView" class="btn btn-success btn-sm"><i
+                                    <a id="timeTableView" class="btn btn-success btn-sm"><i
                                             class="fa fa-folder-open"></i>&nbsp;View</a>
                                 </th>
                             </tr>
@@ -180,8 +181,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 <h3 class="text-center text-danger">
-                                    <strong>There is no petition upto know please add petition to the system
-                                            using add user button.
+                                    <strong>There are no classes sheduled up to now
                                     </strong>
                                 </h3>
                             </div>
@@ -190,7 +190,102 @@
                             $(".alert").alert();
                         </script>
                     </div>
-                </div>
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-6 formBorder">-->
+<!--                        <p class="welcome-Notes">RecentyRegistered</p>-->
+<!--                        &lt;!&ndash;Petition Lists &ndash;&gt;-->
+<!--                        <div class="container-fluid text-center" id="petitionListPresent">-->
+<!--                            <table class="table table-hover table-striped" id="myTable">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th> Petition Number</th>-->
+<!--                                    <th> Petition Priority</th>-->
+<!--                                    <th> Working Place</th>-->
+<!--                                    <th> State</th>-->
+<!--                                    <th> Modify</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                <tr id="petitionList">-->
+<!--                                    <th id="petitionNumber"></th>-->
+<!--                                    <th id="petitionPriority"></th>-->
+<!--                                    <th id="workingPlace"></th>-->
+<!--                                    <th id="petitionState"></th>-->
+<!--                                    <th>-->
+<!--                                        <a id="petitionView" class="btn btn-success btn-sm"><i-->
+<!--                                                class="fa fa-folder-open"></i>&nbsp;View</a>-->
+<!--                                    </th>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        <div class="row" id="petitionListNotPresent">-->
+<!--                            <div class="col-sm-12">-->
+<!--                                <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
+<!--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--                                        <span aria-hidden="true">&times;</span>-->
+<!--                                    </button>-->
+<!--                                    <h3 class="text-center text-danger">-->
+<!--                                        <strong>There is no petition upto know please add petition to the system-->
+<!--                                            using add user button.-->
+<!--                                        </strong>-->
+<!--                                    </h3>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <script>-->
+<!--                                $(".alert").alert();-->
+<!--                            </script>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-6 formBorder">-->
+<!--                        <p class="welcome-Notes">To Day Petitions</p>-->
+<!--                        &lt;!&ndash;Petition Lists &ndash;&gt;-->
+<!--                        <div class="container-fluid text-center" id="petitionListPresent">-->
+<!--                            <table class="table table-hover table-striped" id="myTable">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th> Petition Number</th>-->
+<!--                                    <th> Petition Priority</th>-->
+<!--                                    <th> Working Place</th>-->
+<!--                                    <th> State</th>-->
+<!--                                    <th> Modify</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                <tr id="petitionList">-->
+<!--                                    <th id="petitionNumber"></th>-->
+<!--                                    <th id="petitionPriority"></th>-->
+<!--                                    <th id="workingPlace"></th>-->
+<!--                                    <th id="petitionState"></th>-->
+<!--                                    <th>-->
+<!--                                        <a id="petitionView" class="btn btn-success btn-sm"><i-->
+<!--                                                class="fa fa-folder-open"></i>&nbsp;View</a>-->
+<!--                                    </th>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                        <div class="row" id="petitionListNotPresent">-->
+<!--                            <div class="col-sm-12">-->
+<!--                                <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
+<!--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--                                        <span aria-hidden="true">&times;</span>-->
+<!--                                    </button>-->
+<!--                                    <h3 class="text-center text-danger">-->
+<!--                                        <strong>There is no petition upto know please add petition to the system-->
+<!--                                            using add user button.-->
+<!--                                        </strong>-->
+<!--                                    </h3>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <script>-->
+<!--                                $(".alert").alert();-->
+<!--                            </script>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
             </div>
         </div>
     </div>
