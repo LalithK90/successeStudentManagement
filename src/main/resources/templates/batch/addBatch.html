@@ -148,22 +148,22 @@
         <div class="form-group">
             <label data-th-for="${teacherName}" class="col-sm-3 control-label">Teacher Name</label>
             <div class="col-sm-9">
-                <select id="teacherName" class="form-control" data-th-field="*{teacherName}">
+                <select id="teacherName" class="form-control" data-th-field="*{teacher}">
                     <option value="">Select the Teacher</option>
-                    <option data-th-each="teachers : ${teacher}"
-                            data-th-text="${teachers.teacher}"
-                            data-th-value="${teachers}"></option>
+                    <option data-th-each="teacher : ${teachers}"
+                            data-th-text="${teacher.teacher}"
+                            data-th-value="${teacher}"></option>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${subjectName}" class="col-sm-3 control-label">Subject Name</label>
             <div class="col-sm-9">
-                <select id="subjectName" class="form-control" data-th-field="*{subjectName}">
+                <select id="subjectName" class="form-control" data-th-field="*{subject}">
                     <option value="">Select the Subject</option>
-                    <option data-th-each="subjects : ${subject}"
-                            data-th-text="${subjects.subject}"
-                            data-th-value="${subjects}"></option>
+                    <option data-th-each="subject : ${subjects}"
+                            data-th-text="${subject.subject}"
+                            data-th-value="${subject}"></option>
                 </select>
             </div>
         </div>
