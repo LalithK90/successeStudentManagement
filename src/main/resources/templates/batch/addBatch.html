@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-light">
-    <div class="col-4">
-    </div>
-    <div class="col-4">
-        <h1>Create a Batch</h1>
-    </div>
-    <div class="col-4">
-        <a href="/batch">
-            <button class="btn btn-primary">All Batch</button>
-        </a>
-    </div>
-</div>
+<div class="row bg-light" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >Create a Batch</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/batch" >
+      <button class="btn btn-primary" >All Batch</button >
+    </a >
+  </div >
+</div >
 <!--<div class="container-fluid">-->
 <!--    <form action="/batch/save" data-th-object="${batch}" method="post">-->
 <!--        &lt;!&ndash;batch id&ndash;&gt;-->
@@ -112,76 +112,87 @@
 
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
-    <form action="/batch/save" data-th-object="${batch}" method="post">
-        <div class="form-group">
-            <label class="col-sm-3 control-label" data-th-for="${classReferance}">Batch ID</label>
-            <div class="col-sm-9">
-                <input type="text" data-th-field="*{classReferance}" id="batchId" placeholder="Batch ID" class="form-control" autofocus>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${year}">Academic Year</label>
-            <div class="col-sm-3">
-                <select id="year" class="form-control" data-th-field="*{year}">
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                    <option value="2024">2024</option>
-                    <option value="2025">2025</option>
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                </select>
-            </div>
+<div class="container" >
+  <form action="/batch/save" data-th-object="${batch}" method="post" >
+    <div class="form-row text-right" data-th-if="${addStatus==false}" >
+      <div class="col-md-4" >
+        <label data-th-for="${id}" >Id</label >
+      </div >
+      <div class="col-md-8" >
+        <label >
+          <input class="form-control" data-th-field="*{id}" readonly type="text" >
+        </label >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-3 control-label" data-th-for="${classReferance}" >Batch ID</label >
+      <div class="col-sm-9" >
+        <input type="text" data-th-field="*{classReferance}" id="batchId" placeholder="Batch ID" class="form-control"
+               autofocus >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${year}" >Academic Year</label >
+      <div class="col-sm-3" >
+        <select id="year" class="form-control" data-th-field="*{year}" >
+          <option value="2020" >2020</option >
+          <option value="2021" >2021</option >
+          <option value="2022" >2022</option >
+          <option value="2023" >2023</option >
+          <option value="2024" >2024</option >
+          <option value="2025" >2025</option >
+          <option value="2026" >2026</option >
+          <option value="2027" >2027</option >
+        </select >
+      </div >
 
-            <label class="col-sm-1 control-label" data-th-for="${grade}">Grade</label>
-            <div class="col-sm-5">
-                <select id="grade" class="form-control" data-th-field="*{grade}">
-                    <option value="">Select the Grade</option>
-                    <option data-th-each="grade : ${grades}"
-                            data-th-text="${grade.grade}"
-                            data-th-value="${grade}"></option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${teacherName}" class="col-sm-3 control-label">Teacher Name</label>
-            <div class="col-sm-9">
-                <select id="teacherName" class="form-control" data-th-field="*{teacher}">
-                    <option value="">Select the Teacher</option>
-                    <option data-th-each="teacher : ${teachers}"
-                            data-th-text="${teacher.firstName}"
-                            data-th-value="${teacher.id}"></option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${subjectName}" class="col-sm-3 control-label">Subject Name</label>
-            <div class="col-sm-9">
-                <select id="subjectName" class="form-control" data-th-field="*{subject}">
-                    <option value="">Select the Subject</option>
-                    <option data-th-each="subject : ${subjects}"
-                            data-th-text="${subject.name}"
-                            data-th-value="${subject.id}"></option>
-                </select>
-            </div>
-        </div>
+      <label class="col-sm-1 control-label" data-th-for="${grade}" >Grade</label >
+      <div class="col-sm-5" >
+        <select id="grade" class="form-control" data-th-field="*{grade}" >
+          <option value="" >Select the Grade</option >
+          <option data-th-each="grade : ${grades}"
+                  data-th-text="${grade.grade}"
+                  data-th-value="${grade}" ></option >
+        </select >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher Name</label >
+      <div class="col-sm-9" >
+        <select id="teacherName" class="form-control" data-th-field="*{teacher}" >
+          <option value="" >Select the Teacher</option >
+          <option data-th-each="teacher : ${teachers}"
+                  data-th-text="${teacher.firstName}"
+                  data-th-value="${teacher.id}" ></option >
+        </select >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${subjectName}" class="col-sm-3 control-label" >Subject Name</label >
+      <div class="col-sm-9" >
+        <select id="subjectName" class="form-control" data-th-field="*{subject}" >
+          <option value="" >Select the Subject</option >
+          <option data-th-each="subject : ${subjects}"
+                  data-th-text="${subject.name}"
+                  data-th-value="${subject.id}" ></option >
+        </select >
+      </div >
+    </div >
 
-        <div class="row container-fluid">
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
-            </div>
+    <div class="row container-fluid" >
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="link" class="btn btn-danger btn-block" >Back</button >
+      </div >
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
-            </div>
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
+      </div >
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="submit" class="btn btn-success btn-block">Submit</button>
-            </div>
-        </div>
-    </form> <!-- /form -->
-</div> <!-- ./container -->
-</body>
-</html>
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="submit" class="btn btn-success btn-block" >Submit</button >
+      </div >
+    </div >
+  </form > <!-- /form -->
+</div > <!-- ./container -->
+</body >
+</html >
