@@ -23,12 +23,12 @@
 </div>
 <div class="container">
     <form action="/teacher/save" data-th-object="${teacher}" method="post">
-<!--        <div class="form-group">-->
-<!--            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>-->
-<!--            <div class="col-sm-9">-->
-<!--                <input type="text" readonly data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="form-group" data-th-if="${addStatus== false}">
+            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>
+            <div class="col-sm-9">
+                <input type="text" readonly data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${registrationId}">Registration ID</label>
             <div class="col-sm-5">
@@ -86,7 +86,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${subject}">Subject</label>
             <div class="col-sm-4">
-              <select id="subject" data-th-field="*{subject}" class="form-control" tabindex="7" readonly="" required >
+              <select id="subject" data-th-field="*{subject}" class="form-control" tabindex="7" required >
                 <option value="" >Please select</option >
                 <option data-th-each="subject : ${subjects}"
                         data-th-text="${subject.name}"
