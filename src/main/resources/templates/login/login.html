@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body id="login" >
+<div class="container" >
+  <div class="container mt-4" >
+    <div class="row" >
+      <div class="col-md-7 " id="sideLogin" >
+      </div >
+      <div class="col-md-5 align-content-center bg-transparent" >
+        <form th:action="${'/login'}" method="post" class="p-5" >
+          <fieldset >
+            <legend class="text-center h3" >
+              Sri Lanka Custom
+            </legend >
+            <div class="form-group text-center" >
+              <img data-th-src="${'/img/logo.png'}" class="img-fluid rounded" alt="Company Logo" >
+            </div >
+            <div class="form-label-group" >
+              <input type="text" id="username" th:name="${'username'}" class="form-control" placeholder="username"
+                     required >
+              <label for="username" >Username</label >
+            </div >
+            <div class="form-label-group" >
+              <input type="password" id="inputPassword" th:name="${'password'}" class="form-control"
+                     placeholder="password"
+                     required >
+              <label for="inputPassword" >Password</label >
+            </div >
+            <div class="form-group text-right" >
+              <button class="btn btn-outline-success " type="submit" >
+                LOGIN
+                <i class="fas fa-sign-in-alt" aria-hidden="true" ></i >
+              </button >
+            </div >
+          </fieldset >
+          <div class="container-fluid " th:if="${param.error}" >
+            <p class="bg-white text-capitalize text-danger text-lg-center" >Invalid username or password. </p >
+          </div >
+          <div class="container-fluid " >
+            <p th:text="${err}" class="bg-white text-capitalize text-danger text-lg-center" ></p >
+          </div >
+        </form >
+      </div >
+    </div >
+  </div >
+</div >
+<!--footer include-->
+<div th:replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div th:replace="~{fragments/script :: scriptFragment}" ></div >
+
+</body >
+</html >
