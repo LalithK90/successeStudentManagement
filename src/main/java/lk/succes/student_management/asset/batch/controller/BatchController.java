@@ -2,6 +2,7 @@ package lk.succes.student_management.asset.batch.controller;
 
 
 import lk.succes.student_management.asset.batch.entity.Batch;
+import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch.service.BatchService;
 import lk.succes.student_management.asset.subject.service.SubjectService;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
@@ -36,6 +37,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
   @GetMapping( "/new" )
   public String form(Model model) {
     model.addAttribute("batch", new Batch());
+    model.addAttribute("grades", Grade.values());
     model.addAttribute("teachers", teacherService.findAll());
     model.addAttribute("subjects", subjectService.findAll());
     model.addAttribute("addStatus", true);
@@ -53,7 +55,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
     model.addAttribute("batch", batchService.findById(id));
     model.addAttribute("teachers", teacherService.findAll());
     model.addAttribute("subjects", subjectService.findAll());
-
+    model.addAttribute("grades", Grade.values());
     model.addAttribute("addStatus", false);
     return "batch/addBatch";
   }
@@ -65,7 +67,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
       model.addAttribute("batch", batch);
       model.addAttribute("teachers", teacherService.findAll());
       model.addAttribute("subjects", subjectService.findAll());
-
+      model.addAttribute("grades", Grade.values());
       model.addAttribute("addStatus", true);
       return "batch/addBatch";
     }
