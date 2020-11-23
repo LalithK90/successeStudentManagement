@@ -51,10 +51,12 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Gender</label>
             <div class="col-sm-9">
-                <select id="gender" class="form-control" data-th-field="*{gender}">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
+                <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" readonly="" required >
+                    <option value="" >Please select</option >
+                    <option data-th-each="genders : ${gender}"
+                            data-th-text="${genders.gender}"
+                            data-th-value="${genders}" ></option >
+                </select >
             </div>
         </div>
         <div class="form-group">
@@ -122,11 +124,9 @@
         </div>
     </form> <!-- /form -->
 </div>
-</body>
-</html>
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

@@ -48,27 +48,29 @@
             </div>
         </div>
         <div class="form-group">
-<!--            <label class="col-sm-3 control-label">Gender</label>-->
-<!--            <div class="col-sm-9">-->
-<!--                <select id="gender" class="form-control" data-th-field="*{gender}">-->
-<!--                    <option value="Male">Male</option>-->
-<!--                    <option value="Female">Female</option>-->
-<!--                </select>-->
-<!--            </div>-->
-
-
-
+            <label class="col-sm-3 control-label">Gender</label>
+            <div class="col-sm-9">
+              <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" readonly="" required >
+                <option value="" >Please select</option >
+                <option data-th-each="genders : ${gender}"
+                        data-th-text="${genders.gender}"
+                        data-th-value="${genders}" ></option >
+              </select >
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${dateOfBirth}">Date of birth</label>
             <div class="col-sm-4">
                 <input type="date" id="dateOfBirth" class="form-control" data-th-field="*{dateOfBirth}">
             </div>
+        </div>
 
+        <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${address}">Address</label>
             <div class="col-sm-4">
                 <textarea id="address" class="form-control" data-th-field="*{address}"></textarea>
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${email}">Email</label>
             <div class="col-sm-4">
