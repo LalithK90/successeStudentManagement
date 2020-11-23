@@ -151,8 +151,8 @@
                 <select id="teacherName" class="form-control" data-th-field="*{teacher}">
                     <option value="">Select the Teacher</option>
                     <option data-th-each="teacher : ${teachers}"
-                            data-th-text="${teacher.teacher}"
-                            data-th-value="${teacher}"></option>
+                            data-th-text="${teacher.name}"
+                            data-th-value="${teacher.id}"></option>
                 </select>
             </div>
         </div>
@@ -162,8 +162,8 @@
                 <select id="subjectName" class="form-control" data-th-field="*{subject}">
                     <option value="">Select the Subject</option>
                     <option data-th-each="subject : ${subjects}"
-                            data-th-text="${subject.subject}"
-                            data-th-value="${subject}"></option>
+                            data-th-text="${subject.name}"
+                            data-th-value="${subject.id}"></option>
                 </select>
             </div>
         </div>
