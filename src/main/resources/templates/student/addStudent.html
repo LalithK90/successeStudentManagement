@@ -1,132 +1,131 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Success Student Management System</title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management System</title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-light">
-    <div class="col-4">
-    </div>
-    <div class="col-4">
-        <h1>Add a new studet</h1>
-    </div>
-    <div class="col-4">
-        <a href="/student">
-            <button class="btn btn-primary">View all Students</button>
-        </a>
-    </div>
-</div>
-<div class="container">
-    <form action="/student/save" data-th-object="${student}" method="post">
-        <!--        <div class="form-group">-->
-        <!--            <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>-->
-        <!--            <div class="col-sm-9">-->
-        <!--                <input type="text" readonly data-th-field="*{id}" id="id" placeholder="IndeX" class="form-control" autofocus>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${regNo}">Registration ID</label>
-            <div class="col-sm-5">
-                <input type="text" id="regNo" class="form-control" data-th-field="*{regNo}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${firstName}">First name</label>
-            <div class="col-sm-4">
-                <input type="text" id="firstName" class="form-control" data-th-field="*{firstName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${lastName}">Last name</label>
-            <div class="col-sm-4">
-                <input type="text" id="lastName" class="form-control" data-th-field="*{lastName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Gender</label>
-            <div class="col-sm-9">
-                <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7"  required >
-                    <option value="" >Please select</option >
-                    <option data-th-each="gender : ${genders}"
-                            data-th-text="${gender.gender}"
-                            data-th-value="${gender}" ></option >
-                </select >
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${dob}">Date of birth</label>
-            <div class="col-sm-4">
-                <input type="date" id="dob" class="form-control" data-th-field="*{dob}">
-            </div>
-        </div>
+<div class="row bg-light" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >Add a new studet</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/student" >
+      <button class="btn btn-primary" >View all Students</button >
+    </a >
+  </div >
+</div >
+<div class="container" >
+  <form action="/student/save" data-th-object="${student}" method="post" >
+    <div class="form-group" data-th-if="${addStatus==false}" >
+      <label class="col-sm-3 control-label" data-th-for="${id}" >Index</label >
+      <div class="col-sm-9" >
+        <input type="text" readonly data-th-field="*{id}" id="id" placeholder="IndeX" class="form-control" autofocus >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${regNo}" >Registration ID</label >
+      <div class="col-sm-5" >
+        <input type="text" id="regNo" class="form-control" data-th-field="*{regNo}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${firstName}" >First name</label >
+      <div class="col-sm-4" >
+        <input type="text" id="firstName" class="form-control" data-th-field="*{firstName}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${lastName}" >Last name</label >
+      <div class="col-sm-4" >
+        <input type="text" id="lastName" class="form-control" data-th-field="*{lastName}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-3 control-label" >Gender</label >
+      <div class="col-sm-9" >
+        <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" required >
+          <option value="" >Please select</option >
+          <option data-th-each="gender : ${genders}"
+                  data-th-text="${gender.gender}"
+                  data-th-value="${gender}" ></option >
+        </select >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${dob}" >Date of birth</label >
+      <div class="col-sm-4" >
+        <input type="date" id="dob" class="form-control" data-th-field="*{dob}" >
+      </div >
+    </div >
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${address}">Address</label>
-            <div class="col-sm-4">
-                <textarea id="address" class="form-control" data-th-field="*{address}"></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${city}">City</label>
-            <div class="col-sm-4">
-                <input type="text" id="city" class="form-control" data-th-field="*{city}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">School</label>
-            <div class="col-sm-9">
-                <select id="school" class="form-control" data-th-field="*{school}">
-                    <option value="" selected disabled>Please select</option>
-                    <option data-th-each="school : ${schools}"
-                            data-th-text="${school.name}"
-                            data-th-value="${school.id}">
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${mobile}">Mobile number</label>
-            <div class="col-sm-4">
-                <input type="tel" id="mobile" class="form-control" data-th-field="*{mobile}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${home}">Fixed number</label>
-            <div class="col-sm-4">
-                <input type="tel" id="home" class="form-control" data-th-field="*{home}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${guardian}">Guardian's name</label>
-            <div class="col-sm-4">
-                <input type="text" id="guardian" class="form-control" data-th-field="*{guardian}">
-            </div>
-        </div>
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${address}" >Address</label >
+      <div class="col-sm-4" >
+        <textarea id="address" class="form-control" data-th-field="*{address}" ></textarea >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${city}" >City</label >
+      <div class="col-sm-4" >
+        <input type="text" id="city" class="form-control" data-th-field="*{city}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-3 control-label" >School</label >
+      <div class="col-sm-9" >
+        <select id="school" class="form-control" data-th-field="*{school}" >
+          <option value="" selected disabled >Please select</option >
+          <option data-th-each="school : ${schools}"
+                  data-th-text="${school.name}"
+                  data-th-value="${school.id}" >
+          </option >
+        </select >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${mobile}" >Mobile number</label >
+      <div class="col-sm-4" >
+        <input type="tel" id="mobile" class="form-control" data-th-field="*{mobile}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${home}" >Fixed number</label >
+      <div class="col-sm-4" >
+        <input type="tel" id="home" class="form-control" data-th-field="*{home}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label class="col-sm-2 control-label" data-th-for="${guardian}" >Guardian's name</label >
+      <div class="col-sm-4" >
+        <input type="text" id="guardian" class="form-control" data-th-field="*{guardian}" >
+      </div >
+    </div >
 
-        <div class="row container-fluid">
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
-            </div>
+    <div class="row container-fluid" >
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="link" class="btn btn-danger btn-block" >Back</button >
+      </div >
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
-            </div>
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
+      </div >
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="submit" class="btn btn-success btn-block">Submit</button>
-            </div>
-        </div>
-    </form> <!-- /form -->
-</div>
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="submit" class="btn btn-success btn-block" >Submit</button >
+      </div >
+    </div >
+  </form > <!-- /form -->
+</div >
 <!--footer is included-->
-<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
-<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
-</body>
-</html>
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >
