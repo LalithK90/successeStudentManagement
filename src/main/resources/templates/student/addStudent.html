@@ -51,11 +51,11 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Gender</label>
             <div class="col-sm-9">
-                <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" readonly="" required >
+                <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7"  required >
                     <option value="" >Please select</option >
-                    <option data-th-each="genders : ${gender}"
-                            data-th-text="${genders.gender}"
-                            data-th-value="${genders}" ></option >
+                    <option data-th-each="gender : ${genders}"
+                            data-th-text="${gender.gender}"
+                            data-th-value="${gender}" ></option >
                 </select >
             </div>
         </div>
