@@ -29,10 +29,17 @@ Payment
 2. Payment report {cashier, manager, owner, teacher}
 3. {{Student login and payment and attendance details }}
 
+23.11.2020
+--------------------------------------------------------------------
 
-1> ENUM wala caz _ Gender / Subject
-2>Student Registration ekedi School module eka
-3>Teacher Registrtion ekedi
+1.view hadanna
+2.batch ekta lamyek daana eka
+3.
+
+--------------------------------------------------
+Subject eke Delete eka wada krnnah
+Teacher eke View Module eke subject ek pennaddi code kellak watenwa
+School wala View ek explicit error ekak enawa
 
 
 
