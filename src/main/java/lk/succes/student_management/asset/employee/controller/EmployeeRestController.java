@@ -1,12 +1,10 @@
 package lk.succes.student_management.asset.employee.controller;
 
-
-
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.succes.student_management.asset.employee.entity.Employee;
-import lk.succes.student_management.asset.employee.entity.Enum.Designation;
+import lk.succes.student_management.asset.employee.entity.enums.Designation;
 import lk.succes.student_management.asset.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -14,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping( "/employee" )
