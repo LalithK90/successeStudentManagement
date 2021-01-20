@@ -21,13 +21,23 @@ $(document).ready(function () {
     });
     /*//--------------- data table short using - data table plugin ------- start //*/
 
+    /*When edit employee if there is a nic number need to select relevant gender*/
+    if ($("#nic").val() !== null || $("#nic").val() !== undefined) {
+        $("input:radio[name=gender]").filter(`[value=${calculateGender($("#nic").val())}]`).prop('checked', true);
+    }
+
+
     /* Patient and employee Nic Validation - start*/
     $("#nic").bind('keyup', function () {
         let nic = $(this).val();
         $("#dateOfBirth").val(calculateDateOfBirth(nic));
-        $("#gender").val(calculateGender(nic));
+        //access our front-end gender*/
+        $("input:radio[name=gender]").filter(`[value=${calculateGender(nic)}]`).prop('checked', true);
+
     });
     /* Patient and employee Nic Validation - end*/
+
+
     //input type date can not be selected future date
     $('[type="date"]').prop('max', function () {
         return new Date().toJSON().split('T')[0];

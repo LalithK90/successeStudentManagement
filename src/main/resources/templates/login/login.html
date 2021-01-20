@@ -21,7 +21,7 @@
                                       <i class="fas fa-user"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="text" placeholder="Username"  id="username" th:name="${'username'}">
+                                <input class="form-control" type="text" placeholder="Username"  required id="username" th:name="${'username'}">
                             </div>
                             <div class="input-group mb-4">
                                 <div class="input-group-prepend">
@@ -29,7 +29,7 @@
                                       <i class="fas fa-lock"></i>
                                     </span>
                                 </div>
-                                <input class="form-control" type="password" placeholder="Password" id="inputPassword" th:name="${'password'}">
+                                <input class="form-control" type="password" placeholder="Password" id="inputPassword"  required th:name="${'password'}">
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -59,7 +59,7 @@
 <!--footer include-->
 <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
 <!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
 </body>
 </html>
