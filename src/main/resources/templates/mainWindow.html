@@ -1,301 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Index Page</title>
-</head>
-<body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
-
-<div class="container-fluid">
-    <div class="main-section">
-        <p class="welcome-Notes">Welcome to Student Management System of Success Educational Institute</p>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-7">
-                    <div class="form-row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide invoice">
-                                        <div class="header">
-                                            <div class="count">
-                                                <i class="fa fa-street-view" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="title">Students</div>
-                                        </div>
-                                        <a href="/student">
-                                            <div class="body">
-                                                <div class="title">Manage Students</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide quote">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-newspaper" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Teachers</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/teacher">
-                                            <div class="body">
-                                                <div class="title">Manage Teachers</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Batchs</div>
-                                            </div>
-                                        </div>
-                                        <a href="/batch">
-                                            <div class="body">
-                                                <div class="title">Manage Batches</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+<head th:replace="~{fragments/headerSection :: headerSectionFragment}"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper"><!-- wrapper start -->
+    <nav th:replace="~{fragments/navbarSection :: navbarSectionFragment}"></nav><!-- navbar Section -->
+    <aside th:replace="~{fragments/sidebarSection :: sidebarSectionFragment}"></aside><!-- navbar Section -->
+    <div class="content-wrapper"><!-- content-wrapper Start -->
+        <!-- Header (null area) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">-</h1>
                     </div>
-                    <div class="form-row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-universal-access"
-                                                                      aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Payments</div>
-                                            </div>
-
-                                        </div>
-                                        <a class href="/payment">
-                                            <div class="body">
-                                                <div class="title">Manage Payments</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide quote">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-home" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Time table</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/timeTable">
-                                            <div class="body">
-                                                <div class="title">Manage Time Table </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide invoice">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-bug" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Subject</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/subject">
-                                            <div class="body">
-                                                <div class="title">Subject Management</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">-</a></li>
+                            <li class="breadcrumb-item active">-</li>
+                        </ol>
                     </div>
                 </div>
-                <!--To day Class list-->
-                <div class="col-5 formBorder">
-                    <p class="welcome-Notes">Today Classes</p>
-                    <!--ClassList -->
-                    <div class="container-fluid text-center" id="todayClasses">
-                        <table class="table table-hover table-striped" id="myTable">
-                            <thead>
-                            <tr>
-                                <th> Time</th>
-                                <th> HallNumber</th>
-                                <th> Grade</th>
-                                <th> Subject</th>
-                                <th> Teacher</th>
-                                <th> Modify</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="classList">
-                                <th id="time"></th>
-                                <th id="hallNumber"></th>
-                                <th id="grade"></th>
-                                <th id="subject"></th>
-                                <th id="teacher"></th>
-                                <th>
-                                    <a id="timeTableView" class="btn btn-success btn-sm"><i
-                                            class="fa fa-folder-open"></i>&nbsp;View</a>
-                                </th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row" id="petitionListNotPresent">
-                        <div class="col-sm-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h3 class="text-center text-danger">
-                                    <strong>There are no classes sheduled up to now
-                                    </strong>
-                                </h3>
-                            </div>
-                        </div>
-                        <script>
-                            $(".alert").alert();
-                        </script>
-                    </div>
-<!--                </div>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-6 formBorder">-->
-<!--                        <p class="welcome-Notes">RecentyRegistered</p>-->
-<!--                        &lt;!&ndash;Petition Lists &ndash;&gt;-->
-<!--                        <div class="container-fluid text-center" id="petitionListPresent">-->
-<!--                            <table class="table table-hover table-striped" id="myTable">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th> Petition Number</th>-->
-<!--                                    <th> Petition Priority</th>-->
-<!--                                    <th> Working Place</th>-->
-<!--                                    <th> State</th>-->
-<!--                                    <th> Modify</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody>-->
-<!--                                <tr id="petitionList">-->
-<!--                                    <th id="petitionNumber"></th>-->
-<!--                                    <th id="petitionPriority"></th>-->
-<!--                                    <th id="workingPlace"></th>-->
-<!--                                    <th id="petitionState"></th>-->
-<!--                                    <th>-->
-<!--                                        <a id="petitionView" class="btn btn-success btn-sm"><i-->
-<!--                                                class="fa fa-folder-open"></i>&nbsp;View</a>-->
-<!--                                    </th>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                        <div class="row" id="petitionListNotPresent">-->
-<!--                            <div class="col-sm-12">-->
-<!--                                <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
-<!--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<!--                                        <span aria-hidden="true">&times;</span>-->
-<!--                                    </button>-->
-<!--                                    <h3 class="text-center text-danger">-->
-<!--                                        <strong>There is no petition upto know please add petition to the system-->
-<!--                                            using add user button.-->
-<!--                                        </strong>-->
-<!--                                    </h3>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <script>-->
-<!--                                $(".alert").alert();-->
-<!--                            </script>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-6 formBorder">-->
-<!--                        <p class="welcome-Notes">To Day Petitions</p>-->
-<!--                        &lt;!&ndash;Petition Lists &ndash;&gt;-->
-<!--                        <div class="container-fluid text-center" id="petitionListPresent">-->
-<!--                            <table class="table table-hover table-striped" id="myTable">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th> Petition Number</th>-->
-<!--                                    <th> Petition Priority</th>-->
-<!--                                    <th> Working Place</th>-->
-<!--                                    <th> State</th>-->
-<!--                                    <th> Modify</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody>-->
-<!--                                <tr id="petitionList">-->
-<!--                                    <th id="petitionNumber"></th>-->
-<!--                                    <th id="petitionPriority"></th>-->
-<!--                                    <th id="workingPlace"></th>-->
-<!--                                    <th id="petitionState"></th>-->
-<!--                                    <th>-->
-<!--                                        <a id="petitionView" class="btn btn-success btn-sm"><i-->
-<!--                                                class="fa fa-folder-open"></i>&nbsp;View</a>-->
-<!--                                    </th>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                        <div class="row" id="petitionListNotPresent">-->
-<!--                            <div class="col-sm-12">-->
-<!--                                <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
-<!--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<!--                                        <span aria-hidden="true">&times;</span>-->
-<!--                                    </button>-->
-<!--                                    <h3 class="text-center text-danger">-->
-<!--                                        <strong>There is no petition upto know please add petition to the system-->
-<!--                                            using add user button.-->
-<!--                                        </strong>-->
-<!--                                    </h3>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <script>-->
-<!--                                $(".alert").alert();-->
-<!--                            </script>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
             </div>
         </div>
-    </div>
-</div>
+        <!-- Header (null area) -->
+        <!-- Form Header / Path -->
+        <section class="content">
 
-<!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
+        </section>
+        <!-- Form Header/Path end-->
 
+        <div class="container-fluid">
+            <div class="main-section">
+                <!--<p class="welcome-Notes">Welcome To AVSEC Welfare Society Management System</p>-->
+                <div class="col-12">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+            <div class="card p-2">
+                <div class="card-tools">
+                    <button  type="button" class="btn btn-tool float-right p-1" data-card-widget="remove"><i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <h4><span style="color: #a71d2a; padding: 3px">Protect yourself from COVID-19 by </span> -
+                    <span
+                            class="txt-rotate"
+                            data-period="2000"
+                            data-rotate='[
+                                "Clean your hands often.",
+                                "Cough or sneeze in your bent elbow - not your hands!",
+                                "Avoid touching your eyes, nose and mouth.",
+                                "Limit social gatherings and time spent in crowded places.",
+                                "Avoid close contact with someone who is sick."
+                                ]'></span>
+                </h4>
+
+            </div>
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <!--                            <div class="card-header">-->
+                                <!--                                <h3 class="card-title">Your able to access module which is permission granted</h3>-->
+                                <!--                            </div>-->
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4" >
+                                            <!--                                        <div class="col-sm-4" style="box-shadow: 1px 1px 10px blue;" >-->
+                                            <div  class="position-relative p-3 bg-gray" style="height: 180px;background-size:100% auto; background-image: url('./img/BG_01.png'); ">
+                                                <a href="/employee">
+
+                                                    Employee Module <br/>
+                                                    <small><ul><li>Register Employer</li>
+                                                        <li>Edit Employer</li>
+                                                        <li>Delete Employer</li>
+                                                        <li>Skill Update</li>
+                                                        <li>Dependant Update</li></ul></small></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4" >
+                                            <div class="position-relative p-3 bg-gray" style="height: 180px;background-size:100% auto; background-image:url('./img/BG_02.png');">
+                                                <div class="ribbon-wrapper ribbon-lg">
+                                                    <div class="ribbon bg-info">
+                                                        SMS alert add
+                                                    </div>
+                                                </div>
+                                                <a href="/instalmentType">
+                                                    Payment Module <br/>
+                                                    <small><ul><li>Set Payment</li>
+                                                        <li>Set Instrolment Type</li>
+                                                        <li>Add Paymet</li>
+                                                        <li>Bulk Payment</li>
+                                                        <li>Set Pay Year</li>
+                                                    </ul></small></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="position-relative p-3 bg-gray" style="height: 180px;background-size:100% auto; background-image:url('./img/BG_03.png');">
+
+                                                <a href="/instalmentType">
+                                                    Contact Management <br/>
+                                                    <small><ul><li>Send Email</li>
+                                                        <li>Send SMS</li>
+                                                        <li>Emergency Notification</li>
+                                                        <li>Bulk Noties</li>
+                                                        <li>Veiw Contacts</li>
+                                                    </ul></small></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-sm-4">
+                                            <div class="position-relative p-3 bg-gray" style="height: 180px;background-size:100% auto; background-image:url('./img/BG_04.png');">
+
+                                                <a href="/role">
+                                                    Grievances Module <br/>
+                                                    <small><ul><li>Submit Grievances</li>
+                                                        <li>View Grievances</li>
+                                                        <li>Grievances Status</li>
+
+
+                                                    </ul></small></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="position-relative p-3 bg-gray" style="height: 180px;background-size:100% auto; background-image:url('./img/BG_05.png');">
+
+                                                <a href="/role">
+                                                    Report Module <br/>
+                                                    <small><ul><li>Employee Reports</li>
+                                                        <li>Payment Reports</li>
+                                                        <li>Grievances Reports</li>
+                                                        <li>Email/SMS Reports</li>
+                                                        <li>Other Reports</li>
+
+                                                    </ul></small></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="position-relative p-3 bg-gray" style="height: 180px;background-size:100% auto; background-image:url('./img/BG_06.png');">
+
+                                                <a href="/role">
+                                                    System Management <br/>
+                                                    <small><ul><li>Sys Role Setting</li>
+                                                        <li>User Management</li>
+                                                        <li>Password Change</li>
+
+                                                    </ul></small></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+
+            <script>
+
+
+                var TxtRotate = function(el, toRotate, period) {
+                    this.toRotate = toRotate;
+                    this.el = el;
+                    this.loopNum = 0;
+                    this.period = parseInt(period, 10) || 2000;
+                    this.txt = '';
+                    this.tick();
+                    this.isDeleting = false;
+                };
+
+                TxtRotate.prototype.tick = function() {
+                    var i = this.loopNum % this.toRotate.length;
+                    var fullTxt = this.toRotate[i];
+
+                    if (this.isDeleting) {
+                        this.txt = fullTxt.substring(0, this.txt.length - 1);
+                    } else {
+                        this.txt = fullTxt.substring(0, this.txt.length + 1);
+                    }
+
+                    this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+                    var that = this;
+                    var delta = 300 - Math.random() * 100;
+
+                    if (this.isDeleting) { delta /= 2; }
+
+                    if (!this.isDeleting && this.txt === fullTxt) {
+                        delta = this.period;
+                        this.isDeleting = true;
+                    } else if (this.isDeleting && this.txt === '') {
+                        this.isDeleting = false;
+                        this.loopNum++;
+                        delta = 500;
+                    }
+
+                    setTimeout(function() {
+                        that.tick();
+                    }, delta);
+                };
+
+                window.onload = function() {
+                    var elements = document.getElementsByClassName('txt-rotate');
+                    for (var i=0; i<elements.length; i++) {
+                        var toRotate = elements[i].getAttribute('data-rotate');
+                        var period = elements[i].getAttribute('data-period');
+                        if (toRotate) {
+                            new TxtRotate(elements[i], JSON.parse(toRotate), period);
+                        }
+                    }
+                    // INJECT CSS
+                    var css = document.createElement("style");
+                    css.type = "text/css";
+                    css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+                    document.body.appendChild(css);
+                };
+
+
+
+            </script>
+        </div>
+    </div><!-- content-wrapper end -->
+    <div th:replace="~{fragments/footerSection :: footerSectionFragment}"></div><!-- footer Section -->
+    <!-- Scroll Up Button -->
+    <a id="back-to-top" href="#" class="btn btn-primary back-to-top" role="button" aria-label="Scroll to top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+    <!-- Scroll Up Button end-->
+</div><!-- wrapper end -->
+<div th:replace="~{fragments/scriptSection :: scriptSectionFragment}"></div><!-- script Fragment -->
 </body>
 </html>
-
