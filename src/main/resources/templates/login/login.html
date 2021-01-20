@@ -1,57 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head th:replace="~{fragments/header :: headerFragment}" >
-  <meta charset="UTF-8" >
-  <title >Thymeleaf Springboot </title >
-</head >
-<body id="login" >
-<div class="container" >
-  <div class="container mt-4" >
-    <div class="row" >
-      <div class="col-md-7 " id="sideLogin" >
-      </div >
-      <div class="col-md-5 align-content-center bg-transparent" >
-        <form th:action="${'/login'}" method="post" class="p-5" >
-          <fieldset >
-            <legend class="text-center h3" >
-              Sri Lanka Custom
-            </legend >
-            <div class="form-group text-center" >
-              <img data-th-src="${'/img/logo.png'}" class="img-fluid rounded" alt="Company Logo" >
-            </div >
-            <div class="form-label-group" >
-              <input type="text" id="username" th:name="${'username'}" class="form-control" placeholder="username"
-                     required >
-              <label for="username" >Username</label >
-            </div >
-            <div class="form-label-group" >
-              <input type="password" id="inputPassword" th:name="${'password'}" class="form-control"
-                     placeholder="password"
-                     required >
-              <label for="inputPassword" >Password</label >
-            </div >
-            <div class="form-group text-right" >
-              <button class="btn btn-outline-success " type="submit" >
-                LOGIN
-                <i class="fas fa-sign-in-alt" aria-hidden="true" ></i >
-              </button >
-            </div >
-          </fieldset >
-          <div class="container-fluid " th:if="${param.error}" >
-            <p class="bg-white text-capitalize text-danger text-lg-center" >Invalid username or password. </p >
-          </div >
-          <div class="container-fluid " >
-            <p th:text="${err}" class="bg-white text-capitalize text-danger text-lg-center" ></p >
-          </div >
-        </form >
-      </div >
-    </div >
-  </div >
-</div >
-<!--footer include-->
-<div th:replace="~{fragments/footer :: footerFragment}" ></div >
-<!--script include-->
-<div th:replace="~{fragments/script :: scriptFragment}" ></div >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
 
-</body >
-</html >
+</head>
+<body id="loginBack" class="bg-gradient-light">
+
+<div class="container" id="loginPage" >
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-group shadow" style="margin-left: 10px; margin-right: 10px">
+                <div class="card bg-light p-4" >
+                    <form th:action="${'/login'}" method="post">
+                        <div class="card-body" align="center" style="margin-top: 25px" >
+                            <h1>Login</h1>
+                            <p class="text-muted">Log in to your account</p><br>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="fas fa-user"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="text" placeholder="Username"  id="username" th:name="${'username'}">
+                            </div>
+                            <div class="input-group mb-4">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                      <i class="fas fa-lock"></i>
+                                    </span>
+                                </div>
+                                <input class="form-control" type="password" placeholder="Password" id="inputPassword" th:name="${'password'}">
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <br> <button class="btn btn-primary px-4" type="submit">LOGIN</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card text-black-50 py-5 d-md-down-none" style="width:44%">
+                    <div class="card-body text-center">
+                        <div>
+                            <img class="card-img" src="img/LOGO.png" alt="Card image cap" >
+                            <h2><br>Success Educational Institute</h2>
+                            <p>Student Management System</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--footer include-->
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script include-->
+<script th:replace="~{fragments/script :: scriptFragment}"></script>
+
+</body>
+</html>
