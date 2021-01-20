@@ -5,7 +5,7 @@ import lk.succes.student_management.asset.common_asset.model.Enum.CivilStatus;
 import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
 import lk.succes.student_management.asset.common_asset.model.Enum.Title;
 import lk.succes.student_management.asset.employee.entity.Employee;
-import lk.succes.student_management.asset.employee.entity.Enum.EmployeeStatus;
+import lk.succes.student_management.asset.employee.entity.enums.EmployeeStatus;
 import lk.succes.student_management.asset.employee.service.EmployeeService;
 import lk.succes.student_management.asset.user_management.entity.Role;
 import lk.succes.student_management.asset.user_management.entity.User;
@@ -45,14 +45,14 @@ public class ApplicationCreateRestController {
 
 //Employee
         Employee employee = new Employee();
-        employee.setPayRoleNumber("11111111");
+       // employee.setPayRoleNumber("11111111");
         employee.setName("Admin User");
         employee.setCallingName("Admin");
         employee.setName("908670000V");
         employee.setMobileOne("0750000000");
         employee.setTitle(Title.DR);
         employee.setGender(Gender.MALE);
-        employee.setBloodGroup(BloodGroup.AP);
+        //employee.setBloodGroup(BloodGroup.AP);
 //        employee.setDesignation(Designation.ED);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);

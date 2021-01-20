@@ -2,18 +2,19 @@ package lk.succes.student_management.asset.employee.controller;
 
 
 
-import lk.succes.student_management.asset.common_asset.model.Enum.BloodGroup;
-import lk.succes.student_management.asset.common_asset.model.Enum.CivilStatus;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.Title;
+
+import lk.succes.student_management.asset.common_asset.model.Enum.*;
 import lk.succes.student_management.asset.common_asset.service.CommonService;
 import lk.succes.student_management.asset.employee.entity.Employee;
+import lk.succes.student_management.asset.employee.entity.EmployeeFiles;
+import lk.succes.student_management.asset.employee.entity.enums.Designation;
+import lk.succes.student_management.asset.employee.entity.enums.EmployeeStatus;
 import lk.succes.student_management.asset.employee.service.EmployeeFilesService;
 import lk.succes.student_management.asset.employee.service.EmployeeService;
+import lk.succes.student_management.asset.user_management.entity.User;
 import lk.succes.student_management.asset.user_management.service.UserService;
 import lk.succes.student_management.util.service.DateTimeAgeService;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,6 @@ public class EmployeeController {
 
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-  @Autowired
   public EmployeeController(EmployeeService employeeService, EmployeeFilesService employeeFilesService,
                             DateTimeAgeService dateTimeAgeService,
                             CommonService commonService, UserService userService,
