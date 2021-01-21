@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.school.service;
 
 
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.school.dao.SchoolDao;
 import lk.succes.student_management.asset.school.entity.School;
 import lk.succes.student_management.util.interfaces.AbstractService;
@@ -12,43 +13,47 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SchoolService implements AbstractService< School, Integer> {
+public class SchoolService implements AbstractService< School, Integer > {
 
-    private final SchoolDao schoolDao;
-    @Autowired
-    public SchoolService(SchoolDao schoolDao){
-        this.schoolDao = schoolDao;
-    }
+  private final SchoolDao schoolDao;
 
-
-
-    public List< School > findAll() {
-        return schoolDao.findAll();
-    }
+  @Autowired
+  public SchoolService(SchoolDao schoolDao) {
+    this.schoolDao = schoolDao;
+  }
 
 
-    public School findById(Integer id) {
-        return schoolDao.getOne(id);
-    }
+  public List< School > findAll() {
+    return schoolDao.findAll();
+  }
 
 
-    public School persist(School school) {
-        return schoolDao.save(school);
-    }
+  public School findById(Integer id) {
+    return schoolDao.getOne(id);
+  }
 
 
-    public boolean delete(Integer id) {
-        schoolDao.deleteById(id);
-        return false;
-    }
+  public School persist(School school) {
+    if ( school.getId() == null )
+      school.setLiveDead(LiveDead.ACTIVE);
+    return schoolDao.save(school);
+  }
 
 
-    public List< School > search(School school) {
-        ExampleMatcher matcher = ExampleMatcher
-                .matching()
-                .withIgnoreCase()
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< School > sampleCollectingTubeExample = Example.of(school, matcher);
-        return schoolDao.findAll(sampleCollectingTubeExample);
-    }
+  public boolean delete(Integer id) {
+      School school = schoolDao.getOne(id);
+      school.setLiveDead(LiveDead.STOP);
+      schoolDao.save(school);
+    return false;
+  }
+
+
+  public List< School > search(School school) {
+    ExampleMatcher matcher = ExampleMatcher
+        .matching()
+        .withIgnoreCase()
+        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    Example< School > sampleCollectingTubeExample = Example.of(school, matcher);
+    return schoolDao.findAll(sampleCollectingTubeExample);
+  }
 }
