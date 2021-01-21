@@ -47,8 +47,11 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
         model.addAttribute("teacher", new Teacher());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus",true);
-        model.addAttribute("batches",batchService.findAll());
-        model.addAttribute("subjects",subjectService.findAll());
+        model.addAttribute("batches",batchService.findAll()
+//            .stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
+                          );
+        model.addAttribute("subjects",subjectService.findAll()
+            .stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
         return "teacher/addTeacher";
     }
 
@@ -88,16 +91,14 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
             Teacher lastTeacher = teacherService.lastTeacherOnDB();
             //registration number format => ST200001
             if ( lastTeacher != null ) {
-                String lastNumber = lastTeacher.getRegistrationId().substring(2);
-                teacher.setRegistrationId("ST" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+                String lastNumber = lastTeacher.getRegistrationId().substring(3);
+                teacher.setRegistrationId("SST" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
             } else {
-                teacher.setRegistrationId("ST" + makeAutoGenerateNumberService.numberAutoGen(null
+                teacher.setRegistrationId("SST" + makeAutoGenerateNumberService.numberAutoGen(null
             ));
             }
 
         }
-
-//todo-> teacher registration number need make
         teacherService.persist(teacher);
         return "redirect:/teacher";
 
