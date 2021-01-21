@@ -3,6 +3,7 @@ package lk.succes.student_management.asset.student.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.school.entity.School;
 import lk.succes.student_management.asset.subject.entity.Subject;
 import lk.succes.student_management.util.audit.AuditEntity;
@@ -44,6 +45,10 @@ public class Student extends AuditEntity {
     private String mobile;
 
     private String home;
+
+    @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
+
 
     // TODO: 6/13/2020  add the student picture
     /*One particular batch*/
