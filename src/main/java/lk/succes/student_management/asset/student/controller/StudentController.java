@@ -2,6 +2,7 @@ package lk.succes.student_management.asset.student.controller;
 
 
 import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.school.service.SchoolService;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.student.service.StudentService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/student" )
@@ -32,7 +34,10 @@ public class StudentController implements AbstractController< Student, Integer >
 
     @GetMapping
     public String findAll(Model model) {
-        model.addAttribute("students", studentService.findAll());
+        model.addAttribute("students", studentService.findAll()
+            .stream()
+            .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+            .collect(Collectors.toList()));
         return "student/student";
     }
 
@@ -40,7 +45,7 @@ public class StudentController implements AbstractController< Student, Integer >
     public String form(Model model) {
         model.addAttribute("student", new Student());
         model.addAttribute("schools", schoolService.findAll());
-        model.addAttribute("genders", Gender.values());
+        model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus", true);
         return "student/addStudent";
     }
@@ -55,7 +60,7 @@ public class StudentController implements AbstractController< Student, Integer >
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("student", studentService.findById(id));
         model.addAttribute("schools", schoolService.findAll());
-        model.addAttribute("genders", Gender.values());
+        model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus", false);
         return "student/addStudent";
     }
@@ -66,7 +71,7 @@ public class StudentController implements AbstractController< Student, Integer >
         if ( bindingResult.hasErrors() ) {
             model.addAttribute("student", student);
             model.addAttribute("schools", schoolService.findAll());
-            model.addAttribute("genders", Gender.values());
+            model.addAttribute("gender", Gender.values());
             model.addAttribute("addStatus", true);
             return "student/addStudent";
         }
@@ -77,12 +82,12 @@ public class StudentController implements AbstractController< Student, Integer >
         if ( student.getId() == null ) {
             // need to create auto generated registration number
             Student lastStudent = studentService.lastStudentOnDB();
-            //registration number format => SS200001
+            //registration number format => SSS200001
             if ( lastStudent != null ) {
-                String lastNumber = lastStudent.getRegNo().substring(2);
-                student.setRegNo("SS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+                String lastNumber = lastStudent.getRegNo().substring(3);
+                student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
             } else {
-                student.setRegNo("SS" + makeAutoGenerateNumberService.numberAutoGen(null));
+                student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(null));
             }
         }
         studentService.persist(student);

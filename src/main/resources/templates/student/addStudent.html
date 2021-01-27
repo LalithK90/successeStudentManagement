@@ -29,7 +29,7 @@
         <input type="text" readonly data-th-field="*{id}" id="id" placeholder="IndeX" class="form-control" autofocus >
       </div >
     </div >
-    <div class="form-group" >
+    <div class="form-group" data-th-if="${addStatus==false}" >
       <label class="col-sm-2 control-label" data-th-for="${regNo}" >Registration ID</label >
       <div class="col-sm-5" >
         <input type="text" id="regNo" class="form-control" data-th-field="*{regNo}" >
@@ -47,17 +47,26 @@
         <input type="text" id="lastName" class="form-control" data-th-field="*{lastName}" >
       </div >
     </div >
+
+    <!--Gender-->
     <div class="form-group" >
-      <label class="col-sm-3 control-label" >Gender</label >
-      <div class="col-sm-9" >
-        <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" required >
-          <option value="" >Please select</option >
-          <option data-th-each="gender : ${genders}"
-                  data-th-text="${gender.gender}"
-                  data-th-value="${gender}" ></option >
-        </select >
+        <label class="col-sm-2 control-label" for="gender" >Gender :</label >
+      <div class="col-sm-4" >
+        <div class="custom-control custom-checkbox custom-control-inline "
+             data-th-each="genders,index : ${gender}">
+          <input class="custom-control-input gender" required
+                 data-th-name="${'gender'}"
+                 data-th-value="${genders}"
+                 data-th-id="${index.index}+${genders}" type="radio"
+                 data-th-checked="${genders==gender}"/>
+          <label class="custom-control-label"
+                 data-th-for="${index.index}+${genders}"
+                 data-th-text="${genders.gender}"> radio
+          </label>
+        </div>
       </div >
     </div >
+
     <div class="form-group" >
       <label class="col-sm-2 control-label" data-th-for="${dob}" >Date of birth</label >
       <div class="col-sm-4" >

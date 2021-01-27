@@ -3,6 +3,7 @@ package lk.succes.student_management.asset.teacher.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.subject.entity.Subject;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,8 @@ public class Teacher extends AuditEntity {
     @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
     private String mobile;
 
+    @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
 
     private BigDecimal fee;
 

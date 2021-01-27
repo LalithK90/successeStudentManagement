@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.subject.service;
 
 
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import lk.succes.student_management.asset.subject.dao.SubjectDao;
 import lk.succes.student_management.asset.subject.entity.Subject;
@@ -25,11 +26,16 @@ public class SubjectService implements AbstractService<Subject, Integer> {
     }
 
     public Subject persist(Subject subject) {
+        if(subject.getId() ==null){
+            subject.setLiveDead(LiveDead.ACTIVE);
+        }
         return subjectDao.save(subject);
     }
 
     public boolean delete(Integer id) {
-        subjectDao.deleteById(id);
+        Subject subject = subjectDao.getOne(id);
+        subject.setLiveDead(LiveDead.STOP);
+        subjectDao.save(subject);
         return false;
     }
 
