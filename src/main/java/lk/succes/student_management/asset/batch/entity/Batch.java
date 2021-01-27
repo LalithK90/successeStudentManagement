@@ -7,6 +7,7 @@ import lk.succes.student_management.asset.hall.entity.Hall;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.subject.entity.Subject;
 import lk.succes.student_management.asset.teacher.entity.Teacher;
+import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,10 +42,7 @@ public class Batch extends AuditEntity {
     @OneToMany(mappedBy = "batch")
     private List<Student> students;
 
-    @ManyToMany
-    @JoinTable( name = "batch_hall",
-            joinColumns = @JoinColumn( name = "batch_id" ),
-            inverseJoinColumns = @JoinColumn( name = "hall_id" ) )
-    private List<Hall> halls;
 
+    @OneToMany( mappedBy = "bacth" )
+    private List< TimeTable > timeTables;
 }
