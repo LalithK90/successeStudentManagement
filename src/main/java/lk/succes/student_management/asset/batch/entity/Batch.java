@@ -3,6 +3,7 @@ package lk.succes.student_management.asset.batch.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.hall.entity.Hall;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.subject.entity.Subject;
@@ -32,6 +33,9 @@ public class Batch extends AuditEntity {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
+    @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
+
     @ManyToOne
     private Subject subject;
 
@@ -43,6 +47,6 @@ public class Batch extends AuditEntity {
     private List<Student> students;
 
 
-    @OneToMany( mappedBy = "bacth" )
+    @OneToMany( mappedBy = "batch" )
     private List< TimeTable > timeTables;
 }
