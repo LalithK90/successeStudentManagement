@@ -37,9 +37,6 @@ public class Batch extends AuditEntity {
     private LiveDead liveDead;
 
     @ManyToOne
-    private Subject subject;
-
-    @ManyToOne
     private Teacher teacher;
 
 //so many student on one batch

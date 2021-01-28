@@ -33,12 +33,6 @@ public class Subject extends AuditEntity {
     private LiveDead liveDead;
 
     @OneToMany(mappedBy = "subject")
-    private List< Batch > batches;
-
-    @ManyToMany(mappedBy = "subjects")
-    private List< Student > students;
-
-    @OneToMany(mappedBy = "subject")
     private List< Teacher > teachers;
 
 

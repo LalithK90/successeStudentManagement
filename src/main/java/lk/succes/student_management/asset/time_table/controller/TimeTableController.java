@@ -9,6 +9,7 @@ import lk.succes.student_management.asset.teacher.service.TeacherService;
 import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.asset.time_table.service.TimeTableService;
 import lk.succes.student_management.util.interfaces.AbstractController;
+import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,14 +27,17 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
   private final SubjectService subjectService;
   private final TeacherService teacherService;
   private final BatchService batchService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
   public TimeTableController(TimeTableService timeTableService, HallService hallService,
-                             SubjectService subjectService, TeacherService teacherService, BatchService batchService) {
+                             SubjectService subjectService, TeacherService teacherService, BatchService batchService,
+                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.timeTableService = timeTableService;
     this.hallService = hallService;
     this.subjectService = subjectService;
     this.teacherService = teacherService;
     this.batchService = batchService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
 
   @GetMapping
@@ -59,7 +63,6 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
     model.addAttribute("timeTable", timeTableService.findById(id));
-
       model.addAttribute("addStatus", false);
       return getString(model);
   }
@@ -71,7 +74,14 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
       model.addAttribute("timeTable", timeTable);
         return getString(model);
     }
-
+    if ( timeTable.getId() == null ) {
+      TimeTable lastTimeTable = timeTableService.lastTimeTable();
+      if ( lastTimeTable == null ) {
+        timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+      } else {
+        timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
+      }
+    }
     timeTableService.persist(timeTable);
     return "redirect:/timeTable";
 

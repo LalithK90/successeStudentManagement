@@ -34,36 +34,36 @@
             </div>
         </div>
         <!--Slot ID-->
-        <div class="form-row text-right">
+        <div class="form-row text-right" data-th-if="${addStatus==false}">
             <div class="col-md-4">
-                <label class="control-label" data-th-for="${slotId}">Slot ID :</label>
+                <label class="control-label" data-th-for="${code}">Slot Code :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{slotId}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{slotId}"
-                      data-th-if="${#fields.hasErrors('slotId')}">Error Name</span>
+                <input class="form-control" data-th-field="*{code}" required tabindex="4" type="text"/>
+                <span data-th-errors="*{code}"
+                      data-th-if="${#fields.hasErrors('code')}">Error Name</span>
             </div>
         </div>
-        <!--Date-->
+        <!--startAt-->
         <div class="form-row text-right">
             <div class="col-md-4">
-                <label class="control-label" data-th-for="${date}">Date :</label>
+                <label class="control-label" data-th-for="${startAt}">Start At :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{date}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{date}"
-                      data-th-if="${#fields.hasErrors('date')}">Error Name</span>
+                <input class="form-control" data-th-field="*{startAt}" required tabindex="4" type="datetime-local"/>
+                <span data-th-errors="*{startAt}"
+                      data-th-if="${#fields.hasErrors('startAt')}">Error Name</span>
             </div>
         </div>
-        <!--Time-->
+        <!--endAt-->
         <div class="form-row text-right">
             <div class="col-md-4">
-                <label class="control-label" data-th-for="${time}">Time :</label>
+                <label class="control-label" data-th-for="${endAt}">End At :</label>
             </div>
             <div class="col-md-8">
-                <input class="form-control" data-th-field="*{time}" required tabindex="4" type="text"/>
+                <input class="form-control" data-th-field="*{endAt}" required tabindex="4" type="datetime-local"/>
                 <span data-th-errors="*{time}"
-                      data-th-if="${#fields.hasErrors('time')}">Error Name</span>
+                      data-th-if="${#fields.hasErrors('endAt')}">Error Name</span>
             </div>
         </div>
         <!--Teacher-->
@@ -77,6 +77,22 @@
                     <option data-th-each="teacher : ${teachers}"
                     data-th-value="${teacher.id}"
                     data-th-text="${teacher.name}"></option >
+                </select >
+                <span data-th-errors="*{teacher}"
+                      data-th-if="${#fields.hasErrors('teacher')}">Error Name</span>
+            </div>
+        </div>
+        <!--Subject-->
+        <div class="form-row text-right">
+            <div class="col-md-4">
+                <label class="control-label" data-th-for="${teacher}">Teacher :</label>
+            </div>
+            <div class="col-md-8">
+                <select class="form-control"  required  >
+                    <option value="" >Please Select</option >
+                    <option data-th-each="subject : ${subjects}"
+                            data-th-value="${subject.id}"
+                            data-th-text="${subject.name}"></option >
                 </select >
                 <span data-th-errors="*{teacher}"
                       data-th-if="${#fields.hasErrors('teacher')}">Error Name</span>

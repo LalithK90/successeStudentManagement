@@ -62,7 +62,5 @@ public class Teacher extends AuditEntity {
   @ManyToOne
   private Subject subject;
 
-  @OneToMany( mappedBy = "teacher" )
-  private List< TimeTable > timeTables;
 
 }

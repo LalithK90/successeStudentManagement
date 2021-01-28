@@ -38,5 +38,7 @@ public class TimeTableService implements AbstractService<TimeTable, Integer> {
     }
 
 
-
+  public TimeTable lastTimeTable() {
+  return  timeTableDao.findFirstByOrderByIdDesc();
+    }
 }
