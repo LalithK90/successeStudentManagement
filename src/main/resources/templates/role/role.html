@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<head   data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav   data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
 <div class="container-fluid bg-secondary form-Border">
     <div class="row text-center formManagement border-info">
@@ -55,7 +55,7 @@
     </div>
 </div>
 <!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<footer   data-th-replace="~{fragments/footer :: footerFragment}"></footer>
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 

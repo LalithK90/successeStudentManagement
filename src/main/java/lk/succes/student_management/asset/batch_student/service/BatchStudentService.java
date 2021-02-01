@@ -1,4 +1,5 @@
 package lk.succes.student_management.asset.batch_student.service;
+import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch_student.dao.BatchStudentDao;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
@@ -42,5 +43,7 @@ public class BatchStudentService implements AbstractService<BatchStudent, Intege
   }
 
 
-
+  public int countByBatch(Batch batch) {
+  return batchStudentDao.countByBatch(batch);
+  }
 }

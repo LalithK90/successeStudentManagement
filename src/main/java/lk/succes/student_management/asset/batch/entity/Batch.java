@@ -62,4 +62,7 @@ public class Batch extends AuditEntity {
 
   @OneToMany( mappedBy = "batch" )
   private List< TimeTable > timeTables;
+
+  @Transient
+  private int count;
 }
