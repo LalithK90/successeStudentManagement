@@ -1,5 +1,8 @@
 package lk.succes.student_management.asset.teacher.controller;
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.succes.student_management.asset.batch.service.BatchService;
 import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
@@ -8,6 +11,7 @@ import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
 import lk.succes.student_management.util.interfaces.AbstractController;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +46,7 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
         return "teacher/teacher";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/add")
     public String form(Model model) {
         model.addAttribute("teacher", new Teacher());
         model.addAttribute("gender", Gender.values());
@@ -109,4 +113,17 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
         teacherService.delete(id);
         return "redirect:/teacher";
     }
+    @GetMapping( "/{id}" )
+    @ResponseBody
+    public MappingJacksonValue findId(@PathVariable Integer id) {
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(teacherService.findById(id).getSubject());
+        SimpleBeanPropertyFilter simpleBeanPropertyFilterOne = SimpleBeanPropertyFilter
+            .filterOutAllExcept("id", "name");
+
+        FilterProvider filters = new SimpleFilterProvider()
+            .addFilter("Subject", simpleBeanPropertyFilterOne);
+        mappingJacksonValue.setFilters(filters);
+        return mappingJacksonValue;
+    }
+
 }

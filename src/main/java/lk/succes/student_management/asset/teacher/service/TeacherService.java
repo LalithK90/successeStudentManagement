@@ -42,11 +42,6 @@ public class TeacherService implements AbstractService<Teacher, Integer> {
         return null;
     }
 
-
-    public Teacher lastTeacher() {
-        return teacherDao.findFirstByOrderByIdDesc();
-    }
-
     public Teacher lastTeacherOnDB() {return teacherDao.findFirstByOrderByIdDesc();
     }
 }

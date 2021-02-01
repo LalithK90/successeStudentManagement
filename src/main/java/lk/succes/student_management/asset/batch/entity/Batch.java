@@ -3,6 +3,7 @@ package lk.succes.student_management.asset.batch.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
+import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.hall.entity.Hall;
 import lk.succes.student_management.asset.student.entity.Student;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.util.List;
 
 @Entity
@@ -26,7 +28,9 @@ import java.util.List;
 @JsonFilter( "Batch" )
 public class Batch extends AuditEntity {
 
-    private String classReferance;
+    private String code;
+
+    private String name;
 
     private String year;
 
@@ -39,10 +43,8 @@ public class Batch extends AuditEntity {
     @ManyToOne
     private Teacher teacher;
 
-//so many student on one batch
-    @OneToMany(mappedBy = "batch")
-    private List<Student> students;
-
+    @OneToMany( mappedBy = "batch" )
+    private List< BatchStudent > batchStudents;
 
     @OneToMany( mappedBy = "batch" )
     private List< TimeTable > timeTables;

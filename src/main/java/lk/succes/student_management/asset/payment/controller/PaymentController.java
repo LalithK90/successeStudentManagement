@@ -27,7 +27,7 @@ public class PaymentController implements AbstractController<Payment, Integer> {
         return "payment/payment";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/add")
     public String form(Model model) {
         model.addAttribute("payment", new Payment());
 

@@ -57,8 +57,8 @@ public class Student extends AuditEntity {
   @ManyToOne
   private School school;
 
-  @OneToMany
-  private List< Batch > batches;
+//  @OneToMany
+//  private List< Batch > batches;
 
 
 }

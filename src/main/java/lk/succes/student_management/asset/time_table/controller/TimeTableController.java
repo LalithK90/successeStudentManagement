@@ -47,7 +47,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
     return "timeTable/timeTable";
   }
 
-  @GetMapping( "/new" )
+  @GetMapping( "/add" )
   public String form(Model model) {
     model.addAttribute("timeTable", new TimeTable());
       model.addAttribute("addStatus", true);

@@ -41,7 +41,7 @@ public class StudentController implements AbstractController< Student, Integer >
         return "student/student";
     }
 
-    @GetMapping( "/new" )
+    @GetMapping( "/add" )
     public String form(Model model) {
         model.addAttribute("student", new Student());
         model.addAttribute("schools", schoolService.findAll());

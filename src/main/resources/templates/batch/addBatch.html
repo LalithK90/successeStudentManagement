@@ -37,17 +37,17 @@
         </label >
       </div >
     </div >
-    <div class="form-group" >
-      <label class="col-sm-3 control-label" data-th-for="${classReferance}" >Batch ID</label >
+    <div class="form-group" data-th-if="${addStatus==false}" >
+      <label class="col-sm-3 control-label" data-th-for="${'code'}" >Batch Reff</label >
       <div class="col-sm-9" >
-        <input type="text" data-th-field="*{classReferance}" id="batchId" placeholder="Batch ID" class="form-control"
-               autofocus >
+        <input type="text" data-th-field="*{code}" id="batchId" placeholder="Batch ID" class="form-control"
+               autofocus readonly>
       </div >
     </div >
     <div class="form-group" >
-      <label class="col-sm-2 control-label" data-th-for="${year}" >Academic Year</label >
+      <label class="col-sm-2 control-label" data-th-for="${'year'}" >Academic Year</label >
       <div class="col-sm-3" >
-        <select id="year" class="form-control" data-th-field="*{year}" >
+        <select id="year" class="form-control" data-th-field="*{year}" required>
           <option value="2020" >2020</option >
           <option value="2021" >2021</option >
           <option value="2022" >2022</option >
@@ -59,9 +59,9 @@
         </select >
       </div >
 
-      <label class="col-sm-1 control-label" data-th-for="${grade}" >Grade</label >
+      <label class="col-sm-1 control-label" data-th-for="${'grade'}" >Grade</label >
       <div class="col-sm-5" >
-        <select id="grade" class="form-control" data-th-field="*{grade}" >
+        <select id="grade" class="form-control" data-th-field="*{grade}" required>
           <option value="" >Select the Grade</option >
           <option data-th-each="grade : ${grades}"
                   data-th-text="${grade.grade}"
@@ -70,9 +70,9 @@
       </div >
     </div >
     <div class="form-group" >
-      <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher Name</label >
+      <label data-th-for="${'teacher'}" class="col-sm-3 control-label" >Teacher Name</label >
       <div class="col-sm-9" >
-        <select id="teacherName" class="form-control" data-th-field="*{teacher}" >
+        <select id="teacher" class="form-control" data-th-field="*{teacher}" required>
           <option value="" >Select the Teacher</option >
           <option data-th-each="teacher : ${teachers}"
                   data-th-text="${teacher.firstName}"
@@ -81,20 +81,16 @@
       </div >
     </div >
     <div class="form-group" >
-      <label data-th-for="${subject}" class="col-sm-3 control-label" >Subject Name</label >
+      <label data-th-for="${name}" class="col-sm-3 control-label" >Batch Name</label >
       <div class="col-sm-9" >
-        <select id="subject" class="form-control" data-th-field="*{subject}" >
-          <option value="" >Select the Subject</option >
-          <option data-th-each="subject : ${subjects}"
-                  data-th-text="${subject.name}"
-                  data-th-value="${subject.id}" ></option >
-        </select >
+        <input type="text" data-th-field="*{name}" id="name" placeholder="Batch Name" class="form-control"
+               autofocus readonly>
       </div >
     </div >
 
     <div class="row container-fluid" >
       <div class="col-sm-2 col-sm-offset-2" >
-        <button type="link" class="btn btn-danger btn-block" >Back</button >
+        <button type="button" class="btn btn-danger btn-block" >Back</button >
       </div >
 
       <div class="col-sm-2 col-sm-offset-2" >
@@ -106,6 +102,27 @@
       </div >
     </div >
   </form > <!-- /form -->
-</div > <!-- ./container -->
+</div >
+<input type="hidden" id="subjectUrl" data-th-value="${subjectUrl}" >
+<!--footer include-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+$("#teacher").change(function () {
+    $.ajax({
+        type: 'GET',
+        url: $("#subjectUrl").val()+$(this).val(),
+        success: function (resp) {
+            $("#name").val($("#year").val()+"-"+$("#grade").val()+"-"+$("#teacher option:selected").html()+"-"+resp.name);
+            return resp;
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+
+});
+</script >
 </body >
 </html >

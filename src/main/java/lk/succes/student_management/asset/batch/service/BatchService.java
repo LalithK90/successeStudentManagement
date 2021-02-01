@@ -2,6 +2,7 @@ package lk.succes.student_management.asset.batch.service;
 
 
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import lk.succes.student_management.asset.batch.dao.BatchDao;
 import lk.succes.student_management.asset.batch.entity.Batch;
@@ -43,6 +44,9 @@ public class BatchService implements AbstractService<Batch, Integer> {
         return null;
     }
 
+    public Batch lastBatchOnDB() {
+        return batchDao.findFirstByOrderByIdDesc();
+    }
 
 
 }

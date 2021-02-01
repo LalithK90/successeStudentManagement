@@ -55,12 +55,11 @@ public class Teacher extends AuditEntity {
 
   private BigDecimal fee;
 
-  /*One particular batch*/
-  @ManyToOne
-  private Batch batch;
-
   @ManyToOne
   private Subject subject;
+
+  @OneToMany(mappedBy = "teacher")
+  private List<Batch> batches;
 
 
 }

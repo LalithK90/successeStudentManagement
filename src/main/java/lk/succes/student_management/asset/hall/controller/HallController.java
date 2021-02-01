@@ -31,7 +31,7 @@ public class HallController implements AbstractController< Hall, Integer > {
     return "hall/hall";
   }
 
-  @GetMapping( "/new" )
+  @GetMapping( "/add" )
   public String form(Model model) {
     model.addAttribute("hall", new Hall());
     model.addAttribute("hallConditions", HallCondition.values());
