@@ -35,6 +35,7 @@ public class Batch extends AuditEntity {
     @Column(unique = true)
     private String code;
 
+    @Column(unique = true)
     private String name;
 
     private String year;
