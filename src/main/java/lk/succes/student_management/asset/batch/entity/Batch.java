@@ -2,6 +2,7 @@ package lk.succes.student_management.asset.batch.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
@@ -15,9 +16,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,6 +32,7 @@ import java.util.List;
 @JsonFilter( "Batch" )
 public class Batch extends AuditEntity {
 
+    @Column(unique = true)
     private String code;
 
     private String name;
@@ -39,6 +44,16 @@ public class Batch extends AuditEntity {
 
     @Enumerated(EnumType.STRING)
     private LiveDead liveDead;
+
+
+    @Enumerated(EnumType.STRING)
+    private ClassDay classDay;
+
+    @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm:ss" )
+    private LocalDateTime startAt;
+
+    @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm:ss" )
+    private LocalDateTime endAt;
 
     @ManyToOne
     private Teacher teacher;

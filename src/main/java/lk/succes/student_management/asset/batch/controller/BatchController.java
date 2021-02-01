@@ -2,6 +2,7 @@ package lk.succes.student_management.asset.batch.controller;
 
 
 import lk.succes.student_management.asset.batch.entity.Batch;
+import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch.service.BatchService;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
@@ -43,6 +44,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
 
   private String commonMethod(Model model, Batch batch, boolean addStatus) {
     model.addAttribute("grades", Grade.values());
+    model.addAttribute("classDays", ClassDay.values());
     model.addAttribute("teachers", teacherService.findAll());
     model.addAttribute("batch", batch);
     model.addAttribute("addStatus", addStatus);

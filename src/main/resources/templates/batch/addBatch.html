@@ -81,6 +81,31 @@
       </div >
     </div >
     <div class="form-group" >
+      <label data-th-for="${'classDay'}" class="col-sm-3 control-label" >Class Day</label >
+      <div class="col-sm-9" >
+        <select id="classDay" class="form-control" data-th-field="*{classDay}" required>
+          <option value="" >Select Day</option >
+          <option data-th-each="classDay : ${classDays}"
+                  data-th-text="${classDay.classDay}"
+                  data-th-value="${classDay}" ></option >
+        </select >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${name}" class="col-sm-3 control-label" >Time Period</label >
+      <div class="col-sm-9" >
+        <div class="form-group" >
+          <label for="startAt" >FROM (opening hours 08:00 to 20:00) :</label >
+          <input class="form-control" id="startAt" data-th-field="*{startAt}" type="time" step="3600"  min="08:00" max="20:00"/>
+        </div >
+        <div class="form-group" >
+          <label for="endAt" >TO (opening hours 08:00 to 20:00) :</label >
+          <input class="form-control" id="endAt" data-th-field="*{endAt}" type="time" step="3600" min="08:00" max="20:00"/>
+        </div >
+      </div >
+    </div >
+
+    <div class="form-group" >
       <label data-th-for="${name}" class="col-sm-3 control-label" >Batch Name</label >
       <div class="col-sm-9" >
         <input type="text" data-th-field="*{name}" id="name" placeholder="Batch Name" class="form-control"
@@ -109,20 +134,62 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
-$("#teacher").change(function () {
-    $.ajax({
-        type: 'GET',
-        url: $("#subjectUrl").val()+$(this).val(),
-        success: function (resp) {
-            $("#name").val($("#year").val()+"-"+$("#grade").val()+"-"+$("#teacher option:selected").html()+"-"+resp.name);
-            return resp;
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
+$("#teacher, #grade, #year,#startAt, #endAt").change(function () {
+    let id = $("#teacher").val();
+    let startDateTime = $(`#startAt`).val();
+    let endDateTime = $("#endAt").val();
+    let day = $("#classDay").val();
+    if(id && startDateTime && endDateTime) {
+        $.ajax({
+            type: 'GET',
+            url: $("#subjectUrl").val() + id,
+            success: function (resp) {
+                if (startDateTime !== "" && endDateTime !== "") {
+                    let sDT = Date.parse('20 Aug 2020 '+startDateTime);
+                    let eDT = Date.parse('20 Aug 2020 '+endDateTime);
+                    if (sDT > eDT) {
+                        swal({
+                            title: "Could you accept those time.. !",
+                            icon: "warning",
+                            text: "Please check your time \n End Time can not be less than Start Time",
+                        })
+                        $(`#endAt`).val(startDateTime);
+                    }
+                }
+                $("#name").val($("#year").val()
+                    +"-" + $("#grade").val()
+                    +"-" + $("#teacher option:selected").html().toUpperCase()
+                    +"-" + resp.name.toUpperCase()
+                    +"-" + day
+                    +"-" + startDateTime
+                    +"-"+ endDateTime);
 
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 });
+
+// $("#startAt, #endAt").change(
+// function dateMatch() {
+//     let startDateTime = $(`#startAt`).val();
+//     let endDateTime = $("#endAt").val();
+//     if (startDateTime !== "" && endDateTime !== "") {
+//        let sDT = Date.parse('20 Aug 2020 '+startDateTime);
+//        let eDT = Date.parse('20 Aug 2020 '+endDateTime);
+//         if (sDT > eDT) {
+//             swal({
+//                 title: "Could you accept those time.. !",
+//                 icon: "warning",
+//                 text: "Please check your time \n End Time can not be less than Start Time",
+//             })
+//             $(`#endAt`).val(startDateTime);
+//         }
+//     }
+// });
+
 </script >
 </body >
 </html >
