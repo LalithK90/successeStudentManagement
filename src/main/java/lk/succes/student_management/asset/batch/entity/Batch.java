@@ -32,36 +32,34 @@ import java.util.List;
 @JsonFilter( "Batch" )
 public class Batch extends AuditEntity {
 
-    @Column(unique = true)
-    private String code;
+  @Column( unique = true )
+  private String code;
 
-    @Column(unique = true)
-    private String name;
+  @Column( unique = true )
+  private String name;
 
-    private String year;
+  private String year;
 
-    @Enumerated(EnumType.STRING)
-    private Grade grade;
+  @Enumerated( EnumType.STRING )
+  private Grade grade;
 
-    @Enumerated(EnumType.STRING)
-    private LiveDead liveDead;
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
 
-    @Enumerated(EnumType.STRING)
-    private ClassDay classDay;
+  @Enumerated( EnumType.STRING )
+  private ClassDay classDay;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm:ss" )
-    private LocalDateTime startAt;
+  private String startAt;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd hh:mm:ss" )
-    private LocalDateTime endAt;
+  private String endAt;
 
-    @ManyToOne
-    private Teacher teacher;
+  @ManyToOne
+  private Teacher teacher;
 
-    @OneToMany( mappedBy = "batch" )
-    private List< BatchStudent > batchStudents;
+  @OneToMany( mappedBy = "batch" )
+  private List< BatchStudent > batchStudents;
 
-    @OneToMany( mappedBy = "batch" )
-    private List< TimeTable > timeTables;
+  @OneToMany( mappedBy = "batch" )
+  private List< TimeTable > timeTables;
 }

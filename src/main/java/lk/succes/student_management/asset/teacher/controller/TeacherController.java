@@ -51,9 +51,6 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
         model.addAttribute("teacher", new Teacher());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus",true);
-        model.addAttribute("batches",batchService.findAll()
-//            .stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
-                          );
         model.addAttribute("subjects",subjectService.findAll()
             .stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
         return "teacher/addTeacher";

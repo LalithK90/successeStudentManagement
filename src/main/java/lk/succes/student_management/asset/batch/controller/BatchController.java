@@ -75,8 +75,11 @@ public class BatchController implements AbstractController< Batch, Integer > {
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
+      System.out.println("sdasdasd" );
+      bindingResult.getAllErrors().forEach(System.out::println);
       return commonMethod(model, batch, true);
     }
+    System.out.println("sdasdasd gggb");
     if ( batch.getId() == null ) {
 
       // need to create auto generated registration number
@@ -85,8 +88,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
         String lastNumber = lastBatch.getCode().substring(3);
         batch.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       } else {
-        batch.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null
-                                                                         ));
+        batch.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
 
     }
