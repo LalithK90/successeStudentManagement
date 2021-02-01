@@ -13,6 +13,7 @@ import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -75,13 +76,19 @@ public class BatchController implements AbstractController< Batch, Integer > {
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
-      System.out.println("sdasdasd" );
       bindingResult.getAllErrors().forEach(System.out::println);
       return commonMethod(model, batch, true);
     }
-    System.out.println("sdasdasd gggb");
-    if ( batch.getId() == null ) {
 
+    if ( batch.getId() == null ) {
+      Batch batchDb = batchService.findByName(batch.getName());
+
+      if  (batchDb != null){
+        ObjectError error = new ObjectError("batch",
+                                            "This batch is already in the system. ");
+        bindingResult.addError(error);
+        return commonMethod(model, batch, true);
+      }
       // need to create auto generated registration number
       Batch lastBatch = batchService.lastBatchOnDB();
       if ( lastBatch != null ) {
@@ -90,7 +97,6 @@ public class BatchController implements AbstractController< Batch, Integer > {
       } else {
         batch.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null));
       }
-
     }
 
     batchService.persist(batch);

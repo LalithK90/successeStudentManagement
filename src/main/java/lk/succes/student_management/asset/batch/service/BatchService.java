@@ -49,4 +49,7 @@ public class BatchService implements AbstractService<Batch, Integer> {
     }
 
 
+    public Batch findByName(String name) {
+    return batchDao.findByName(name);
+    }
 }

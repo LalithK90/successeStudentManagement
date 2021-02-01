@@ -36,19 +36,16 @@ import java.util.stream.Collectors;
 public class EmployeeController {
   private final EmployeeService employeeService;
   private final EmployeeFilesService employeeFilesService;
-  private final DateTimeAgeService dateTimeAgeService;
   private final CommonService commonService;
   private final UserService userService;
 
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
   public EmployeeController(EmployeeService employeeService, EmployeeFilesService employeeFilesService,
-                            DateTimeAgeService dateTimeAgeService,
                             CommonService commonService, UserService userService,
                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.employeeService = employeeService;
     this.employeeFilesService = employeeFilesService;
-    this.dateTimeAgeService = dateTimeAgeService;
     this.commonService = commonService;
     this.userService = userService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
@@ -87,7 +84,6 @@ public class EmployeeController {
       employee.setFileInfo(employeeFilesService.employeeFileDownloadLinks(employee));
       employees.add(employee);
     }
-    System.out.println("dfsdfs "+employees.size());
     model.addAttribute("employees", employees);
     model.addAttribute("contendHeader", "Employee");
     return "employee/employee";

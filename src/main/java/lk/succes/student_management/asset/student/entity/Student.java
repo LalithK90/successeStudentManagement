@@ -3,6 +3,8 @@ package lk.succes.student_management.asset.student.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
+import lk.succes.student_management.asset.batch.entity.enums.Grade;
+import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.school.entity.School;
@@ -51,14 +53,14 @@ public class Student extends AuditEntity {
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
+  @Enumerated( EnumType.STRING )
+  private Grade grade;
 
-  // TODO: 6/13/2020  add the student picture
-  /*One particular batch*/
   @ManyToOne
   private School school;
 
-//  @OneToMany
-//  private List< Batch > batches;
+  @OneToMany(mappedBy = "student")
+  private List< BatchStudent > batchStudents;
 
 
 }

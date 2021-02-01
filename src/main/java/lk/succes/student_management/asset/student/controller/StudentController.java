@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.student.controller;
 
 
+import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
 import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.asset.school.service.SchoolService;
@@ -44,6 +45,7 @@ public class StudentController implements AbstractController< Student, Integer >
     @GetMapping( "/add" )
     public String form(Model model) {
         model.addAttribute("student", new Student());
+        model.addAttribute("grades", Grade.values());
         model.addAttribute("schools", schoolService.findAll());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus", true);
@@ -59,6 +61,7 @@ public class StudentController implements AbstractController< Student, Integer >
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("student", studentService.findById(id));
+        model.addAttribute("grades", Grade.values());
         model.addAttribute("schools", schoolService.findAll());
         model.addAttribute("gender", Gender.values());
         model.addAttribute("addStatus", false);
@@ -71,6 +74,7 @@ public class StudentController implements AbstractController< Student, Integer >
         if ( bindingResult.hasErrors() ) {
             model.addAttribute("student", student);
             model.addAttribute("schools", schoolService.findAll());
+            model.addAttribute("grades", Grade.values());
             model.addAttribute("gender", Gender.values());
             model.addAttribute("addStatus", true);
             return "student/addStudent";
