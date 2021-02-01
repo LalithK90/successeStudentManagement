@@ -28,7 +28,7 @@ public class DiscountController implements AbstractController<Discount, Integer>
         return "discount/discount";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/add")
     public String form(Model model) {
         model.addAttribute("discount", new Discount());
 

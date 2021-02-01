@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BatchDao extends JpaRepository<Batch, Integer> {
 
+  Batch findFirstByOrderByIdDesc();
+
+  Batch findByName(String name);
 }

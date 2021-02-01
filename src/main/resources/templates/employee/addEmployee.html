@@ -146,21 +146,6 @@
                     data-th-if="${#fields.hasErrors('dateOfBirth')}" class="error" >Error Birthday</span >
             </div >
           </div >
-          <!--Blood group-->
-          <!--<div class="form-row text-right">
-              <div class="col-md-4">
-                  <label class="control-label" for="bloodGroup">Blood Group :</label>
-              </div>
-              <div class="col-md-8">
-                  <select id="bloodGroup" data-th-field="*{bloodGroup}" class="form-control" tabindex="9" required>
-                      <option value="">Please select</option>
-                      <option data-th-each="bloodGroups : ${bloodGroup}"
-                              data-th-text="${bloodGroups.bloodGroup}"
-                              data-th-value="${bloodGroups}"
-                              data-th-selected="${bloodGroups==employee.bloodGroup?'selected':'unselected'}">Please select</option>
-                  </select>
-              </div>
-          </div>-->
           <!--Designation-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
@@ -250,17 +235,6 @@
                     data-th-if="${#fields.hasErrors('land')}" id="landError" >Error Land Number</span >
             </div >
           </div >
-          <!--Email-->
-          <!--<div class="form-row text-right">
-              <div class="col-md-4">
-                  <label class="control-label" for="email">Email :</label>
-              </div>
-              <div class="col-md-8">
-                  <input id="email" data-th-field="*{email}" class="form-control" tabindex="16" type="email" required/>
-                  <span class="error" data-th-errors="*{email}"
-                        data-th-if="${#fields.hasErrors('email')}" id="emailError">Error Email</span>
-              </div>
-          </div>-->
           <!--Office email-->
           <div class="form-row text-right" >
             <div class="col-md-4" >

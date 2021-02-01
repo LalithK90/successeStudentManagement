@@ -30,7 +30,7 @@ public class SubjectController implements AbstractController< Subject, Integer >
     return "subject/subject";
   }
 
-  @GetMapping( "/new" )
+  @GetMapping( "/add" )
   public String form(Model model) {
     model.addAttribute("subject", new Subject());
 

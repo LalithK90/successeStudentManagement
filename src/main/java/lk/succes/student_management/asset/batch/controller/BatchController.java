@@ -2,46 +2,63 @@ package lk.succes.student_management.asset.batch.controller;
 
 
 import lk.succes.student_management.asset.batch.entity.Batch;
+import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch.service.BatchService;
-import lk.succes.student_management.asset.subject.service.SubjectService;
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.teacher.controller.TeacherController;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
 import lk.succes.student_management.util.interfaces.AbstractController;
+import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/batch" )
 public class BatchController implements AbstractController< Batch, Integer > {
   private final BatchService batchService;
   private final TeacherService teacherService;
-  private final SubjectService subjectService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-  public BatchController(BatchService batchService, TeacherService teacherService, SubjectService subjectService) {
+  public BatchController(BatchService batchService, TeacherService teacherService,
+                         MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.batchService = batchService;
     this.teacherService = teacherService;
-    this.subjectService = subjectService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
+
 
   @GetMapping
   public String findAll(Model model) {
-    model.addAttribute("batchs", batchService.findAll());
+    model.addAttribute("batchs",
+                       batchService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
     return "batch/batch";
   }
 
-  @GetMapping( "/new" )
-  public String form(Model model) {
-    model.addAttribute("batch", new Batch());
+  private String commonMethod(Model model, Batch batch, boolean addStatus) {
     model.addAttribute("grades", Grade.values());
+    model.addAttribute("classDays", ClassDay.values());
     model.addAttribute("teachers", teacherService.findAll());
-    model.addAttribute("subjects", subjectService.findAll());
-    model.addAttribute("addStatus", true);
+    model.addAttribute("batch", batch);
+    model.addAttribute("addStatus", addStatus);
+    model.addAttribute("subjectUrl", MvcUriComponentsBuilder
+        .fromMethodName(TeacherController.class, "findId", "")
+        .build()
+        .toString());
     return "batch/addBatch";
+  }
+
+  @GetMapping( "/add" )
+  public String form(Model model) {
+    return commonMethod(model, new Batch(), true);
   }
 
   @GetMapping( "/view/{id}" )
@@ -52,24 +69,34 @@ public class BatchController implements AbstractController< Batch, Integer > {
 
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
-    model.addAttribute("batch", batchService.findById(id));
-    model.addAttribute("teachers", teacherService.findAll());
-    model.addAttribute("subjects", subjectService.findAll());
-    model.addAttribute("grades", Grade.values());
-    model.addAttribute("addStatus", false);
-    return "batch/addBatch";
+    return commonMethod(model, batchService.findById(id), false);
   }
 
   @PostMapping( "/save" )
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
-      model.addAttribute("batch", batch);
-      model.addAttribute("teachers", teacherService.findAll());
-      model.addAttribute("subjects", subjectService.findAll());
-      model.addAttribute("grades", Grade.values());
-      model.addAttribute("addStatus", true);
-      return "batch/addBatch";
+      bindingResult.getAllErrors().forEach(System.out::println);
+      return commonMethod(model, batch, true);
+    }
+
+    if ( batch.getId() == null ) {
+      Batch batchDb = batchService.findByName(batch.getName());
+
+      if  (batchDb != null){
+        ObjectError error = new ObjectError("batch",
+                                            "This batch is already in the system. ");
+        bindingResult.addError(error);
+        return commonMethod(model, batch, true);
+      }
+      // need to create auto generated registration number
+      Batch lastBatch = batchService.lastBatchOnDB();
+      if ( lastBatch != null ) {
+        String lastNumber = lastBatch.getCode().substring(3);
+        batch.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+      } else {
+        batch.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null));
+      }
     }
 
     batchService.persist(batch);

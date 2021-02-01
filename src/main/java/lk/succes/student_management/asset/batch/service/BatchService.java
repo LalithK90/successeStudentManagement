@@ -1,6 +1,8 @@
 package lk.succes.student_management.asset.batch.service;
 
 
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import lk.succes.student_management.asset.batch.dao.BatchDao;
 import lk.succes.student_management.asset.batch.entity.Batch;
@@ -25,11 +27,16 @@ public class BatchService implements AbstractService<Batch, Integer> {
     }
 
     public Batch persist(Batch batch) {
+        if(batch.getId() ==null){
+            batch.setLiveDead(LiveDead.ACTIVE);
+        }
         return batchDao.save(batch);
     }
 
     public boolean delete(Integer id) {
-        batchDao.deleteById(id);
+        Batch batch = batchDao.getOne(id);
+        batch.setLiveDead(LiveDead.STOP);
+        batchDao.save(batch);
         return false;
     }
 
@@ -37,6 +44,12 @@ public class BatchService implements AbstractService<Batch, Integer> {
         return null;
     }
 
+    public Batch lastBatchOnDB() {
+        return batchDao.findFirstByOrderByIdDesc();
+    }
 
 
+    public Batch findByName(String name) {
+    return batchDao.findByName(name);
+    }
 }

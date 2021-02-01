@@ -17,7 +17,7 @@
         <h1>Batch Management</h1>
     </div>
     <div class="col-4">
-        <a href="/batch/new">
+        <a href="/batch/add">
             <button class="btn btn-primary" align="center">New Batch</button>
         </a>
     </div>
@@ -40,10 +40,10 @@
             <tbody>
             <tr data-th-each="batch, index : ${batchs }">
                 <td data-th-text="${index.count}"></td>
-                <td data-th-text="${batch.classReferance}"></td>
+                <td data-th-text="${batch.code}"></td>
                 <td data-th-text="${batch.year}"></td>
-                <td data-th-text="${batch.grade}"></td>
-                <td data-th-text="${batch.subject.name}"></td>
+                <td data-th-text="${batch.grade.grade}"></td>
+                <td data-th-text="${batch.name}"></td>
                 <td data-th-text="${batch.teacher.firstName}"></td>
 
 

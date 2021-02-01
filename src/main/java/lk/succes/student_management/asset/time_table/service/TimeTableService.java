@@ -1,9 +1,9 @@
-package lk.succes.student_management.asset.timeTable.service;
+package lk.succes.student_management.asset.time_table.service;
 
 
 import lk.succes.student_management.util.interfaces.AbstractService;
-import lk.succes.student_management.asset.timeTable.dao.TimeTableDao;
-import lk.succes.student_management.asset.timeTable.entity.TimeTable;
+import lk.succes.student_management.asset.time_table.dao.TimeTableDao;
+import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +38,7 @@ public class TimeTableService implements AbstractService<TimeTable, Integer> {
     }
 
 
-
+  public TimeTable lastTimeTable() {
+  return  timeTableDao.findFirstByOrderByIdDesc();
+    }
 }

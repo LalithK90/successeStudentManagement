@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.hall.service;
 
 
+import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import lk.succes.student_management.asset.hall.dao.HallDao;
 import lk.succes.student_management.asset.hall.entity.Hall;
@@ -25,11 +26,16 @@ public class HallService implements AbstractService<Hall, Integer> {
     }
 
     public Hall persist(Hall hall) {
+        if (hall.getId() == null){
+            hall.setLiveDead(LiveDead.ACTIVE);
+        }
         return hallDao.save(hall);
     }
 
     public boolean delete(Integer id) {
-        hallDao.deleteById(id);
+     Hall hall = hallDao.getOne(id);
+     hall.setLiveDead(LiveDead.STOP);
+     hallDao.save(hall);
         return false;
     }
 

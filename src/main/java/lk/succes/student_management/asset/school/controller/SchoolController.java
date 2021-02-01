@@ -45,7 +45,7 @@ public class SchoolController {
     return commonMethod(model, false, schoolService.findById(id));
   }
 
-  @GetMapping( "/new" )
+  @GetMapping( "/add" )
   public String form(Model model) {
     return commonMethod(model, true, new School());
   }
