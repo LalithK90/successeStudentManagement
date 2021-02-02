@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,11 +36,13 @@ public class BatchStudentController {
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
         .collect(Collectors.toList());
+
+    List< Batch > batches = new ArrayList<>();
     for ( Batch batch : batchList ) {
       batch.setCount(batchStudentService.countByBatch(batch));
-      batchList.add(batch);
+      batches.add(batch);
     }
-    model.addAttribute("batches",batchList);
+    model.addAttribute("batches",batches);
     return "batchStudent/batchStudent";
   }
   @GetMapping("/batch/{id}")
