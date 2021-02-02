@@ -136,7 +136,7 @@
         <label class="col-sm-1 control-label" data-th-for="${'batches'}" >Batches:</label >
         <div class="col-sm-7" >
           <select id="batches" class="form-control col-sm-10" data-th-field="*{batches}" multiple required >
-
+            <option data-th-each="batch : ${batches}" ></option >
           </select >
         </div >
         <label class="col-sm-4 control-label" >Total Fee for Month : <input id="monthFee" value="0" class="form-control"
@@ -169,7 +169,7 @@
 <script data-th-src="@{/js/jquery.multi-select.js}" ></script >
 
 <script src="/js/jquery.quickSearch.js" ></script >
-
+<!--todo need add like supplier item addition-->
 <script >
     let totalPrice = 0;
     $("#grade").change(function () {

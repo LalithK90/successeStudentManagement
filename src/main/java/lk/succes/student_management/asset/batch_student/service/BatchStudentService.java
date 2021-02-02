@@ -3,6 +3,7 @@ import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch_student.dao.BatchStudentDao;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +46,9 @@ public class BatchStudentService implements AbstractService<BatchStudent, Intege
 
   public int countByBatch(Batch batch) {
   return batchStudentDao.countByBatch(batch);
+  }
+
+  public List< BatchStudent> findByStudent(Student student) {
+    return batchStudentDao.findByStudent(student);
   }
 }

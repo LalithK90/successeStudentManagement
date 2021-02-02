@@ -5,6 +5,7 @@ import lk.succes.student_management.asset.batch.controller.BatchController;
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
+import lk.succes.student_management.asset.batch_student.service.BatchStudentService;
 import lk.succes.student_management.asset.common_asset.model.enums.Gender;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.school.service.SchoolService;
@@ -28,13 +29,14 @@ import java.util.stream.Collectors;
 @RequestMapping( "/student" )
 public class StudentController implements AbstractController< Student, Integer > {
     private final StudentService studentService;
-
+    private final BatchStudentService batchStudentService;
     private final SchoolService schoolService;
     private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
     public StudentController(StudentService studentService,
-                             SchoolService schoolService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                             BatchStudentService batchStudentService, SchoolService schoolService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
         this.studentService = studentService;
+        this.batchStudentService = batchStudentService;
         this.schoolService = schoolService;
         this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     }
@@ -49,13 +51,19 @@ public class StudentController implements AbstractController< Student, Integer >
     }
 
     private String commonThing(Model model, Student student, boolean addStatus){
+        List<BatchStudent> batchStudents = batchStudentService.findByStudent(student);
+        if (batchStudents !=null){
+            List<Batch> batches = new ArrayList<>();
+            batchStudents.forEach(x->batches.add(x.getBatch()));
+            student.setBatches(batches);
+        }
         model.addAttribute("student", student);
         model.addAttribute("addStatus", addStatus);
         model.addAttribute("grades", Grade.values());
         model.addAttribute("schools", schoolService.findAll().stream()
             .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
             .collect(Collectors.toList()));
-        model.addAttribute("gender", Gender.values());
+        model.addAttribute("genders", Gender.values());
          model.addAttribute("batchUrl", MvcUriComponentsBuilder
              .fromMethodName(BatchController.class, "findByGrade", "")
              .build()
