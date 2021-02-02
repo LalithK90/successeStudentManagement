@@ -47,7 +47,7 @@ public class Batch extends AuditEntity {
 
   private String endAt;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   private Teacher teacher;
 
   @OneToMany( mappedBy = "batch" )

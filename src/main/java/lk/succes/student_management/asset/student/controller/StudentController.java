@@ -2,7 +2,9 @@ package lk.succes.student_management.asset.student.controller;
 
 
 import lk.succes.student_management.asset.batch.controller.BatchController;
+import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
+import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.enums.Gender;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.school.service.SchoolService;
@@ -18,6 +20,8 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -81,7 +85,15 @@ public class StudentController implements AbstractController< Student, Integer >
         if ( bindingResult.hasErrors() ) {
             return commonThing(model,student, true);
         }
-
+        List< BatchStudent > batchStudents = new ArrayList<>();
+        for ( Batch batch : student.getBatches() ) {
+            BatchStudent batchStudent = new BatchStudent();
+            batchStudent.setStudent(student);
+            batchStudent.setBatch(batch);
+            batchStudent.setLiveDead(LiveDead.ACTIVE);
+            batchStudents.add(batchStudent);
+        }
+        student.setBatchStudents(batchStudents);
 //there are two different situation
         //1. new Student -> need to generate new number
         //2. update student -> no required to generate number

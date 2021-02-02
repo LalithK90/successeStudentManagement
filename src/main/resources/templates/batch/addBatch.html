@@ -115,9 +115,9 @@
       </div >
     </div >
     <div class="form-group" >
-      <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors: </label >
+      <label  data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors: </label >
       <ul >
-        <li id="error" data-th-each="err : ${#fields.errors('*')}" data-th-text="${err}" class="error" ></li >
+        <li  data-th-each="err : ${#fields.errors('*')}" data-th-text="${err}" class="text-danger" ></li >
       </ul >
     </div >
     <div class="row container-fluid" >

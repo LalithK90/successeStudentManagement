@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -86,7 +87,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
     if ( batch.getId() == null ) {
       Batch batchDb = batchService.findByName(batch.getName());
 
-      if  (batchDb != null){
+      if ( batchDb != null ) {
         ObjectError error = new ObjectError("batch",
                                             "This batch is already in the system. ");
         bindingResult.addError(error);
@@ -115,14 +116,33 @@ public class BatchController implements AbstractController< Batch, Integer > {
 
   @GetMapping( "/{grade}" )
   @ResponseBody
-  public MappingJacksonValue findByGrade(@PathVariable("grade") Grade grade) {
+  public MappingJacksonValue findByGrade(@PathVariable( "grade" ) Grade grade) {
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(batchService.findByGrade(grade));
-    SimpleBeanPropertyFilter simpleBeanPropertyFilterOne = SimpleBeanPropertyFilter
+
+    SimpleBeanPropertyFilter forBatch = SimpleBeanPropertyFilter
         .filterOutAllExcept("id", "name");
-    System.out.println("sdasdasddad sdas ");
+
     FilterProvider filters = new SimpleFilterProvider()
-        .addFilter("Batch", simpleBeanPropertyFilterOne);
+        .addFilter("Batch", forBatch);
+
     mappingJacksonValue.setFilters(filters);
+
+    return mappingJacksonValue;
+  }
+
+  @GetMapping( "/id/{id}" )
+  @ResponseBody
+  public MappingJacksonValue findById(@PathVariable( "id" ) Integer id) {
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(batchService.findById(id).getTeacher());
+
+    SimpleBeanPropertyFilter forTeacher = SimpleBeanPropertyFilter
+        .filterOutAllExcept("id","firstName", "fee");
+
+    FilterProvider filters = new SimpleFilterProvider()
+        .addFilter("Teacher", forTeacher);
+
+    mappingJacksonValue.setFilters(filters);
+
     return mappingJacksonValue;
   }
 }
