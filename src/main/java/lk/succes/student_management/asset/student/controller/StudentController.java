@@ -1,9 +1,10 @@
 package lk.succes.student_management.asset.student.controller;
 
 
+import lk.succes.student_management.asset.batch.controller.BatchController;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.school.service.SchoolService;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.student.service.StudentService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -42,14 +44,24 @@ public class StudentController implements AbstractController< Student, Integer >
         return "student/student";
     }
 
+    private String commonThing(Model model, Student student, boolean addStatus){
+        model.addAttribute("student", student);
+        model.addAttribute("addStatus", addStatus);
+        model.addAttribute("grades", Grade.values());
+        model.addAttribute("schools", schoolService.findAll().stream()
+            .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+            .collect(Collectors.toList()));
+        model.addAttribute("gender", Gender.values());
+         model.addAttribute("batchUrl", MvcUriComponentsBuilder
+             .fromMethodName(BatchController.class, "findByGrade", "")
+             .build()
+             .toString());
+        return "student/addStudent";
+    }
+
     @GetMapping( "/add" )
     public String form(Model model) {
-        model.addAttribute("student", new Student());
-        model.addAttribute("grades", Grade.values());
-        model.addAttribute("schools", schoolService.findAll());
-        model.addAttribute("gender", Gender.values());
-        model.addAttribute("addStatus", true);
-        return "student/addStudent";
+        return commonThing(model,new Student(), true);
     }
 
     @GetMapping( "/view/{id}" )
@@ -60,24 +72,14 @@ public class StudentController implements AbstractController< Student, Integer >
 
     @GetMapping( "/edit/{id}" )
     public String edit(@PathVariable Integer id, Model model) {
-        model.addAttribute("student", studentService.findById(id));
-        model.addAttribute("grades", Grade.values());
-        model.addAttribute("schools", schoolService.findAll());
-        model.addAttribute("gender", Gender.values());
-        model.addAttribute("addStatus", false);
-        return "student/addStudent";
+        return commonThing(model,studentService.findById(id), false);
     }
 
     @PostMapping( "/save" )
     public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,
                           RedirectAttributes redirectAttributes, Model model) {
         if ( bindingResult.hasErrors() ) {
-            model.addAttribute("student", student);
-            model.addAttribute("schools", schoolService.findAll());
-            model.addAttribute("grades", Grade.values());
-            model.addAttribute("gender", Gender.values());
-            model.addAttribute("addStatus", true);
-            return "student/addStudent";
+            return commonThing(model,student, true);
         }
 
 //there are two different situation

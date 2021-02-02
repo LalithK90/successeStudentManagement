@@ -1,4 +1,4 @@
-package lk.succes.student_management.asset.common_asset.model.Enum;
+package lk.succes.student_management.asset.common_asset.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

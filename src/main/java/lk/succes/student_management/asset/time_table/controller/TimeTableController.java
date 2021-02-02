@@ -2,7 +2,7 @@ package lk.succes.student_management.asset.time_table.controller;
 
 
 import lk.succes.student_management.asset.batch.service.BatchService;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.service.HallService;
 import lk.succes.student_management.asset.subject.service.SubjectService;
 import lk.succes.student_management.asset.teacher.service.TeacherService;

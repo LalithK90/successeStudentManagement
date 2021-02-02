@@ -1,6 +1,6 @@
 package lk.succes.student_management.asset.teacher.service;
 
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.teacher.dao.TeacherDao;
 import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.util.interfaces.AbstractService;

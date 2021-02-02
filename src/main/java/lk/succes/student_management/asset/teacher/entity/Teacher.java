@@ -2,10 +2,9 @@ package lk.succes.student_management.asset.teacher.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.subject.entity.Subject;
-import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

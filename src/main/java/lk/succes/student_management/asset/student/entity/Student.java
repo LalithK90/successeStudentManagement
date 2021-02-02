@@ -5,10 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.school.entity.School;
-import lk.succes.student_management.asset.subject.entity.Subject;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -61,6 +60,9 @@ public class Student extends AuditEntity {
 
   @OneToMany(mappedBy = "student")
   private List< BatchStudent > batchStudents;
+
+  @Transient
+  private List<Batch> batches;
 
 
 }

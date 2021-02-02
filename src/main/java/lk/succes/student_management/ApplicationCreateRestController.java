@@ -1,9 +1,8 @@
 package lk.succes.student_management;
 
-import lk.succes.student_management.asset.common_asset.model.Enum.BloodGroup;
-import lk.succes.student_management.asset.common_asset.model.Enum.CivilStatus;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.Title;
+import lk.succes.student_management.asset.common_asset.model.enums.CivilStatus;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.Title;
 import lk.succes.student_management.asset.employee.entity.Employee;
 import lk.succes.student_management.asset.employee.entity.enums.Designation;
 import lk.succes.student_management.asset.employee.entity.enums.EmployeeStatus;

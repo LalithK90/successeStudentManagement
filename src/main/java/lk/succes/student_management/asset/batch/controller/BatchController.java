@@ -1,15 +1,19 @@
 package lk.succes.student_management.asset.batch.controller;
 
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch.service.BatchService;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.teacher.controller.TeacherController;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
 import lk.succes.student_management.util.interfaces.AbstractController;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -108,5 +112,18 @@ public class BatchController implements AbstractController< Batch, Integer > {
   public String delete(@PathVariable Integer id, Model model) {
     batchService.delete(id);
     return "redirect:/batch";
+  }
+
+  @GetMapping( "/{grade}" )
+  @ResponseBody
+  public MappingJacksonValue findByGrade(@PathVariable("grade") Grade grade) {
+    MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(batchService.findByGrade(grade));
+    SimpleBeanPropertyFilter simpleBeanPropertyFilterOne = SimpleBeanPropertyFilter
+        .filterOutAllExcept("id", "name");
+    System.out.println("sdasdasddad sdas ");
+    FilterProvider filters = new SimpleFilterProvider()
+        .addFilter("Batch", simpleBeanPropertyFilterOne);
+    mappingJacksonValue.setFilters(filters);
+    return mappingJacksonValue;
   }
 }

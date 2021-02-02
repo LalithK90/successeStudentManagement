@@ -3,8 +3,7 @@ package lk.succes.student_management.asset.employee.controller;
 
 
 
-import lk.succes.student_management.asset.common_asset.model.Enum.*;
-import lk.succes.student_management.asset.common_asset.service.CommonService;
+import lk.succes.student_management.asset.common_asset.model.enums.*;
 import lk.succes.student_management.asset.employee.entity.Employee;
 import lk.succes.student_management.asset.employee.entity.EmployeeFiles;
 import lk.succes.student_management.asset.employee.entity.enums.Designation;
@@ -13,7 +12,6 @@ import lk.succes.student_management.asset.employee.service.EmployeeFilesService;
 import lk.succes.student_management.asset.employee.service.EmployeeService;
 import lk.succes.student_management.asset.user_management.entity.User;
 import lk.succes.student_management.asset.user_management.service.UserService;
-import lk.succes.student_management.util.service.DateTimeAgeService;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -36,17 +34,15 @@ import java.util.stream.Collectors;
 public class EmployeeController {
   private final EmployeeService employeeService;
   private final EmployeeFilesService employeeFilesService;
-  private final CommonService commonService;
   private final UserService userService;
 
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
   public EmployeeController(EmployeeService employeeService, EmployeeFilesService employeeFilesService,
-                            CommonService commonService, UserService userService,
+                            UserService userService,
                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.employeeService = employeeService;
     this.employeeFilesService = employeeFilesService;
-    this.commonService = commonService;
     this.userService = userService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
@@ -130,9 +126,9 @@ public class EmployeeController {
       return commonThings(model);
     }
 
-    employee.setMobileOne(commonService.commonMobileNumberLengthValidator(employee.getMobileOne()));
-    employee.setMobileTwo(commonService.commonMobileNumberLengthValidator(employee.getMobileTwo()));
-    employee.setLand(commonService.commonMobileNumberLengthValidator(employee.getLand()));
+    employee.setMobileOne(makeAutoGenerateNumberService.phoneNumberLengthValidator(employee.getMobileOne()));
+    employee.setMobileTwo(makeAutoGenerateNumberService.phoneNumberLengthValidator(employee.getMobileTwo()));
+    employee.setLand(makeAutoGenerateNumberService.phoneNumberLengthValidator(employee.getLand()));
 
     if ( employee.getId() == null ) {
       Employee lastEmployee = employeeService.lastEmployee();

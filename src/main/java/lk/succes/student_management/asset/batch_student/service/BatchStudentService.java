@@ -2,7 +2,7 @@ package lk.succes.student_management.asset.batch_student.service;
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch_student.dao.BatchStudentDao;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
