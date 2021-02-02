@@ -80,7 +80,6 @@ public class BatchController implements AbstractController< Batch, Integer > {
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
-      bindingResult.getAllErrors().forEach(System.out::println);
       return commonMethod(model, batch, true);
     }
 
