@@ -60,7 +60,7 @@
                  data-th-name="${'gender'}"
                  data-th-value="${genders}"
                  data-th-id="${index.index}+${genders}" type="radio"
-                 data-th-checked="${genders==gender}" />
+                 data-th-checked="${genders==student.gender}" />
           <label class="custom-control-label"
                  data-th-for="${index.index}+${genders}"
                  data-th-text="${genders.gender}" > radio
@@ -130,35 +130,32 @@
     <div class="form-group" >
       <label class="col-sm-1 control-label" data-th-for="${'batches'}" >Available Batches</label >
       <div class="col-sm-5" >
-        <select id="batches" class="form-control" required >
+        <select id="batches" class="form-control" >
           <option value="" >Choose</option >
 
         </select >
       </div >
     </div >
-    <div class="form-row col-md-12 col-sm-12 mt-4 text-center" >
+    <div class="form-row mt-4 text-center" >
       <!--Selected Batch-->
       <div class="container-fluid" >
         <table class="table table-striped table-inverse" id="selectedBatchInTable" >
-          <legend ><strong > <i >Selected Batches </i ></strong ></legend >
+          <legend ><strong > <i >Selected Batches Count: </i ><span id="selectedCount" ></span > </strong ></legend >
           <thead class="thead-inverse" >
           <tr >
-            <th >Index</th >
             <th >Batch Name</th >
             <th >Active or Inactive</th >
             <th >Modify</th >
           </tr >
           </thead >
           <tbody >
-          <tr data-th-each="batchStudent, index : ${student.batchStudents}" data-th-if="${supplierItemEdit}" >
-            <td >
-              <strong > <span data-th-text="${index.count}" ></span ></strong >
-            </td >
+          <tr data-th-each="batchStudent, index : ${student.batchStudents}" >
             <td >
               <strong >
-                <span class="control-label" data-th-text="${batchStudent.batch.name}" ></span >
+                <span class="control-label" data-th-id="${'tx'+index.index}"
+                      data-th-text="${batchStudent.batch.name}" ></span >
               </strong >
-              <input type="hidden" data-th-value="${batchStudent.batch.id}"
+              <input type="hidden" data-th-id="${'tx'+index.index}" data-th-value="${batchStudent.batch.id}"
                      data-th-name="${'batchStudents[__${index.index}__].batch.id'}" >
               <input type="hidden" data-th-value="${batchStudent.id}"
                      data-th-name="${'batchStudents[__${index.index}__].id'}" >
@@ -166,13 +163,11 @@
                      data-th-name="${'batchStudents[__${index.index}__].student.id'}" >
             </td >
             <td >
-            </td >
-            <td >
               <!--Radio button-->
               <div class="col" >
                 <div class="custom-control custom-checkbox custom-control-inline "
                      data-th-each="liveDead : ${liveDeads}" >
-                  <input class="custom-control-input liveDead" required
+                  <input class="custom-control-input" required
                          data-th-name="${'batchStudents[__${index.index}__].liveDead'}"
                          data-th-value="${liveDead}"
                          data-th-id="${index.index}+${liveDead}" type="radio"
@@ -184,7 +179,11 @@
                 </div >
               </div >
             </td >
-
+            <td >
+              <button type="button" data-th-id="${'rm'+index.index}" class="btn btn-outline-danger"
+                      onclick="tableRowRemove(this)" >Remove
+              </button >
+            </td >
           </tr >
           </tbody >
         </table >
@@ -214,9 +213,15 @@
 <script >
 
     $("#grade").change(function () {
+        let url = $("#batchUrl").val() + $(this).val();
+        let studentId = $("#id").val();
+        if (!studentId) {
+            url = $("#batchUrl").val() + $(this).val() + "/" + studentId;
+        }
+
         $.ajax({
             type: 'GET',
-            url: $("#batchUrl").val() + $(this).val(),
+            url: url,
             success: function (resp) {
                 for (let i = 0; i < resp.length; i++) {
                     $("#batches").append(new Option(resp[i].name, resp[i].id));
@@ -224,6 +229,10 @@
             },
             error: function (err) {
                 console.log(err);
+                swal({
+                    title: "There is no more batches match with this grade",
+                    icon: "warning",
+                });
             }
         });
     })
@@ -235,18 +244,18 @@
     });
     //table row remove
     let tableRowRemove = function (obj) {
-
         let itemIndex = obj.parentNode.parentNode.rowIndex;
-        let itemSelected = document.getElementById("selectedBatchInTable").rows.item(itemIndex).cells;
+        let id = obj.id.slice(2);
+        console.log("id  " + id);
+        let removeItemText = $(`#tx${id}`).html();
+        let removeItemValue = $(`#vl${id}`).val();
 
-        let removeItemValue = itemSelected[1].childNodes[1].nextSibling.nextSibling.attributes.value.nodeValue;
-        let removeItemText = itemSelected[1].childNodes[1].firstChild.nodeValue;
-
+        console.log(removeItemText + " value   " + removeItemValue)
         $("#batches").append(new Option(removeItemText, removeItemValue));
         let removeRow = `#selectedBatchInTable tr:eq(${itemIndex})`
         $(removeRow).remove();
 
-
+        selectedBatch();
     }
     //option tag remove
     let optionElementRemove = function (id) {
@@ -259,38 +268,41 @@
     //table row add
     let tableRowAdd = function (value) {
         let rows = $("#selectedBatchInTable tr").length;
-        let supplierId = $("#supplierId").val();
         let rowCount = rows - 1;
-        // let rowCount = itemCount + 1;
 
         let html = `<tr>
-                        <td>${rows}</td>
                         <td>
-                            <span>${value.name}</span>
-                            <input type="hidden" name="batchStudents[${rowCount}].id" value="">
-                            <input type="hidden" name="batchStudents[${rowCount}].batch.id" value="${value.value}">
+                            <span id="tx${rowCount}">${value.name}</span>
+                            <input id="vl${rowCount}" type="hidden" name="batchStudents[${rowCount}].batch.id" value="${value.value}">
                         </td>
                         <td>
   <div class="custom-control custom-checkbox custom-control-inline " >
     <input class="custom-control-input" required   id="${rowCount}+ACTIVE"        name="batchStudents[${rowCount}].liveDead"           value="ACTIVE" type="radio"/>
     <label class="custom-control-label"           for="${rowCount}+ACTIVE">Active    </label >
-        </div>
-        <div class="custom-control custom-checkbox custom-control-inline " >
+</div>
+  <div class="custom-control custom-checkbox custom-control-inline " >
       <input class="custom-control-input" required id="${rowCount}+STOP"           name="batchStudents[${rowCount}].liveDead"           value="STOP" type="radio"/>
     <label class="custom-control-label"           for="${rowCount}+STOP">Deactive    </label >
   </div >
                         </td>
 
                         <td>
-                            <button type="button" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
+                            <button type="button" id="rm${rowCount}" class="btn btn-outline-danger" onclick="tableRowRemove(this)">Remove</button>
                         </td>
                     </tr>`;
 
         $("#selectedBatchInTable tr:last").after(html);
+        selectedBatch();
 
     }
 
+    $(document).ready(function () {
+        selectedBatch();
+    });
 
+    function selectedBatch() {
+        $("#selectedCount").html($("#selectedBatchInTable tr").length - 1);
+    }
 </script >
 </body >
 </html >

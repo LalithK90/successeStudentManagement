@@ -48,6 +48,7 @@ public class StudentController implements AbstractController< Student, Integer >
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
         .collect(Collectors.toList()));
+    model.addAttribute("studentRemoveBatch", false);
     return "student/student";
   }
 
@@ -59,7 +60,7 @@ public class StudentController implements AbstractController< Student, Integer >
     model.addAttribute("schools", schoolService.findAll().stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
         .collect(Collectors.toList()));
-    model.addAttribute("genders", Gender.values());
+    model.addAttribute("gender", Gender.values());
     model.addAttribute("batchUrl", MvcUriComponentsBuilder
         .fromMethodName(BatchController.class, "findByGrade", "")
         .build()
@@ -89,13 +90,8 @@ public class StudentController implements AbstractController< Student, Integer >
     if ( bindingResult.hasErrors() ) {
       return commonThing(model, student, true);
     }
-    List< BatchStudent > batchStudents = new ArrayList<>();
-    student.getBatchStudents().forEach(x -> {
-      x.setStudent(student);
-      x.setLiveDead(LiveDead.ACTIVE);
-      batchStudents.add(x);
-    });
-    student.setBatchStudents(batchStudents);
+
+    student.getBatchStudents().forEach(batchStudentService::persist);
 //there are two different situation
     //1. new Student -> need to generate new number
     //2. update student -> no required to generate number

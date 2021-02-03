@@ -9,5 +9,5 @@ public enum LiveDead {
     ACTIVE("Active"),
     STOP("Stop");
 
-    private final String liveDeath;
+    private final String liveDead;
 }
