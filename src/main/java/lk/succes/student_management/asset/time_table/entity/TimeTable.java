@@ -24,18 +24,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @JsonFilter( "TimeTable" )
 public class TimeTable extends AuditEntity {
+
   private String code;
+
+  private String lesson;
+
+  private String remark;
 
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
-  private LocalDateTime startAt;
-
-  private LocalDateTime endAt;
-
   @ManyToOne
   private Batch batch;
-
 
   @ManyToOne
   private Hall hall;
