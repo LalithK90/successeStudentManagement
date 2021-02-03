@@ -7,9 +7,6 @@
 </head >
 <body >
 
-<link data-th-href="@{/css/multi-select.css}" media="all" rel="stylesheet" type="text/css" />
-<link data-th-href="@{/css/studentAddCss.css}" media="all" rel="stylesheet" type="text/css" />
-
 
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
@@ -161,63 +158,6 @@
   <!-- /form -->
   <input type="hidden" id="batchUrl" data-th-value="${batchUrl}" >
 </div >
-<!--footer is included-->
-<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
-<!--script is included-->
-<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
-<!--custom javascript-->
-<script data-th-src="@{/js/jquery.multi-select.js}" ></script >
 
-<script src="/js/jquery.quickSearch.js" ></script >
-<!--todo need add like supplier item addition-->
-<script >
-    let totalPrice = 0;
-    $("#grade").change(function () {
-        $.ajax({
-            type: 'GET',
-            url: $("#batchUrl").val() + $(this).val(),
-            success: function (resp) {
-                for (let k = 0; resp.length > k; k++) {
-                    $("#batches").multiSelect('addOption', {value: `${resp[k].id}`, text: `${resp[k].name}`, index: 0});
-                }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
-    });
-    $('#batches').multiSelect({
-        selectableHeader: "<div class='control-label bg-info h3'>Available Batches</div>",
-        selectionHeader: "<div class='control-label bg-info h3'>Selected  Batches</div>",
-        afterSelect: function (values) {
-            $.ajax({
-                type: 'GET',
-                url: $("#batchUrl").val() + "id/" + values,
-                success: function (resp) {
-                    totalPrice += parseInt(resp.fee);
-                    $("#monthFee").val(totalPrice);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        },
-        afterDeselect: function (values) {
-            $.ajax({
-                type: 'GET',
-                url: $("#batchUrl").val() + "id/" + values,
-                success: function (resp) {
-                    totalPrice -= parseInt(resp.fee);
-                    $("#monthFee").val(totalPrice);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        },
-    });
-
-
-</script >
 </body >
 </html >

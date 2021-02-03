@@ -2,8 +2,10 @@ package lk.succes.student_management.asset.batch_student.controller;
 
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch.service.BatchService;
+import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.batch_student.service.BatchStudentService;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.student.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,15 +44,28 @@ public class BatchStudentController {
       batch.setCount(batchStudentService.countByBatch(batch));
       batches.add(batch);
     }
-    model.addAttribute("batches",batches);
+    model.addAttribute("batches", batches);
     return "batchStudent/batchStudent";
   }
-  @GetMapping("/batch/{id}")
-  public String studentAddBatch(@PathVariable("id")Integer id, Model model) {
+
+  @GetMapping( "/batch/{id}" )
+  public String studentAddBatch(@PathVariable( "id" ) Integer id, Model model) {
     Batch batch = batchService.findById(id);
-    //todo -> file
-    model.addAttribute("students",studentService.findByGrade(batch.getGrade()));
-    return "batchStudent/addBatchStudent";}
+    model.addAttribute("batchDetail", batch);
+    model.addAttribute("teacherDetail", batch.getTeacher());
+    //already registered student on this batch
+    List< Student > registeredStudent = new ArrayList<>();
+    batch.getBatchStudents().forEach(x -> registeredStudent.add(x.getStudent()));
+    //not registered student on this batch
+    List< Student> notRegisteredStudent = studentService.findByGrade(batch.getGrade())
+        .stream()
+        .filter(x->!registeredStudent.contains(x))
+        .collect(Collectors.toList());
+    model.addAttribute("students", registeredStudent);
+    model.addAttribute("notRegisteredStudent",notRegisteredStudent );
+    model.addAttribute("student", new BatchStudent());
+    return "batchStudent/addBatchStudent";
+  }
 
 
 }

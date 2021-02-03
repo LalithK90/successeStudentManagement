@@ -1,267 +1,119 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--&lt;!&ndash;Styles, meta data, and title are included&ndash;&gt;-->
-<!--<head data-th-replace="~{fragments/header :: headerFragment}">-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Thymeleaf Springboot </title>-->
-<!--</head>-->
-<!--<body>-->
-<!--&lt;!&ndash;Nav bar is included&ndash;&gt;-->
-<!--<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>-->
-
-<!--<div class="row bg-secondary">-->
-<!--    <div class="col-4">-->
-<!--        <a href="/teacher/add">-->
-<!--            <button class="btn btn-info">New Teacher</button>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--    <div class="col-4">-->
-<!--        <h1>Teacher Management - Teacher Detail</h1>-->
-<!--    </div>-->
-<!--    <div class="col-4">-->
-<!--        <a href="/teacher">-->
-<!--            <button class="btn btn-primary">All Teacher</button>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;Teacher detail&ndash;&gt;-->
-<!--<div class="container-fluid" data-th-fragment="teacherDetail">-->
-<!--    &lt;!&ndash;teacher id&ndash;&gt;-->
-<!--<<<<<<< HEAD-->
-<!--    <div class="form-group">-->
-<!--=======-->
-<!--    <div class="form-batch">-->
-<!--&gt;>>>>>> 2620e6f6a389a3cc3a95251fa10504462b0eeb03-->
-<!--        <label data-th-for="${id}">Id</label>-->
-<!--        <p class="form-control" data-th-text="${teacherDetail.id}"></p>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;registration number&ndash;&gt;-->
-<!--<<<<<<< HEAD-->
-<!--    <div class="form-group">-->
-<!--=======-->
-<!--    <div class="form-batch">-->
-<!--&gt;>>>>>> 2620e6f6a389a3cc3a95251fa10504462b0eeb03-->
-<!--        <label data-th-for="${registrationId}"></label>-->
-<!--        <p class="form-control" data-th-text="${teacherDetail.registrationId}"></p>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;First Name&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${firstName}">First Name :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.firstName}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Last Name&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${lastName}">First Name :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.lastName}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Gender&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label">Gender :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.gender}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Date of birth&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label">Birth date :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.dateOfBirth}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Email&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label">Email :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.email}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Address&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label">Address :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-utext="${teacherDetail.address}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Mobile Number One&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${mobile}">Mobile One No :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control mobile" data-th-text="${teacherDetail.mobile}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Subject&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${subject}">Subject :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.subject}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Fee&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${fee}">Tuition Fee :</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${teacherDetail.fee}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;Button&ndash;&gt;-->
-<!--<<<<<<< HEAD-->
-<!--<div class="form-group col-md-12 col-sm-12 text-center flex-column ">-->
-<!--=======-->
-<!--<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">-->
-<!--&gt;>>>>>> 2620e6f6a389a3cc3a95251fa10504462b0eeb03-->
-<!--    <a href="/teacher">-->
-<!--        <button class="btn btn-success" tabindex="21" type="submit">-->
-<!--            Back-->
-<!--        </button>-->
-<!--    </a>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;footer is included&ndash;&gt;-->
-<!--<div data-th-replace="~{fragments/footer :: footerFragment}"></div>-->
-<!--&lt;!&ndash;script is included&ndash;&gt;-->
-<!--<div data-th-replace="~{fragments/script :: scriptFragment}"></div>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>
-        Success Student Management system
-    </title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >
+    Success Student Management system
+  </title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-link">
-    <div class="col-4">
+<div class="row bg-link" >
+  <div class="col-4" >
 
-    </div>
-    <div class="col-4">
-        <h1>Details of teacher/h1>
-    </div>
-    <div class="col-4">
-        <a href="/teacher/add">
-            <button class="btn btn-primary" align="center">Add new teacher</button>
-        </a>
-    </div>
-</div>
-<!--Discount detail-->
-<div class=" row container-fluid" data-th-fragment="teacherDetail">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-8">
-        <div class="form-group">
-            <label data-th-for="${id}" class="col-sm-3 control-label">Index</label>
-            <div class="col-sm-6">
-                <p type="text" id="id" class="form-control" data-th-text="*{teacherDetail.id}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${RegistrationId}" class="col-sm-3 control-label">Registration ID</label>
-            <div class="col-sm-6">
-                <p type="text" id="RegistrationId" class="form-control" data-th-text="*{teacherDetail.RegistrationId}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${firstName}" class="col-sm-3 control-label">First name</label>
-            <div class="col-sm-6">
-                <p type="text" id="firstName" class="form-control" data-th-text="*{teacherDetail.firstName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${lastName}" class="col-sm-3 control-label">Last name</label>
-            <div class="col-sm-6">
-                <p type="text" id="lastName" class="form-control" data-th-text="*{teacherDetail.lastName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${nic}" class="col-sm-3 control-label">NIC</label>
-            <div class="col-sm-6">
-                <p type="text" id="nic" class="form-control" data-th-text="*{teacherDetail.nic}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${gender}" class="col-sm-3 control-label">Gender</label>
-            <div class="col-sm-6">
-                <p type="text" id="gender" class="form-control" data-th-text="*{teacherDetail.gender}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${dateOfBirth}" class="col-sm-3 control-label">Date of Birth</label>
-            <div class="col-sm-6">
-                <p type="text" id="dateOfBirth" class="form-control" data-th-text="*{teacherDetail.dateOfBirth}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${address}" class="col-sm-3 control-label">Address</label>
-            <div class="col-sm-6">
-                <p type="text" id="address" class="form-control" data-th-text="*{teacherDetail.address}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${email}" class="col-sm-3 control-label">Email</label>
-            <div class="col-sm-6">
-                <p type="text" id="email" class="form-control" data-th-text="*{teacherDetail.email}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${mobile}" class="col-sm-3 control-label">Mobile number</label>
-            <div class="col-sm-6">
-                <p type="text" id="mobile" class="form-control" data-th-text="*{teacherDetail.mobile}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${subject}" class="col-sm-3 control-label">subject</label>
-            <div class="col-sm-6">
-                <p type="text" id="subject" class="form-control" data-th-text="*{teacherDetail.subject}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${fee}" class="col-sm-3 control-label">Tution Fee</label>
-            <div class="col-sm-6">
-                <p type="text" id="fee" class="form-control" data-th-text="*{teacherDetail.fee}">
-            </div>
-        </div>
-        <div class="row container-fluid">
-            <div class="col-sm-2 col-sm-offset-2">
-                <a href="/teacher">
-                    <button type="link"  class="btn btn-danger btn-block" >Back</button>
-                </a>
-            </div>
+  </div >
+  <div class="col-4" >
+    <h1 >Details of teacher </h1>
+  </div >
+  <div class="col-4" >
+    <a href="/teacher/add" >
+      <button class="btn btn-primary" align="center" >Teacher Details</button >
+    </a >
+  </div >
+</div >
+<!--teacherDetail detail-->
+<div class=" row container-fluid" data-th-fragment="teacherDetail" >
+  <div class="col-sm-3" ></div >
+  <div class="col-sm-8" >
+    <div class="form-group" >
+      <label data-th-for="${id}" class="col-sm-3 control-label" >Index</label >
+      <div class="col-sm-6" >
+        <p type="text" id="id" class="form-control" data-th-text="*{teacherDetail.id}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${RegistrationId}" class="col-sm-3 control-label" >Registration ID</label >
+      <div class="col-sm-6" >
+        <p type="text" id="RegistrationId" class="form-control" data-th-text="*{teacherDetail.RegistrationId}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${firstName}" class="col-sm-3 control-label" >First name</label >
+      <div class="col-sm-6" >
+        <p type="text" id="firstName" class="form-control" data-th-text="*{teacherDetail.firstName}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${lastName}" class="col-sm-3 control-label" >Last name</label >
+      <div class="col-sm-6" >
+        <p type="text" id="lastName" class="form-control" data-th-text="*{teacherDetail.lastName}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${nic}" class="col-sm-3 control-label" >NIC</label >
+      <div class="col-sm-6" >
+        <p type="text" id="nic" class="form-control" data-th-text="*{teacherDetail.nic}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${gender}" class="col-sm-3 control-label" >Gender</label >
+      <div class="col-sm-6" >
+        <p type="text" id="gender" class="form-control" data-th-text="*{teacherDetail.gender}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${dateOfBirth}" class="col-sm-3 control-label" >Date of Birth</label >
+      <div class="col-sm-6" >
+        <p type="text" id="dateOfBirth" class="form-control" data-th-text="*{teacherDetail.dateOfBirth}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${address}" class="col-sm-3 control-label" >Address</label >
+      <div class="col-sm-6" >
+        <p type="text" id="address" class="form-control" data-th-text="*{teacherDetail.address}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${email}" class="col-sm-3 control-label" >Email</label >
+      <div class="col-sm-6" >
+        <p type="text" id="email" class="form-control" data-th-text="*{teacherDetail.email}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${mobile}" class="col-sm-3 control-label" >Mobile number</label >
+      <div class="col-sm-6" >
+        <p type="text" id="mobile" class="form-control" data-th-text="*{teacherDetail.mobile}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${subject}" class="col-sm-3 control-label" >subject</label >
+      <div class="col-sm-6" >
+        <p type="text" id="subject" class="form-control" data-th-text="*{teacherDetail.subject}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${fee}" class="col-sm-3 control-label" >Tution Fee</label >
+      <div class="col-sm-6" >
+        <p type="text" id="fee" class="form-control" data-th-text="*{teacherDetail.fee}" >
+      </div >
+    </div >
+    <div class="row container-fluid" >
+      <div class="col-sm-2 col-sm-offset-2" >
+        <a href="/teacher" >
+          <button type="link" class="btn btn-danger btn-block" >Back</button >
+        </a >
+      </div >
 
-        </div>
-    </div>
-    <div class="col-sm-1"></div>
-</div>
+    </div >
+  </div >
+  <div class="col-sm-1" ></div >
+</div >
 <!--footer is included-->
-<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
-<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
-</body>
-</html>
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >
