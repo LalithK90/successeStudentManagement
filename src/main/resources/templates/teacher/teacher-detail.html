@@ -16,7 +16,7 @@
 
   </div >
   <div class="col-4" >
-    <h1 >Details of teacher </h1>
+    <h1 >Details of teacher </h1 >
   </div >
   <div class="col-4" >
     <a href="/teacher/add" >
@@ -91,7 +91,7 @@
     <div class="form-group" >
       <label data-th-for="${subject}" class="col-sm-3 control-label" >subject</label >
       <div class="col-sm-6" >
-        <p type="text" id="subject" class="form-control" data-th-text="*{teacherDetail.subject}" >
+        <p type="text" id="subject" class="form-control" data-th-text="*{teacherDetail.subject.name}" >
       </div >
     </div >
     <div class="form-group" >
@@ -103,7 +103,7 @@
     <div class="row container-fluid" >
       <div class="col-sm-2 col-sm-offset-2" >
         <a href="/teacher" >
-          <button type="link" class="btn btn-danger btn-block" >Back</button >
+          <button type="button" class="btn btn-danger btn-block" >Back</button >
         </a >
       </div >
 

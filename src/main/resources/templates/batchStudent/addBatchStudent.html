@@ -28,10 +28,10 @@
 
 <div class="container">
 <div class="container-fluid">
-    <div data-th-replace="~{batch/batch-details :: batchDetailsFragment}"></div>
+    <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}"></div>
 </div>
     <div class="container-fluid">
-        <div data-th-replace="~{teacher/teacher-details :: teacherDetail}"></div>
+        <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}"></div>
     </div>
     <form action="/school/save" data-th-object="${student}" method="post" >
 
@@ -39,7 +39,7 @@
             <div class="form-group" >
                 <label class="col-sm-1 control-label" data-th-for="${'batches'}" >Batches:</label >
                 <div class="col-sm-7" >
-                    <select id="batches" class="form-control col-sm-10" data-th-field="*{batches}" multiple required >
+                    <select id="batches" class="form-control col-sm-10"  multiple required >
                         <option data-th-each="batch : ${batches}" ></option >
                     </select >
                 </div >
@@ -72,7 +72,6 @@
 <!--custom javascript-->
 <script data-th-src="@{/js/jquery.multi-select.js}" ></script >
 
-<script src="/js/jquery.quickSearch.js" ></script >
 <!--todo need add like supplier item addition-->
 <script >
 

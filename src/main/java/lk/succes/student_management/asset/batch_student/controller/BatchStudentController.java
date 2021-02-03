@@ -10,6 +10,7 @@ import lk.succes.student_management.asset.student.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -64,8 +65,16 @@ public class BatchStudentController {
     model.addAttribute("students", registeredStudent);
     model.addAttribute("notRegisteredStudent",notRegisteredStudent );
     model.addAttribute("student", new BatchStudent());
+    model.addAttribute("studentRemoveBatch", true);
     return "batchStudent/addBatchStudent";
   }
 
+  @GetMapping("/removeBatch")
+  public String removeStudentFromBatch(@ModelAttribute BatchStudent batchStudent){
+    BatchStudent batchStudentDB = batchStudentService.findByStudentAndBatch(batchStudent.getStudent(), batchStudent.getBatch());
+    batchStudentDB.setLiveDead(LiveDead.STOP);
+    batchStudentService.persist(batchStudent);
+    return "redirect:/batchStudent/batch/"+ batchStudentDB.getId();
+  }
 
 }

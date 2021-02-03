@@ -28,102 +28,96 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping( "/student" )
 public class StudentController implements AbstractController< Student, Integer > {
-    private final StudentService studentService;
-    private final BatchStudentService batchStudentService;
-    private final SchoolService schoolService;
-    private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+  private final StudentService studentService;
+  private final BatchStudentService batchStudentService;
+  private final SchoolService schoolService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-    public StudentController(StudentService studentService,
-                             BatchStudentService batchStudentService, SchoolService schoolService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
-        this.studentService = studentService;
-        this.batchStudentService = batchStudentService;
-        this.schoolService = schoolService;
-        this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+  public StudentController(StudentService studentService,
+                           BatchStudentService batchStudentService, SchoolService schoolService,
+                           MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+    this.studentService = studentService;
+    this.batchStudentService = batchStudentService;
+    this.schoolService = schoolService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+  }
+
+  @GetMapping
+  public String findAll(Model model) {
+    model.addAttribute("students", studentService.findAll()
+        .stream()
+        .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+        .collect(Collectors.toList()));
+    return "student/student";
+  }
+
+  private String commonThing(Model model, Student student, boolean addStatus) {
+    model.addAttribute("student", student);
+    model.addAttribute("addStatus", addStatus);
+    model.addAttribute("grades", Grade.values());
+    model.addAttribute("liveDeads", LiveDead.values());
+    model.addAttribute("schools", schoolService.findAll().stream()
+        .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+        .collect(Collectors.toList()));
+    model.addAttribute("genders", Gender.values());
+    model.addAttribute("batchUrl", MvcUriComponentsBuilder
+        .fromMethodName(BatchController.class, "findByGrade", "")
+        .build()
+        .toString());
+    return "student/addStudent";
+  }
+
+  @GetMapping( "/add" )
+  public String form(Model model) {
+    return commonThing(model, new Student(), true);
+  }
+
+  @GetMapping( "/view/{id}" )
+  public String findById(@PathVariable Integer id, Model model) {
+    model.addAttribute("studentDetail", studentService.findById(id));
+    return "student/student-detail";
+  }
+
+  @GetMapping( "/edit/{id}" )
+  public String edit(@PathVariable Integer id, Model model) {
+    return commonThing(model, studentService.findById(id), false);
+  }
+
+  @PostMapping( "/save" )
+  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes, Model model) {
+    if ( bindingResult.hasErrors() ) {
+      return commonThing(model, student, true);
     }
-
-    @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("students", studentService.findAll()
-            .stream()
-            .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
-            .collect(Collectors.toList()));
-        return "student/student";
-    }
-
-    private String commonThing(Model model, Student student, boolean addStatus){
-        List<BatchStudent> batchStudents = batchStudentService.findByStudent(student);
-        if (batchStudents !=null){
-            List<Batch> batches = new ArrayList<>();
-            batchStudents.forEach(x->batches.add(x.getBatch()));
-            student.setBatches(batches);
-        }
-        model.addAttribute("student", student);
-        model.addAttribute("addStatus", addStatus);
-        model.addAttribute("grades", Grade.values());
-        model.addAttribute("schools", schoolService.findAll().stream()
-            .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
-            .collect(Collectors.toList()));
-        model.addAttribute("genders", Gender.values());
-         model.addAttribute("batchUrl", MvcUriComponentsBuilder
-             .fromMethodName(BatchController.class, "findByGrade", "")
-             .build()
-             .toString());
-        return "student/addStudent";
-    }
-
-    @GetMapping( "/add" )
-    public String form(Model model) {
-        return commonThing(model,new Student(), true);
-    }
-
-    @GetMapping( "/view/{id}" )
-    public String findById(@PathVariable Integer id, Model model) {
-        model.addAttribute("studentDetail", studentService.findById(id));
-        return "student/student-detail";
-    }
-
-    @GetMapping( "/edit/{id}" )
-    public String edit(@PathVariable Integer id, Model model) {
-        return commonThing(model,studentService.findById(id), false);
-    }
-
-    @PostMapping( "/save" )
-    public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes, Model model) {
-        if ( bindingResult.hasErrors() ) {
-            return commonThing(model,student, true);
-        }
-        List< BatchStudent > batchStudents = new ArrayList<>();
-        for ( Batch batch : student.getBatches() ) {
-            BatchStudent batchStudent = new BatchStudent();
-            batchStudent.setStudent(student);
-            batchStudent.setBatch(batch);
-            batchStudent.setLiveDead(LiveDead.ACTIVE);
-            batchStudents.add(batchStudent);
-        }
-        student.setBatchStudents(batchStudents);
+    List< BatchStudent > batchStudents = new ArrayList<>();
+    student.getBatchStudents().forEach(x -> {
+      x.setStudent(student);
+      x.setLiveDead(LiveDead.ACTIVE);
+      batchStudents.add(x);
+    });
+    student.setBatchStudents(batchStudents);
 //there are two different situation
-        //1. new Student -> need to generate new number
-        //2. update student -> no required to generate number
-        if ( student.getId() == null ) {
-            // need to create auto generated registration number
-            Student lastStudent = studentService.lastStudentOnDB();
-            //registration number format => SSS200001
-            if ( lastStudent != null ) {
-                String lastNumber = lastStudent.getRegNo().substring(3);
-                student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
-            } else {
-                student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(null));
-            }
-        }
-        studentService.persist(student);
-        return "redirect:/student";
-
+    //1. new Student -> need to generate new number
+    //2. update student -> no required to generate number
+    if ( student.getId() == null ) {
+      // need to create auto generated registration number
+      Student lastStudent = studentService.lastStudentOnDB();
+      //registration number format => SSS200001
+      if ( lastStudent != null ) {
+        String lastNumber = lastStudent.getRegNo().substring(3);
+        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+      } else {
+        student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(null));
+      }
     }
+    studentService.persist(student);
+    return "redirect:/student";
 
-    @GetMapping( "/delete/{id}" )
-    public String delete(@PathVariable Integer id, Model model) {
-        studentService.delete(id);
-        return "redirect:/student";
-    }
+  }
+
+  @GetMapping( "/delete/{id}" )
+  public String delete(@PathVariable Integer id, Model model) {
+    studentService.delete(id);
+    return "redirect:/student";
+  }
 }

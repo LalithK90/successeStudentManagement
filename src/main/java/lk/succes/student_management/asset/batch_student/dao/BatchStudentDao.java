@@ -13,4 +13,6 @@ public interface BatchStudentDao extends JpaRepository< BatchStudent, Integer> {
   int countByBatch(Batch batch);
 
   List< BatchStudent> findByStudent(Student student);
+
+  BatchStudent findByStudentAndBatch(Student student, Batch batch);
 }
