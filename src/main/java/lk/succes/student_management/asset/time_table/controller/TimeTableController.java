@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.time_table.controller;
 
 
+import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.service.BatchService;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.service.HallService;
@@ -10,6 +11,7 @@ import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.asset.time_table.service.TimeTableService;
 import lk.succes.student_management.util.interfaces.AbstractController;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.stream.Collectors;
 
 @Controller
@@ -46,12 +50,24 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
                        timeTableService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
     return "timeTable/timeTable";
   }
-
   @GetMapping( "/add" )
-  public String form(Model model) {
+  public String form(Model model){
+    return "timeTable/dateChooser";
+  }
+
+
+  @PostMapping( "/add" )
+  public String form(@RequestParam( "date" ) @DateTimeFormat( pattern = "yyyy-MM-dd" ) LocalDate date, Model model) {
+    LocalDate today = LocalDate.now();
+    //month
+    Month month = today.getMonth();
+//Day of week
+    String dayOfWeek = date.getDayOfWeek().toString();
+
     model.addAttribute("timeTable", new TimeTable());
-      model.addAttribute("addStatus", true);
-      return getString(model);
+    model.addAttribute("batches", batchService.findByClassDay(ClassDay.valueOf(dayOfWeek)));
+    model.addAttribute("addStatus", true);
+    return commonThing(model);
   }
 
   @GetMapping( "/view/{id}" )
@@ -63,8 +79,8 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
     model.addAttribute("timeTable", timeTableService.findById(id));
-      model.addAttribute("addStatus", false);
-      return getString(model);
+    model.addAttribute("addStatus", false);
+    return commonThing(model);
   }
 
   @PostMapping( "/save" )
@@ -72,7 +88,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
       model.addAttribute("timeTable", timeTable);
-        return getString(model);
+      return commonThing(model);
     }
     if ( timeTable.getId() == null ) {
       TimeTable lastTimeTable = timeTableService.lastTimeTable();
@@ -87,20 +103,20 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
 
   }
 
-    private String getString(Model model) {
-        model.addAttribute("halls",
-                           hallService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
-        model.addAttribute("teachers",
-                           teacherService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
-        model.addAttribute("subjects",
-                           subjectService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
-      model.addAttribute("batches",
-                         batchService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
-      model.addAttribute("addStatus", true);
-        return "timeTable/addTimeTable";
-    }
+  private String commonThing(Model model) {
+    model.addAttribute("halls",
+                       hallService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+    model.addAttribute("teachers",
+                       teacherService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+    model.addAttribute("subjects",
+                       subjectService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+    model.addAttribute("batches",
+                       batchService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+    model.addAttribute("addStatus", true);
+    return "timeTable/addTimeTable";
+  }
 
-    @GetMapping( "/delete/{id}" )
+  @GetMapping( "/delete/{id}" )
   public String delete(@PathVariable Integer id, Model model) {
     timeTableService.delete(id);
     return "redirect:/timeTable";

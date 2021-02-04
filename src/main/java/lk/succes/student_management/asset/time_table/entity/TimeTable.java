@@ -31,6 +31,10 @@ public class TimeTable extends AuditEntity {
 
   private String remark;
 
+  private LocalDateTime startAt;
+
+  private LocalDateTime endAt;
+
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
