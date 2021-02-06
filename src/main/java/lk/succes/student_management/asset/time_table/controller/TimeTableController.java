@@ -1,8 +1,10 @@
 package lk.succes.student_management.asset.time_table.controller;
 
 
+import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.service.BatchService;
+import lk.succes.student_management.asset.batch_student.service.BatchStudentService;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.service.HallService;
 import lk.succes.student_management.asset.subject.service.SubjectService;
@@ -21,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -31,16 +35,19 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
   private final SubjectService subjectService;
   private final TeacherService teacherService;
   private final BatchService batchService;
+  private final BatchStudentService batchStudentService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
   public TimeTableController(TimeTableService timeTableService, HallService hallService,
                              SubjectService subjectService, TeacherService teacherService, BatchService batchService,
+                             BatchStudentService batchStudentService,
                              MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.timeTableService = timeTableService;
     this.hallService = hallService;
     this.subjectService = subjectService;
     this.teacherService = teacherService;
     this.batchService = batchService;
+    this.batchStudentService = batchStudentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
 
@@ -50,8 +57,9 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
                        timeTableService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
     return "timeTable/timeTable";
   }
+
   @GetMapping( "/add" )
-  public String form(Model model){
+  public String form(Model model) {
     return "timeTable/dateChooser";
   }
 
@@ -64,9 +72,20 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
 //Day of week
     String dayOfWeek = date.getDayOfWeek().toString();
 
+    List< Batch > batches = new ArrayList<>();
+    for ( Batch batch : batchService.findByClassDay(ClassDay.valueOf(dayOfWeek))
+        .stream()
+        .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+        .collect(Collectors.toList()) ) {
+      batch.setCount(batchStudentService.countByBatch(batch));
+      batches.add(batch);
+    }
+
     model.addAttribute("timeTable", new TimeTable());
-    model.addAttribute("batches", batchService.findByClassDay(ClassDay.valueOf(dayOfWeek)));
+    model.addAttribute("batches", batchService.findAll());
+//    model.addAttribute("batches", batches);
     model.addAttribute("addStatus", true);
+    model.addAttribute("date", date);
     return commonThing(model);
   }
 
@@ -88,6 +107,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
       model.addAttribute("timeTable", timeTable);
+      model.addAttribute("addStatus", true);
       return commonThing(model);
     }
     if ( timeTable.getId() == null ) {
@@ -98,6 +118,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
         timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
       }
     }
+    //todo before save need to validate
     timeTableService.persist(timeTable);
     return "redirect:/timeTable";
 
@@ -107,12 +128,12 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
     model.addAttribute("halls",
                        hallService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
     model.addAttribute("teachers",
-                       teacherService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+                       teacherService.findAll()
+                           .stream()
+                           .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+                           .collect(Collectors.toList()));
     model.addAttribute("subjects",
                        subjectService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
-    model.addAttribute("batches",
-                       batchService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
-    model.addAttribute("addStatus", true);
     return "timeTable/addTimeTable";
   }
 

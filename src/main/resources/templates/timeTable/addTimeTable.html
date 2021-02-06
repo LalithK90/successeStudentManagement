@@ -25,11 +25,12 @@
   <form action="/timeTable/save" data-th-object="${timeTable}" method="post" >
 
     <div class="container-fluid" >
-      <table class="table table-responsive" >
+      <table class="table table-responsive" id="timeTable" >
         <tr >
           <th data-th-if="${!addStatus}" >Index</th >
-          <th data-th-if="${addStatus}" >Code</th >
+          <th data-th-if="${!addStatus}" >Code</th >
           <th >Batch Name</th >
+          <th >Student Count</th >
           <th >Lesson</th >
           <th >Start At</th >
           <th >End At</th >
@@ -37,34 +38,46 @@
         </tr >
         <tr data-th-each="batch, index : ${batches}" >
           <th data-th-if="${!addStatus}" data-th-text="${index.count}" ></th >
-          <th data-th-if="${addStatus}" >
-            <input type="text" class="form-control" data-th-name="${timeTables[__${index}__].code}" required readonly >
+          <th data-th-if="${!addStatus}" >
+            <input type="text" class="form-control" data-th-name="${'timeTables[__${index.index}__].code'}" required
+                   readonly >
           </th >
           <th >
             <input type="text" class="form-control"
-                   data-th-value="${addStatus?'timeTables[__${index}__].batch.name':'batch.name'}" required readonly >
-            <input type="text" class="form-control" data-th-name="${timeTables[__${index}__].batch.id}"
+                   data-th-value="${addStatus?batch.name:timeTables[__${index.index}__].batch.name}" required readonly >
+            <input type="hidden" class="form-control" data-th-name="${'timeTables[__${index.index}__].batch.id'}"
                    data-th-value="${batch.id}" required readonly >
           </th >
           <th >
-            <input type="text" class="form-control" data-th-name="${timeTables[__${index}__].lesson}"
-                   data-th-value="${timeTables[__${index}__].lesson}" required >
+            <input type="text" class="form-control"
+                   data-th-value="${addStatus?batch.count:timeTables[__${index.index}__].batch.count}" required
+                   readonly >
           </th >
           <th >
-            <input type="datetime-local" class="form-control startAt" data-th-name="${timeTables[__${index}__].startAt}"
-                   data-th-value="${timeTables[__${index}__].startAt}" required >
+            <input type="text" class="form-control" data-th-name="${'timeTables[__${index.index}__].lesson'}"
+                   data-th-value="${addStatus?'':timeTables[__${index.index}__].lesson}" required >
           </th >
           <th >
-            <input type="datetime-local" class="form-control endAt" data-th-name="${timeTables[__${index}__].endAt}"
-                   data-th-value="${timeTables[__${index}__].endAt}" required >
+            <input type="datetime-local" class="form-control startAt"
+                   data-th-id="${'sAt'+index.index}"
+                   data-th-name="${'timeTables[__${index.index}__].startAt'}"
+                   data-th-value="${addStatus?'':timeTables[__${index.index}__].startAt}" required >
           </th >
           <th >
-            <select data-th-name="${timeTables[__${index}__].hall.id}"
-                    data-th-value="${timeTables[__${index}__].hall.id}" id="" required >
+            <input type="datetime-local" class="form-control endAt"
+                   data-th-id="${'eAt'+index.index}"
+                   data-th-name="${'timeTables[__${index.index}__].endAt'}"
+                   data-th-value="${addStatus?'':timeTables[__${index.index}__].endAt}" required >
+          </th >
+          <th >
+            <select data-th-name="${'timeTables[__${index.index}__].hall.id'}"
+                    data-th-id="${'hAt'+index.index}"
+                    data-th-value="${addStatus?'':timeTables[__${index.index}__].hall.id}" required
+                    class="form-control hall" >
               <option value="" >Please select</option >
               <option data-th-each="hall : ${halls}"
                       data-th-value="${hall.id}"
-                      data-th-utext="${hall.name}" ></option >
+                      data-th-text="${'Name : '+hall.name+' Seats : '+ hall.seatCount}" ></option >
             </select >
           </th >
         </tr >
@@ -83,9 +96,78 @@
   </form >
 </div >
 
+<input type="hidden" data-th-value="${date}" id="date" >
+
 <!--footer is included-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    let timeTableSlots = [];
+    $(document).ready(function () {
+        let date = $("#date").val();
+        let max = date + "T20:00";
+        let min = date + "T06:00";
+        $(".startAt, .endAt").attr({'max': max, 'min': min});
+        let timeSlot = {};
+        for (let x = 0; x < $('#timeTable tr').length - 1; x++) {
+            timeSlot.id = x;
+            timeSlot.sAt = $(`#sAt${x}`).val();
+            timeSlot.eAt = $(`#eAt${x}`).val();
+            timeSlot.hAt = $(`#hAt${x}`).val();
+            timeTableSlots.push(timeSlot);
+            timeSlot = {};
+        }
+    });
+
+    $(".startAt, .endAt,.hall").bind('change', function () {
+        let selectedFiledId = $(this).attr('id').slice(3);
+        let startAt = $(`#sAt${selectedFiledId}`).val();
+        let endAt = $(`#eAt${selectedFiledId}`).val();
+        let hallValue = $(`#hAt${selectedFiledId}`).val();
+
+        if (startAt !== "" && endAt !== "") {
+            if (Date.parse(startAt) > Date.parse(endAt)) {
+                swal({
+                    title: "Could you accept those days.. !",
+                    icon: "warning",
+                    text: "Please check your date \n Expire Date can not be less than Manufacture Date",
+                })
+                $(`#sAt${selectedFiledId}`).addClass('bg-danger').removeClass('bg-success bg-white');
+                $(`#eAt${selectedFiledId}`).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+            } else {
+                $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
+            }
+        } else {
+            $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-white').removeClass('bg-success bg-danger');
+        }
+        let timeSlot = {};
+        if (startAt && endAt && hallValue) {
+            timeSlot.id = selectedFiledId;
+            timeSlot.sAt = startAt;
+            timeSlot.eAt = endAt;
+            timeSlot.hAt = hallValue;
+
+            for (let y = 0; y < timeTableSlots.length; y++) {
+                if ((timeTableSlots[y].sAt === timeSlot.sAt && timeTableSlots[y].eAt === timeSlot.eAt && timeTableSlots[y].hAt === timeSlot.hAt) &&
+                    timeTableSlots[y].eAt < timeSlot.sAt) {
+                    swal({
+                        title: "Could you accept those days.. !",
+                        icon: "warning",
+                        text: "Please check your date selected data \n This time slot and hall is already allocate another slot ",
+                    })
+                    $(`#eAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId} `).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+
+                } else {
+                    timeTableSlots[y].id = timeSlot.id;
+                    timeTableSlots[y].sAt = timeSlot.sAt;
+                    timeTableSlots[y].eAt = timeSlot.eAt;
+                    timeTableSlots[y].hAt = timeSlot.hAt;
+                    timeSlot = {};
+                }
+            }
+        }
+    })
+</script >
 </body >
 </html >

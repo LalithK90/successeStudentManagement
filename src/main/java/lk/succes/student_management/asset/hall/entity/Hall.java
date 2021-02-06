@@ -25,7 +25,6 @@ public class Hall extends AuditEntity {
     @Enumerated( EnumType.STRING )
     private LiveDead liveDead;
 
-
     private String name;
 
     private String number;

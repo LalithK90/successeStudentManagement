@@ -39,7 +39,6 @@ public class Batch extends AuditEntity {
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
-
   @Enumerated( EnumType.STRING )
   private ClassDay classDay;
 
