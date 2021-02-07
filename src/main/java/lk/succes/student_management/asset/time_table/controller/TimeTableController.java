@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/timeTable" )
-public class TimeTableController implements AbstractController< TimeTable, Integer > {
+public class TimeTableController {
   private final TimeTableService timeTableService;
   private final HallService hallService;
   private final SubjectService subjectService;
@@ -59,7 +59,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
   }
 
   @GetMapping( "/add" )
-  public String form(Model model) {
+  public String form() {
     return "timeTable/dateChooser";
   }
 
@@ -81,7 +81,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
       batches.add(batch);
     }
 
-    model.addAttribute("timeTable", new TimeTable());
+    model.addAttribute("batch", new Batch());
     model.addAttribute("batches", batchService.findAll());
 //    model.addAttribute("batches", batches);
     model.addAttribute("addStatus", true);
@@ -104,23 +104,27 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
   }
 
   @PostMapping( "/save" )
-  public String persist(@Valid @ModelAttribute TimeTable timeTable, BindingResult bindingResult,
+  public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
-      model.addAttribute("timeTable", timeTable);
+      model.addAttribute("timeTable", batch);
       model.addAttribute("addStatus", true);
       return commonThing(model);
     }
-    if ( timeTable.getId() == null ) {
-      TimeTable lastTimeTable = timeTableService.lastTimeTable();
-      if ( lastTimeTable == null ) {
-        timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
-      } else {
-        timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
+
+    for ( TimeTable timeTable : batch.getTimeTables() ) {
+      if ( timeTable.getId() == null ) {
+        TimeTable lastTimeTable = timeTableService.lastTimeTable();
+        if ( lastTimeTable == null ) {
+          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+        } else {
+          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
+        }
       }
+
+      timeTableService.persist(timeTable);
     }
-    //todo before save need to validate
-    timeTableService.persist(timeTable);
+
     return "redirect:/timeTable";
 
   }
