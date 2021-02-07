@@ -1,7 +1,8 @@
 package lk.succes.student_management.asset.student.service;
 
 
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.batch.entity.enums.Grade;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.student.dao.StudentDao;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.util.interfaces.AbstractService;
@@ -47,4 +48,7 @@ public class StudentService implements AbstractService< Student, Integer > {
         return studentDao.findFirstByOrderByIdDesc();
     }
 
+  public List< Student > findByGrade(Grade grade) {
+      return studentDao.findByGrade(grade);
+  }
 }

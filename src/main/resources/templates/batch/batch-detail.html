@@ -18,18 +18,18 @@
     </div>
     <div class="col-4">
         <a href="/batch/add">
-            <button class="btn btn-primary" align="center">New Batch</button>
+            <button class="btn btn-primary" align="center">Batch Detail</button>
         </a>
     </div>
 </div>
 
 <div class="row container-fluid">
     <div class="col-sm-3"></div>
-    <div class="col-sm-8">
+    <div class="col-sm-8" data-th-fragment="batchDetailsFragment">
         <div class="form-group">
-            <label data-th-for="${classReferance}" class="col-sm-3 control-label">Class reference</label>
+            <label data-th-for="${code}" class="col-sm-3 control-label">Class reference</label>
             <div class="col-sm-6">
-                <p type="text" id="classReferance" class="form-control" data-th-text="*{batchDetail.classReferance}">
+                <p type="text" id="code" class="form-control" data-th-text="*{batchDetail.code}">
             </div>
         </div>
         <div class="form-group">
@@ -51,9 +51,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label data-th-for="${subjectName}" class="col-sm-3 control-label">Subject Name</label>
+            <label data-th-for="${'name'}" class="col-sm-3 control-label"> Name</label>
             <div class="col-sm-6">
-                <p type="text" id="subjectName" class="form-control" data-th-text="*{batchDetail.subject.name}">
+                <p type="text" id="name" class="form-control" data-th-text="*{batchDetail.name}">
             </div>
         </div>
 

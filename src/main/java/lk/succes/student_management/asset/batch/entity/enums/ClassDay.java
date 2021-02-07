@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ClassDay {
-  MON("Monday"),
-  TUE("Tuesday"),
-  WED("Wednesday"),
-  THU("Thursday"),
-  FRI("Friday"),
-  SAT("Saturday"),
-  SUN("Sunday");
+  MONDAY("Monday"),
+  TUESDAY("Tuesday"),
+  WEDNESDAY("Wednesday"),
+  THURSDAY("Thursday"),
+  FRIDAY("Friday"),
+  SATURDAY("Saturday"),
+  SUNDAY("Sunday");
   private final String classDay;
 }

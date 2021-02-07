@@ -76,7 +76,7 @@
         <select id="teacher" class="form-control" data-th-field="*{teacher}" required >
           <option value="" >Select the Teacher</option >
           <option data-th-each="teacher : ${teachers}"
-                  data-th-text="${teacher.firstName}"
+                  data-th-text="${teacher.firstName+'_'+teacher.fee}"
                   data-th-value="${teacher.id}" ></option >
         </select >
       </div >
@@ -115,9 +115,9 @@
       </div >
     </div >
     <div class="form-group" >
-      <label id="errorLabel" data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors: </label >
+      <label  data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '" >Errors: </label >
       <ul >
-        <li id="error" data-th-each="err : ${#fields.errors('*')}" data-th-text="${err}" class="error" ></li >
+        <li  data-th-each="err : ${#fields.errors('*')}" data-th-text="${err}" class="text-danger" ></li >
       </ul >
     </div >
     <div class="row container-fluid" >
@@ -179,23 +179,6 @@
         }
     });
 
-    // $("#startAt, #endAt").change(
-    // function dateMatch() {
-    //     let startDateTime = $(`#startAt`).val();
-    //     let endDateTime = $("#endAt").val();
-    //     if (startDateTime !== "" && endDateTime !== "") {
-    //        let sDT = Date.parse('20 Aug 2020 '+startDateTime);
-    //        let eDT = Date.parse('20 Aug 2020 '+endDateTime);
-    //         if (sDT > eDT) {
-    //             swal({
-    //                 title: "Could you accept those time.. !",
-    //                 icon: "warning",
-    //                 text: "Please check your time \n End Time can not be less than Start Time",
-    //             })
-    //             $(`#endAt`).val(startDateTime);
-    //         }
-    //     }
-    // });
 
 </script >
 </body >

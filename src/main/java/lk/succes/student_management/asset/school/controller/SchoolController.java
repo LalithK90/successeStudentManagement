@@ -1,7 +1,7 @@
 package lk.succes.student_management.asset.school.controller;
 
 
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.school.entity.School;
 import lk.succes.student_management.asset.school.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Controller

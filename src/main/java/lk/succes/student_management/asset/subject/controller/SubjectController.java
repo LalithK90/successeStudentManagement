@@ -1,7 +1,7 @@
 package lk.succes.student_management.asset.subject.controller;
 
 
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.subject.entity.Subject;
 import lk.succes.student_management.asset.subject.service.SubjectService;
 import lk.succes.student_management.util.interfaces.AbstractController;

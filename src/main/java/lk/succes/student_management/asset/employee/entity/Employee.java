@@ -1,10 +1,10 @@
 package lk.succes.student_management.asset.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
-import lk.succes.student_management.asset.common_asset.model.Enum.CivilStatus;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
-import lk.succes.student_management.asset.common_asset.model.Enum.Title;
+import lk.succes.student_management.asset.common_asset.model.enums.CivilStatus;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.Title;
 import lk.succes.student_management.asset.common_asset.model.FileInfo;
 import lk.succes.student_management.asset.employee.entity.enums.Designation;
 import lk.succes.student_management.asset.employee.entity.enums.EmployeeStatus;
