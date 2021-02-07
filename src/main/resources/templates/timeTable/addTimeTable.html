@@ -104,8 +104,8 @@
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
     let timeTableSlots = [];
+    let date = $("#date").val();
     $(document).ready(function () {
-        let date = $("#date").val();
         let max = date + "T20:00";
         let min = date + "T06:00";
         $(".startAt, .endAt").attr({'max': max, 'min': min});
@@ -118,56 +118,78 @@
             timeTableSlots.push(timeSlot);
             timeSlot = {};
         }
-    });
 
-    $(".startAt, .endAt,.hall").bind('change', function () {
-        let selectedFiledId = $(this).attr('id').slice(3);
-        let startAt = $(`#sAt${selectedFiledId}`).val();
-        let endAt = $(`#eAt${selectedFiledId}`).val();
-        let hallValue = $(`#hAt${selectedFiledId}`).val();
+        if (timeTableSlots.length >= 1) {
+            $(".startAt, .endAt,.hall").bind('change', function () {
 
-        if (startAt !== "" && endAt !== "") {
-            if (Date.parse(startAt) > Date.parse(endAt)) {
-                swal({
-                    title: "Could you accept those days.. !",
-                    icon: "warning",
-                    text: "Please check your date \n Expire Date can not be less than Manufacture Date",
-                })
-                $(`#sAt${selectedFiledId}`).addClass('bg-danger').removeClass('bg-success bg-white');
-                $(`#eAt${selectedFiledId}`).val('').addClass('bg-danger').removeClass('bg-success bg-white');
-            } else {
-                $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
-            }
-        } else {
-            $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-white').removeClass('bg-success bg-danger');
-        }
-        let timeSlot = {};
-        if (startAt && endAt && hallValue) {
-            timeSlot.id = selectedFiledId;
-            timeSlot.sAt = startAt;
-            timeSlot.eAt = endAt;
-            timeSlot.hAt = hallValue;
+                    let selectedFiledId = $(this).attr('id').slice(3);
+                    let startAt = $(`#sAt${selectedFiledId}`).val();
+                    let endAt = $(`#eAt${selectedFiledId}`).val();
+                    let hallValue = $(`#hAt${selectedFiledId}`).val();
 
-            for (let y = 0; y < timeTableSlots.length; y++) {
-                if ((timeTableSlots[y].sAt === timeSlot.sAt && timeTableSlots[y].eAt === timeSlot.eAt && timeTableSlots[y].hAt === timeSlot.hAt) &&
-                    timeTableSlots[y].eAt < timeSlot.sAt) {
-                    swal({
-                        title: "Could you accept those days.. !",
-                        icon: "warning",
-                        text: "Please check your date selected data \n This time slot and hall is already allocate another slot ",
-                    })
-                    $(`#eAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId} `).val('').addClass('bg-danger').removeClass('bg-success bg-white');
-
-                } else {
-                    timeTableSlots[y].id = timeSlot.id;
-                    timeTableSlots[y].sAt = timeSlot.sAt;
-                    timeTableSlots[y].eAt = timeSlot.eAt;
-                    timeTableSlots[y].hAt = timeSlot.hAt;
-                    timeSlot = {};
+                    if (startAt && endAt) {
+                        if (Date.parse(startAt) > Date.parse(endAt)) {
+                            swal({
+                                title: "Could you accept those days.. !",
+                                icon: "warning",
+                                text: "Please check your date \n Expire Date can not be less than Manufacture Date",
+                            })
+                            $(`#sAt${selectedFiledId}`).addClass('bg-danger').removeClass('bg-success bg-white');
+                            $(`#eAt${selectedFiledId}`).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+                        } else if (hallValue) {
+                            let timeSlot = {};
+                            let timeTableSlotsLength = timeTableSlots.length;
+                            timeSlot.id = selectedFiledId;
+                            timeSlot.sAt = startAt;
+                            timeSlot.eAt = endAt;
+                            timeSlot.hAt = hallValue;
+                            for (let y = 0; y < timeTableSlotsLength; y++) {
+                                if ((timeTableSlots[y].sAt === timeSlot.sAt && timeTableSlots[y].eAt === timeSlot.eAt && timeTableSlots[y].hAt === timeSlot.hAt)
+                                ) {
+                                    validate(selectedFiledId);
+                                } else {
+                                    timeTableSlots[y].id = timeSlot.id;
+                                    timeTableSlots[y].sAt = timeSlot.sAt;
+                                    timeTableSlots[y].eAt = timeSlot.eAt;
+                                    timeTableSlots[y].hAt = timeSlot.hAt;
+                                    timeSlot = {};
+                                }
+                            }
+                        } else {
+                            $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
+                        }
+                    } else {
+                        $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-white').removeClass('bg-success bg-danger');
+                    }
                 }
-            }
+            )
+        } else {
+            swal({
+                title: `${date}`,
+                icon: "warning",
+                text: "There is no registered batches to add time table on .. !",
+                buttons: {
+                    text: "Go to Date",
+                },
+            }).then((value) => {
+                if (value) {
+                    location.replace(document.location.origin + '/timeTable/add')
+                }
+            });
         }
     })
+    ;
+
+    function validate(selectedFiledId) {
+        swal({
+            title: "Could you accept those days.. !",
+            icon: "warning",
+            text: "Please check your date selected data \n This time slot and hall is already allocate another slot ",
+        })
+        $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId} `).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+
+    }
+
 </script >
 </body >
 </html >
