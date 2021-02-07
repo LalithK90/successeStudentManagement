@@ -35,6 +35,7 @@
           <th >Start At</th >
           <th >End At</th >
           <th >Hall</th >
+          <th data-th-if="${!addStatus}">Modify</th>
         </tr >
         <tr data-th-each="batch, index : ${batches}" >
           <th data-th-if="${!addStatus}" data-th-text="${index.count}" ></th >
@@ -80,6 +81,22 @@
                       data-th-text="${'Name : '+hall.name+' Seats : '+ hall.seatCount}" ></option >
             </select >
           </th >
+          <th data-th-if="${!addStatus}">
+            <div class="col" >
+              <div class="custom-control custom-checkbox custom-control-inline "
+                   data-th-each="liveDead : ${liveDeads}" >
+                <input class="custom-control-input" required
+                       data-th-name="${'timeTables[__${index.index}__].liveDead'}"
+                       data-th-value="${liveDead}"
+                       data-th-id="${index.index}+${liveDead}" type="radio"
+                       data-th-checked="${liveDead==timeTables[__${index.index}__].liveDead}" />
+                <label class="custom-control-label"
+                       data-th-for="${index.index}+${liveDead}"
+                       data-th-text="${liveDead.liveDead}" > radio
+                </label >
+              </div >
+            </div >
+          </th>
         </tr >
       </table >
     </div >
@@ -139,15 +156,21 @@
                         } else if (hallValue) {
                             let timeSlot = {};
                             let timeTableSlotsLength = timeTableSlots.length;
-                            timeSlot.id = selectedFiledId;
+                            timeSlot.id = parseInt(selectedFiledId);
                             timeSlot.sAt = startAt;
                             timeSlot.eAt = endAt;
                             timeSlot.hAt = hallValue;
                             for (let y = 0; y < timeTableSlotsLength; y++) {
-                                if ((timeTableSlots[y].sAt === timeSlot.sAt && timeTableSlots[y].eAt === timeSlot.eAt && timeTableSlots[y].hAt === timeSlot.hAt)
-                                ) {
-                                    validate(selectedFiledId);
-                                } else {
+                                console.log(timeSlot)
+                                if (timeTableSlots[y].sAt === timeSlot.sAt && timeTableSlots[y].eAt === timeSlot.eAt && timeTableSlots[y].hAt === timeSlot.hAt) {
+                                    swal({
+                                        title: "Could you accept those days.. !",
+                                        icon: "warning",
+                                        text: "Please check your date selected data \n This time slot and hall is already allocate another slot ",
+                                    })
+                                    $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId} `).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+                                    return -1;
+                                } else if (timeTableSlots[y].id === timeSlot.id) {
                                     timeTableSlots[y].id = timeSlot.id;
                                     timeTableSlots[y].sAt = timeSlot.sAt;
                                     timeTableSlots[y].eAt = timeSlot.eAt;
@@ -155,6 +178,7 @@
                                     timeSlot = {};
                                 }
                             }
+                            console.log(timeTableSlots)
                         } else {
                             $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
                         }
@@ -177,18 +201,7 @@
                 }
             });
         }
-    })
-    ;
-
-    function validate(selectedFiledId) {
-        swal({
-            title: "Could you accept those days.. !",
-            icon: "warning",
-            text: "Please check your date selected data \n This time slot and hall is already allocate another slot ",
-        })
-        $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId} `).val('').addClass('bg-danger').removeClass('bg-success bg-white');
-
-    }
+    });
 
 </script >
 </body >

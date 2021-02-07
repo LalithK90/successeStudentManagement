@@ -86,6 +86,7 @@ public class TimeTableController implements AbstractController< TimeTable, Integ
 //    model.addAttribute("batches", batches);
     model.addAttribute("addStatus", true);
     model.addAttribute("date", date);
+    model.addAttribute("liveDeads", LiveDead.values());
     return commonThing(model);
   }
 
