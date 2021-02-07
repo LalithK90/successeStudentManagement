@@ -3,15 +3,13 @@ package lk.succes.student_management.asset.time_table.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.entity.Hall;
-import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,18 +24,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @JsonFilter( "TimeTable" )
 public class TimeTable extends AuditEntity {
+
   private String code;
 
-  @Enumerated( EnumType.STRING )
-  private LiveDead liveDead;
+  private String lesson;
+
+  private String remark;
 
   private LocalDateTime startAt;
 
   private LocalDateTime endAt;
 
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
+
   @ManyToOne
   private Batch batch;
-
 
   @ManyToOne
   private Hall hall;

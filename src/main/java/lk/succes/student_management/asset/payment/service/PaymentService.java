@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.payment.service;
 
 
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.util.interfaces.AbstractService;
 import lk.succes.student_management.asset.payment.dao.PaymentDao;
 import lk.succes.student_management.asset.payment.entity.Payment;
@@ -25,11 +26,15 @@ public class PaymentService implements AbstractService<Payment, Integer> {
     }
 
     public Payment persist(Payment payment) {
+        if ( payment.getId() == null )
+            payment.setLiveDead(LiveDead.ACTIVE);
         return paymentDao.save(payment);
     }
 
     public boolean delete(Integer id) {
-        paymentDao.deleteById(id);
+      Payment payment = paymentDao.getOne(id);
+      payment.setLiveDead(LiveDead.STOP);
+      paymentDao.save(payment);
         return false;
     }
 
@@ -38,5 +43,7 @@ public class PaymentService implements AbstractService<Payment, Integer> {
     }
 
 
-
+    public Payment lastStudentOnDB() {
+        return paymentDao.findFirstByOrderByIdDesc();
+    }
 }

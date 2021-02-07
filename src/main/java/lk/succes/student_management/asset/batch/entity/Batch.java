@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
-import lk.succes.student_management.asset.hall.entity.Hall;
-import lk.succes.student_management.asset.student.entity.Student;
-import lk.succes.student_management.asset.subject.entity.Subject;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.util.audit.AuditEntity;
@@ -16,12 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.swing.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -46,7 +39,6 @@ public class Batch extends AuditEntity {
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
-
   @Enumerated( EnumType.STRING )
   private ClassDay classDay;
 
@@ -54,7 +46,7 @@ public class Batch extends AuditEntity {
 
   private String endAt;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   private Teacher teacher;
 
   @OneToMany( mappedBy = "batch" )

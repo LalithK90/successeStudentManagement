@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import lk.succes.student_management.asset.batch.service.BatchService;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
-import lk.succes.student_management.asset.common_asset.model.Enum.LiveDead;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.subject.service.SubjectService;
 import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
@@ -82,10 +82,6 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
             model.addAttribute("subjects",subjectService.findAll());
             return "teacher/addTeacher";
         }
-
-        //there are two different situation
-        //1. new Teacher -> need to generate new number
-        //2. update Teacher -> no required to generate number
         if ( teacher.getId() == null ) {
 
             // need to create auto generated registration number
@@ -115,7 +111,7 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
     public MappingJacksonValue findId(@PathVariable Integer id) {
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(teacherService.findById(id).getSubject());
         SimpleBeanPropertyFilter simpleBeanPropertyFilterOne = SimpleBeanPropertyFilter
-            .filterOutAllExcept("id", "name");
+            .filterOutAllExcept("id", "name","fee");
 
         FilterProvider filters = new SimpleFilterProvider()
             .addFilter("Subject", simpleBeanPropertyFilterOne);
