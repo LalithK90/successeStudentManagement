@@ -17,5 +17,5 @@ public interface TimeTableDao extends JpaRepository< TimeTable, Integer > {
 
   List<TimeTable> findByBatchAndStartAtIsBetween(Batch batch, LocalDateTime form, LocalDateTime to);
 
-  List< TimeTable> findByCreatedAtIsBetween(LocalDateTime from, LocalDateTime to);
+  List< TimeTable> findByStartAtIsBetween(LocalDateTime from, LocalDateTime to);
 }

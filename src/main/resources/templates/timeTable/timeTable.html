@@ -41,8 +41,8 @@
             <td data-th-text="${index.count}"></td>
             <td data-th-text="${timeTable.code}"></td>
             <td data-th-text="${timeTable.lesson}"></td>
-            <td data-th-text="${{timeTable.startAt}}"></td>
-            <td data-th-text="${{timeTable.endAt}}"></td>
+            <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}"></td>
+            <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}"></td>
             <td data-th-text="${timeTable.liveDead.liveDead}"></td>
             <td data-th-text="${timeTable.hall.name}"></td>
             <td data-th-text="${timeTable.batch.name}"></td>

@@ -146,18 +146,20 @@ public class TimeTableController {
     LocalDateTime from = dateTimeAgeService.dateTimeToLocalDateStartInDay(date);
     LocalDateTime to = dateTimeAgeService.dateTimeToLocalDateEndInDay(date);
 
-    //Day of week
-    String dayOfWeek = date.getDayOfWeek().toString();
+
     List< Batch > batches = new ArrayList<>();
-    for ( Batch batch : batchService.findByClassDay(ClassDay.valueOf(dayOfWeek))
-        .stream()//filter by using batch and in timeTable
-        .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE) && timeTableService.availableTimeTableCheck(from,to,x))
-        .collect(Collectors.toList()) ) {
-      batch.setCount(batchStudentService.countByBatch(batch));
-      batches.add(batch);
-    }
-    Batch batch = new Batch();
+
+    Batch batchSend = new Batch();
     if ( addStatus ) {
+      String dayOfWeek = date.getDayOfWeek().toString();
+      //Day of week
+      for ( Batch batch : batchService.findByClassDay(ClassDay.valueOf(dayOfWeek))
+          .stream()//filter by using batch and in timeTable
+          .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE) && timeTableService.availableTimeTableCheck(from,to,x))
+          .collect(Collectors.toList()) ) {
+        batch.setCount(batchStudentService.countByBatch(batch));
+        batches.add(batch);
+      }
       List< TimeTable > timeTables = new ArrayList<>();
       for ( Batch batch1 : batches ) {
         TimeTable timeTable = new TimeTable();
@@ -165,14 +167,16 @@ public class TimeTableController {
         timeTables.add(timeTable);
       }
       System.out.println("time table size " + timeTables.size());
-      batch.setTimeTables(timeTables);
+      batchSend.setTimeTables(timeTables);
     } else {
       System.out.println("add status false");
-      batch.setTimeTables(timeTableService.findByCreatedAtIsBetween(from, to));
+      List<TimeTable> timeTables = timeTableService.findByCreatedAtIsBetween(from, to);
+      System.out.println("date "+date+"  form "+from+"size "+ timeTables.size());
+      batchSend.setTimeTables(timeTables);
     }
 
 
-    model.addAttribute("batches", batch);
+    model.addAttribute("batches", batchSend);
 //    model.addAttribute("batches", batchService.findAll());
 
     model.addAttribute("addStatus", addStatus);

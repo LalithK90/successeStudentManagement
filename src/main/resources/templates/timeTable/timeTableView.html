@@ -25,7 +25,7 @@
 
   <div class="container-fluid" data-th-if="${indexOne.index==0}" >
     <form action="/timeTable/edit" method="post" >
-      <span data-th-text="${{timeTableMap.date}}" ></span >
+      <span data-th-text="${#temporals.format(timeTableMap.date, 'dd-MM-yyyy')}" ></span >
       <input type="hidden" name="date" data-th-value="${timeTableMap.date}" class="date" >
       <button type="submit" class="btn btn-warning" >Edit</button >
     </form >
@@ -47,8 +47,8 @@
       <tr data-th-each="timeTable, index : ${timeTableMap.timeTables}" >
         <td data-th-text="${timeTable.code}" ></td >
         <td data-th-text="${timeTable.lesson}" ></td >
-        <td data-th-text="${{timeTable.startAt}}" ></td >
-        <td data-th-text="${{timeTable.endAt}}" ></td >
+        <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
+        <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
         <td data-th-text="${timeTable.hall.name}" ></td >
         <td data-th-text="${timeTable.batch.name}" ></td >
         <td >

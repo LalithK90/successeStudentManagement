@@ -35,20 +35,21 @@
           <th >Start At</th >
           <th >End At</th >
           <th >Hall</th >
+          <th data-th-if="${!addStatus}" >Activity</th >
           <th data-th-if="${!addStatus}" >Comment</th >
-          <th data-th-if="${!addStatus}" >Modify</th >
         </tr >
         <tr data-th-each="batch, index : ${batches.timeTables}" >
           <th data-th-if="${!addStatus}" data-th-text="${index.count}" ></th >
           <th data-th-if="${!addStatus}" >
-            <input type="text" class="form-control" data-th-name="${'timeTables[__${index.index}__].code'}" required
+            <input type="text" class="form-control" data-th-name="${'batches.timeTables[__${index.index}__].code'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].code}" required
                    readonly >
           </th >
           <th >
             <input type="text" class="form-control"
                    data-th-value="${batches.timeTables[__${index.index}__].batch.name}" required readonly >
             <input type="hidden" class="form-control" data-th-name="${'timeTables[__${index.index}__].batch.id'}"
-                   data-th-value="${batch.id}" required readonly >
+                   data-th-value="${batches.timeTables[__${index.index}__].batch.id}" required readonly >
           </th >
           <th >
             <input type="text" class="form-control"
@@ -90,7 +91,7 @@
                        data-th-name="${'timeTables[__${index.index}__].liveDead'}"
                        data-th-value="${liveDead}"
                        data-th-id="${index.index}+${liveDead}" type="radio"
-                       data-th-checked="${liveDead==timeTables[__${index.index}__].liveDead}" />
+                       data-th-checked="${liveDead==batches.timeTables[__${index.index}__].liveDead}" />
                 <label class="custom-control-label"
                        data-th-for="${index.index}+${liveDead}"
                        data-th-text="${liveDead.liveDead}" > radio
@@ -98,7 +99,11 @@
               </div >
             </div >
           </th >
-
+          <th data-th-if="${!addStatus}" >
+            <input type="text" class="form-control"
+                   data-th-name="${'timeTables[__${index.index}__].remark'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].remark}" required >
+          </th >
         </tr >
       </table >
     </div >
@@ -123,8 +128,8 @@
     let timeTableSlots = [];
     let date = $("#date").val();
     $(document).ready(function () {
-        let max = date + "20:00";
-        let min = date + "06:00";
+        let max = date + "T20:00";
+        let min = date + "T06:00";
         $(".startAt, .endAt").attr({'max': max, 'min': min});
         let timeSlot = {};
         for (let x = 0; x < $('#timeTable tr').length - 1; x++) {

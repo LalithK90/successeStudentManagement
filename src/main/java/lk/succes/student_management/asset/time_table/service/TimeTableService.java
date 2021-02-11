@@ -54,11 +54,10 @@ public class TimeTableService implements AbstractService< TimeTable, Integer > {
 
   public boolean availableTimeTableCheck(LocalDateTime from, LocalDateTime to, Batch batch) {
     List< TimeTable > timeTables = timeTableDao.findByBatchAndStartAtIsBetween(batch, from, to);
-    System.out.println("service size "+ timeTables.size());
     return timeTables.isEmpty();
   }
 
   public List< TimeTable> findByCreatedAtIsBetween(LocalDateTime from, LocalDateTime to) {
-  return timeTableDao.findByCreatedAtIsBetween(from,to);
+  return timeTableDao.findByStartAtIsBetween(from,to);
   }
 }
