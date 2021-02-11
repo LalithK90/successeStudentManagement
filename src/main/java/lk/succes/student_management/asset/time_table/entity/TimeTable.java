@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,8 +32,10 @@ public class TimeTable extends AuditEntity {
 
   private String remark;
 
+  @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm" )
   private LocalDateTime startAt;
 
+  @DateTimeFormat( pattern = "yyyy-MM-dd HH:mm" )
   private LocalDateTime endAt;
 
   @Enumerated( EnumType.STRING )

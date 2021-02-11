@@ -26,21 +26,21 @@
 </div >
 <!--Student detail-->
 <div class="container-fluid" data-th-fragment="timeTableDetail" >
-  <form action="/timeTable/add" method="post">
+  <form action="/timeTable/add" method="post" >
     <!--Date-->
     <div class="form-row text-right" >
       <div class="col-md-4" >
         <label class="control-label" for="date" >Date:</label >
       </div >
       <div class="col-md-8" >
-        <input type="date" name="date" id="date" class="form-control" required>
+        <input type="date" name="date" id="date" class="form-control" required >
       </div >
     </div >
     <!--Button-->
     <div class="form-batch col-md-12 col-sm-12 text-center flex-column " >
       <a href="/timeTable" >
         <button class="btn btn-success" tabindex="21" type="submit" >
-          Back
+          Send
         </button >
       </a >
     </div >
@@ -50,5 +50,12 @@
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $(document).ready(function () {
+        $('[type="date"]').prop('min', function () {
+            return new Date().toJSON().split('T')[0];
+        });
+    });
+</script >
 </body >
 </html >

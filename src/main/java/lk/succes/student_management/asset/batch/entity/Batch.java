@@ -13,8 +13,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -46,7 +48,7 @@ public class Batch extends AuditEntity {
 
   private String endAt;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne( fetch = FetchType.EAGER )
   private Teacher teacher;
 
   @OneToMany( mappedBy = "batch" )
@@ -57,4 +59,8 @@ public class Batch extends AuditEntity {
 
   @Transient
   private int count;
+
+  @Transient
+  @DateTimeFormat( pattern = "yyyy-MM-dd" )
+  private LocalDate date;
 }

@@ -22,7 +22,7 @@
   </div >
 </div >
 <div class="container-fluid" >
-  <form action="/timeTable/save" data-th-object="${batch}" method="post" >
+  <form action="/timeTable/save" data-th-object="${batches}" method="post" >
 
     <div class="container-fluid" >
       <table class="table table-responsive" id="timeTable" >
@@ -35,9 +35,10 @@
           <th >Start At</th >
           <th >End At</th >
           <th >Hall</th >
+          <th data-th-if="${!addStatus}" >Comment</th >
           <th data-th-if="${!addStatus}" >Modify</th >
         </tr >
-        <tr data-th-each="batch, index : ${batches}" >
+        <tr data-th-each="batch, index : ${batches.timeTables}" >
           <th data-th-if="${!addStatus}" data-th-text="${index.count}" ></th >
           <th data-th-if="${!addStatus}" >
             <input type="text" class="form-control" data-th-name="${'timeTables[__${index.index}__].code'}" required
@@ -45,35 +46,35 @@
           </th >
           <th >
             <input type="text" class="form-control"
-                   data-th-value="${addStatus?batch.name:timeTables[__${index.index}__].batch.name}" required readonly >
+                   data-th-value="${batches.timeTables[__${index.index}__].batch.name}" required readonly >
             <input type="hidden" class="form-control" data-th-name="${'timeTables[__${index.index}__].batch.id'}"
                    data-th-value="${batch.id}" required readonly >
           </th >
           <th >
             <input type="text" class="form-control"
-                   data-th-value="${addStatus?batch.count:timeTables[__${index.index}__].batch.count}" required
+                   data-th-value="${batches.timeTables[__${index.index}__].batch.count}" required
                    readonly >
           </th >
           <th >
             <input type="text" class="form-control" data-th-name="${'timeTables[__${index.index}__].lesson'}"
-                   data-th-value="${addStatus?'':timeTables[__${index.index}__].lesson}" required >
+                   data-th-value="${batches.timeTables[__${index.index}__].lesson}" required >
           </th >
           <th >
             <input type="datetime-local" class="form-control startAt"
                    data-th-id="${'sAt'+index.index}"
                    data-th-name="${'timeTables[__${index.index}__].startAt'}"
-                   data-th-value="${addStatus?'':timeTables[__${index.index}__].startAt}" required >
+                   data-th-value="${batches.timeTables[__${index.index}__].startAt}" required >
           </th >
           <th >
             <input type="datetime-local" class="form-control endAt"
                    data-th-id="${'eAt'+index.index}"
                    data-th-name="${'timeTables[__${index.index}__].endAt'}"
-                   data-th-value="${addStatus?'':timeTables[__${index.index}__].endAt}" required >
+                   data-th-value="${batches.timeTables[__${index.index}__].endAt}" required >
           </th >
           <th >
             <select data-th-name="${'timeTables[__${index.index}__].hall.id'}"
                     data-th-id="${'hAt'+index.index}"
-                    data-th-value="${addStatus?'':timeTables[__${index.index}__].hall.id}" required
+                    data-th-value="${batches.timeTables[__${index.index}__].hall}" required
                     class="form-control hall" >
               <option value="" >Please select</option >
               <option data-th-each="hall : ${halls}"
@@ -97,11 +98,10 @@
               </div >
             </div >
           </th >
+
         </tr >
       </table >
     </div >
-
-
     <!--Button-->
     <div class="form-batch col-md-12 col-sm-12 text-center flex-column " >
       <button class="btn btn-success" tabindex="21" type="submit" >
@@ -123,8 +123,8 @@
     let timeTableSlots = [];
     let date = $("#date").val();
     $(document).ready(function () {
-        let max = date + "T20:00";
-        let min = date + "T06:00";
+        let max = date + "20:00";
+        let min = date + "06:00";
         $(".startAt, .endAt").attr({'max': max, 'min': min});
         let timeSlot = {};
         for (let x = 0; x < $('#timeTable tr').length - 1; x++) {
@@ -178,12 +178,11 @@
                                     timeSlot = {};
                                 }
                             }
-                            console.log(timeTableSlots)
                         } else {
-                            $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
+                            $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
                         }
                     } else {
-                        $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId}`).addClass('bg-white').removeClass('bg-success bg-danger');
+                        $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-white').removeClass('bg-success bg-danger');
                     }
                 }
             )
