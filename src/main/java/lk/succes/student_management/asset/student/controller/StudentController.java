@@ -116,4 +116,19 @@ public class StudentController implements AbstractController< Student, Integer >
     studentService.delete(id);
     return "redirect:/student";
   }
+
+  @PostMapping("/search")
+  public String search(@ModelAttribute Student student, Model model) {
+    List< Student > students = studentService.search(student);
+
+    if ( students.isEmpty() ) {
+      model.addAttribute("student", true);
+      return "student/studentChooser";
+    } else if ( students.size() == 1 ) {
+      return "redirect:/payment/add/" + students.get(0).getId();
+    } else {
+      model.addAttribute("students", students);
+      return "student/studentChooser";
+    }
+  }
 }
