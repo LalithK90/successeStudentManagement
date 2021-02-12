@@ -14,6 +14,7 @@ import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.asset.time_table.service.TimeTableService;
 import lk.succes.student_management.util.service.DateTimeAgeService;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
+import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -66,16 +68,20 @@ public class TimeTableController {
 
   @GetMapping( "/byDate" )
   public String byDate(Model model) {
-    List< DateTimeTable > dateTimeTables = new ArrayList<>();
-    Map< LocalDateTime, List< TimeTable > > timeTableMap =
-        timeTableService.findAll().stream().collect(Collectors.groupingBy(TimeTable::getStartAt));
+    HashSet< LocalDate > classDates = new HashSet<>();
+    List< TimeTable > timeTables = timeTableService.findAll();
+    timeTables.forEach(x -> classDates.add(x.getStartAt().toLocalDate()));
 
-    timeTableMap.forEach((x, y) -> {
-      DateTimeTable timeTable = new DateTimeTable();
-      timeTable.setDate(x.toLocalDate());
-      timeTable.setTimeTables(y);
-      dateTimeTables.add(timeTable);
-    });
+    List< DateTimeTable > dateTimeTables = new ArrayList<>();
+
+    for ( LocalDate classDate : classDates ) {
+      DateTimeTable dateTimeTable = new DateTimeTable();
+      dateTimeTable.setDate(classDate);
+      dateTimeTable.setTimeTables(timeTables.stream().filter(x -> x.getStartAt().toLocalDate().isEqual(classDate)).collect(Collectors.toList()));
+      dateTimeTables.add(dateTimeTable);
+    }
+    System.out.println("tables size "+ dateTimeTables.size()+"  date "+ classDates.size());
+
     model.addAttribute("timeTableMaps", dateTimeTables);
     return "timeTable/timeTableView";
   }
@@ -155,7 +161,7 @@ public class TimeTableController {
       //Day of week
       for ( Batch batch : batchService.findByClassDay(ClassDay.valueOf(dayOfWeek))
           .stream()//filter by using batch and in timeTable
-          .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE) && timeTableService.availableTimeTableCheck(from,to,x))
+          .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE) && timeTableService.availableTimeTableCheck(from, to, x))
           .collect(Collectors.toList()) ) {
         batch.setCount(batchStudentService.countByBatch(batch));
         batches.add(batch);
@@ -170,8 +176,8 @@ public class TimeTableController {
       batchSend.setTimeTables(timeTables);
     } else {
       System.out.println("add status false");
-      List<TimeTable> timeTables = timeTableService.findByCreatedAtIsBetween(from, to);
-      System.out.println("date "+date+"  form "+from+"size "+ timeTables.size());
+      List< TimeTable > timeTables = timeTableService.findByCreatedAtIsBetween(from, to);
+      System.out.println("date " + date + "  form " + from + "size " + timeTables.size());
       batchSend.setTimeTables(timeTables);
     }
 

@@ -21,47 +21,49 @@
   <div class="col-4" ></div >
 </div >
 
-<div class="container-fluid" data-th-each="timeTableMap, indexOne : ${timeTableMaps}" >
-
-  <div class="container-fluid" data-th-if="${indexOne.index==0}" >
-    <form action="/timeTable/edit" method="post" >
-      <span data-th-text="${#temporals.format(timeTableMap.date, 'dd-MM-yyyy')}" ></span >
-      <input type="hidden" name="date" data-th-value="${timeTableMap.date}" class="date" >
-      <button type="submit" class="btn btn-warning" >Edit</button >
-    </form >
-  </div >
-  <div class="container-fluid" >
-    <table class="table table-striped table-inverse table-responsive" >
-      <thead class="thead-inverse" >
-      <tr data-th-if="${indexOne.index==0}" >
-        <th >code</th >
-        <th >Lesson</th >
-        <th >Start Time</th >
-        <th >End Time</th >
-        <th >Hall Name</th >
-        <th >Batch Name</th >
-        <th >Modify</th >
-      </tr >
-      </thead >
-      <tbody >
-      <tr data-th-each="timeTable, index : ${timeTableMap.timeTables}" >
-        <td data-th-text="${timeTable.code}" ></td >
-        <td data-th-text="${timeTable.lesson}" ></td >
-        <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
-        <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
-        <td data-th-text="${timeTable.hall.name}" ></td >
-        <td data-th-text="${timeTable.batch.name}" ></td >
-        <td >
-          <a data-th-href="${'/timeTable/view/'+ timeTable.id}" >
-            <button class="btn btn-info" >View</button >
-          </a >
-        </td >
-      </tr >
-      </tbody >
-    </table >
+<div class="container-fluid" >
+  <div data-th-each="timeTableMap, indexOne : ${timeTableMaps}" >
+    <div class="container-fluid" >
+      <form action="/timeTable/edit" method="post" class="text-center">
+        <span data-th-text="${#temporals.format(timeTableMap.date, 'dd-MM-yyyy')}" ></span >
+        <input type="hidden" name="date" data-th-value="${timeTableMap.date}" class="date" >
+        <button type="submit" class="btn btn-warning" >Edit</button >
+      </form >
+    </div >
+    <div class="container-fluid" >
+      <table class="table table-striped table-inverse table-responsive" >
+        <thead class="thead-inverse" >
+        <tr >
+          <th >Code</th >
+          <th >Teacher Name</th >
+          <th >Lesson</th >
+          <th >Start Time</th >
+          <th >End Time</th >
+          <th >Hall Name</th >
+          <th >Batch Name</th >
+          <th >Modify</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr data-th-each="timeTable, index : ${timeTableMap.timeTables}" >
+          <td data-th-text="${timeTable.code}" ></td >
+          <td data-th-text="${timeTable.batch.teacher.firstName}" ></td >
+          <td data-th-text="${timeTable.lesson}" ></td >
+          <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
+          <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
+          <td data-th-text="${timeTable.hall.name}" ></td >
+          <td data-th-text="${timeTable.batch.name}" ></td >
+          <td >
+            <a data-th-href="${'/timeTable/view/'+ timeTable.id}" >
+              <button class="btn btn-info" >View</button >
+            </a >
+          </td >
+        </tr >
+        </tbody >
+      </table >
+    </div >
   </div >
 </div >
-
 <!--footer is included-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
