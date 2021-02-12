@@ -63,11 +63,11 @@
           <a data-th-href="${'/student/view/'+ student.id}" >
             <button class="btn btn-info" >View</button >
           </a >
-            <form action="/batchStudent/removeBatch" >
-              <input type="hidden" name="batch" data-th-value="${batchDetail.id}">
-              <input type="hidden" name="student" data-th-value="${student.id}">
-              <button type="submit" class="btn btn-danger">Remove</button >
-            </form >
+          <form action="/batchStudent/removeBatch" method="post">
+            <input type="hidden" name="batch" data-th-value="${batchDetail.id}" >
+            <input type="hidden" name="student" data-th-value="${student.id}" >
+            <button type="submit" class="btn btn-danger" >Remove</button >
+          </form >
         </td >
       </tr >
       </tbody >
