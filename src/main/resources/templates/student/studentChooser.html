@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Student Management</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="row bg-secondary" >
+  <div class="col-4" >
+    <a href="/payment/add" >
+      <button class="btn btn-info" >New Time Slot Add</button >
+    </a >
+  </div >
+  <div class="col-4" >
+    <h1 >Choose Student Payment</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/payment" >
+      <button class="btn btn-primary" >View All Payment</button >
+    </a >
+  </div >
+</div >
+<!--Student detail-->
+<div class="container-fluid" data-th-fragment="timeTableDetail" >
+  <form action="/student/search" method="post" >
+    <!--Value-->
+    <div class="form-row text-right" >
+      <div class="col-md-4" >
+        <label class="control-label" for="searchValue" >Search Value :</label >
+      </div >
+      <div class="col-md-8" >
+        <select type="date" id="searchValue" class="form-control" required >
+          <option value="" disabled>Selected Value</option >
+          <option value="name" >Name</option >
+          <option value="regNo" >Register Number</option >
+          <option value="firstName" >First Name</option >
+        </select >
+      </div >
+    </div >
+    <!--Value-->
+    <div class="form-row text-right" >
+      <div class="col-md-4" >
+        <label class="control-label" for="value" >Enter Value :</label >
+      </div >
+      <div class="col-md-8" >
+        <input type="text" id="value" class="form-control" required >
+      </div >
+    </div >
+    <!--Button-->
+    <div class="form-batch col-md-12 col-sm-12 text-center flex-column " >
+      <button class="btn btn-success" id="buttonSubmit" tabindex="21" type="submit" >
+        Send
+      </button >
+    </div >
+  </form >
+</div >
+<!--student list-->
+<div class="container-fluid" data-th-if="${not #lists.isEmpty(students) }">
+  <table class="table table-striped table-inverse table-responsive container" id="myTable" >
+    <thead class="thead-inverse" >
+    <tr >
+      <th >Index</th >
+      <th >Registration ID</th >
+      <th >First Name</th >
+      <th >School</th >
+      <th >Guardian</th >
+      <th >Mobile Number</th >
+      <th >Home Number</th >
+      <th >Select</th >
+    </tr >
+    </thead >
+    <tbody >
+    <tr data-th-each="student, index : ${students}" >
+      <td data-th-text="${index.count}" ></td >
+      <td data-th-text="${student.regNo}" ></td >
+      <td data-th-text="${student.firstName}" ></td >
+      <td data-th-text="${student.school.name}" ></td >
+      <td data-th-text="${student.guardian}" ></td >
+      <td data-th-text="${student.mobile}" ></td >
+      <td data-th-text="${student.home}" ></td >
+      <td >
+        <a data-th-href="${'/payment/add/'+ student.id}" >
+          <button class="btn btn-info" >Select</button >
+        </a >
+      </td >
+    </tr >
+    </tbody >
+  </table >
+</div>
+<!--alert-->
+<div class="container-fluid" data-th-if="${#lists.isEmpty(students) && student}">
+  <div class="alert alert-primary alert-dismissible fade show" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+      <span aria-hidden="true" >&times;</span >
+      <span class="sr-only" >Close</span >
+    </button >
+    <strong >Ohhh !</strong > There was no student accoding to you provide details.
+  </div >
+</div>
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $(document).ready(function () {
+        $("#searchValue").change(function () {
+            toggle($(this).val(), $("#value").val());
+        });
+        $("#value").keyup(function () {
+            toggle($("#searchValue").val(), $(this).val());
+        });
+        $("#buttonSubmit").attr('disabled', 'disabled');
+    });
+
+    function toggle(selectedValue, enterValue) {
+        if (selectedValue && enterValue) {
+            $("#buttonSubmit").removeAttr('disabled');
+            $("#value").attr('name', selectedValue);
+        } else {
+            $("#buttonSubmit").attr('disabled', 'disabled');
+            $("#value").removeAttr('name').val('');
+        }
+    }
+</script >
+</body >
+</html >

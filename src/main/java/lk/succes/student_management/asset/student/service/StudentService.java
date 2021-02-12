@@ -6,6 +6,8 @@ import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.student.dao.StudentDao;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.util.interfaces.AbstractService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +43,12 @@ public class StudentService implements AbstractService< Student, Integer > {
     }
 
     public List< Student > search(Student student) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+            .matching()
+            .withIgnoreCase()
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< Student > categoryExample = Example.of(student, matcher);
+        return studentDao.findAll(categoryExample);
     }
 
     public Student lastStudentOnDB() {

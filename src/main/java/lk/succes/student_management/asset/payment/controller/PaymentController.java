@@ -12,28 +12,41 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.text.Collator;
+import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/payment" )
-public class PaymentController implements AbstractController< Payment, Integer > {
+public class PaymentController {
   private final PaymentService paymentService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
   public PaymentController(PaymentService paymentService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.paymentService = paymentService;
-      this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
 
   @GetMapping
   public String findAll(Model model) {
-    model.addAttribute("payments", paymentService.findAll());
+    model.addAttribute("payments",
+                       paymentService.findAll()
+                           .stream()
+                           .filter(x -> x.getCreatedAt().toLocalDate().equals(LocalDate.now()))
+                           .collect(Collectors.toList()));
     return "payment/payment";
   }
 
   @GetMapping( "/add" )
-  public String form(Model model) {
-    model.addAttribute("payment", new Payment());
+  public String chooseForm(Model model) {
+    model.addAttribute("student",false);
+    return "student/studentChooser";
+  }
 
+  @PostMapping( "/add/{id}" )
+  public String form(@PathVariable("id")Integer id, Model model) {
+//todo
+    model.addAttribute("payment", new Payment());
     model.addAttribute("addStatus", true);
     return "payment/addPayment";
   }
