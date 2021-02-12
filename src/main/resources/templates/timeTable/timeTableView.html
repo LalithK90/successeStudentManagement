@@ -23,11 +23,11 @@
 
 <div class="container-fluid" >
   <div data-th-each="timeTableMap, indexOne : ${timeTableMaps}" >
-    <div class="container-fluid" >
-      <form action="/timeTable/edit" method="post" class="text-center">
+    <div class="container-fluid bg-gradient-info" >
+      <form action="/timeTable/edit" method="post" class="text-center text-dark p-1 font-weight-bold">
         <span data-th-text="${#temporals.format(timeTableMap.date, 'dd-MM-yyyy')}" ></span >
         <input type="hidden" name="date" data-th-value="${timeTableMap.date}" class="date" >
-        <button type="submit" class="btn btn-warning" >Edit</button >
+        <button type="submit" class="btn btn-warning btn-sm" >Edit</button >
       </form >
     </div >
     <div class="container-fluid" >

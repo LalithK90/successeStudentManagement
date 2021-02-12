@@ -8,6 +8,7 @@ import lk.succes.student_management.asset.batch_student.service.BatchStudentServ
 import lk.succes.student_management.asset.common_asset.model.DateTimeTable;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.service.HallService;
+import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.subject.service.SubjectService;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
 import lk.succes.student_management.asset.time_table.entity.TimeTable;
@@ -80,7 +81,6 @@ public class TimeTableController {
       dateTimeTable.setTimeTables(timeTables.stream().filter(x -> x.getStartAt().toLocalDate().isEqual(classDate)).collect(Collectors.toList()));
       dateTimeTables.add(dateTimeTable);
     }
-    System.out.println("tables size "+ dateTimeTables.size()+"  date "+ classDates.size());
 
     model.addAttribute("timeTableMaps", dateTimeTables);
     return "timeTable/timeTableView";
@@ -106,7 +106,17 @@ public class TimeTableController {
 
   @GetMapping( "/view/{id}" )
   public String findById(@PathVariable Integer id, Model model) {
-    model.addAttribute("timeTableDetail", timeTableService.findById(id));
+    TimeTable timeTable = timeTableService.findById(id);
+    model.addAttribute("timeTableDetail", timeTable);
+    List< Student > students = new ArrayList<>();
+    timeTable.getBatch()
+        .getBatchStudents()
+        .stream()
+        .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
+        .forEach(x -> students.add(x.getStudent()));
+
+    model.addAttribute("students", students);
+    model.addAttribute("studentRemoveBatch", true);
     return "timeTable/timeTable-detail";
   }
 
