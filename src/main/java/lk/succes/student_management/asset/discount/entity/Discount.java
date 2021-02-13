@@ -25,12 +25,4 @@ public class Discount extends AuditEntity {
     private String discountAmount;
     private String approvedBy;
     private String discountStatus;
-
-    @OneToMany(mappedBy = "discount")
-    private List<Payment> payments;
-
-
-
-
-
 }
