@@ -88,7 +88,7 @@ public class PaymentController {
     });
 
     student.setBatchStudents(batchStudentPayment);
-    model.addAttribute("month", months);
+    model.addAttribute("paymentStatuses", PaymentStatus.values());
     model.addAttribute("student", student);
     model.addAttribute("addStatus", true);
     model.addAttribute("studentDetail", student);
@@ -117,16 +117,20 @@ public class PaymentController {
   }
 
   @PostMapping( "/batchStudent/save" )
-  public String persist(@Valid @ModelAttribute BatchStudent batchStudent, BindingResult bindingResult, Model model) {
+  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
     if ( bindingResult.hasErrors() ) {
-      return "redirect:/payment/add/" + batchStudent.getStudent().getId();
+      return "redirect:/payment/add/" + student.getId();
     }
-    batchStudent.getPayments().forEach(x -> {
-      if ( !x.getAmount().equals(BigDecimal.ZERO) ) {
-        commonSave(x);
-        paymentService.persist(x);
+    HashSet< Payment > payments = new HashSet<>();
+    student.getBatchStudents().forEach(x -> x.getPayments().forEach(y -> {
+      if ( !y.getPaymentStatus().equals(PaymentStatus.NO_PAID) ) {
+        y.setBatchStudent(x);
+        commonSave(y);
+        payments.add(paymentService.persist(y));
       }
-    });
+    }));
+
+    //todo -> need to do print
     return "redirect:/payment";
   }
 

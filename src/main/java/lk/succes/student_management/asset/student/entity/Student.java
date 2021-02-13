@@ -61,8 +61,5 @@ public class Student extends AuditEntity {
   @OneToMany(mappedBy = "student",cascade ={ CascadeType.MERGE, CascadeType.PERSIST})
   private List< BatchStudent > batchStudents;
 
-  //@Transient
-  //private List<Batch> batches;
-
 
 }
