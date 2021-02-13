@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="row bg-light" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >Make a Payment</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/payment" >
+      <button class="btn btn-primary" >View all Payments</button >
+    </a >
+  </div >
+</div >
+<div class="container-fuild" >
+  <div id="accordianId" role="tablist" aria-multiselectable="true" >
+    <div class="card" >
+      <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+         aria-controls="section1ContentId" >
+        <div class="card-header" role="tab" id="section1HeaderId" >
+          <h5 class="mb-0 text-center" >
+            Student Details
+          </h5 >
+        </div >
+      </a >
+      <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+        <div class="card-body" >
+          <div data-th-replace="~{student/student-detail :: studentDetailsFragment}" ></div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<form action="/payment/batchStudent/save" data-th-object="${student}" method="post" >
+  <input type="hidden" data-th-field="*{id}" hidden />
+  <div class="container-fluid" id="payment" role="tablist" aria-multiselectable="true" >
+    <div class="card" data-th-each="batchStudent, batchIndex : ${student.batchStudents}" >
+      <a data-toggle="collapse" data-parent="#payment" data-th-href="${'#acc'+batchIndex.index}" aria-expanded="true"
+         da-th-aria-controls="${'acc'+batchIndex.index}" >
+        <div class="card-header" role="tab" data-th-id="${'ac'+batchIndex.index}" >
+          <h5 class="mb-0 text-center" data-th-text="${batchStudent.batch.name}" >
+          </h5 >
+        </div >
+      </a >
+      <div data-th-id="${'acc'+batchIndex.index}" class="collapse in" role="tabpanel"
+           data-th-aria-labelledby="${'ac'+batchIndex.index}" >
+        <div class="card-body" >
+          <div class="form-row" >
+            <div class="col-6" >
+              <div class="form-row" >
+                <label data-th-for="${code}" class="col-sm-3 control-label" >Class reference</label >
+                <div class="col-sm-6" >
+                  <p type="text" class="form-control" data-th-text="${batchStudent.batch.code}" >
+                </div >
+              </div >
+              <div class="form-row" >
+                <label data-th-for="${year}" class="col-sm-3 control-label" >Academic Year</label >
+                <div class="col-sm-6" >
+                  <p type="text" class="form-control" data-th-text="${batchStudent.batch.year}" >
+                </div >
+              </div >
+              <div class="form-row" >
+                <label data-th-for="${grade}" class="col-sm-3 control-label" >Grade</label >
+                <div class="col-sm-6" >
+                  <p type="text" class="form-control" data-th-text="${batchStudent.batch.grade}" >
+                </div >
+              </div >
+              <div class="form-row" >
+                <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher</label >
+                <div class="col-sm-6" >
+                  <p type="text" class="form-control" data-th-text="${batchStudent.batch.teacher.firstName}" >
+                </div >
+              </div >
+              <div class="form-row" >
+                <label data-th-for="${'name'}" class="col-sm-3 control-label" > Name</label >
+                <div class="col-sm-6" >
+                  <p type="text" class="form-control" data-th-text="${batchStudent.batch.name}" >
+                </div >
+              </div >
+            </div >
+            <div class="col-6" >
+              <div class="container-fluid" >
+                <table class="table table-striped table-inverse table-responsive" >
+                  <thead class="thead-inverse" >
+                  <tr >
+                    <th >Month</th >
+                    <th >Amount</th >
+                    <th >P. Status</th >
+                  </tr >
+                  </thead >
+                  <tbody >
+                  <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" >
+                    <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
+                      <!--id-->
+                      <input type="hidden"
+                             data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].id}" >
+                      <!--month-->
+                      <input type="text" class="form-control"
+                             data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].month}"
+                             readonly required >
+                    </td >
+                    <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
+                      <!--amount-->
+                      <input type="text" class="form-control" data-th-id="${'vl'+paymentIndex.index}"
+                             data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].amount}"
+                             readonly required >
+                    </td >
+                    <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
+                      <div class="custom-control custom-checkbox custom-control-inline form-row"
+                           data-th-each="paymentStatus,index : ${paymentStatuses}" >
+                        <input class="custom-control-input gender" required
+                               data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
+                               data-th-value="${paymentStatus}"
+                               data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
+                               data-th-checked="${paymentStatus==payment.paymentStatus}" />
+                        <label class="custom-control-label"
+                               data-th-for="${paymentIndex.index+'pb'+index.index}"
+                               data-th-text="${paymentStatus.paymentStatus}" > radio
+                        </label >
+                      </div >
+                      <!--batchStudent-->
+                      <input type="hidden" data-th-field="*{batchStudents[__${batchIndex.index}__].id}" >
+                      <!--live dead-->
+                      <input type="hidden" class="form-control"
+                             data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].liveDead}" >
+
+                    </td >
+                  </tr >
+                  </tbody >
+                </table >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+  <!--  <div class="container-fluid"  data-th-each="batchStudent, batchIndex : ${student.batchStudents}" >
+      <div class="form-row" >
+        <div class="col-6" >
+          <div class="form-row" >
+            <label data-th-for="${code}" class="col-sm-3 control-label" >Class reference</label >
+            <div class="col-sm-6" >
+              <p type="text" class="form-control" data-th-text="${batchStudent.batch.code}" >
+            </div >
+          </div >
+          <div class="form-row" >
+            <label data-th-for="${year}" class="col-sm-3 control-label" >Academic Year</label >
+            <div class="col-sm-6" >
+              <p type="text" class="form-control" data-th-text="${batchStudent.batch.year}" >
+            </div >
+          </div >
+          <div class="form-row" >
+            <label data-th-for="${grade}" class="col-sm-3 control-label" >Grade</label >
+            <div class="col-sm-6" >
+              <p type="text" class="form-control" data-th-text="${batchStudent.batch.grade}" >
+            </div >
+          </div >
+          <div class="form-row" >
+            <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher</label >
+            <div class="col-sm-6" >
+              <p type="text" class="form-control" data-th-text="${batchStudent.batch.teacher.firstName}" >
+            </div >
+          </div >
+          <div class="form-row" >
+            <label data-th-for="${'name'}" class="col-sm-3 control-label" > Name</label >
+            <div class="col-sm-6" >
+              <p type="text" class="form-control" data-th-text="${batchStudent.batch.name}" >
+            </div >
+          </div >
+        </div >
+        <div class="col-6" >
+          <div class="container-fluid" >
+            <table class="table table-striped table-inverse table-responsive" >
+              <thead class="thead-inverse" >
+              <tr >
+                <th >Month</th >
+                <th >Amount</th >
+                <th >P. Status</th >
+              </tr >
+              </thead >
+              <tbody >
+              <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" >
+                <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
+                  &lt;!&ndash;id&ndash;&gt;
+                  <input type="hidden"
+                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].id}" >
+                  &lt;!&ndash;month&ndash;&gt;
+                  <input type="text" class="form-control"
+                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].month}"
+                         readonly required >
+                </td >
+                <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
+                  &lt;!&ndash;amount&ndash;&gt;
+                  <input type="text" class="form-control" data-th-id="${'vl'+paymentIndex.index}"
+                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].amount}"
+                         readonly required >
+                </td >
+                <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
+                  <div class="custom-control custom-checkbox custom-control-inline form-row"
+                       data-th-each="paymentStatus,index : ${paymentStatuses}" >
+                    <input class="custom-control-input gender" required
+                           data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
+                           data-th-value="${paymentStatus}"
+                           data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
+                           data-th-checked="${paymentStatus==payment.paymentStatus}" />
+                    <label class="custom-control-label"
+                           data-th-for="${paymentIndex.index+'pb'+index.index}"
+                           data-th-text="${paymentStatus.paymentStatus}" > radio
+                    </label >
+                  </div >
+                  &lt;!&ndash;batchStudent&ndash;&gt;
+                  <input type="hidden" data-th-field="*{batchStudents[__${batchIndex.index}__].id}" >
+                  &lt;!&ndash;live dead&ndash;&gt;
+                  <input type="hidden" class="form-control"
+                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].liveDead}" >
+
+                </td >
+              </tr >
+              </tbody >
+            </table >
+          </div >
+        </div >
+      </div >
+    </div >-->
+
+  <div class="row container-fluid" >
+    <div class="col-sm-2 col-sm-offset-2" >
+      <button type="link" class="btn btn-danger btn-block" >Back</button >
+    </div >
+
+    <div class="col-sm-2 col-sm-offset-2" >
+      <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
+    </div >
+
+    <div class="col-sm-2 col-sm-offset-2" >
+      <button type="submit" class="btn btn-success btn-block" >Submit</button >
+    </div >
+  </div >
+</form >
+<!-- /form -->
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >
