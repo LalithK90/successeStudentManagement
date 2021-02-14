@@ -55,4 +55,8 @@ public class BatchStudentService implements AbstractService<BatchStudent, Intege
   public BatchStudent findByStudentAndBatch(Student student, Batch batch) {
     return batchStudentDao.findByStudentAndBatch(student, batch);
   }
+
+  public List<BatchStudent> findByBatch(Batch batch) {
+  return batchStudentDao.findByBatch(batch);
+  }
 }

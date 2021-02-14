@@ -10,27 +10,28 @@ import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.service.HallService;
 import lk.succes.student_management.asset.student.entity.Student;
 import lk.succes.student_management.asset.subject.service.SubjectService;
+import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.asset.teacher.service.TeacherService;
 import lk.succes.student_management.asset.time_table.entity.TimeTable;
 import lk.succes.student_management.asset.time_table.service.TimeTableService;
+import lk.succes.student_management.asset.user_management.entity.User;
+import lk.succes.student_management.asset.user_management.service.UserService;
 import lk.succes.student_management.util.service.DateTimeAgeService;
 import lk.succes.student_management.util.service.MakeAutoGenerateNumberService;
-import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -44,12 +45,14 @@ public class TimeTableController {
   private final BatchStudentService batchStudentService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
   private final DateTimeAgeService dateTimeAgeService;
+  private final UserService userService;
+
 
   public TimeTableController(TimeTableService timeTableService, HallService hallService,
                              SubjectService subjectService, TeacherService teacherService, BatchService batchService,
                              BatchStudentService batchStudentService,
                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                             DateTimeAgeService dateTimeAgeService) {
+                             DateTimeAgeService dateTimeAgeService, UserService userService) {
     this.timeTableService = timeTableService;
     this.hallService = hallService;
     this.subjectService = subjectService;
@@ -58,6 +61,7 @@ public class TimeTableController {
     this.batchStudentService = batchStudentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.dateTimeAgeService = dateTimeAgeService;
+    this.userService = userService;
   }
 
   @GetMapping
@@ -69,8 +73,25 @@ public class TimeTableController {
 
   @GetMapping( "/byDate" )
   public String byDate(Model model) {
-    HashSet< LocalDate > classDates = new HashSet<>();
     List< TimeTable > timeTables = timeTableService.findAll();
+    return common(timeTables, model);
+  }
+
+  @GetMapping( "/teacher" )
+  public String byTeacher(Model model) {
+    User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+//todo need to think teacher as user
+    Teacher teacher = new Teacher();
+    List< TimeTable > timeTables = timeTableService.findAll()
+        .stream()
+        .filter(x -> x.getBatch().getTeacher().equals(teacher))
+        .collect(Collectors.toList());
+
+    return common(timeTables, model);
+  }
+
+  private String common(List< TimeTable > timeTables, Model model) {
+    HashSet< LocalDate > classDates = new HashSet<>();
     timeTables.forEach(x -> classDates.add(x.getStartAt().toLocalDate()));
 
     List< DateTimeTable > dateTimeTables = new ArrayList<>();

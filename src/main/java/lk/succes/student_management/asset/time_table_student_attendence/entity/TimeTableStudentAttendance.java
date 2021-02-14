@@ -32,4 +32,7 @@ public class TimeTableStudentAttendance extends AuditEntity {
 
   @ManyToOne
   private BatchStudent batchStudent;
+
+  @ManyToOne
+  private TimeTable timeTable;
 }

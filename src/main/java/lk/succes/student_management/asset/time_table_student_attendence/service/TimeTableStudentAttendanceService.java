@@ -46,7 +46,7 @@ public class TimeTableStudentAttendanceService implements AbstractService< TimeT
     return null;
   }
 
-  public TimeTableStudentAttendance lastTimeTable() {
+  public TimeTableStudentAttendance lastTimeTableStudentAttendance() {
     return timeTableStudentAttendanceDao.findFirstByOrderByIdDesc();
   }
 
