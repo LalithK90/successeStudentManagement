@@ -6,6 +6,7 @@ import lk.succes.student_management.asset.batch_student_exam_result.entity.Batch
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.payment.entity.Payment;
 import lk.succes.student_management.asset.student.entity.Student;
+import lk.succes.student_management.asset.time_table_student_attendence.entity.TimeTableStudentAttendance;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.*;
 
@@ -34,5 +35,8 @@ public class BatchStudent extends AuditEntity {
 
   @OneToMany( mappedBy = "batchStudent" )
   private List< BatchStudentExamResult > batchStudentExamResults;
+
+  @OneToMany(mappedBy = "batchStudent")
+  private List< TimeTableStudentAttendance > timeTableStudentAttendances;
 
 }

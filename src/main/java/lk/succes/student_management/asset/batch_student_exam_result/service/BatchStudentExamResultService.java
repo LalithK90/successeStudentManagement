@@ -52,12 +52,5 @@ public class BatchStudentExamResultService implements AbstractService< BatchStud
     return batchStudentExamResultDao.findFirstByOrderByIdDesc();
   }
 
-  public boolean availableTimeTableCheck(LocalDateTime from, LocalDateTime to, BatchStudent batchStudent) {
-    List< BatchStudentExamResult > timeTables = batchStudentExamResultDao.findByBatchStudentAndStartAtIsBetween(batchStudent, from, to);
-    return timeTables.isEmpty();
-  }
 
-  public List< BatchStudentExamResult > findByCreatedAtIsBetween(LocalDateTime from, LocalDateTime to) {
-  return batchStudentExamResultDao.findByStartAtIsBetween(from, to);
-  }
 }

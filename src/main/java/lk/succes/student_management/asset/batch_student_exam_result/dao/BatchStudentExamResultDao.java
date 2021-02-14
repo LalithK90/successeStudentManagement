@@ -14,7 +14,4 @@ public interface BatchStudentExamResultDao extends JpaRepository< BatchStudentEx
 
   BatchStudentExamResult findFirstByOrderByIdDesc();
 
-  List< BatchStudentExamResult > findByBatchStudentAndStartAtIsBetween(BatchStudent batch, LocalDateTime form, LocalDateTime to);
-
-  List< BatchStudentExamResult > findByStartAtIsBetween(LocalDateTime from, LocalDateTime to);
 }
