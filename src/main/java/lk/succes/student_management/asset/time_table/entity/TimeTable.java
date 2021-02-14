@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.hall.entity.Hall;
+import lk.succes.student_management.asset.time_table_student_attendence.entity.TimeTableStudentAttendance;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -44,5 +46,6 @@ public class TimeTable extends AuditEntity {
   @ManyToOne
   private Hall hall;
 
-
+  @OneToMany(mappedBy = "timeTable")
+  private List< TimeTableStudentAttendance > timeTableStudentAttendances;
 }

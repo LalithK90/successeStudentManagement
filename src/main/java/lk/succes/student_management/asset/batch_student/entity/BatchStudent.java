@@ -19,7 +19,7 @@ import java.util.List;
 @JsonFilter( "BatchStudent" )
 public class BatchStudent extends AuditEntity {
 
-  @Enumerated( EnumType.STRING)
+  @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
   @ManyToOne
@@ -28,6 +28,7 @@ public class BatchStudent extends AuditEntity {
   @ManyToOne
   private Student student;
 
-  @OneToMany(mappedBy = "batchStudent")
+  @OneToMany( mappedBy = "batchStudent" )
   private List< Payment > payments;
+
 }
