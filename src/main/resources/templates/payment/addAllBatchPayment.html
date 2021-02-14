@@ -40,6 +40,10 @@
     </div >
   </div >
 </div >
+<div class="container-fluid form-row" >
+  <div class="col-6 text-right" >Total Amount</div >
+  <div class="col-6 text-left" ><span id="totalAmount" ></span ></div >
+</div >
 <form action="/payment/batchStudent/save" data-th-object="${student}" method="post" >
   <input type="hidden" data-th-field="*{id}" hidden />
   <div class="container-fluid" id="payment" role="tablist" aria-multiselectable="true" >
@@ -89,7 +93,8 @@
             </div >
             <div class="col-6" >
               <div class="container-fluid" >
-                <table class="table table-striped table-inverse table-responsive" >
+                <table class="table table-striped table-inverse table-responsive"
+                       data-th-id="${'tb'+batchIndex.index}" >
                   <thead class="thead-inverse" >
                   <tr >
                     <th >Month</th >
@@ -115,24 +120,25 @@
                              readonly required >
                     </td >
                     <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
-                      <div class="custom-control custom-checkbox custom-control-inline form-row"
-                           data-th-each="paymentStatus,index : ${paymentStatuses}" >
-                        <input class="custom-control-input gender" required
-                               data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
-                               data-th-value="${paymentStatus}"
-                               data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
-                               data-th-checked="${paymentStatus==payment.paymentStatus}" />
-                        <label class="custom-control-label"
-                               data-th-for="${paymentIndex.index+'pb'+index.index}"
-                               data-th-text="${paymentStatus.paymentStatus}" > radio
-                        </label >
+                      <div class="form-row" >
+                        <div class="custom-control custom-checkbox custom-control-inline "
+                             data-th-each="paymentStatus,index : ${paymentStatuses}" >
+                          <input class="custom-control-input" required onchange="paymentCheck(this)"
+                                 data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
+                                 data-th-value="${paymentStatus}"
+                                 data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
+                                 data-th-checked="${paymentStatus==payment.paymentStatus}" />
+                          <label class="custom-control-label"
+                                 data-th-for="${paymentIndex.index+'pb'+index.index}"
+                                 data-th-text="${paymentStatus.paymentStatus}" > radio
+                          </label >
+                        </div >
                       </div >
                       <!--batchStudent-->
                       <input type="hidden" data-th-field="*{batchStudents[__${batchIndex.index}__].id}" >
                       <!--live dead-->
                       <input type="hidden" class="form-control"
                              data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].liveDead}" >
-
                     </td >
                   </tr >
                   </tbody >
@@ -144,104 +150,16 @@
       </div >
     </div >
   </div >
-  <!--  <div class="container-fluid"  data-th-each="batchStudent, batchIndex : ${student.batchStudents}" >
-      <div class="form-row" >
-        <div class="col-6" >
-          <div class="form-row" >
-            <label data-th-for="${code}" class="col-sm-3 control-label" >Class reference</label >
-            <div class="col-sm-6" >
-              <p type="text" class="form-control" data-th-text="${batchStudent.batch.code}" >
-            </div >
-          </div >
-          <div class="form-row" >
-            <label data-th-for="${year}" class="col-sm-3 control-label" >Academic Year</label >
-            <div class="col-sm-6" >
-              <p type="text" class="form-control" data-th-text="${batchStudent.batch.year}" >
-            </div >
-          </div >
-          <div class="form-row" >
-            <label data-th-for="${grade}" class="col-sm-3 control-label" >Grade</label >
-            <div class="col-sm-6" >
-              <p type="text" class="form-control" data-th-text="${batchStudent.batch.grade}" >
-            </div >
-          </div >
-          <div class="form-row" >
-            <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher</label >
-            <div class="col-sm-6" >
-              <p type="text" class="form-control" data-th-text="${batchStudent.batch.teacher.firstName}" >
-            </div >
-          </div >
-          <div class="form-row" >
-            <label data-th-for="${'name'}" class="col-sm-3 control-label" > Name</label >
-            <div class="col-sm-6" >
-              <p type="text" class="form-control" data-th-text="${batchStudent.batch.name}" >
-            </div >
-          </div >
-        </div >
-        <div class="col-6" >
-          <div class="container-fluid" >
-            <table class="table table-striped table-inverse table-responsive" >
-              <thead class="thead-inverse" >
-              <tr >
-                <th >Month</th >
-                <th >Amount</th >
-                <th >P. Status</th >
-              </tr >
-              </thead >
-              <tbody >
-              <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" >
-                <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
-                  &lt;!&ndash;id&ndash;&gt;
-                  <input type="hidden"
-                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].id}" >
-                  &lt;!&ndash;month&ndash;&gt;
-                  <input type="text" class="form-control"
-                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].month}"
-                         readonly required >
-                </td >
-                <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
-                  &lt;!&ndash;amount&ndash;&gt;
-                  <input type="text" class="form-control" data-th-id="${'vl'+paymentIndex.index}"
-                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].amount}"
-                         readonly required >
-                </td >
-                <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
-                  <div class="custom-control custom-checkbox custom-control-inline form-row"
-                       data-th-each="paymentStatus,index : ${paymentStatuses}" >
-                    <input class="custom-control-input gender" required
-                           data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
-                           data-th-value="${paymentStatus}"
-                           data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
-                           data-th-checked="${paymentStatus==payment.paymentStatus}" />
-                    <label class="custom-control-label"
-                           data-th-for="${paymentIndex.index+'pb'+index.index}"
-                           data-th-text="${paymentStatus.paymentStatus}" > radio
-                    </label >
-                  </div >
-                  &lt;!&ndash;batchStudent&ndash;&gt;
-                  <input type="hidden" data-th-field="*{batchStudents[__${batchIndex.index}__].id}" >
-                  &lt;!&ndash;live dead&ndash;&gt;
-                  <input type="hidden" class="form-control"
-                         data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].liveDead}" >
-
-                </td >
-              </tr >
-              </tbody >
-            </table >
-          </div >
-        </div >
-      </div >
-    </div >-->
 
   <div class="row container-fluid" >
     <div class="col-sm-2 col-sm-offset-2" >
-      <button type="link" class="btn btn-danger btn-block" >Back</button >
+      <a href="/payment" >
+        <button type="button" class="btn btn-danger btn-block" >Back</button >
+      </a >
     </div >
-
     <div class="col-sm-2 col-sm-offset-2" >
       <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
     </div >
-
     <div class="col-sm-2 col-sm-offset-2" >
       <button type="submit" class="btn btn-success btn-block" >Submit</button >
     </div >
@@ -252,7 +170,27 @@
 <!--script is included-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
-  //todo-> javascript part
+    $("#totalAmount").html('0.00');
+
+    function paymentCheck(paymentValue) {
+        let filedId = '';
+        for (let i = 0; 1 < paymentValue.id.length; i++) {
+            if (paymentValue.id[i] === 'p') {
+                break;
+            }
+            filedId += paymentValue.id[i];
+        }
+        let amount = $(`#vl${filedId}`).val();
+        if (paymentValue.value === 'PAID') {
+            let total = parseFloat($("#totalAmount").html()) + parseFloat(amount);
+            $("#totalAmount").html(total);
+        } else {
+            let total = parseFloat($("#totalAmount").html()) - parseFloat(amount);
+            $("#totalAmount").html(total);
+        }
+
+    }
+
 
 </script >
 </body >

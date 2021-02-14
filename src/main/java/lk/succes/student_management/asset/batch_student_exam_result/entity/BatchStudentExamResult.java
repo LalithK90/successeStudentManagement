@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.batch_student_exam_result.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
+import lk.succes.student_management.asset.batch_exam.entity.BatchExam;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.enums.AttendanceStatus;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
@@ -41,5 +42,8 @@ public class BatchStudentExamResult extends AuditEntity {
 
   @ManyToOne
   private BatchStudent batchStudent;
+
+  @ManyToOne
+  private BatchExam batchExam;
 
 }
