@@ -4,6 +4,7 @@ package lk.succes.student_management.asset.batch.entity;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes.student_management.asset.batch.entity.enums.Grade;
+import lk.succes.student_management.asset.batch_exam.entity.BatchExam;
 import lk.succes.student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.teacher.entity.Teacher;
@@ -56,6 +57,9 @@ public class Batch extends AuditEntity {
 
   @OneToMany( mappedBy = "batch" )
   private List< TimeTable > timeTables;
+
+  @OneToMany( mappedBy = "batch" )
+  private List< BatchExam > batchExams;
 
   @Transient
   private int count;

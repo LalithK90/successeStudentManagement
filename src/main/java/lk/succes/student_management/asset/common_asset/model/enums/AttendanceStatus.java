@@ -1,4 +1,4 @@
-package lk.succes.student_management.asset.time_table_student_attendence.entity.enums;
+package lk.succes.student_management.asset.common_asset.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -54,7 +54,6 @@ public class EmployeeController {
     model.addAttribute("civilStatus", CivilStatus.values());
     model.addAttribute("employeeStatus", EmployeeStatus.values());
     model.addAttribute("designation", Designation.values());
-    model.addAttribute("bloodGroup", BloodGroup.values());
     return "employee/addEmployee";
   }
 
