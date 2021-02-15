@@ -5,7 +5,7 @@ import lk.succes_student_management.asset.batch.service.BatchService;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
 import lk.succes_student_management.asset.batch_exam.service.BatchExamService;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,14 +17,15 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping( "/batchExam" )
 public class BatchExamController {
-
   private final BatchService batchService;
-
   private final BatchExamService batchExamService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-  public BatchExamController(BatchService batchService, BatchExamService batchExamService) {
+  public BatchExamController(BatchService batchService, BatchExamService batchExamService,
+                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.batchService = batchService;
     this.batchExamService = batchExamService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
 
   @GetMapping
@@ -49,7 +50,7 @@ public class BatchExamController {
     BatchExam batchExam = new BatchExam();
     batchExam.setBatch(batch);
     batchExam.setStartAt(LocalDateTime.now());
-
+    model.addAttribute("batchExams", batch.getBatchExams());
     model.addAttribute("batchExam", batchExam);
     return "batchExam/addBatchExam";
   }
@@ -63,6 +64,7 @@ public class BatchExamController {
   @GetMapping( "/edit/{id}" )
   public String edit(@PathVariable Integer id, Model model) {
     BatchExam batchExam = batchExamService.findById(id);
+    model.addAttribute("batchExams", batchService.findById(batchExam.getBatch().getId()).getBatchExams());
     model.addAttribute("batchDetail", batchExam.getBatch());
     model.addAttribute("batchExam", batchExam);
     model.addAttribute("addStatus", true);
@@ -75,6 +77,16 @@ public class BatchExamController {
     if ( bindingResult.hasErrors() ) {
       return "redirect:/batchExam/add" + batchExam.getBatch().getId();
     }
+    if ( batchExam.getId() ==null ) {
+      BatchExam lastBatchExam = batchExamService.lastBatchExamDB();
+      if ( lastBatchExam != null ) {
+        String lastNumber = lastBatchExam.getCode().substring(3);
+        batchExam.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
+      } else {
+        batchExam.setCode("SSB" + makeAutoGenerateNumberService.numberAutoGen(null));
+      }
+    }
+
     batchExamService.persist(batchExam);
     return "redirect:/batchExam/teacher";
   }

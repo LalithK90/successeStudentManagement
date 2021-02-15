@@ -1,4 +1,5 @@
 package lk.succes_student_management.asset.batch_exam.service;
+
 import lk.succes_student_management.asset.batch.entity.Batch;
 import lk.succes_student_management.asset.batch_exam.dao.BatchExamDao;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BatchExamService implements AbstractService< BatchExam, Integer> {
+public class BatchExamService implements AbstractService< BatchExam, Integer > {
   private final BatchExamDao batchExamDao;
 
   public BatchExamService(BatchExamDao batchExamDao) {
@@ -25,7 +26,7 @@ public class BatchExamService implements AbstractService< BatchExam, Integer> {
   }
 
   public BatchExam persist(BatchExam batchExam) {
-    if(batchExam.getId() ==null){
+    if ( batchExam.getId() == null ) {
       batchExam.setLiveDead(LiveDead.ACTIVE);
     }
     return batchExamDao.save(batchExam);
@@ -38,13 +39,17 @@ public class BatchExamService implements AbstractService< BatchExam, Integer> {
     return false;
   }
 
-  public List<BatchExam> search(BatchExam batchExam) {
+  public List< BatchExam > search(BatchExam batchExam) {
     return null;
   }
 
 
   public int countByBatch(Batch batch) {
-  return batchExamDao.countByBatch(batch);
+    return batchExamDao.countByBatch(batch);
+  }
+
+  public BatchExam lastBatchExamDB() {
+    return batchExamDao.findFirstByOrderByIdDesc();
   }
 
 }

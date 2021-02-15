@@ -11,5 +11,7 @@ import java.util.List;
 public interface BatchExamDao extends JpaRepository< BatchExam, Integer> {
   int countByBatch(Batch batch);
 
+  BatchExam findFirstByOrderByIdDesc();
+
   List< BatchExam> findByBatch(Batch batch);
 }

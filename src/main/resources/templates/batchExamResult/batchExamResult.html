@@ -50,10 +50,10 @@
                     <a data-th-href="${'/batchExam/delete/'+ batchExam.id}">
                         <button type="button" class="btn btn-danger">Delete</button>
                     </a>
-                    <a data-th-href="${'/batchStudentExamResult/addAttendance/'+ batchExam.id}">
+                    <a data-th-href="${'/batchStudentExamResult/addAttendance/'+ batchExam.batch.id}">
                         <button type="button" class="btn btn-primary">Mark Attendance</button>
                     </a>
-                    <a data-th-href="${'/batchStudentExamResult/addResult'+ batchExam.id}">
+                    <a data-th-href="${'/batchStudentExamResult/addResult'+ batchExam.batch.id}">
                         <button type="button" class="btn btn-success">Add Result</button>
                     </a>
                 </td>
