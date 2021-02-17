@@ -1,5 +1,6 @@
 package lk.succes.student_management.asset.teacher.service;
 
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.teacher.dao.TeacherDao;
 import lk.succes.student_management.asset.teacher.entity.Teacher;
 import lk.succes.student_management.util.interfaces.AbstractService;
@@ -24,21 +25,21 @@ public class TeacherService implements AbstractService<Teacher, Integer> {
     }
 
     public Teacher persist(Teacher teacher) {
+        if(teacher.getId() ==null){
+            teacher.setLiveDead(LiveDead.ACTIVE);
+        }
         return teacherDao.save(teacher);
     }
 
     public boolean delete(Integer id) {
-        teacherDao.deleteById(id);
+        Teacher teacher = teacherDao.getOne(id);
+        teacher.setLiveDead(LiveDead.STOP);
+        teacherDao.save(teacher);
         return false;
     }
 
     public List<Teacher> search(Teacher teacher) {
         return null;
-    }
-
-
-    public Teacher lastTeacher() {
-        return teacherDao.findFirstByOrderByIdDesc();
     }
 
     public Teacher lastTeacherOnDB() {return teacherDao.findFirstByOrderByIdDesc();

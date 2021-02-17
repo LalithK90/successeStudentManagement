@@ -19,7 +19,7 @@
         <h1>Subject Management</h1>
     </div>
     <div class="col-4">
-        <a href="/subject/new">
+        <a href="/subject/add">
             <button class="btn btn-primary" align="center">New Subject</button>
         </a>
     </div>
@@ -43,8 +43,7 @@
                             <td data-th-text="${subject.name}"></td>
                             <td data-th-text="${subject.code}"></td>
                             <td>
-                                <a data-th-href="${'/subject/view/'+ subject.id}"><button class="btn btn-info">View</button></a>
-                                <a data-th-href="${'/subject/edit/'+ subject.id}"><button class="btn btn-success">Edit</button></a>
+                                 <a data-th-href="${'/subject/edit/'+ subject.id}"><button class="btn btn-success">Edit</button></a>
                                 <a data-th-href="${'/subject/delete/'+ subject.id}"><button class="btn btn-danger">Delete</button></a>
                             </td>
                         </tr>
@@ -54,8 +53,8 @@
 </div>
 
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

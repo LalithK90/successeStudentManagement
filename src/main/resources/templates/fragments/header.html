@@ -1,71 +1,43 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="headerFragment">
-    <title th:if="${headerTitle==null}" th:text="${'W3Academy'}">Success Student Management System</title>
-    <title th:if="${headerTitle!=null}" th:text="${headerTitle}">SSuccess Student Management System</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:fragment="headerFragment" >
+    <title   data-th-if="${headerTitle==null}"   data-th-text="${'Success Student'}" >Spring boot - Thymeleaf</title >
+    <title   data-th-if="${headerTitle!=null}"   data-th-text="${headerTitle}" >Spring boot - Thymeleaf</title >
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
 
     <!-- Bootstrap core CSS Downloaded file add-->
-    <link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css} " media="all" rel="stylesheet" type="text/css"/>
+    <link data-th-href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css} " media="all" rel="stylesheet" type="text/css" />
 
-<!--    &lt;!&ndash;Jquery ui&ndash;&gt;-->
-<!--    <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css} " media="all" rel="stylesheet" type="text/css"/>-->
-<!--    <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.structure.css}" media="all" rel="stylesheet" type="text/css"/>-->
-<!--    <link th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.theme.css}" media="all" rel="stylesheet" type="text/css"/>-->
+    <!--Jquery ui-->
+    <link data-th-href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css} " media="all" rel="stylesheet" type="text/css" />
+    <link data-th-href="@{/webjars/jquery-ui/1.12.1/jquery-ui.structure.css}" media="all" rel="stylesheet" type="text/css" />
+    <link data-th-href="@{/webjars/jquery-ui/1.12.1/jquery-ui.theme.css}" media="all" rel="stylesheet" type="text/css" />
 
-<!--    &lt;!&ndash;Pdf js &ndash;&gt;-->
-<!--    <link th:href="@{/webjars/pdf-js/2.3.200/web/viewer.css}" media="all" rel="stylesheet" type="text/css">-->
+    <!--Pdf js -->
+    <!--<link data-th-href="@{/webjars/pdf-js/2.3.200/web/viewer.css}" media="all" rel="stylesheet" type="text/css">-->
 
-<!--    &lt;!&ndash;Chart js&ndash;&gt;-->
-<!--    <link th:href="@{/webjars/chart.js/2.9.3/dist/Chart.min.css}" media="all" rel="stylesheet" type="text/css">-->
+    <!--Chart js-->
+    <link data-th-href="@{/webjars/chart.js/2.9.3/dist/Chart.min.css}" media="all" rel="stylesheet" type="text/css" >
 
-<!--    &lt;!&ndash;table pagination&ndash;&gt;-->
-<!--    <link th:href="@{/css/dataTables.bootstrap.min.css}" media="all" rel="stylesheet" type="text/css"/>-->
-<!--    &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
-<!--    <link th:href="@{/css/myCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
-<!--    &lt;!&ndash;image uploader css&ndash;&gt;-->
-<!--    <link th:href="@{/css/image-uploader.min.css}" media="all" rel="stylesheet" type="text/css"/>-->
-<!--    &lt;!&ndash;Floating Label&ndash;&gt;-->
-<!--    <link th:href="@{/css/floating-labels.css}" media="all" rel="stylesheet" type="text/css"/>-->
-<!--    &lt;!&ndash;style for main window&ndash;&gt;-->
-<!--    <link th:href="@{/css/stylemainwindow.css}" media="all" rel="stylesheet" type="text/css"/>-->
-<!--    &lt;!&ndash;Animations&ndash;&gt;-->
-<!--    <link th:href="@{/css/animate.css}" media="all" rel="stylesheet" type="text/css"/>-->
+    <!--table pagination-->
+    <link data-th-href="@{/css/dataTables.bootstrap.min.css}" media="all" rel="stylesheet" type="text/css" />
+    <!-- Custom styles for this template -->
+    <!--<link data-th-href="@{/css/myCss.css}" media="all" rel="stylesheet" type="text/css"/>-->
+    <!-- fontawesome css -->
+    <link data-th-href="@{/webjars/font-awesome/5.11.2/css/fontawesome.min.css} " media="all" rel="stylesheet"
+          type="text/css" />
+    <!--Floating Label-->
+    <link data-th-href="@{/css/floating-labels.css}" media="all" rel="stylesheet" type="text/css" />
 
-<!--    <link th:href="@{/css/cards.css}" media="all" rel="stylesheet" type="text/css"/>-->
-
-<!--    &lt;!&ndash; Icons font CSS&ndash;&gt;-->
-<!--    <link th:href="@{vendor/mdi-font/css/material-design-iconic-font.min.css}" rel="stylesheet" media="all">-->
-<!--    &lt;!&ndash; Font special for pages&ndash;&gt;-->
-<!--    <link th:href="@{https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i}" rel="stylesheet">-->
-
-<!--    &lt;!&ndash; Vendor CSS&ndash;&gt;-->
-<!--    <link th:href="@{vendor/select2/select2.min.css}" rel="stylesheet" media="all">-->
-<!--    <link th:href="@{vendor/datepicker/daterangepicker.css}" rel="stylesheet" media="all">-->
-
-    <!-- Main CSS-->
-    <link th:href="@{css/main.css}" rel="stylesheet" media="all">
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--SB admin css-->
+    <link data-th-href="@{/css/sb-admin-2.min.css}" media="all" rel="stylesheet" type="text/css" >
 
 
+</head >
+<body >
 
-</head>
-<body>
 
-
-</body>
-</html>
-
+</body >
+</html >

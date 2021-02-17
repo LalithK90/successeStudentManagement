@@ -29,7 +29,7 @@
                 <input type="text" readonly data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" data-th-if="${addStatus== false}">
             <label class="col-sm-2 control-label" data-th-for="${registrationId}">Registration ID</label>
             <div class="col-sm-5">
                 <input type="text" id="registrationId" class="form-control" data-th-field="*{registrationId}">
@@ -48,16 +48,31 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">Gender</label>
-            <div class="col-sm-9">
-              <select id="gender" data-th-field="*{gender}" class="form-control" tabindex="7" required >
-                <option value="" >Please select</option >
-                <option data-th-each="genders : ${gender}"
-                        data-th-text="${genders.gender}"
-                        data-th-value="${genders}" ></option >
-              </select >
+            <label class="col-sm-2 control-label" data-th-for="${nic}">NIC</label>
+            <div class="col-sm-4">
+                <input type="text" id="nic" class="form-control" data-th-field="*{nic}">
             </div>
         </div>
+        <!--Gender-->
+        <div class="form-row text-right" >
+            <div class="col-md-4" >
+                <label class="control-label" for="gender" >Gender :</label >
+            </div >
+            <div class="col-md-8" >
+                <div class="custom-control custom-checkbox custom-control-inline "
+                     data-th-each="genders,index : ${gender}">
+                    <input class="custom-control-input gender" required
+                           data-th-name="${'gender'}"
+                           data-th-value="${genders}"
+                           data-th-id="${index.index}+${genders}" type="radio"
+                           data-th-checked="${genders==gender}"/>
+                    <label class="custom-control-label"
+                           data-th-for="${index.index}+${genders}"
+                           data-th-text="${genders.gender}"> radio
+                    </label>
+                </div>
+            </div >
+        </div >
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${dateOfBirth}">Date of birth</label>
             <div class="col-sm-4">
@@ -86,23 +101,25 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${subject}">Subject</label>
             <div class="col-sm-4">
-              <select id="subject" data-th-field="*{subject}" class="form-control" tabindex="7" required >
-                <option value="" >Please select</option >
-                <option data-th-each="subject : ${subjects}"
-                        data-th-text="${subject.name}"
-                        data-th-value="${subject.id}" ></option >
-              </select >   </div>
+                <select id="subject" data-th-field="*{subject}" class="form-control" tabindex="7" required >
+                    <option value="" >Please select</option >
+                    <option data-th-each="subject : ${subjects}"
+                            data-th-text="${subject.name}"
+                            data-th-value="${subject.id}" ></option >
+                </select >   </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${fee}">Tution Fee</label>
             <div class="col-sm-4">
-                <input type="text" id="fee" class="form-control" data-th-field="*{fee}">
+                <input type="number" id="fee" class="form-control" data-th-field="*{fee}">
             </div>
         </div>
 
         <div class="row container-fluid">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
+                <a href="/subject" >
+                    <button type="button" class="btn btn-danger btn-block" >Back</button >
+                </a >
             </div>
 
             <div class="col-sm-2 col-sm-offset-2">
@@ -116,8 +133,8 @@
     </form>
 </div>
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

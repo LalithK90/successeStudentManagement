@@ -1,108 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Success TimeTable Management</title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success TimeTable Management</title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-secondary">
-    <div class="col-4">
-    </div>
-    <div class="col-4">
-        <h1>TimeTable Management - Add New TimeTable</h1>
-    </div>
-    <div class="col-4">
-        <a href="/timeTable">
-            <button class="btn btn-primary">View All On Time Table</button>
-        </a>
-    </div>
-</div>
-<div class="container-fluid">
-    <form action="/timeTable/save" data-th-object="${timeTable}" method="post">
-        <!--timeTable id-->
-        <div class="form-row text-right" data-th-if="${addStatus==false}">
-            <div class="col-md-4">
-                <label data-th-for="${id}">Id</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{id}" readonly type="text">
-            </div>
-        </div>
-        <!--Slot ID-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${slotId}">Slot ID :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{slotId}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{slotId}"
-                      data-th-if="${#fields.hasErrors('slotId')}">Error Name</span>
-            </div>
-        </div>
-        <!--Date-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${date}">Date :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{date}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{date}"
-                      data-th-if="${#fields.hasErrors('date')}">Error Name</span>
-            </div>
-        </div>
-        <!--Time-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${time}">Time :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{time}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{time}"
-                      data-th-if="${#fields.hasErrors('time')}">Error Name</span>
-            </div>
-        </div>
+<div class="row bg-secondary" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >TimeTable Management - Add New TimeTable</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/timeTable" >
+      <button class="btn btn-primary" >View All On Time Table</button >
+    </a >
+  </div >
+</div >
+<div class="container-fluid" >
+  <form action="/timeTable/save" data-th-object="${batches}" method="post" >
 
-        <!--Teacher-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${teacher}">Teacher :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{teacher}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{teacher}"
-                      data-th-if="${#fields.hasErrors('teacher')}">Error Name</span>
-            </div>
-        </div>
+    <div class="container-fluid" >
+      <table class="table table-responsive" id="timeTable" >
+        <tr >
+          <th data-th-if="${!addStatus}" >Index</th >
+          <th data-th-if="${!addStatus}" >Code</th >
+          <th >Batch Name</th >
+          <th >Student Count</th >
+          <th >Lesson</th >
+          <th >Start At</th >
+          <th >End At</th >
+          <th >Hall</th >
+          <th data-th-if="${!addStatus}" >Activity</th >
+          <th data-th-if="${!addStatus}" >Comment</th >
+        </tr >
+        <tr data-th-each="batch, index : ${batches.timeTables}" >
+          <th data-th-if="${!addStatus}" data-th-text="${index.count}" ></th >
+          <th data-th-if="${!addStatus}" >
+            <input type="text" class="form-control" data-th-name="${'batches.timeTables[__${index.index}__].code'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].code}" required
+                   readonly >
+          </th >
+          <th >
+            <input type="text" class="form-control"
+                   data-th-value="${batches.timeTables[__${index.index}__].batch.name}" required readonly >
+            <input type="hidden" class="form-control" data-th-name="${'timeTables[__${index.index}__].batch.id'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].batch.id}" required readonly >
+          </th >
+          <th >
+            <input type="text" class="form-control"
+                   data-th-value="${batches.timeTables[__${index.index}__].batch.count}" required
+                   readonly >
+          </th >
+          <th >
+            <input type="text" class="form-control" data-th-name="${'timeTables[__${index.index}__].lesson'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].lesson}" required >
+          </th >
+          <th >
+            <input type="datetime-local" class="form-control startAt"
+                   data-th-id="${'sAt'+index.index}"
+                   data-th-name="${'timeTables[__${index.index}__].startAt'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].startAt}" required >
+          </th >
+          <th >
+            <input type="datetime-local" class="form-control endAt"
+                   data-th-id="${'eAt'+index.index}"
+                   data-th-name="${'timeTables[__${index.index}__].endAt'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].endAt}" required >
+          </th >
+          <th >
+            <select data-th-name="${'timeTables[__${index.index}__].hall.id'}"
+                    data-th-id="${'hAt'+index.index}"
+                    data-th-value="${batches.timeTables[__${index.index}__].hall}" required
+                    class="form-control hall" >
+              <option value="" >Please select</option >
+              <option data-th-each="hall : ${halls}"
+                      data-th-value="${hall.id}"
+                      data-th-text="${'Name : '+hall.name+' Seats : '+ hall.seatCount}" ></option >
+            </select >
+          </th >
+          <th data-th-if="${!addStatus}" >
+            <div class="col" >
+              <div class="custom-control custom-checkbox custom-control-inline "
+                   data-th-each="liveDead : ${liveDeads}" >
+                <input class="custom-control-input" required
+                       data-th-name="${'timeTables[__${index.index}__].liveDead'}"
+                       data-th-value="${liveDead}"
+                       data-th-id="${index.index}+${liveDead}" type="radio"
+                       data-th-checked="${liveDead==batches.timeTables[__${index.index}__].liveDead}" />
+                <label class="custom-control-label"
+                       data-th-for="${index.index}+${liveDead}"
+                       data-th-text="${liveDead.liveDead}" > radio
+                </label >
+              </div >
+            </div >
+          </th >
+          <th data-th-if="${!addStatus}" >
+            <input type="text" class="form-control"
+                   data-th-name="${'timeTables[__${index.index}__].remark'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].remark}" required >
+          </th >
+        </tr >
+      </table >
+    </div >
+    <!--Button-->
+    <div class="form-batch col-md-12 col-sm-12 text-center flex-column " >
+      <button class="btn btn-success" tabindex="21" type="submit" >
+        <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp; &nbsp;<span
+            data-th-text="${addStatus==true?'Save': 'Update'}"
+            id="submit" ></span >
+      </button >
+    </div >
+  </form >
+</div >
 
-        <!--Hall Number-->
-        <div class="form-row text-right">
-            <div class="col-md-4">
-                <label class="control-label" data-th-for="${hallNumber}">hallNumber :</label>
-            </div>
-            <div class="col-md-8">
-                <input class="form-control" data-th-field="*{hallNumber}" required tabindex="4" type="text"/>
-                <span data-th-errors="*{hallNumber}"
-                      data-th-if="${#fields.hasErrors('hallNumber')}">Error Name</span>
-            </div>
-        </div>
-        <!--Button-->
-        <div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
-            <button class="btn btn-success" tabindex="21" type="submit">
-                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span
-                    data-th-text="${addStatus==true?'Save': 'Update'}"
-                    id="submit"></span>
-            </button>
-        </div>
-    </form>
-</div>
+<input type="hidden" data-th-value="${date}" id="date" >
 
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-</body>
-</html>
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    let timeTableSlots = [];
+    let date = $("#date").val();
+    $(document).ready(function () {
+        let max = date + "T20:00";
+        let min = date + "T06:00";
+        $(".startAt, .endAt").attr({'max': max, 'min': min});
+        let timeSlot = {};
+        for (let x = 0; x < $('#timeTable tr').length - 1; x++) {
+            timeSlot.id = x;
+            timeSlot.sAt = $(`#sAt${x}`).val();
+            timeSlot.eAt = $(`#eAt${x}`).val();
+            timeSlot.hAt = $(`#hAt${x}`).val();
+            timeTableSlots.push(timeSlot);
+            timeSlot = {};
+        }
+
+        if (timeTableSlots.length >= 1) {
+            $(".startAt, .endAt,.hall").bind('change', function () {
+
+                    let selectedFiledId = $(this).attr('id').slice(3);
+                    let startAt = $(`#sAt${selectedFiledId}`).val();
+                    let endAt = $(`#eAt${selectedFiledId}`).val();
+                    let hallValue = $(`#hAt${selectedFiledId}`).val();
+
+                    if (startAt && endAt) {
+                        if (Date.parse(startAt) > Date.parse(endAt)) {
+                            swal({
+                                title: "Could you accept those days.. !",
+                                icon: "warning",
+                                text: "Please check your date \n Expire Date can not be less than Manufacture Date",
+                            })
+                            $(`#sAt${selectedFiledId}`).addClass('bg-danger').removeClass('bg-success bg-white');
+                            $(`#eAt${selectedFiledId}`).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+                        } else if (hallValue) {
+                            let timeSlot = {};
+                            let timeTableSlotsLength = timeTableSlots.length;
+                            timeSlot.id = parseInt(selectedFiledId);
+                            timeSlot.sAt = startAt;
+                            timeSlot.eAt = endAt;
+                            timeSlot.hAt = hallValue;
+                            for (let y = 0; y < timeTableSlotsLength; y++) {
+                                console.log(timeSlot)
+                                if (timeTableSlots[y].sAt === timeSlot.sAt && timeTableSlots[y].eAt === timeSlot.eAt && timeTableSlots[y].hAt === timeSlot.hAt) {
+                                    swal({
+                                        title: "Could you accept those days.. !",
+                                        icon: "warning",
+                                        text: "Please check your date selected data \n This time slot and hall is already allocate another slot ",
+                                    })
+                                    $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}, #hAt${selectedFiledId} `).val('').addClass('bg-danger').removeClass('bg-success bg-white');
+                                    return -1;
+                                } else if (timeTableSlots[y].id === timeSlot.id) {
+                                    timeTableSlots[y].id = timeSlot.id;
+                                    timeTableSlots[y].sAt = timeSlot.sAt;
+                                    timeTableSlots[y].eAt = timeSlot.eAt;
+                                    timeTableSlots[y].hAt = timeSlot.hAt;
+                                    timeSlot = {};
+                                }
+                            }
+                        } else {
+                            $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-success').removeClass('bg-danger bg-white');
+                        }
+                    } else {
+                        $(`#sAt${selectedFiledId}, #eAt${selectedFiledId}`).addClass('bg-white').removeClass('bg-success bg-danger');
+                    }
+                }
+            )
+        } else {
+            swal({
+                title: `${date}`,
+                icon: "warning",
+                text: "There is no registered batches to add time table on .. !",
+                buttons: {
+                    text: "Go to Date",
+                },
+            }).then((value) => {
+                if (value) {
+                    location.replace(document.location.origin + '/timeTable/add')
+                }
+            });
+        }
+    });
+
+</script >
+</body >
+</html >

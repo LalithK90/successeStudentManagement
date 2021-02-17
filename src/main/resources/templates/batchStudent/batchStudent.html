@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Thymeleaf Springboot </title >
+</head >
+<body >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<!--heading Area-->
+<div class="container-fluid  form-Border" >
+  <div class="row text-center formManagement border-info" >
+    <div class="col" >
+      <a href="/home" id="btnHome" class="btn btn-outline-info" >
+        &nbsp;Back To Home&nbsp;
+      </a >
+    </div >
+
+    <div class="col" >
+      <a class="btn btn-info" href="/batch/add" ><i class="fa fa-plus" ></i >
+        &nbsp;Add New</a >
+    </div >
+
+  </div >
+  <div class="row text-center" >
+    <div class="col" >
+      <h4 class="text-info text-center" >
+        <strong >
+          Active Batches
+        </strong >
+      </h4 >
+    </div >
+  </div >
+</div >
+<div class="container-fluid formBorder text-center" >
+  <div class="col" >
+    <div class="col" id="employeeListPresent"   data-th-if="${not #lists.isEmpty(batches)}" >
+      <table class="table table-hover table-striped" id="myTable" >
+        <thead >
+        <tr >
+          <th > Index</th >
+          <th > Code</th >
+          <th > Name</th >
+          <th > Teacher Name</th >
+          <th > Student Count</th >
+          <th > Modify</th >
+        </tr >
+        </thead >
+        <tbody >
+        <tr   data-th-each="batch, rowCount : ${batches}" >
+          <th   data-th-text="${rowCount.count}" ></th >
+          <th   data-th-text="${batch.code}" ></th >
+          <th   data-th-text="${batch.name}" ></th >
+          <th   data-th-text="${batch.teacher.firstName}" ></th >
+          <th   data-th-text="${batch.count}" ></th >
+          <th >
+            <a   data-th-href="${'/batchStudent/batch/' + batch.id}" class="btn btn-outline-secondary btn-sm" >&nbsp;Add Student</a >
+            <a   data-th-href="${'/batchStudent/batch/student/' + batch.id}" class="btn btn-primary btn-sm" ><i class="fa fa-edit" ></i >&nbsp;Show
+                                                                                                                     Student</a >
+          </th >
+        </tr >
+        </tbody >
+      </table >
+    </div >
+  </div >
+  <div class="row"   data-th-if="${ #lists.isEmpty(batches)}" >
+    <div class="col-sm-12" >
+      <div class="alert alert-warning alert-dismissible fade show" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+          <span aria-hidden="true" >&times;</span >
+        </button >
+        <h3 class="text-center text-danger" >
+          <strong >There is no active batches upto now please add batch to the system
+                   using add user button.
+          </strong >
+        </h3 >
+      </div >
+    </div >
+  </div >
+</div >
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script include-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+<script >
+    /*active boostrap alert - start*/
+    $(".alert").alert();
+    /*active boostrap alert - end*/
+</script >
+</body >
+</html >

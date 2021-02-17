@@ -1,6 +1,7 @@
 package lk.succes.student_management.asset.school.entity;
 
 
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,10 @@ public class School {
 
     @Column(nullable = false, length = 45, unique = true)
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private LiveDead liveDead;
+
 
 
 }

@@ -1,85 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Student Management</title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Student Management</title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-secondary">
-    <div class="col-4">
-        <a href="/timeTable/new">
-            <button class="btn btn-info">New Time Slot Add</button>
-        </a>
-    </div>
-    <div class="col-4">
-        <h1>Time Table Management</h1>
-    </div>
-    <div class="col-4">
-        <a href="/timeTable">
-            <button class="btn btn-primary">View All Student</button>
-        </a>
-    </div>
-</div>
+<div class="row bg-secondary" >
+  <div class="col-4" >
+    <a href="/timeTable/add" >
+      <button class="btn btn-info" >New Time Slot Add</button >
+    </a >
+  </div >
+  <div class="col-4" >
+    <h1 >Time Table Management</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/timeTable" >
+      <button class="btn btn-primary" >View All Student</button >
+    </a >
+  </div >
+</div >
 <!--Student detail-->
-<div class="container-fluid" data-th-fragment="timeTableDetail">
-    <!--timeTable id-->
-    <div class="form-batch">
-        <label data-th-for="${id}">Id</label>
-        <p class="form-control" data-th-text="${timeTableDetail.id}"></p>
-    </div>
-    <!--Date-->
-    <div class="form-row text-right">
-        <div class="col-md-4">
-            <label class="control-label" data-th-for="${date}">Date:</label>
-        </div>
-        <div class="col-md-8">
-            <p class="form-control" data-th-text="${timeTableDetail.date}"></p>
-        </div>
-    </div>
-    <!--Time-->
-    <div class="form-row text-right">
-        <div class="col-md-4">
-            <label class="control-label" data-th-for="${time}">Time :</label>
-        </div>
-        <div class="col-md-8">
-            <p class="form-control" data-th-text="${timeTableDetail.time}"></p>
-        </div>
-    </div>
-    <!--Teacher-->
-    <div class="form-row text-right">
-        <div class="col-md-4">
-            <label class="control-label">Teacher :</label>
-        </div>
-        <div class="col-md-8">
-            <p class="form-control" data-th-text="${timeTableDetail.teacher}"></p>
-        </div>
-    </div>
-    <!--Hall Number-->
-    <div class="form-row text-right">
-        <div class="col-md-4">
-            <label class="control-label">Hall Number :</label>
-        </div>
-        <div class="col-md-8">
-            <p class="form-control" data-th-text="${timeTableDetail.hallNumber}"></p>
-        </div>
-    </div>
-</div>
+<div class="container-fluid" data-th-fragment="timeTableDetail" >
+  <!--timeTable id-->
+  <div class="form-batch" >
+    <label data-th-for="${id}" >Id</label >
+    <p class="form-control" data-th-text="${timeTableDetail.code}" ></p >
+  </div >
+  <!-- start date time-->
+  <div class="form-row " >
+    <div class="col-md-4" >
+      <label class="control-label" data-th-for="${date}" >Start Date Time:</label >
+    </div >
+    <div class="col-md-8" >
+      <p class="form-control" data-th-text="${#temporals.format(timeTableDetail.startAt, 'dd-MM-yyyy HH:mm')}" ></p >
+    </div >
+  </div >
+  <!-- end date time-->
+  <div class="form-row " >
+    <div class="col-md-4" >
+      <label class="control-label" data-th-for="${date}" >End Date Time:</label >
+    </div >
+    <div class="col-md-8" >
+      <p class="form-control" data-th-text="${#temporals.format(timeTableDetail.endAt, 'dd-MM-yyyy HH:mm')}" ></p >
+    </div >
+  </div >
+  <!--Batch name-->
+  <div class="form-row " >
+    <div class="col-md-4" >
+      <label class="control-label" >Batch Name :</label >
+    </div >
+    <div class="col-md-8" >
+      <p class="form-control" data-th-text="${timeTableDetail.batch.name}" ></p >
+    </div >
+  </div >
+  <!--teacher name-->
+  <div class="form-row " >
+    <div class="col-md-4" >
+      <label class="control-label" >Teacher Name:</label >
+    </div >
+    <div class="col-md-8" >
+      <p class="form-control"
+         data-th-text="${timeTableDetail.batch.teacher.firstName +' '+timeTableDetail.batch.teacher.lastName}" ></p >
+    </div >
+  </div >
+  <!--Lesson-->
+  <div class="form-row " >
+    <div class="col-md-4" >
+      <label class="control-label" >Lesson :</label >
+    </div >
+    <div class="col-md-8" >
+      <p class="form-control" data-th-text="${timeTableDetail.lesson}" ></p >
+    </div >
+  </div >
+  <!--Hall Number-->
+  <div class="form-row " >
+    <div class="col-md-4" >
+      <label class="control-label" >Hall Number :</label >
+    </div >
+    <div class="col-md-8" >
+      <p class="form-control" data-th-text="${timeTableDetail.hall.name}" ></p >
+    </div >
+  </div >
+  <!--student list -->
+  <div data-th-replace="~{student/student:: studentsFragment}" ></div>
+</div >
 <!--Button-->
-<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">
-    <a href="/timeTable">
-        <button class="btn btn-success" tabindex="21" type="submit">
-            Back
-        </button>
-    </a>
-</div>
+<div class="form-batch col-md-12 col-sm-12 text-center flex-column " >
+  <a href="/timeTable" >
+    <button class="btn btn-success" tabindex="21" type="submit" >
+      Back
+    </button >
+  </a >
+</div >
 
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
-</body>
-</html>
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >

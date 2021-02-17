@@ -1,84 +1,4 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--&lt;!&ndash;Styles, meta data, and title are included&ndash;&gt;-->
-<!--<head data-th-replace="~{fragments/header :: headerFragment}">-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Thymeleaf Springboot </title>-->
-<!--</head>-->
-<!--<body>-->
-<!--&lt;!&ndash;Nav bar is included&ndash;&gt;-->
-<!--<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>-->
 
-<!--<div class="row bg-secondary">-->
-<!--    <div class="col-4">-->
-<!--        <a href="/hall/new">-->
-<!--            <button class="btn btn-info">New Hall</button>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--    <div class="col-4">-->
-<!--        <h1>Hall Management - Hall Detail</h1>-->
-<!--    </div>-->
-<!--    <div class="col-4">-->
-<!--        <a href="/hall">-->
-<!--            <button class="btn btn-primary">All Hall</button>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;Hall detail&ndash;&gt;-->
-<!--<div class="container-fluid" data-th-fragment="hallDetail">-->
-<!--    &lt;!&ndash;hall id&ndash;&gt;-->
-<!--    <div class="form-batch">-->
-<!--        <label data-th-for="${id}">Id</label>-->
-<!--        <p class="form-control" data-th-text="${hallDetail.id}"></p>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;number&ndash;&gt;-->
-<!--    <div class="form-batch">-->
-<!--        <label data-th-for="${number}"></label>-->
-<!--        <p class="form-control" data-th-text="${hallDetail.number}"></p>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Condition&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${hallCondition}">Hall Condition:</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${hallDetail.hallCondition}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;Count&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${seatCount}">Seating count:</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${hallDetail.seatCount}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash;location&ndash;&gt;-->
-<!--    <div class="form-row text-right">-->
-<!--        <div class="col-md-4">-->
-<!--            <label class="control-label" data-th-for="${hallLocation}">Hall location:</label>-->
-<!--        </div>-->
-<!--        <div class="col-md-8">-->
-<!--            <p class="form-control" data-th-text="${hallDetail.hallLocation}"></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;Button&ndash;&gt;-->
-<!--<div class="form-batch col-md-12 col-sm-12 text-center flex-column ">-->
-<!--    <a href="/hall">-->
-<!--        <button class="btn btn-success" tabindex="21" type="submit">-->
-<!--            Back-->
-<!--        </button>-->
-<!--    </a>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;footer is included&ndash;&gt;-->
-<!--<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>-->
-<!--&lt;!&ndash;script is included&ndash;&gt;-->
-<!--<script data-th-replace="~{fragments/script :: scriptFragment}"></script>-->
-<!--</body>-->
-<!--</html>-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +19,7 @@
         <h1>Hall Details</h1>
     </div>
     <div class="col-4">
-        <a href="/hall/new">
+        <a href="/hall/add">
             <button class="btn btn-primary" align="center">Add New Hall</button>
         </a>
     </div>
@@ -111,31 +31,36 @@
         <div class="form-group">
             <label data-th-for="${id}" class="col-sm-3 control-label">Hall ID</label>
             <div class="col-sm-6">
-                <p type="text" id="id" class="form-control" data-th-text="*{hallDetail.id}">
+                <p type="text" id="id" class="form-control"   data-th-text="${hallDetail.id}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${number}" class="col-sm-3 control-label">Hall Number</label>
             <div class="col-sm-6">
-                <p type="text" id="number" class="form-control" data-th-text="*{hallDetail.number}">
+                <p type="text" id="number" class="form-control"   data-th-text="${hallDetail.number}">
             </div>
+        </div><div class="form-group">
+        <label data-th-for="${number}" class="col-sm-3 control-label">Hall Name</label>
+        <div class="col-sm-6">
+            <p type="text" id="name" class="form-control"   data-th-text="${hallDetail.name}">
         </div>
+    </div>
         <div class="form-group">
             <label data-th-for="${hallCondition}" class="col-sm-3 control-label">Hall Condition</label>
             <div class="col-sm-6">
-                <p type="text" id="hallCondition" class="form-control" data-th-text="*{hallDetail.hallCondition}">
+                <p type="text" id="hallCondition" class="form-control"   data-th-text="${hallDetail.hallCondition.hallCondition}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${seatCount}" class="col-sm-3 control-label">Seating Count</label>
             <div class="col-sm-6">
-                <p type="text" id="seatCount" class="form-control" data-th-text="*{hallDetail.seatCount}">
+                <p type="text" id="seatCount" class="form-control"   data-th-text="${hallDetail.seatCount}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${hallLocation}" class="col-sm-3 control-label">hallLocation</label>
             <div class="col-sm-6">
-                <p type="text" id="hallLocation" class="form-control" data-th-text="*{hallDetail.hallLocation}">
+                <p type="text" id="hallLocation" class="form-control"   data-th-text="${hallDetail.hallLocation}">
             </div>
         </div>
 
@@ -152,8 +77,8 @@
 </div>
 
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

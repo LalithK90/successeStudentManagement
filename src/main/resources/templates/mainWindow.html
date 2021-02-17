@@ -1,301 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: headerFragment}">
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Index Page</title>
+    <title>Student Management System</title>
 </head>
 <body>
-<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid">
-    <div class="main-section">
-        <p class="welcome-Notes">Welcome to Student Management System of Success Educational Institute</p>
-        <div class="col-12">
-            <div class="row">
-                <div class="col-7">
-                    <div class="form-row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide invoice">
-                                        <div class="header">
-                                            <div class="count">
-                                                <i class="fa fa-street-view" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="title">Students</div>
-                                        </div>
-                                        <a href="/student">
-                                            <div class="body">
-                                                <div class="title">Manage Students</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide quote">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-newspaper" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Teachers</div>
-                                            </div>
+<h1 align="center" class="display-3 text-danger"><strong>Welcome to Success Student Management System</strong></h1>
 
-                                        </div>
-                                        <a href="/teacher">
-                                            <div class="body">
-                                                <div class="title">Manage Teachers</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Batchs</div>
-                                            </div>
-                                        </div>
-                                        <a href="/batch">
-                                            <div class="body">
-                                                <div class="title">Manage Batches</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form-row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide resource">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-universal-access"
-                                                                      aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Payments</div>
-                                            </div>
-
-                                        </div>
-                                        <a class href="/payment">
-                                            <div class="body">
-                                                <div class="title">Manage Payments</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide quote">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-home" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Time table</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/timeTable">
-                                            <div class="body">
-                                                <div class="title">Manage Time Table </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="tile wide invoice">
-                                        <div class="header">
-                                            <div class="">
-                                                <div class="count"><i class="fa fa-bug" aria-hidden="true"></i>
-                                                </div>
-                                                <div class="title">Subject</div>
-                                            </div>
-
-                                        </div>
-                                        <a href="/subject">
-                                            <div class="body">
-                                                <div class="title">Subject Management</div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--To day Class list-->
-                <div class="col-5 formBorder">
-                    <p class="welcome-Notes">Today Classes</p>
-                    <!--ClassList -->
-                    <div class="container-fluid text-center" id="todayClasses">
-                        <table class="table table-hover table-striped" id="myTable">
-                            <thead>
-                            <tr>
-                                <th> Time</th>
-                                <th> HallNumber</th>
-                                <th> Grade</th>
-                                <th> Subject</th>
-                                <th> Teacher</th>
-                                <th> Modify</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="classList">
-                                <th id="time"></th>
-                                <th id="hallNumber"></th>
-                                <th id="grade"></th>
-                                <th id="subject"></th>
-                                <th id="teacher"></th>
-                                <th>
-                                    <a id="timeTableView" class="btn btn-success btn-sm"><i
-                                            class="fa fa-folder-open"></i>&nbsp;View</a>
-                                </th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row" id="petitionListNotPresent">
-                        <div class="col-sm-12">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h3 class="text-center text-danger">
-                                    <strong>There are no classes sheduled up to now
-                                    </strong>
-                                </h3>
-                            </div>
-                        </div>
-                        <script>
-                            $(".alert").alert();
-                        </script>
-                    </div>
-<!--                </div>-->
-<!--                <div class="row">-->
-<!--                    <div class="col-6 formBorder">-->
-<!--                        <p class="welcome-Notes">RecentyRegistered</p>-->
-<!--                        &lt;!&ndash;Petition Lists &ndash;&gt;-->
-<!--                        <div class="container-fluid text-center" id="petitionListPresent">-->
-<!--                            <table class="table table-hover table-striped" id="myTable">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th> Petition Number</th>-->
-<!--                                    <th> Petition Priority</th>-->
-<!--                                    <th> Working Place</th>-->
-<!--                                    <th> State</th>-->
-<!--                                    <th> Modify</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody>-->
-<!--                                <tr id="petitionList">-->
-<!--                                    <th id="petitionNumber"></th>-->
-<!--                                    <th id="petitionPriority"></th>-->
-<!--                                    <th id="workingPlace"></th>-->
-<!--                                    <th id="petitionState"></th>-->
-<!--                                    <th>-->
-<!--                                        <a id="petitionView" class="btn btn-success btn-sm"><i-->
-<!--                                                class="fa fa-folder-open"></i>&nbsp;View</a>-->
-<!--                                    </th>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                        <div class="row" id="petitionListNotPresent">-->
-<!--                            <div class="col-sm-12">-->
-<!--                                <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
-<!--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<!--                                        <span aria-hidden="true">&times;</span>-->
-<!--                                    </button>-->
-<!--                                    <h3 class="text-center text-danger">-->
-<!--                                        <strong>There is no petition upto know please add petition to the system-->
-<!--                                            using add user button.-->
-<!--                                        </strong>-->
-<!--                                    </h3>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <script>-->
-<!--                                $(".alert").alert();-->
-<!--                            </script>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="col-6 formBorder">-->
-<!--                        <p class="welcome-Notes">To Day Petitions</p>-->
-<!--                        &lt;!&ndash;Petition Lists &ndash;&gt;-->
-<!--                        <div class="container-fluid text-center" id="petitionListPresent">-->
-<!--                            <table class="table table-hover table-striped" id="myTable">-->
-<!--                                <thead>-->
-<!--                                <tr>-->
-<!--                                    <th> Petition Number</th>-->
-<!--                                    <th> Petition Priority</th>-->
-<!--                                    <th> Working Place</th>-->
-<!--                                    <th> State</th>-->
-<!--                                    <th> Modify</th>-->
-<!--                                </tr>-->
-<!--                                </thead>-->
-<!--                                <tbody>-->
-<!--                                <tr id="petitionList">-->
-<!--                                    <th id="petitionNumber"></th>-->
-<!--                                    <th id="petitionPriority"></th>-->
-<!--                                    <th id="workingPlace"></th>-->
-<!--                                    <th id="petitionState"></th>-->
-<!--                                    <th>-->
-<!--                                        <a id="petitionView" class="btn btn-success btn-sm"><i-->
-<!--                                                class="fa fa-folder-open"></i>&nbsp;View</a>-->
-<!--                                    </th>-->
-<!--                                </tr>-->
-<!--                                </tbody>-->
-<!--                            </table>-->
-<!--                        </div>-->
-<!--                        <div class="row" id="petitionListNotPresent">-->
-<!--                            <div class="col-sm-12">-->
-<!--                                <div class="alert alert-warning alert-dismissible fade show" role="alert">-->
-<!--                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<!--                                        <span aria-hidden="true">&times;</span>-->
-<!--                                    </button>-->
-<!--                                    <h3 class="text-center text-danger">-->
-<!--                                        <strong>There is no petition upto know please add petition to the system-->
-<!--                                            using add user button.-->
-<!--                                        </strong>-->
-<!--                                    </h3>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <script>-->
-<!--                                $(".alert").alert();-->
-<!--                            </script>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-            </div>
-        </div>
+<!-- Four equal columns -->
+<div class="row">
+    <div class="jumbotron col-3" >
+        <h2>Student Management</h2><br>
+        <i class="fas fa-book-reader" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Registration</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
+    </div>
+    <div class="jumbotron col-3 bg-light" >
+        <h2>Teacher Management</h2><br>
+        <i class="fas fa-chalkboard-teacher" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Registration</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
+    </div>
+    <div class="jumbotron col-3" >
+        <h2>Class Management</h2><br>
+        <i class="fas fa-school" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Add new Class</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
+    </div>
+    <div class="jumbotron col-3 bg-light" >
+        <h2>Payment Management</h2><br>
+        <i class="fab fa-amazon-pay" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Make a Payment</button>
+        <button type="button" class="btn btn-outline-warning">Transaction modify</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
+    </div>
+</div>
+<div class="row">
+    <div class="jumbotron  col-3 bg-light" >
+        <h2>Shedule Management</h2><br>
+        <i class="far fa-clock" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Create Session</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View time Table</button>
+    </div>
+    <div class="jumbotron jumbotron col-3" >
+        <h2>Hall Management</h2><br>
+        <i class="fas fa-hotel" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Add new</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
+    </div>
+    <div class="jumbotron col-3  bg-light" >
+        <h2>Subject Management</h2><br>
+        <i class="far fa-folder-open" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Add new</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
+    </div>
+    <div class="jumbotron col-3" >
+        <h2>Staff Management</h2><br>
+        <i class="far fa-address-card" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">Registration</button>
+        <button type="button" class="btn btn-outline-warning">Update Details</button>
+        <button type="button" class="btn btn-outline-success">View All</button>
     </div>
 </div>
 
-<!--footer include-->
-<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
-<!--script include-->
-<script th:replace="~{fragments/script :: scriptFragment}"></script>
 
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>
-

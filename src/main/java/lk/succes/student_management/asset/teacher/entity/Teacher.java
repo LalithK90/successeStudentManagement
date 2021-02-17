@@ -2,7 +2,8 @@ package lk.succes.student_management.asset.teacher.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes.student_management.asset.batch.entity.Batch;
-import lk.succes.student_management.asset.common_asset.model.Enum.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.Gender;
+import lk.succes.student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes.student_management.asset.subject.entity.Subject;
 import lk.succes.student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,40 +25,40 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @JsonFilter( "Teacher" )
 public class Teacher extends AuditEntity {
-    private String RegistrationId;
+  private String RegistrationId;
 
-    @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
-    @Column( unique = true )
-    private String nic;
+  @Size( max = 12, min = 10, message = "NIC number is contained numbers between 9 and X/V or 12 " )
+  @Column( unique = true )
+  private String nic;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+  @Enumerated( EnumType.STRING )
+  private Gender gender;
 
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate dateOfBirth;
+  @DateTimeFormat( pattern = "yyyy-MM-dd" )
+  private LocalDate dateOfBirth;
 
-    private String firstName;
+  private String firstName;
 
-    private String lastName;
+  private String lastName;
 
-    private String address;
+  private String address;
 
-    @Column(unique = true)
-    private String email;
+  @Column( unique = true )
+  private String email;
 
-    @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
-    private String mobile;
+  @Size( max = 10, message = "Mobile number length should be contained 10 and 9" )
+  private String mobile;
 
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
-    private BigDecimal fee;
+  private BigDecimal fee;
 
-    /*One particular batch*/
-    @ManyToOne
-    private Batch batch;
+  @ManyToOne
+  private Subject subject;
 
-   @ManyToOne
-    private Subject subject;
-
+  @OneToMany(mappedBy = "teacher")
+  private List<Batch> batches;
 
 
 }

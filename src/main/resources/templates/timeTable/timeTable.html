@@ -11,7 +11,7 @@
 
 <div class="row bg-secondary">
     <div class="col-4">
-        <a href="/timeTable/new">
+        <a href="/timeTable/add">
             <button class="btn btn-primary">New TimeTable</button>
         </a>
     </div>
@@ -22,31 +22,32 @@
 </div>
 
 <div class="container-fluid">
-    <table class="table table-striped table-inverse table-responsive" id="myTable">
+    <table class="table table-striped table-inverse table-responsive" data-th-fragment="timeTable" id="myTable">
         <thead class="thead-inverse">
         <tr>
-            <th>
-
-            </th>
-            <th>Session Index</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Teacher</th>
-            <th>Date of Birth</th>
+            <th>Index</th>
+            <th>code</th>
+            <th>Lesson</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Active/Not</th>
+            <th>Hall Name</th>
+            <th>Batch Name</th>
             <th>Modify</th>
         </tr>
         </thead>
         <tbody>
         <tr data-th-each="timeTable, index : ${timeTables}">
             <td data-th-text="${index.count}"></td>
-            <td data-th-text="${timeTable.date}"></td>
-            <td data-th-text="${timeTable.time}"></td>
-            <td data-th-text="${timeTable.teacher}"></td>
-            <td data-th-text="${timeTable.hallNumber}"></td>
+            <td data-th-text="${timeTable.code}"></td>
+            <td data-th-text="${timeTable.lesson}"></td>
+            <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}"></td>
+            <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}"></td>
+            <td data-th-text="${timeTable.liveDead.liveDead}"></td>
+            <td data-th-text="${timeTable.hall.name}"></td>
+            <td data-th-text="${timeTable.batch.name}"></td>
             <td>
                 <a data-th-href="${'/timeTable/view/'+ timeTable.id}"><button class="btn btn-info">View</button></a>
-                <a data-th-href="${'/timeTable/edit/'+ timeTable.id}"><button class="btn btn-success">Update</button></a>
-                <a data-th-href="${'/timeTable/delete/'+ timeTable.id}"><button class="btn btn-danger">Delete</button></a>
             </td>
         </tr>
         </tbody>
@@ -54,8 +55,8 @@
 </div>
 
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

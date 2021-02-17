@@ -1,8 +1,9 @@
 package lk.succes.student_management.asset.user_management.controller;
 
+
 import lk.succes.student_management.asset.employee.entity.Employee;
-import lk.succes.student_management.asset.employee.entity.Enum.Designation;
-import lk.succes.student_management.asset.employee.entity.Enum.EmployeeStatus;
+import lk.succes.student_management.asset.employee.entity.enums.Designation;
+import lk.succes.student_management.asset.employee.entity.enums.EmployeeStatus;
 import lk.succes.student_management.asset.employee.service.EmployeeService;
 import lk.succes.student_management.asset.user_management.entity.User;
 import lk.succes.student_management.asset.user_management.service.RoleService;

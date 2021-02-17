@@ -17,7 +17,7 @@
         <h1>Discount Details</h1>
     </div>
     <div class="col-4">
-        <a href="/discount/new">
+        <a href="/discount/add">
             <button class="btn btn-primary" align="center">Create a Discount</button>
         </a>
     </div>
@@ -29,31 +29,31 @@
         <div class="form-group">
             <label data-th-for="${id}" class="col-sm-3 control-label">Discount Code</label>
             <div class="col-sm-6">
-                <p type="text" id="id" class="form-control" data-th-text="*{discountDetail.id}">
+                <p type="text" id="id" class="form-control"   data-th-text="${discountDetail.id}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${discountType}" class="col-sm-3 control-label">Discount type</label>
             <div class="col-sm-6">
-                <p type="text" id="discountType" class="form-control" data-th-text="*{discountDetail.discountType}">
+                <p type="text" id="discountType" class="form-control"   data-th-text="${discountDetail.discountType}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${discountAmount}" class="col-sm-3 control-label">Discount Value</label>
             <div class="col-sm-6">
-                <p type="text" id="discountAmount" class="form-control" data-th-text="*{discountDetail.discountAmount}">
+                <p type="text" id="discountAmount" class="form-control"   data-th-text="${discountDetail.discountAmount}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${approvedBy}" class="col-sm-3 control-label">Approved by</label>
             <div class="col-sm-6">
-                <p type="text" id="approvedBy" class="form-control" data-th-text="*{discountDetail.approvedBy}">
+                <p type="text" id="approvedBy" class="form-control"   data-th-text="${discountDetail.approvedBy}">
             </div>
         </div>
         <div class="form-group">
             <label data-th-for="${discountStatus}" class="col-sm-3 control-label">Status</label>
             <div class="col-sm-6">
-                <p type="text" id="discountStatus" class="form-control" data-th-text="*{discountDetail.discountStatus}">
+                <p type="text" id="discountStatus" class="form-control"   data-th-text="${discountDetail.discountStatus}">
             </div>
         </div>
 
@@ -116,8 +116,8 @@
 
 
 <!--footer is included-->
-<footer data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<script data-th-replace="~{fragments/script :: scriptFragment}"></script>
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>
