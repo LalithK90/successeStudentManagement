@@ -22,7 +22,6 @@ public class BatchStudentController {
   private final BatchStudentService batchStudentService;
   private final StudentService studentService;
 
-
   public BatchStudentController(BatchService batchService, BatchStudentService batchStudentService,
                                 StudentService studentService) {
     this.batchService = batchService;

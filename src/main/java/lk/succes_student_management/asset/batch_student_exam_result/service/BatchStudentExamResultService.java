@@ -46,7 +46,7 @@ public class BatchStudentExamResultService implements AbstractService< BatchStud
   }
 
 
-  public BatchStudentExamResult lastTimeTable() {
+  public BatchStudentExamResult lastBatchStudentExamResultDB() {
     return batchStudentExamResultDao.findFirstByOrderByIdDesc();
   }
 

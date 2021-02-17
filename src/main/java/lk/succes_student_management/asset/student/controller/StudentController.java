@@ -95,7 +95,6 @@ public class StudentController implements AbstractController< Student, Integer >
     if ( student.getId() == null ) {
       // need to create auto generated registration number
       Student lastStudent = studentService.lastStudentOnDB();
-      //registration number format => SSS200001
       if ( lastStudent != null ) {
         String lastNumber = lastStudent.getRegNo().substring(3);
         student.setRegNo("SSS" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
