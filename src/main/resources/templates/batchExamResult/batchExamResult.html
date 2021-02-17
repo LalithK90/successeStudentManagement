@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Thymeleaf Springboot </title>
+</head>
+<body>
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+
+<div class="row bg-link">
+    <div class="col-4">
+
+    </div>
+    <div class="col-4">
+        <h1>Batch Management</h1>
+    </div>
+    <div class="col-4">
+        <a href="/batch/add">
+            <button class="btn btn-primary" align="center">New Batch</button>
+        </a>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="container-fluid" data-th-fragment="batchExamFragment">
+        <table class="table table-striped table-inverse table-responsive" id="myTable">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Index</th>
+                <th>Exam Reference</th>
+                <th>Batch Name</th>
+                <th>Start At</th>
+                <th>End At</th>
+                <th>Modify</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="batchExam, index : ${batchExams }">
+                <td data-th-text="${index.count}"></td>
+                <td data-th-text="${batchExam.code}"></td>
+                <td data-th-text="${batchExam.batch.name}"></td>
+                <td data-th-text="${#temporals.format(batchExam.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
+                <td data-th-text="${#temporals.format(batchExam.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
+                <td>
+                    <a data-th-href="${'/batchExam/edit/'+ batchExam.id}">
+                        <button type="button" class="btn btn-info">Edit</button>
+                    </a>
+                    <a data-th-href="${'/batchExam/delete/'+ batchExam.id}">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                    <a data-th-href="${'/batchStudentExamResult/addAttendance/'+ batchExam.batch.id}">
+                        <button type="button" class="btn btn-primary">Mark Attendance</button>
+                    </a>
+                    <a data-th-href="${'/batchStudentExamResult/addResult'+ batchExam.batch.id}">
+                        <button type="button" class="btn btn-success">Add Result</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
+</body>
+</html>

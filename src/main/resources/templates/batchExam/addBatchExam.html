@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="form-row bg-light" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >Exam Management</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/batchExam/teacher" >
+      <button class="btn btn-primary" >Exam Management</button >
+    </a >
+  </div >
+</div >
+<div id="accordianId" role="tablist" aria-multiselectable="true" >
+  <div class="card" >
+    <div class="card-header" role="tab" id="section1HeaderId" >
+      <a data-toggle="collapse" data-parent="#accordianId" href="#section1ContentId" aria-expanded="true"
+         aria-controls="section1ContentId" >
+        <h5 class="mb-0 container-fluid text-center" ><span data-th-text="${batchDetail.name}" ></span ></h5 >
+      </a >
+    </div >
+    <div id="section1ContentId" class="collapse in" role="tabpanel" aria-labelledby="section1HeaderId" >
+      <div class="card-body" >
+        <nav data-th-replace="~{batch/batch-detail :: batchDetailsFragment}" ></nav >
+      </div >
+    </div >
+  </div >
+</div >
+
+<div class="container-fluid" >
+  <form action="/batchExam" data-th-object="${batchExam}" method="post" >
+    <div class="form-row" >
+      <div class="col-4" >
+        <p >New Exam</p >
+        <input class="form-control" data-th-field="*{batch.id}" readonly type="hidden" >
+        <div class="form-group" data-th-if="${addStatus}" >
+          <label class="control-label" data-th-for="${id}" >Exam Code</label >
+          <div class="col-sm-9" >
+            <input type="hidden" readonly data-th-field="*{code}" placeholder="Index" class="form-control" autofocus >
+            <input type="hidden" readonly data-th-field="*{id}" class="form-control" >
+            <input class="form-control" data-th-field="*{liveDead}" readonly type="hidden" >
+          </div >
+        </div >
+        <!--start at-->
+        <div class="form-group" >
+          <label class="control-label" data-th-for="${startAt}" >Start Date Time</label >
+          <div class="col-sm-9" >
+            <input type="datetime-local" class="form-control "
+                   data-th-field="*{startAt}" required >
+          </div >
+        </div >
+        <!--end at-->
+        <div class="form-group" >
+          <label class="control-label" data-th-for="${endAt}" >End Date Time</label >
+          <div class="col-sm-9" >
+            <input type="datetime-local" class="form-control "
+                   data-th-field="*{endAt}" required >
+          </div >
+        </div >
+        <!--remark-->
+        <div class="form-group" >
+          <label class="control-label" data-th-for="${remark}" >Remarks </label >
+          <div class="col-sm-9" >
+            <textarea class="form-control " data-th-field="*{remark}" ></textarea >
+          </div >
+        </div >
+      </div >
+      <div class="col-8" >
+        <p class="form-row" >Already created Exam on this batch</p >
+        <div data-th-replace="~{batchExam/batchExam :: batchExamFragment}" ></div >
+      </div >
+    </div >
+
+    <!--button area-->
+    <div class="row container-fluid" >
+      <div class="col-sm-2 col-sm-offset-2" >
+        <a href="/batchExam/teacher" >
+          <button type="button" class="btn btn-danger btn-block" >Back</button >
+        </a >
+      </div >
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
+      </div >
+      <div class="col-sm-2 col-sm-offset-2" >
+        <button type="submit" class="btn btn-success btn-block" >Submit</button >
+      </div >
+    </div >
+  </form >
+</div >
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    if (!$("#endAt").val()) {
+        let startAt =$("#startAt").val();
+        $("#endAt").val(startAt).attr('min',startAt);
+        document.getElementById("startAt").min =$("#startAt").val();
+
+    }
+
+    $("#startAt, #endAt").change(function (){
+        let startAt =$("#startAt").val();
+        let endAt =$("#endAt").val();
+        if (Date.parse(startAt) > Date.parse(endAt)) {
+            swal({
+                title: "Could you accept those days.. !",
+                icon: "warning",
+                text: "Please check your date \n Start Date can not be less than End Date",
+            })
+            $("#startAt").addClass('bg-danger').removeClass('bg-success bg-white');
+            $("#endAt").val(startAt).addClass('bg-danger').removeClass('bg-success bg-white');
+        }else {
+            $("#startAt").addClass('bg-success').removeClass('bg-danger bg-white');
+            $("#endAt").addClass('bg-success').removeClass('bg-danger bg-white');
+        }
+    });
+
+</script >
+</body >
+</html >

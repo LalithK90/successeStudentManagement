@@ -23,18 +23,19 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="container table-responsive">
-        <table class="table table-striped table-inverse " id="myTable">
+<div class="form-row">
+    <div class="container-fluid">
+        <table class="table table-striped table-inverse table-responsive" id="myTable">
             <thead class="thead-inverse">
             <tr>
                 <th>Index</th>
                 <th>Class Reference</th>
                 <th>Year</th>
                 <th>Grade</th>
-                <th>Subject Name</th>
+                <th>Batch Name</th>
                 <th>Teacher Name</th>
-
+                <th>Subject Name</th>
+                <th>Modify</th>
             </tr>
             </thead>
             <tbody>
@@ -45,17 +46,19 @@
                 <td data-th-text="${batch.grade.grade}"></td>
                 <td data-th-text="${batch.name}"></td>
                 <td data-th-text="${batch.teacher.firstName}"></td>
-
-
+                <td data-th-text="${batch.teacher.subject.name}"></td>
                 <td>
                     <a data-th-href="${'/batch/view/'+ batch.id}">
-                        <button class="btn btn-info">View</button>
+                        <button type="button" class="btn btn-info">View</button>
                     </a>
                     <a data-th-href="${'/batch/edit/'+ batch.id}">
-                        <button class="btn btn-success">Edit</button>
+                        <button type="button" class="btn btn-success">Edit</button>
                     </a>
                     <a data-th-href="${'/batch/delete/'+ batch.id}">
-                        <button class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                    <a data-th-href="${'/batchExam/add/'+ batch.id}">
+                        <button type="button" class="btn btn-warning">Add Exam</button>
                     </a>
                 </td>
             </tr>

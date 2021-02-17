@@ -22,7 +22,7 @@ $(document).ready(function () {
     /*//--------------- data table short using - data table plugin ------- start //*/
 
     /*When edit employee if there is a nic number need to select relevant gender*/
-    if ($("#nic").val() !== null || $("#nic").val() !== undefined) {
+    if ($("#nic").val()) {
         $("input:radio[name=gender]").filter(`[value=${calculateGender($("#nic").val())}]`).prop('checked', true);
     }
 
@@ -549,20 +549,6 @@ let deleteAllTableRow = function (tableName) {
     }
 };
 
-/*jquery - ui function*/
-//$( "input" ).checkboxradio;
-
-$(function () {
-    $("#").resizable({
-        autoHide: true,
-        aspectRatio: true,
-        ghost: true,
-    });
-});
-
-//$( ".login" ).draggable();
-//$( "#dateOfBirth" ).datepicker;
-//$( document ).tooltip();
 
 
 //password validator user add
