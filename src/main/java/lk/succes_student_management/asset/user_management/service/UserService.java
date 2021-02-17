@@ -1,6 +1,8 @@
 package lk.succes_student_management.asset.user_management.service;
 
 import lk.succes_student_management.asset.employee.entity.Employee;
+import lk.succes_student_management.asset.student.entity.Student;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.user_management.dao.UserDao;
 import lk.succes_student_management.asset.user_management.entity.User;
 import lk.succes_student_management.util.interfaces.AbstractService;
@@ -16,75 +18,85 @@ import java.util.List;
 
 @Service
 @CacheConfig( cacheNames = {"user"} ) // tells Spring where to store cache for this class
-public class UserService implements AbstractService<User, Integer > {
-    private final UserDao userDao;
-    private final PasswordEncoder passwordEncoder;
+public class UserService implements AbstractService< User, Integer > {
+  private final UserDao userDao;
+  private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserService(PasswordEncoder passwordEncoder, UserDao userDao) {
-        this.passwordEncoder = passwordEncoder;
-        this.userDao = userDao;
-    }
+  @Autowired
+  public UserService(PasswordEncoder passwordEncoder, UserDao userDao) {
+    this.passwordEncoder = passwordEncoder;
+    this.userDao = userDao;
+  }
 
-    @Cacheable
-    public List< User > findAll() {
-        return userDao.findAll();
-    }
+  @Cacheable
+  public List< User > findAll() {
+    return userDao.findAll();
+  }
 
-    @Cacheable
-    @Transactional
-    public User findById(Integer id) {
-        return userDao.getOne(id);
-    }
+  @Cacheable
+  @Transactional
+  public User findById(Integer id) {
+    return userDao.getOne(id);
+  }
 
-    @Caching( evict = {@CacheEvict( value = "user", allEntries = true )},
-            put = {@CachePut( value = "user", key = "#user.id" )} )
-    @Transactional
-    public User persist(User user) {
-        user.setUsername(user.getUsername().toLowerCase());
-        if ( user.getPassword() != null ) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        } else {
-            user.setPassword(userDao.getOne(user.getId()).getPassword());
-        }
-        return userDao.save(user);
+  @Caching( evict = {@CacheEvict( value = "user", allEntries = true )},
+      put = {@CachePut( value = "user", key = "#user.id" )} )
+  @Transactional
+  public User persist(User user) {
+    user.setUsername(user.getUsername().toLowerCase());
+    if ( user.getPassword() != null ) {
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
+    } else {
+      user.setPassword(userDao.getOne(user.getId()).getPassword());
     }
+    return userDao.save(user);
+  }
 
-    @CacheEvict( allEntries = true )
-    public boolean delete(Integer id) {
-        //according to this project can not be deleted user
-        userDao.deleteById(id);
-        return false;
-    }
+  @CacheEvict( allEntries = true )
+  public boolean delete(Integer id) {
+    //according to this project can not be deleted user
+    userDao.deleteById(id);
+    return false;
+  }
 
-    @Cacheable
-    public List< User > search(User user) {
-        ExampleMatcher matcher =
-                ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< User > userExample = Example.of(user, matcher);
-        return userDao.findAll(userExample);
-    }
+  @Cacheable
+  public List< User > search(User user) {
+    ExampleMatcher matcher =
+        ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+    Example< User > userExample = Example.of(user, matcher);
+    return userDao.findAll(userExample);
+  }
 
-    @Cacheable
-    public Integer findByUserIdByUserName(String userName) {
-        return userDao.findUserIdByUserName(userName);
-    }
+  @Cacheable
+  public Integer findByUserIdByUserName(String userName) {
+    return userDao.findUserIdByUserName(userName);
+  }
 
-    @Cacheable
-    @Transactional( readOnly = true )
-    public User findByUserName(String name) {
-        return userDao.findByUsername(name);
-    }
+  @Cacheable
+  @Transactional( readOnly = true )
+  public User findByUserName(String name) {
+    return userDao.findByUsername(name);
+  }
 
-    @Cacheable
-    public User findUserByEmployee(Employee employee) {
-        return userDao.findByEmployee(employee);
-    }
+  @Cacheable
+  public User findUserByEmployee(Employee employee) {
+    return userDao.findByEmployee(employee);
+  }
 
-    @Cacheable
-    public boolean findByEmployee(Employee employee) {
-        return userDao.findByEmployee(employee) == null;
-    }
+  @Cacheable
+  public boolean findByEmployee(Employee employee) {
+    return userDao.findByEmployee(employee) == null;
+  }
+
+  @Cacheable
+  public boolean findByTeacher(Teacher teacher) {
+    return userDao.findByTeacher(teacher) == null;
+  }
+
+  @Cacheable
+  public boolean findByStudent(Student student) {
+    return userDao.findByStudent(student) == null;
+  }
 
 
 }

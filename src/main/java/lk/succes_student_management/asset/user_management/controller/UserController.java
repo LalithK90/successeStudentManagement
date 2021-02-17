@@ -5,6 +5,10 @@ import lk.succes_student_management.asset.employee.entity.Employee;
 import lk.succes_student_management.asset.employee.entity.enums.Designation;
 import lk.succes_student_management.asset.employee.entity.enums.EmployeeStatus;
 import lk.succes_student_management.asset.employee.service.EmployeeService;
+import lk.succes_student_management.asset.student.entity.Student;
+import lk.succes_student_management.asset.student.service.StudentService;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
+import lk.succes_student_management.asset.teacher.service.TeacherService;
 import lk.succes_student_management.asset.user_management.entity.User;
 import lk.succes_student_management.asset.user_management.service.RoleService;
 import lk.succes_student_management.asset.user_management.service.UserService;
@@ -25,13 +29,17 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
     private final EmployeeService employeeService;
+    private final TeacherService teacherService;
+    private final StudentService studentService;
 
     @Autowired
-    public UserController(UserService userService, EmployeeService employeeService, RoleService roleService
-                         ) {
+    public UserController(UserService userService, EmployeeService employeeService, RoleService roleService,
+                          TeacherService teacherService, StudentService studentService) {
         this.userService = userService;
         this.employeeService = employeeService;
         this.roleService = roleService;
+        this.teacherService = teacherService;
+        this.studentService = studentService;
     }
     @GetMapping
     public String userPage(Model model) {
@@ -66,7 +74,6 @@ public class UserController {
         return "user/addUser";
     }
 
-    //Send a searched employee to add working place
     @PostMapping( value = "/workingPlace" )
     public String addUserEmployeeDetails(@ModelAttribute( "employee" ) Employee employee, Model model) {
 
@@ -145,4 +152,71 @@ public class UserController {
         model.addAttribute("userDetail", userService.search(user));
         return "user/user-detail";
     }
+
+    @GetMapping( value = "/teacherAdd" )
+    public String userTeacherAddFrom(Model model) {
+        model.addAttribute("addStatus", true);
+        model.addAttribute("employeeDetailShow", false);
+        model.addAttribute("teacher", new Teacher());
+        return "user/addUserTeacher";
+    }
+
+    @PostMapping( value = "/teacher" )
+    public String addUserTeacherDetails(@ModelAttribute( "teacher" ) Teacher teacher, Model model) {
+
+        List< Teacher > teachers = teacherService.search(teacher)
+            .stream()
+            .filter(userService::findByTeacher)
+            .collect(Collectors.toList());
+
+        if ( teachers.size() == 1 ) {
+            model.addAttribute("user", new User());
+            model.addAttribute("employee", teachers.get(0));
+            model.addAttribute("addStatus", true);
+            return commonCode(model);
+        }
+        model.addAttribute("addStatus", true);
+        model.addAttribute("teacher", new Teacher());
+        model.addAttribute("employeeDetailShow", false);
+        model.addAttribute("employeeNotFoundShow", true);
+        model.addAttribute("employeeNotFound", "There is not teacher in the system according to the provided details" +
+            " or that teacher already be a user in the system" +
+            " \n Could you please search again !!");
+
+        return "user/addUser";
+    }
+
+    @GetMapping( value = "/studentAdd" )
+    public String userStudentAddFrom(Model model) {
+        model.addAttribute("addStatus", true);
+        model.addAttribute("employeeDetailShow", false);
+        model.addAttribute("student", new Student());
+        return "user/addUserStudent";
+    }
+
+    @PostMapping( value = "/student" )
+    public String addUserStudentDetails(@ModelAttribute( "student" ) Student student, Model model) {
+
+        List< Student > students = studentService.search(student)
+            .stream()
+            .filter(userService::findByStudent)
+            .collect(Collectors.toList());
+
+        if ( students.size() == 1 ) {
+            model.addAttribute("user", new User());
+            model.addAttribute("employee", students.get(0));
+            model.addAttribute("addStatus", true);
+            return commonCode(model);
+        }
+        model.addAttribute("addStatus", true);
+        model.addAttribute("student", new Student());
+        model.addAttribute("employeeDetailShow", false);
+        model.addAttribute("employeeNotFoundShow", true);
+        model.addAttribute("employeeNotFound", "There is not student in the system according to the provided details" +
+            " or that student already be a user in the system" +
+            " \n Could you please search again !!");
+
+        return "user/addUser";
+    }
+
 }

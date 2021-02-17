@@ -9,18 +9,23 @@
 
 <div class="container-fluid bg-secondary form-Border" >
   <div class="row text-center formManagement border-info" >
-    <div class="col" >
-      <a class="btn btn-success" id="newUser" data-th-href="${'/user/add'}" >
-        <i class="fa fa-user-plus" style="font-size: 18px;" ></i > &nbsp; Add User </a >
+    <div class="col-8" >
+      <div class="form-row" >
+        <a class="btn btn-success mr-2" data-th-href="${'/user/add'}" >
+          <i class="fa fa-user-plus"  ></i > &nbsp; Add User Employee</a >
+        <a class="btn btn-success mr-2" data-th-href="${'/user/teacherAdd'}" >
+          <i class="fa fa-user-plus"  ></i > &nbsp; Add User Teacher</a >
+        <a class="btn btn-success mr-2" data-th-href="${'/user/studentAdd'}" >
+          <i class="fa fa-user-plus"  ></i > &nbsp; Add User Student</a >
+      </div >
     </div >
-    <div class="col" >
+    <div class="col-4" >
       <h4 class="text-info text-center" >
         <strong >
           User Management
         </strong >
       </h4 >
     </div >
-    <div class="col" ></div >
   </div >
 </div >
 <div class="container-fluid bg-dark formBorder" >
