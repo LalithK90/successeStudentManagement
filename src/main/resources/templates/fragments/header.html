@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head th:fragment="headerFragment" >
+<html lang="en"  >
+<head data-th-fragment="headerFragment" >
     <title   data-th-if="${headerTitle==null}"   data-th-text="${'Success Student'}" >Spring boot - Thymeleaf</title >
     <title   data-th-if="${headerTitle!=null}"   data-th-text="${headerTitle}" >Spring boot - Thymeleaf</title >
     <!-- Required meta tags -->

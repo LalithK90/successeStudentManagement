@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
 <head   data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -42,7 +42,7 @@
                         <th   data-th-text="${rowCount.count}"></th>
                         <th   data-th-text="${user.username}"></th>
                         <th   data-th-text="${user.enabled==true?'Active':'Blocked'}"></th>
-                        <th th:text="${{user.createdAt}}"></th>
+                        <th data-th-text="${{user.createdAt}}"></th>
                         <th><a class="btn btn-success btn-sm" id="userView"><i
                                 class="fa fa-folder-open"   data-th-href="${'/user/' + user.id}"></i>&nbsp;View</a>
                             <a class="btn btn-primary btn-sm" id="userEdit"   data-th-href="${'/user/edit/' + user.id}"><i
@@ -81,7 +81,7 @@
 </div>
 
 <!--footer include-->
-<footer   data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div   data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 

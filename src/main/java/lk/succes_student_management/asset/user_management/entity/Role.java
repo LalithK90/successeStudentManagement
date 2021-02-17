@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Role extends AuditEntity {
 
-    @NotNull
+
     @Column( unique = true )
     private String roleName;
 

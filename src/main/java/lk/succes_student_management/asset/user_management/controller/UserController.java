@@ -50,14 +50,6 @@ public class UserController {
         model.addAttribute("employeeDetailShow", true);
         model.addAttribute("employeeNotFoundShow", false);
         model.addAttribute("roleList", roleService.findAll());
-        /*model.addAttribute("districtUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getDistrict", "")
-                .build()
-                .toString());
-        model.addAttribute("stationUrl", MvcUriComponentsBuilder
-                .fromMethodName(WorkingPlaceRestController.class, "getStation", "")
-                .build()
-                .toString());*/
         return "user/addUser";
     }
 
