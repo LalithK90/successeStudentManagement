@@ -86,11 +86,8 @@
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
-    <strong><span id="employeeNotFound"   data-th-text="${employeeNotFound}"></span></strong>
-    <script>
-        $(".alert").alert();
-    </script>
-</div>
+    <strong><span data-th-text="${employeeNotFound}"></span></strong>
+
 
 <!--User add from-->
 <div class="container-fluid bg-dark formBorder"   data-th-if="${employeeDetailShow==true}" id="userFormShow">
@@ -198,6 +195,9 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 
-
+<script>
+    $(".alert").alert();
+</script>
+</div>
 </body>
 </html>

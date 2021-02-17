@@ -33,7 +33,6 @@ public class UserController {
         this.employeeService = employeeService;
         this.roleService = roleService;
     }
-
     @GetMapping
     public String userPage(Model model) {
         model.addAttribute("users", userService.findAll());
@@ -45,7 +44,6 @@ public class UserController {
         model.addAttribute("userDetail", userService.findById(id));
         return "user/user-detail";
     }
-
     private String commonCode(Model model) {
         model.addAttribute("employeeDetailShow", true);
         model.addAttribute("employeeNotFoundShow", false);
@@ -138,8 +136,7 @@ public class UserController {
 
     @GetMapping( value = "/remove/{id}" )
     public String removeUser(@PathVariable Integer id) {
-        // user can not be deleted
-        //userService.delete(id);
+        userService.delete(id);
         return "redirect:/user";
     }
 
