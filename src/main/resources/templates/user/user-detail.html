@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
 <head   data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -71,7 +71,7 @@
                     <label class="control-label">Created Date :</label>
                 </div>
                 <div class="col-md-8">
-                    <strong><span id="createDate" th:text="${{userDetail.createdAt}}"></span></strong>
+                    <strong><span id="createDate" data-th-text="${{userDetail.createdAt}}"></span></strong>
                 </div>
             </div>
             <div class="form-row">

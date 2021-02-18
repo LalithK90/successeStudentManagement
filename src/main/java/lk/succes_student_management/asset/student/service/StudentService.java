@@ -47,8 +47,8 @@ public class StudentService implements AbstractService< Student, Integer > {
             .matching()
             .withIgnoreCase()
             .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< Student > categoryExample = Example.of(student, matcher);
-        return studentDao.findAll(categoryExample);
+        Example< Student > studentExample = Example.of(student, matcher);
+        return studentDao.findAll(studentExample);
     }
 
     public Student lastStudentOnDB() {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
 <head   data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
     <title>Thymeleaf Springboot </title>
@@ -30,8 +30,8 @@
 </div>
 <div class="container-fluid bg-dark formBorder">
     <div class="col-sm-12 flex-column ">
-        <form id="form" class="form-horizontal" method="POST" th:action="${addStatus==true?'/role/add':'/role/update'}"
-              th:object="${role}">
+        <form id="form" class="form-horizontal" method="POST" data-th-action="${addStatus==true?'/role/add':'/role/update'}"
+              data-th-object="${role}">
             <div class="form-batch col-md-12 col-sm-12 text-center flex-column">
                 <div class="col-sm-6 col-md-6 offset-2">
                     <div id="idHide"   data-th-if="${addStatus==false}" class="form-row text-right">
@@ -39,7 +39,7 @@
                             <label class="control-label" for="id">ID :</label>
                         </div>
                         <div class="col-md-8">
-                            <input class="form-control" th:field="*{id}"  id="id" type="text" readonly/>
+                            <input class="form-control" data-th-field="*{id}"  id="id" type="text" readonly/>
                         </div>
                     </div>
                     <div class="form-row text-right">
@@ -47,7 +47,7 @@
                             <label class="control-label" for="roleName">Name :</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="roleName" th:field="*{roleName}" class="form-control" type="text" required/>
+                            <input id="roleName" data-th-field="*{roleName}" class="form-control" type="text" required/>
                             <span id="roleNameError" th:errors="*{roleName}"   data-th-if="${#fields.hasErrors('roleName')}" class="error">Error Role Name</span>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
             </div>
             <!--Error-->
             <div class="form-row">
-                <label id="errorLabel"   data-th-if="${#fields.hasErrors('*')}" th:text="'Errors: '">Errors: </label>
+                <label id="errorLabel"   data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors: </label>
                 <ul>
                     <li id="errorDisplay"   data-th-each="err: ${#fields.errors('*')}" th:utext="${err}" class="error"></li>
                 </ul>
@@ -70,7 +70,7 @@
     </div>
 </div>
 <!--footer include-->
-<footer   data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div   data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
 <head   data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
 
@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="card-group shadow" style="margin-left: 10px; margin-right: 10px">
                 <div class="card bg-light p-4" >
-                    <form th:action="${'/login'}" method="post">
+                    <form data-th-action="${'/login'}" method="post">
                         <div class="card-body" align="center" style="margin-top: 25px" >
                             <h1>Login</h1>
                             <p class="text-muted">Log in to your account</p><br>
@@ -57,7 +57,7 @@
 
 
 <!--footer include-->
-<footer   data-th-replace="~{fragments/footer :: footerFragment}"></footer>
+<div   data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 

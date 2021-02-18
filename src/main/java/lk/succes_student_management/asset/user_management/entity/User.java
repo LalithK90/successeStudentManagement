@@ -2,6 +2,8 @@ package lk.succes_student_management.asset.user_management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lk.succes_student_management.asset.employee.entity.Employee;
+import lk.succes_student_management.asset.student.entity.Student;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.util.audit.AuditEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +26,13 @@ import java.util.List;
 public class User extends AuditEntity {
 
     @OneToOne
-    @NotNull
     private Employee employee;
+
+    @OneToOne
+    private Student student;
+
+    @OneToOne
+    private Teacher teacher;
 
     @Column(nullable = false,unique = true)
     @Size(min = 5, message = "user name should include at least five characters")
@@ -48,14 +55,5 @@ public class User extends AuditEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-
-
-
-    /*@ManyToMany(fetch = FetchType.EAGER)
-    //@Fetch( FetchMode.SUBSELECT)
-    @JoinTable(name = "user_working_place",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "working_place_id"))
-    private Set< WorkingPlace > workingPlaces;*/
 
 }

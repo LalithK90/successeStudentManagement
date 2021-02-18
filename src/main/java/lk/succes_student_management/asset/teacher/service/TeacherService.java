@@ -1,9 +1,12 @@
 package lk.succes_student_management.asset.teacher.service;
 
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes_student_management.asset.employee.entity.Employee;
 import lk.succes_student_management.asset.teacher.dao.TeacherDao;
 import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.util.interfaces.AbstractService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,7 +42,12 @@ public class TeacherService implements AbstractService<Teacher, Integer> {
     }
 
     public List<Teacher> search(Teacher teacher) {
-        return null;
+        ExampleMatcher matcher = ExampleMatcher
+            .matching()
+            .withIgnoreCase()
+            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example< Teacher > teacherExample = Example.of(teacher, matcher);
+        return teacherDao.findAll(teacherExample);
     }
 
     public Teacher lastTeacherOnDB() {return teacherDao.findFirstByOrderByIdDesc();
