@@ -1,81 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--&lt;!&ndash;Styles, meta data, and title are included&ndash;&gt;-->
-<!--<head data-th-replace="~{fragments/header :: headerFragment}">-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Thymeleaf Springboot </title>-->
-<!--</head>-->
-<!--<body>-->
-<!--&lt;!&ndash;Nav bar is included&ndash;&gt;-->
-<!--<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>-->
-
-<!--<div class="bg-secondary">-->
-<!--    <div class="col-4"></div>-->
-<!--    <div class="col-4">-->
-<!--        <h1>Subject Management - Add New Subject</h1>-->
-<!--    </div>-->
-<!--    <div class="col-4">-->
-<!--        <a href="/subject">-->
-<!--            <button class="btn btn-primary">All Subject</button>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="container">-->
-<!--    <form action="/subject/save" data-th-object="${subject}" method="post">-->
-<!--        &lt;!&ndash;subject id&ndash;&gt;-->
-<!--        <div class="form-row text-right" data-th-if="${addStatus==false}">-->
-<!--            <div class="col-md-4">-->
-<!--                <label data-th-for="${id}">Id</label>-->
-<!--            </div>-->
-<!--            <div class="col-md-8">-->
-<!--                <label>-->
-<!--                    <input class="form-control" data-th-field="*{id}" readonly type="text">-->
-<!--                </label>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Name&ndash;&gt;-->
-<!--        <div class="form-row text-right">-->
-<!--            <div class="col-md-4">-->
-<!--                <label class="control-label" data-th-for="${name}">Name :</label>-->
-<!--            </div>-->
-<!--            <div class="col-md-8">-->
-<!--                <label>-->
-<!--                    <input class="form-control" data-th-field="*{name}" required tabindex="4" type="text"/>-->
-<!--                </label>-->
-<!--                <span data-th-errors="*{name}"-->
-<!--                      data-th-if="${#fields.hasErrors('name')}">Error Name</span>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash;Code&ndash;&gt;-->
-<!--        <div class="form-row text-right">-->
-<!--            <div class="col-md-4">-->
-<!--                <label class="control-label" data-th-for="${code}">code :</label>-->
-<!--            </div>-->
-<!--            <div class="col-md-8">-->
-<!--                <input class="form-control" data-th-field="*{code}" required tabindex="4" type="text"/>-->
-<!--                <span data-th-errors="*{code}"-->
-<!--                      data-th-if="${#fields.hasErrors('code')}">Error Name</span>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash;Button&ndash;&gt;-->
-<!--        <div class="container-fluid">-->
-<!--            <button class="btn btn-success" tabindex="21" type="submit">-->
-<!--                <i class="fa fa-save " style="font-size: 20px"></i>&nbsp; &nbsp;<span-->
-<!--                    data-th-text="${addStatus==true?'Save': 'Update'}"-->
-<!--                    id="submit"></span>-->
-<!--            </button>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--&lt;!&ndash;footer is included&ndash;&gt;-->
-<!--<div data-th-replace="~{fragments/footer :: footerFragment}"></div>-->
-<!--&lt;!&ndash;script is included&ndash;&gt;-->
-<!--<div data-th-replace="~{fragments/script :: scriptFragment}"></div>-->
-<!--</body>-->
-<!--</html>-->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,16 +31,18 @@
                 <input type="text" data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" data-th-for="${name}">Subject Name</label>
-            <div class="col-sm-5">
-                <input type="text" id="name" class="form-control" data-th-field="*{name}" placeholder="Subject name">
-            </div>
-        </div>
+        <!--subjectCode-->
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${code}">Subject code</label>
             <div class="col-sm-4">
                 <input type="text" id="code" placeholder="Subject Code" class="form-control" data-th-field="*{code}">
+            </div>
+        </div>
+        <!--subjectName-->
+        <div class="form-group">
+            <label class="col-sm-2 control-label" data-th-for="${name}">Subject Name</label>
+            <div class="col-sm-5">
+                <input type="text" id="name" class="form-control" data-th-field="*{name}" placeholder="Subject name">
             </div>
         </div>
         <div class="row container-fluid">

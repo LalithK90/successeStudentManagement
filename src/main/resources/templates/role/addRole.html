@@ -7,7 +7,7 @@
 <body>
 <nav   data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="container-fluid bg-secondary form-Border">
+<div class="container-fluid  form-Border">
     <div class="row text-center formManagement border-info">
         <div class="col">
             <a class="btn btn-primary" href="/home">
@@ -28,7 +28,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid bg-dark formBorder">
+<div class="container-fluid  formBorder">
     <div class="col-sm-12 flex-column ">
         <form id="form" class="form-horizontal" method="POST" data-th-action="${addStatus==true?'/role/add':'/role/update'}"
               data-th-object="${role}">
@@ -54,7 +54,7 @@
                 </div>
             </div>
             <div class="form-batch col-md-12 col-sm-12 text-center flex-column">
-                <button class="btn btn-success" type="submit">
+                <button class="btn btn-outline-primary" type="submit">
                     <i class="fa fa-save" style="font-size: 20px"></i>&nbsp; &nbsp;<span
                         id="submit"   data-th-text="${addStatus==true?'Save': 'Update'}">                        </span>
                 </button>
