@@ -135,9 +135,8 @@ public class TimeTableController {
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
         .forEach(x -> students.add(x.getStudent()));
-    System.out.println(students.size());
     model.addAttribute("students", students);
-    model.addAttribute("studentRemoveBatch", false);
+    model.addAttribute("studentRemoveBatch", true);
     return "timeTable/timeTable-detail";
   }
 

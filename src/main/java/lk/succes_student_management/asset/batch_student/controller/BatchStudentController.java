@@ -45,32 +45,48 @@ public class BatchStudentController {
     return "batchStudent/batchStudent";
   }
 
-  @PostMapping( "/batch/{id}" )
+  @GetMapping( "/batch/{id}" )
   public String studentAddBatch(@PathVariable( "id" ) Integer id, Model model) {
+    common(id, model, true);
+    return "batchStudent/addBatchStudent";
+  }
+
+  @PostMapping( "/removeBatch" )
+  public String removeStudentFromBatch(@ModelAttribute BatchStudent batchStudent) {
+    BatchStudent batchStudentDB = batchStudentService.findByStudentAndBatch(batchStudent.getStudent(),
+                                                                            batchStudent.getBatch());
+    batchStudentDB.setLiveDead(LiveDead.STOP);
+    batchStudentService.persist(batchStudent);
+    return "redirect:/batchStudent/batch/" + batchStudentDB.getBatch().getId();
+  }
+
+  @GetMapping( "/batch/student/{id}" )
+  public String batchStudent(@PathVariable( "id" ) Integer id, Model model) {
+    common(id, model, false);
+    return "batchStudent/showStudent";
+  }
+
+  private void common(Integer id, Model model, boolean addStatus) {
     Batch batch = batchService.findById(id);
     model.addAttribute("batchDetail", batch);
     model.addAttribute("teacherDetail", batch.getTeacher());
     //already registered student on this batch
     List< Student > registeredStudent = new ArrayList<>();
     batch.getBatchStudents().forEach(x -> registeredStudent.add(x.getStudent()));
-    //not registered student on this batch
-    List< Student> notRegisteredStudent = studentService.findByGrade(batch.getGrade())
-        .stream()
-        .filter(x->!registeredStudent.contains(x))
-        .collect(Collectors.toList());
     model.addAttribute("students", registeredStudent);
-    model.addAttribute("notRegisteredStudent",notRegisteredStudent );
-    model.addAttribute("student", new BatchStudent());
     model.addAttribute("studentRemoveBatch", true);
-    return "batchStudent/addBatchStudent";
-  }
 
-  @GetMapping("/removeBatch")
-  public String removeStudentFromBatch(@ModelAttribute BatchStudent batchStudent){
-    BatchStudent batchStudentDB = batchStudentService.findByStudentAndBatch(batchStudent.getStudent(), batchStudent.getBatch());
-    batchStudentDB.setLiveDead(LiveDead.STOP);
-    batchStudentService.persist(batchStudent);
-    return "redirect:/batchStudent/batch/"+ batchStudentDB.getId();
+
+    if ( addStatus ) {
+      model.addAttribute("student", new BatchStudent());
+      //not registered student on this batch
+      List< Student > notRegisteredStudent = studentService.findByGrade(batch.getGrade())
+          .stream()
+          .filter(x -> !registeredStudent.contains(x))
+          .collect(Collectors.toList());
+      model.addAttribute("notRegisteredStudent", notRegisteredStudent);
+    }
+
   }
 
 }
