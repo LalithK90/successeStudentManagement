@@ -73,4 +73,18 @@ public class BatchStudentController {
     return "redirect:/batchStudent/batch/"+ batchStudentDB.getBatch().getId();
   }
 
+  @GetMapping("/batch/student/{id}")
+  private String batchStudent(@PathVariable("id")Integer id, Model model){
+    Batch batch = batchService.findById(id);
+    model.addAttribute("batchDetail", batch);
+    model.addAttribute("teacherDetail", batch.getTeacher());
+    //already registered student on this batch
+    List< Student > registeredStudent = new ArrayList<>();
+    batch.getBatchStudents().forEach(x -> registeredStudent.add(x.getStudent()));
+    model.addAttribute("students", registeredStudent);
+    model.addAttribute("student", new BatchStudent());
+    model.addAttribute("studentRemoveBatch", true);
+    return "batchStudent/showStudent";
+  }
+
 }
