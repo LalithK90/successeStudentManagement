@@ -183,7 +183,7 @@ public class UserController {
             " or that teacher already be a user in the system" +
             " \n Could you please search again !!");
 
-        return "user/addUser";
+        return "user/addUserTeacher";
     }
 
     @GetMapping( value = "/studentAdd" )
@@ -216,7 +216,7 @@ public class UserController {
             " or that student already be a user in the system" +
             " \n Could you please search again !!");
 
-        return "user/addUser";
+        return "user/addUserStudent";
     }
 
 }
