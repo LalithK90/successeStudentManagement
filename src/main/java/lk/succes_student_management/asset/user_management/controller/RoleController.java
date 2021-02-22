@@ -82,7 +82,7 @@ public class RoleController {
             ObjectError error = new ObjectError("role",
                                                 "This role is already in the System <br/>System message -->" + e.toString());
             result.addError(error);
-            model.addAttribute("addStatus", false);
+            model.addAttribute("addStatus", true);
             model.addAttribute("role", role);
             return "role/addRole";
         }
