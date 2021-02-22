@@ -103,7 +103,7 @@
           <!--Nic-->
           <div class="form-row text-right" >
             <div class="col-md-4" >
-              <label class="control-label" for="nic" >NIC No :</label >
+              <label class="control-label" for="NationalID" >NIC No :</label >
             </div >
             <div class="col-md-8" >
               <input data-th-field="*{nic}" class="form-control" tabindex="6" type="text"
@@ -115,10 +115,10 @@
           </div >
           <!--Gender-->
           <div class="form-row text-right" >
-            <div class="col-md-4" >
+            <div class="col-md-4 text-right" >
               <label class="control-label" for="gender" >Gender :</label >
             </div >
-            <div class="col-md-8" >
+            <div class="col-md-8 text-left" >
               <div class="custom-control custom-checkbox custom-control-inline "
                    data-th-each="genders,index : ${gender}">
                 <input class="custom-control-input gender" required
