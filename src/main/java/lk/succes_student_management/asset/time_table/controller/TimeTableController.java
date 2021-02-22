@@ -51,7 +51,8 @@ public class TimeTableController {
 
 
   public TimeTableController(TimeTableService timeTableService, HallService hallService,
-                             SubjectService subjectService, TeacherService teacherService, StudentService studentService, BatchService batchService,
+                             SubjectService subjectService, TeacherService teacherService,
+                             StudentService studentService, BatchService batchService,
                              BatchStudentService batchStudentService,
                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                              DateTimeAgeService dateTimeAgeService, UserService userService) {
@@ -137,7 +138,11 @@ public class TimeTableController {
         .getBatchStudents()
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
-        .forEach(x -> students.add(studentService.findById(x.getStudent().getId())));
+        .forEach(x -> {
+          System.out.println(x.getId()+" batchId");
+          System.out.println(x.getStudent().getId()+ " stude id");
+          students.add(studentService.findById(x.getStudent().getId()));
+        });
     System.out.println(students.size());
     model.addAttribute("students", students);
     model.addAttribute("studentRemoveBatch", false);
