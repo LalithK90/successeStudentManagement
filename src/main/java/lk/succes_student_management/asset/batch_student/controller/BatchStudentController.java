@@ -45,7 +45,7 @@ public class BatchStudentController {
     return "batchStudent/batchStudent";
   }
 
-  @PostMapping( "/batch/{id}" )
+  @GetMapping( "/batch/{id}" )
   public String studentAddBatch(@PathVariable( "id" ) Integer id, Model model) {
     Batch batch = batchService.findById(id);
     model.addAttribute("batchDetail", batch);
@@ -65,12 +65,12 @@ public class BatchStudentController {
     return "batchStudent/addBatchStudent";
   }
 
-  @GetMapping("/removeBatch")
+  @PostMapping("/removeBatch")
   public String removeStudentFromBatch(@ModelAttribute BatchStudent batchStudent){
     BatchStudent batchStudentDB = batchStudentService.findByStudentAndBatch(batchStudent.getStudent(), batchStudent.getBatch());
     batchStudentDB.setLiveDead(LiveDead.STOP);
     batchStudentService.persist(batchStudent);
-    return "redirect:/batchStudent/batch/"+ batchStudentDB.getId();
+    return "redirect:/batchStudent/batch/"+ batchStudentDB.getBatch().getId();
   }
 
 }
