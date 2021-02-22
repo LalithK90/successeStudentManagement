@@ -54,10 +54,10 @@
               <input class="custom-control-input gender" required
                      data-th-name="${'timeTableStudentAttendances[__${index.index}__].attendanceStatus'}"
                      data-th-value="${attendanceStatus}"
-                     data-th-id="${indexOne.index}+${attendanceStatus}" type="radio"
+                     data-th-id="${indexOne.index}+${attendanceStatus}+{index.index}" type="radio"
                      data-th-checked="${attendanceStatus==timeTableStudentAttendance.attendanceStatus}" />
               <label class="custom-control-label"
-                     data-th-for="${indexOne.index}+${attendanceStatus}"
+                     data-th-for="${indexOne.index}+${attendanceStatus}+{index.index}"
                      data-th-text="${attendanceStatus.attendanceStatus}" > radio
               </label >
             </span >
