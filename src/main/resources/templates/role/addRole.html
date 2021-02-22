@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-8">
                             <input id="roleName" data-th-field="*{roleName}" class="form-control" type="text" required/>
-                            <span id="roleNameError" th:errors="*{roleName}"   data-th-if="${#fields.hasErrors('roleName')}" class="error">Error Role Name</span>
+                            <span id="roleNameError" data-th-errors="*{roleName}"   data-th-if="${#fields.hasErrors('roleName')}" class="error">Error Role Name</span>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
             <div class="form-row">
                 <label id="errorLabel"   data-th-if="${#fields.hasErrors('*')}" data-th-text="'Errors: '">Errors: </label>
                 <ul>
-                    <li id="errorDisplay"   data-th-each="err: ${#fields.errors('*')}" th:utext="${err}" class="error"></li>
+                    <li data-th-each="err: ${#fields.errors('*')}" data-th-utext="${err}"></li>
                 </ul>
             </div>
         </form>
