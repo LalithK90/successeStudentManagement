@@ -50,9 +50,15 @@
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
     $(document).ready(function () {
+        let date = new Date();
         $('[type="date"]').prop('min', function () {
-            return new Date().toJSON().split('T')[0];
-        });
+            console.log(date)
+            return date.toJSON().split('T')[0];
+        }).prop('max', function () {
+            let futureDate = date.setDate(date.getDate() + 30);
+            console.log(futureDate);
+            return futureDate;
+        })
     });
 </script >
 </body >
