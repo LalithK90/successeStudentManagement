@@ -9,6 +9,7 @@ import lk.succes_student_management.asset.common_asset.model.DateTimeTable;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.hall.service.HallService;
 import lk.succes_student_management.asset.student.entity.Student;
+import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.asset.subject.service.SubjectService;
 import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.teacher.service.TeacherService;
@@ -41,6 +42,7 @@ public class TimeTableController {
   private final HallService hallService;
   private final SubjectService subjectService;
   private final TeacherService teacherService;
+  private final StudentService studentService;
   private final BatchService batchService;
   private final BatchStudentService batchStudentService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
@@ -49,7 +51,7 @@ public class TimeTableController {
 
 
   public TimeTableController(TimeTableService timeTableService, HallService hallService,
-                             SubjectService subjectService, TeacherService teacherService, BatchService batchService,
+                             SubjectService subjectService, TeacherService teacherService, StudentService studentService, BatchService batchService,
                              BatchStudentService batchStudentService,
                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
                              DateTimeAgeService dateTimeAgeService, UserService userService) {
@@ -57,6 +59,7 @@ public class TimeTableController {
     this.hallService = hallService;
     this.subjectService = subjectService;
     this.teacherService = teacherService;
+    this.studentService = studentService;
     this.batchService = batchService;
     this.batchStudentService = batchStudentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
@@ -134,7 +137,7 @@ public class TimeTableController {
         .getBatchStudents()
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
-        .forEach(x -> students.add(x.getStudent()));
+        .forEach(x -> students.add(studentService.findById(x.getStudent().getId())));
     System.out.println(students.size());
     model.addAttribute("students", students);
     model.addAttribute("studentRemoveBatch", false);
