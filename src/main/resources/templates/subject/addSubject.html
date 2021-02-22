@@ -38,6 +38,7 @@
                 <input type="text" id="code" placeholder="Subject Code" class="form-control" data-th-field="*{code}">
             </div>
         </div>
+        <input type="text" data-th-field="*{liveDead}" hidden>
         <!--subjectName-->
         <div class="form-group">
             <label class="col-sm-2 control-label" data-th-for="${name}">Subject Name</label>
@@ -47,7 +48,7 @@
         </div>
         <div class="row container-fluid">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
+                <a href="/subject"><button type="button" class="btn btn-danger btn-block">Back</button></a>
             </div>
 
             <div class="col-sm-2 col-sm-offset-2">
