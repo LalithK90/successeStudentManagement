@@ -88,7 +88,6 @@ public class StudentController implements AbstractController< Student, Integer >
       return commonThing(model, student, true);
     }
 
-    student.getBatchStudents().forEach(batchStudentService::persist);
 //there are two different situation
     //1. new Student -> need to generate new number
     //2. update student -> no required to generate number
@@ -103,6 +102,10 @@ public class StudentController implements AbstractController< Student, Integer >
       }
     }
     studentService.persist(student);
+    student.getBatchStudents().forEach(x -> {
+      x.setStudent(student);
+      batchStudentService.persist(x);
+    });
     return "redirect:/student";
 
   }
@@ -113,7 +116,7 @@ public class StudentController implements AbstractController< Student, Integer >
     return "redirect:/student";
   }
 
-  @PostMapping("/search")
+  @PostMapping( "/search" )
   public String search(@ModelAttribute Student student, Model model) {
     List< Student > students = studentService.search(student);
 
