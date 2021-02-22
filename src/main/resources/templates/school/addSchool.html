@@ -28,6 +28,7 @@
             <label class="col-sm-3 control-label" data-th-for="${classReferance}">School ID</label>
             <div class="col-sm-9">
                 <input type="text" data-th-field="*{id}" id="schoolId" placeholder="School ID" class="form-control" autofocus>
+                <input type="text" data-th-field="*{liveDead}" hidden>
             </div>
         </div>
 
@@ -40,7 +41,7 @@
 
         <div class="row container-fluid">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
+              <a href="/school"><button type="button" class="btn btn-danger btn-block">Back</button></a>
             </div>
 
             <div class="col-sm-2 col-sm-offset-2">

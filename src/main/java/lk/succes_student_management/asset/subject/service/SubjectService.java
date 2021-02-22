@@ -8,6 +8,7 @@ import lk.succes_student_management.asset.subject.entity.Subject;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SubjectService implements AbstractService<Subject, Integer> {
@@ -18,7 +19,7 @@ public class SubjectService implements AbstractService<Subject, Integer> {
     }
 
     public List<Subject> findAll() {
-        return subjectDao.findAll();
+        return subjectDao.findAll() .stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList());
     }
 
     public Subject findById(Integer id) {

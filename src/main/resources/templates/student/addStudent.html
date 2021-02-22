@@ -266,7 +266,7 @@
     $("#grade").change(function () {
         let url = $("#batchUrl").val() + $(this).val();
         let studentId = $("#id").val();
-        if (!studentId) {
+        if (studentId) {
             url = $("#batchUrl").val() + $(this).val() + "/" + studentId;
         }
 

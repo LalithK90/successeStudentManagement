@@ -26,7 +26,7 @@ public class SubjectController implements AbstractController< Subject, Integer >
   @GetMapping
   public String findAll(Model model) {
     model.addAttribute("subjects",
-                       subjectService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+                       subjectService.findAll());
     return "subject/subject";
   }
 

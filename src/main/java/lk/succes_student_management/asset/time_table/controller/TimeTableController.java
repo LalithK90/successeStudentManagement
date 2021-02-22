@@ -82,10 +82,10 @@ public class TimeTableController {
     User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
 //todo need to think teacher as user
     Teacher teacher = new Teacher();
-    List< TimeTable > timeTables = timeTableService.findAll()
-        .stream()
-        .filter(x -> x.getBatch().getTeacher().equals(teacher))
-        .collect(Collectors.toList());
+    List< TimeTable > timeTables = timeTableService.findAll();
+//        .stream()
+//        .filter(x -> x.getBatch().getTeacher().equals(teacher))
+//        .collect(Collectors.toList());
 
     return common(timeTables, model);
   }
@@ -135,7 +135,7 @@ public class TimeTableController {
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList())
         .forEach(x -> students.add(x.getStudent()));
-
+    System.out.println(students.size());
     model.addAttribute("students", students);
     model.addAttribute("studentRemoveBatch", false);
     return "timeTable/timeTable-detail";
