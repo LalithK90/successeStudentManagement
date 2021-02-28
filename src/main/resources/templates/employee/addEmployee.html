@@ -312,7 +312,7 @@
                 <label class="control-label" for="createdAt" >Created At :</label >
               </div >
               <div class="col-md-8" >
-                <input id="createdAt"  data-th-text="${createdAt}}" class="form-control" type="text"
+                <input id="createdAt"  data-th-text="${{createdAt}}" class="form-control" type="text"
                        readonly />
               </div >
             </div >
@@ -322,8 +322,8 @@
           <!--Button-->
           <div class="form-group col-md-12 col-sm-12 text-center flex-column " >
             <button class="btn btn-success" type="submit" tabindex="21" >
-              <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp; &nbsp;<span id="submit"
-                                                                                      data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
+              <i class="fa fa-save " style="font-size: 20px" ></i >&nbsp;
+              &nbsp;<span id="submit" data-th-text="${addStatus==true?'Save': 'Update'}" ></span >
             </button >
             <button class="btn btn-danger" type="reset" >
               <i class="fa fa-redo" ></i > <span id="reset" >Reset</span >

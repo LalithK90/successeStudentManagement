@@ -131,7 +131,7 @@ public class EmployeeController {
 
     if ( employee.getId() == null ) {
       Employee lastEmployee = employeeService.lastEmployee();
-      if ( lastEmployee == null ) {
+      if ( lastEmployee.getCode() == null ) {
         employee.setCode("SSME" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
       } else {
         employee.setCode("SSME" + makeAutoGenerateNumberService.numberAutoGen(lastEmployee.getCode().substring(4)).toString());

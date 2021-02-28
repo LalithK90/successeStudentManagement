@@ -17,38 +17,38 @@
     <div class="col-4">
     </div>
     <div class="col-4">
-        <h1>Add a School</h1>
+        <h1>Students On batch and New Student Add</h1>
     </div>
     <div class="col-4">
         <a href="/school">
-            <button class="btn btn-primary">Students On batch and New Student Add</button>
+            <button class="btn btn-primary">Add a School</button>
         </a>
     </div>
 </div>
 
 <div class="container">
-<div class="container-fluid">
+<div class="container">
     <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}"></div>
 </div>
-    <div class="container-fluid">
+    <div class="container">
         <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}"></div>
     </div>
     <form action="/school/save" data-th-object="${student}" method="post" >
 
         <div class="form-row" >
             <div class="form-group" >
-                <label class="col-sm-1 control-label" data-th-for="${'batches'}" >Batches:</label >
-                <div class="col-sm-7" >
-                    <select id="batches" class="form-control col-sm-10"  multiple required >
+                <label class="col-sm-4 control-label" data-th-for="${'batches'}" >Batches:</label >
+                <div class="col-sm-8" >
+                    <select id="batches" class="form-control col-8"  multiple required >
                         <option data-th-each="batch : ${batches}" ></option >
                     </select >
                 </div >
             </div >
         </div >
 
-        <div class="row container-fluid">
+        <div class="row container">
             <div class="col-sm-2 col-sm-offset-2">
-                <button type="link" class="btn btn-danger btn-block">Back</button>
+                <a href="/batchStudent"><button type="button" class="btn btn-danger btn-block">Back</button></a>
             </div>
 
             <div class="col-sm-2 col-sm-offset-2">
@@ -60,7 +60,7 @@
             </div>
         </div>
     </form>
-    <div class="container-fluid">
+    <div class="container">
         <div data-th-replace="~{student/student :: studentsFragment}"></div>
     </div>
 </div>
