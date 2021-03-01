@@ -56,7 +56,7 @@ public class BatchStudentController {
     BatchStudent batchStudentDB = batchStudentService.findByStudentAndBatch(batchStudent.getStudent(),
                                                                             batchStudent.getBatch());
     batchStudentDB.setLiveDead(LiveDead.STOP);
-    batchStudentService.persist(batchStudent);
+    batchStudentService.persist(batchStudentDB);
     return "redirect:/batchStudent/batch/" + batchStudentDB.getBatch().getId();
   }
 
@@ -72,7 +72,11 @@ public class BatchStudentController {
     model.addAttribute("teacherDetail", batch.getTeacher());
     //already registered student on this batch
     List< Student > registeredStudent = new ArrayList<>();
-    batch.getBatchStudents().forEach(x -> registeredStudent.add(x.getStudent()));
+    batch.getBatchStudents()
+            .stream()
+            .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
+            .collect(Collectors.toList())
+            .forEach(x -> registeredStudent.add(x.getStudent()));
     model.addAttribute("students", registeredStudent);
     model.addAttribute("studentRemoveBatch", true);
 
