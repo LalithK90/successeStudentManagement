@@ -69,7 +69,6 @@ public class EmployeeController {
   //Send all employee data
   @RequestMapping
   public String employeePage(Model model) {
-    System.out.println(" im in");
     List< Employee > employees = new ArrayList<>();
     for ( Employee employee : employeeService.findAll()
         .stream()
