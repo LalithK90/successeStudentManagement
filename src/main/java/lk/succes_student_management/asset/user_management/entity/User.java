@@ -25,13 +25,13 @@ import java.util.List;
 @JsonIgnoreProperties(value = "createdDate", allowGetters = true)
 public class User extends AuditEntity {
 
-    @ManyToOne
+    @OneToOne
     private Employee employee;
 
-    @ManyToOne
+    @OneToOne
     private Student student;
 
-    @ManyToOne
+    @OneToOne
     private Teacher teacher;
 
     @Column(nullable = false,unique = true)
