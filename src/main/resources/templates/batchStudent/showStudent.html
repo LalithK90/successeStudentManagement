@@ -17,23 +17,27 @@
   <div class="col-4" >
   </div >
   <div class="col-4" >
-    <h1 >Add a School</h1 >
+    <h1 >Add new Student for Batch</h1 >
   </div >
   <div class="col-4" >
-    <a href="/school" >
+    <a href="/student" >
       <button class="btn btn-primary" >Students On batch and New Student Add</button >
     </a >
   </div >
 </div >
-
-
-<div class="container-fluid" >
-  <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}" ></div >
-</div >
-<div class="container-fluid" >
-  <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}" ></div >
-</div >
-<div class="container-fluid" >
+<div class="row">
+<div class="col-md-6">
+<!--  <div class="container-fluid" >-->
+    <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}" ></div >
+<!--  </div >-->
+</div>
+<div class="col-md-6">
+<!--  <div class="container" >-->
+    <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}" ></div >
+<!--  </div >-->
+</div>
+</div>
+<div class="container" >
   <div data-th-replace="~{student/student :: studentsFragment}" ></div >
 </div >
 

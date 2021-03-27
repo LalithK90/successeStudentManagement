@@ -80,7 +80,7 @@
               <option value="" >Please select</option >
               <option data-th-each="hall : ${halls}"
                       data-th-value="${hall.id}"
-                      data-th-text="${'Name : '+hall.name+' Seats : '+ hall.seatCount}" ></option >
+                      data-th-text="${'Hall Number : '+hall.number+' Seats : '+ hall.seatCount}" ></option >
             </select >
           </th >
           <th data-th-if="${!addStatus}" >

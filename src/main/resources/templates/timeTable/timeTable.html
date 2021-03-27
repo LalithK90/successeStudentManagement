@@ -31,7 +31,7 @@
             <th>Start Time</th>
             <th>End Time</th>
             <th>Active/Not</th>
-            <th>Hall Name</th>
+            <th>Hall Number</th>
             <th>Batch Name</th>
             <th>Modify</th>
         </tr>
@@ -44,7 +44,7 @@
             <td data-th-text="${#temporals.format(timeTable.startAt, 'dd-MM-yyyy HH:mm')}"></td>
             <td data-th-text="${#temporals.format(timeTable.endAt, 'dd-MM-yyyy HH:mm')}"></td>
             <td data-th-text="${timeTable.liveDead.liveDead}"></td>
-            <td data-th-text="${timeTable.hall.name}"></td>
+            <td data-th-text="${timeTable.hall.number}"></td>
             <td data-th-text="${timeTable.batch.name}"></td>
             <td>
                 <a data-th-href="${'/timeTable/view/'+ timeTable.id}"><button class="btn btn-info">View</button></a>
