@@ -274,6 +274,7 @@
             type: 'GET',
             url: url,
             success: function (resp) {
+                $("#batches").empty();
                 for (let i = 0; i < resp.length; i++) {
                     $("#batches").append(new Option(resp[i].name, resp[i].id));
                 }
