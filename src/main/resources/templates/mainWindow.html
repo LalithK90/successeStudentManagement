@@ -12,65 +12,80 @@
 <h1 align="center" class="display-3 text-danger"><strong>Welcome to Success Student Management System</strong></h1>
 
 <!-- Four equal columns -->
-<div class="row">
-    <div class="jumbotron col-3" >
+<div class="row fixed ui-widget-content ">
+    <div class="jumbotron col-sm-3" >
         <h2>Student Management</h2><br>
         <i class="fas fa-book-reader" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Registration</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
+        <a href="/student/add"><buton type="button" class="btn btn-outline-primary">Registration</buton></a>
+        <a href="/student"><button type="button" class="btn btn-outline-warning">View all Students</button></a>
     </div>
-    <div class="jumbotron col-3 bg-light" >
+    <div class="jumbotron col-sm-3 bg-light" >
         <h2>Teacher Management</h2><br>
         <i class="fas fa-chalkboard-teacher" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Registration</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
+        <a href="/teacher/add" ><button type="button" class="btn btn-outline-primary">Registration</button></a>
+        <a href="/teacher"><button type="button" class="btn btn-outline-warning">View All Teachers</button></a>
     </div>
-    <div class="jumbotron col-3" >
+    <div class="jumbotron col-sm-3" >
         <h2>Class Management</h2><br>
         <i class="fas fa-school" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Add new Class</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
+        <a href="/batch/add"><button type="button" class="btn btn-outline-primary">Add new Class</button></a>
+        <a href="/batch"><button type="button" class="btn btn-outline-warning">Modify Class details</button></a>
+        <a href="/batchStudent"><button type="button" class="btn btn-outline-success">View All Class Sessions</button></a>
     </div>
-    <div class="jumbotron col-3 bg-light" >
+    <div class="jumbotron col-sm-3 bg-light" >
         <h2>Payment Management</h2><br>
         <i class="fab fa-amazon-pay" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Make a Payment</button>
-        <button type="button" class="btn btn-outline-warning">Transaction modify</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
+        <a href="/payment/add"><button type="button" class="btn btn-outline-primary">Make a Payment</button></a>
+        <a href="/payment"><button type="button" class="btn btn-outline-warning">Transaction Modify</button></a>
+    </div>
+</div>
+<div class="row fixed ui-widget-content">
+    <div class="jumbotron col-sm-3 bg-light" >
+        <h2>Shedule Management</h2><br>
+        <i class="far fa-clock" style="font-size:36px"></i><br><br>
+        <a href="/timeTable/add"><button type="button" class="btn btn-outline-primary">Create Session</button></a>
+        <a href="/timeTable/teacher"><button type="button" class="btn btn-outline-warning">Session Status</button></a>
+        <a href="/timeTable"><button type="button" class="btn btn-outline-success">View time Table</button></a>
+    </div>
+    <div class="jumbotron col-sm-3" >
+        <h2>Hall Management</h2><br>
+        <i class="fas fa-hotel" style="font-size:36px"></i><br><br>
+        <a href="/hall/add"><button type="button" class="btn btn-outline-primary">Add new Hall</button></a>
+        <a href="/hall"><button type="button" class="btn btn-outline-warning">Hall Details</button></a>
+    </div>
+    <div class="jumbotron col-sm-3  bg-light" >
+        <h2>Subject Management</h2><br>
+        <i class="far fa-folder-open" style="font-size:36px"></i><br><br>
+        <a href="/subject/add"><button type="button" class="btn btn-outline-primary">Add new Subject</button></a>
+        <a href="/subject"><button type="button" class="btn btn-outline-warning">View all Subjects</button></a>
+    </div>
+    <div class="jumbotron col-md-3" >
+        <h2>Attendance Management</h2><br>
+        <i class="far fa-address-card" style="font-size:36px"></i><br><br>
+        <a href="/timeTableStudentAttendance"> <button type="button" class="btn btn-outline-primary">Mark Attendance</button></a>
+        <a href="/timeTable/teacher"><button type="button" class="btn btn-outline-warning">Update Attendance</button></a>
     </div>
 </div>
 <div class="row">
-    <div class="jumbotron  col-3 bg-light" >
-        <h2>Shedule Management</h2><br>
+    <div class="jumbotron col-sm-6 bg-light" >
+        <h2>Exam Management</h2><br>
         <i class="far fa-clock" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Create Session</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View time Table</button>
+        <button type="button" class="btn btn-outline-primary">Shedule an Exam</button>
+        <button type="button" class="btn btn-outline-warning">Modify Exam</button>
+        <button type="button" class="btn btn-outline-dark">View Result</button>
+        <button type="button" class="btn btn-outline-success">Exam Attendance</button>
     </div>
-    <div class="jumbotron jumbotron col-3" >
-        <h2>Hall Management</h2><br>
-        <i class="fas fa-hotel" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Add new</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
-    </div>
-    <div class="jumbotron col-3  bg-light" >
-        <h2>Subject Management</h2><br>
-        <i class="far fa-folder-open" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Add new</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
-    </div>
-    <div class="jumbotron col-3" >
+    <div class="jumbotron col-sm-6" >
         <h2>Staff Management</h2><br>
-        <i class="far fa-address-card" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Registration</button>
-        <button type="button" class="btn btn-outline-warning">Update Details</button>
-        <button type="button" class="btn btn-outline-success">View All</button>
+        <i class="fas fa-hotel" style="font-size:36px"></i><br><br>
+        <button type="button" class="btn btn-outline-primary">User Management</button>
+        <button type="button" class="btn btn-outline-warning">Role Management</button>
+        <button type="button" class="btn btn-outline-success">Employee Management</button>
+        <button type="button" class="btn btn-outline-info">Details Management</button>
+        <button type="button" class="btn btn-outline-dark">Privillage Management</button>
     </div>
+
+
 </div>
 
 

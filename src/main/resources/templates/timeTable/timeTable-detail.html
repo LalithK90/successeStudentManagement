@@ -27,9 +27,13 @@
 <!--Student detail-->
 <div class="container-fluid" data-th-fragment="timeTableDetail" >
   <!--timeTable id-->
-  <div class="form-batch" >
-    <label data-th-for="${id}" >Id</label >
-    <p class="form-control" data-th-text="${timeTableDetail.code}" ></p >
+  <div class="form-row" >
+    <div class="col-md-4">
+      <label data-th-for="${id}" >ID</label >
+    </div>
+    <div class="col-md-8">
+      <p class="form-control" data-th-text="${timeTableDetail.code}" ></p >
+    </div>
   </div >
   <!-- start date time-->
   <div class="form-row " >
@@ -37,7 +41,7 @@
       <label class="control-label" data-th-for="${date}" >Start Date Time:</label >
     </div >
     <div class="col-md-8" >
-      <p class="form-control" data-th-text="${#temporals.format(timeTableDetail.startAt, 'dd-MM-yyyy HH:mm')}" ></p >
+      <p class="form-control" data-th-text="${#temporals.format(timeTableDetail.startAt, 'yyyy-MM-dd HH:mm')}" ></p >
     </div >
   </div >
   <!-- end date time-->
@@ -46,7 +50,7 @@
       <label class="control-label" data-th-for="${date}" >End Date Time:</label >
     </div >
     <div class="col-md-8" >
-      <p class="form-control" data-th-text="${#temporals.format(timeTableDetail.endAt, 'dd-MM-yyyy HH:mm')}" ></p >
+      <p class="form-control" data-th-text="${#temporals.format(timeTableDetail.endAt, 'yyyy-MM-dd HH:mm')}" ></p >
     </div >
   </div >
   <!--Batch name-->
@@ -83,7 +87,7 @@
       <label class="control-label" >Hall Number :</label >
     </div >
     <div class="col-md-8" >
-      <p class="form-control" data-th-text="${timeTableDetail.hall.name}" ></p >
+      <p class="form-control" data-th-text="${timeTableDetail.hall.number}" ></p >
     </div >
   </div >
   <!--student list -->
@@ -92,9 +96,7 @@
 <!--Button-->
 <div class="form-batch col-md-12 col-sm-12 text-center flex-column " >
   <a href="/timeTable" >
-    <button class="btn btn-success" tabindex="21" type="submit" >
-      Back
-    </button >
+    <button class="btn btn-success" tabindex="21" type="submit" >Back</button >
   </a >
 </div >
 
