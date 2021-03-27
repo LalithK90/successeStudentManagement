@@ -36,7 +36,7 @@ public class ApplicationCreateRestController {
     @GetMapping( "/select/user" )
     public String saveUser() {
         //roles list start
-        String[] roles = {"ADMIN", "TEACHER","STUDENT","MANAGER","CASHIER"};
+        String[] roles = {"ADMIN", "TEACHER","STUDENT","MANAGER","CASHIER","SECTION_HEAD"};
         for ( String s : roles ) {
             Role role = new Role();
             role.setRoleName(s);

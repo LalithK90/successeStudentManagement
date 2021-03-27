@@ -94,6 +94,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
     }
 
     if ( batch.getId() == null ) {
+      System.out.println("batch name " + batch.getName());
       Batch batchDb = batchService.findByName(batch.getName());
 
       if ( batchDb != null ) {
