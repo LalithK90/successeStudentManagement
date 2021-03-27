@@ -40,8 +40,8 @@
         <input type="text" class="form-control" data-th-field="*{liveDead}" hidden >
       </div >
     </div >
-    <div class="row">
-      <div class="col-6">
+    <div class="row" >
+      <div class="col-6" >
         <!--firstName-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${firstName}" >First name</label >
@@ -50,8 +50,8 @@
           </div >
         </div >
 
-      </div>
-      <div class="col-6">
+      </div >
+      <div class="col-6" >
         <!--lastName-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${lastName}" >Last name</label >
@@ -59,10 +59,10 @@
             <input type="text" id="lastName" class="form-control" data-th-field="*{lastName}" >
           </div >
         </div >
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
+      </div >
+    </div >
+    <div class="row" >
+      <div class="col-6" >
         <!--Gender-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${'gender'}" >Gender :</label >
@@ -82,8 +82,8 @@
           </div >
         </div >
 
-      </div>
-      <div class="col-6">
+      </div >
+      <div class="col-6" >
         <!--dateOfBirth-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${dob}" >Date of birth</label >
@@ -91,10 +91,10 @@
             <input type="date" id="dob" class="form-control" data-th-field="*{dob}" >
           </div >
         </div >
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
+      </div >
+    </div >
+    <div class="row" >
+      <div class="col-6" >
         <!--address-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${address}" >Address</label >
@@ -103,8 +103,8 @@
           </div >
         </div >
 
-      </div>
-      <div class="col-6">
+      </div >
+      <div class="col-6" >
         <!--city-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${city}" >City</label >
@@ -112,10 +112,10 @@
             <input type="text" id="city" class="form-control" data-th-field="*{city}" >
           </div >
         </div >
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
+      </div >
+    </div >
+    <div class="row" >
+      <div class="col-6" >
         <!--grade-->
         <div class="form-group" >
           <label class="col-sm-1 control-label" data-th-for="${'grade'}" >Grade</label >
@@ -128,9 +128,9 @@
             </select >
           </div >
         </div >
-      </div>
-      <div class="col-6"></div>
-    </div>
+      </div >
+      <div class="col-6" ></div >
+    </div >
     <!--school-->
     <div class="form-group" >
       <label class="col-6 control-label" >School</label >
@@ -144,8 +144,8 @@
         </select >
       </div >
     </div >
-    <div class="row">
-      <div class="col-6">
+    <div class="row" >
+      <div class="col-6" >
         <!--mobileNumber-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${mobile}" >Mobile number</label >
@@ -153,8 +153,8 @@
             <input type="tel" id="mobile" class="form-control" data-th-field="*{mobile}" >
           </div >
         </div >
-      </div>
-      <div class="col-6">
+      </div >
+      <div class="col-6" >
         <!--fixedNumber-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${home}" >Fixed number</label >
@@ -162,10 +162,10 @@
             <input type="tel" id="home" class="form-control" data-th-field="*{home}" >
           </div >
         </div >
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
+      </div >
+    </div >
+    <div class="row" >
+      <div class="col-6" >
         <!--guardian-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${guardian}" >Guardian's name</label >
@@ -173,8 +173,8 @@
             <input type="text" id="guardian" class="form-control" data-th-field="*{guardian}" >
           </div >
         </div >
-      </div>
-      <div class="col-6">
+      </div >
+      <div class="col-6" >
         <!--available Batches-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${'batches'}" >Available Batches</label >
@@ -185,8 +185,8 @@
             </select >
           </div >
         </div >
-      </div>
-    </div>
+      </div >
+    </div >
     <div class="form-row mt-4 text-center" >
       <!--Selected Batch-->
       <div class="container-fluid" >
@@ -243,7 +243,9 @@
     </div >
     <div class="row container" >
       <div class="col-4" >
-        <a href="/student"><button type="button" class="btn btn-danger btn-block" >Back</button ></a>
+        <a href="/student" >
+          <button type="button" class="btn btn-danger btn-block" >Back</button >
+        </a >
       </div >
 
       <div class="col-4" >
@@ -328,14 +330,14 @@
                             <input id="vl${rowCount}" type="hidden" name="batchStudents[${rowCount}].batch.id" value="${value.value}">
                         </td>
                         <td>
-  <div class="custom-control custom-checkbox custom-control-inline " >
-    <input class="custom-control-input" required   id="${rowCount}+ACTIVE"        name="batchStudents[${rowCount}].liveDead"           value="ACTIVE" type="radio"/>
-    <label class="custom-control-label"           for="${rowCount}+ACTIVE">Active    </label >
-</div>
-  <div class="custom-control custom-checkbox custom-control-inline " >
-      <input class="custom-control-input" required id="${rowCount}+STOP"           name="batchStudents[${rowCount}].liveDead"           value="STOP" type="radio"/>
-    <label class="custom-control-label"           for="${rowCount}+STOP">Deactive    </label >
-  </div >
+                          <div class="custom-control custom-checkbox custom-control-inline " >
+                            <input class="custom-control-input" required   id="${rowCount}+ACTIVE" name="batchStudents[${rowCount}].liveDead" value="ACTIVE" type="radio" checked="checked"/>
+                            <label class="custom-control-label"  for="${rowCount}+ACTIVE" >Active </label >
+                          </div>
+                          <div class="custom-control custom-checkbox custom-control-inline " >
+                            <input class="custom-control-input" required id="${rowCount}+STOP" name="batchStudents[${rowCount}].liveDead" value="STOP" type="radio"/>
+                            <label class="custom-control-label" for="${rowCount}+STOP">Deactivate </label >
+                          </div >
                         </td>
 
                         <td>
