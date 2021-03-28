@@ -154,7 +154,7 @@
                             swal({
                                 title: "Could you accept those days.. !",
                                 icon: "warning",
-                                text: "Please check your date \n Expire Date can not be less than Manufacture Date",
+                                text: "Please check your date \n start at can not be less than end at",
                             })
                             $(`#sAt${selectedFiledId}`).addClass('bg-danger').removeClass('bg-success bg-white');
                             $(`#eAt${selectedFiledId}`).val('').addClass('bg-danger').removeClass('bg-success bg-white');
@@ -207,6 +207,12 @@
         }
     });
 
+    /*
+         $('[type="date"]').prop('max', function () {
+            return new Date().toJSON().split('T')[0];
+        });
+
+     */
 </script >
 </body >
 </html >
