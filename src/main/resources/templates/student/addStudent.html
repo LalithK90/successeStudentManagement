@@ -200,7 +200,7 @@
           </tr >
           </thead >
           <tbody >
-          <tr data-th-each="batchStudent, index : ${student.batchStudents}" >
+          <tr data-th-each="batchStudent, index : ${student.batchStudents}" data-th-if="${not #lists.isEmpty(student.batchStudents)}">
             <td >
               <strong >
                 <span class="control-label" data-th-id="${'tx'+index.index}"
@@ -289,6 +289,7 @@
     })
 
     function addOptionTag(resp) {
+        console.log("length "+resp.length);
         $("#batches").empty();
         $("#batches").append(`<option value="">Please Select</option>`);
         for (let i = 0; i < resp.length; i++) {
