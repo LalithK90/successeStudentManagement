@@ -76,7 +76,8 @@ public class BatchStudentController {
             .stream()
             .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
             .collect(Collectors.toList())
-            .forEach(x -> registeredStudent.add(x.getStudent()));
+            .forEach(x -> registeredStudent.add(studentService.findById(x.getStudent().getId())));
+
     model.addAttribute("students", registeredStudent);
     model.addAttribute("studentRemoveBatch", true);
 

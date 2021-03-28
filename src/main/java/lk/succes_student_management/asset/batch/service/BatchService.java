@@ -61,4 +61,8 @@ public class BatchService implements AbstractService< Batch, Integer > {
   public List< Batch > findByClassDay(ClassDay classDay) {
     return batchDao.findByClassDay(classDay);
   }
+
+  public Batch findByYearAndClassDayAndStartAtAndEndAt(String year, ClassDay classDay, String startAt, String endAt) {
+  return batchDao.findByYearAndClassDayAndStartAtAndEndAt(year,classDay,startAt,endAt);
+  }
 }

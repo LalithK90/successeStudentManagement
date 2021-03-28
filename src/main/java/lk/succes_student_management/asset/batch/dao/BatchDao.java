@@ -20,4 +20,6 @@ public interface BatchDao extends JpaRepository<Batch, Integer> {
   List< Batch> findByGrade(Grade grade);
 
   List< Batch> findByClassDay(ClassDay classDay);
+
+  Batch findByYearAndClassDayAndStartAtAndEndAt(String year, ClassDay classDay, String startAt, String endAt);
 }

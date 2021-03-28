@@ -89,15 +89,16 @@ public class BatchController implements AbstractController< Batch, Integer > {
   @PostMapping( "/save" )
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
+
+
     if ( bindingResult.hasErrors() ) {
       return commonMethod(model, batch, true);
     }
 
     if ( batch.getId() == null ) {
-      System.out.println("batch name " + batch.getName());
       Batch batchDb = batchService.findByName(batch.getName());
-
-      if ( batchDb != null ) {
+Batch batchDbDayAndStartAndEndTime = batchService.findByYearAndClassDayAndStartAtAndEndAt(batch.getYear(),batch.getClassDay(),batch.getStartAt(), batch.getEndAt());
+      if ( batchDbDayAndStartAndEndTime != null && batchDb !=null) {
         ObjectError error = new ObjectError("batch",
                                             "This batch is already in the system. ");
         bindingResult.addError(error);
