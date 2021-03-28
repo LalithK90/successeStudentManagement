@@ -276,7 +276,6 @@
             type: 'GET',
             url: url,
             success: function (resp) {
-                $("#batches").empty();
                 addOptionTag(resp);
             },
             error: function (err) {
@@ -290,11 +289,13 @@
     })
 
     function addOptionTag(resp) {
+        $("#batches").empty();
         $("#batches").append(`<option value="">Please Select</option>`);
         for (let i = 0; i < resp.length; i++) {
             $("#batches").append(`<option value="${resp[i].id}">${resp[i].name}</option>`);
         }
-
+        deleteAllTableRow(selectedBatchInTable);
+        selectedBatch();
     }
 
     //add new item and price
