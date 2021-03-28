@@ -147,9 +147,18 @@ public class BatchController implements AbstractController< Batch, Integer > {
     List< BatchStudent > batchStudents = batchStudentService.findByStudent(studentService.findById(id));
     List< Batch > notAssignBatch = new ArrayList<>();
     List< Batch > batches = batchService.findByGrade(grade);
-    for ( Batch batch : batches )
-      for ( BatchStudent batchStudent : batchStudents )
-        if ( !batchStudent.getBatch().equals(batch) ) notAssignBatch.add(batch);
+
+    if ( !batchStudents.isEmpty() ) {
+      for ( Batch batch : batches ) {
+        for ( BatchStudent batchStudent : batchStudents ) {
+          if ( !batchStudent.getBatch().equals(batch) ) {
+            notAssignBatch.add(batch);
+          }
+        }
+      }
+    } else {
+      notAssignBatch.addAll(batches);
+    }
 
     MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(notAssignBatch);
 
