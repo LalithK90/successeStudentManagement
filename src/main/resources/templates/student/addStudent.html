@@ -200,7 +200,8 @@
           </tr >
           </thead >
           <tbody >
-          <tr data-th-each="batchStudent, index : ${student.batchStudents}" data-th-if="${not #lists.isEmpty(student.batchStudents)}">
+          <tr data-th-if="${not #lists.isEmpty(student.batchStudents)}"
+              data-th-each="batchStudent, index : ${student.batchStudents}" >
             <td >
               <strong >
                 <span class="control-label" data-th-id="${'tx'+index.index}"
@@ -266,36 +267,42 @@
 <script >
 
     $("#grade").change(function () {
-        let url = $("#batchUrl").val() + $(this).val();
-        let studentId = $("#id").val();
-        if (studentId) {
-            url = $("#batchUrl").val() + $(this).val() + "/" + studentId;
-        }
+        gradeChange($(this).val());
+        deleteAllTableRow(selectedBatchInTable);
+    });
 
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (resp) {
-                addOptionTag(resp);
-            },
-            error: function (err) {
-                console.log(err);
-                swal({
-                    title: "There is no more batches match with this grade",
-                    icon: "warning",
-                });
+    function gradeChange(val) {
+        if (val.length !== 0) {
+            let url = $("#batchUrl").val() + val;
+            let studentId = $("#id").val();
+            if (studentId) {
+                url = $("#batchUrl").val() + val + "/" + studentId;
             }
-        });
-    })
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (resp) {
+                    addOptionTag(resp);
+                },
+                error: function (err) {
+                    console.log(err);
+                    swal({
+                        title: "There is no more batches match with this grade",
+                        icon: "warning",
+                    });
+                }
+            });
+        }
+    }
 
     function addOptionTag(resp) {
-        console.log("length "+resp.length);
+        console.log("length " + resp.length);
         $("#batches").empty();
         $("#batches").append(`<option value="">Please Select</option>`);
         for (let i = 0; i < resp.length; i++) {
             $("#batches").append(`<option value="${resp[i].id}">${resp[i].name}</option>`);
         }
-        deleteAllTableRow(selectedBatchInTable);
         selectedBatch();
     }
 
@@ -360,6 +367,8 @@
 
     $(document).ready(function () {
         selectedBatch();
+        gradeChange($("#grade").val());
+
     });
 
     function selectedBatch() {
