@@ -276,11 +276,8 @@
             type: 'GET',
             url: url,
             success: function (resp) {
-                $("#batches").empty().append(new Option("Please Select", ""));
-
-                for (let i = 0; i < resp.length; i++) {
-                    $("#batches").append(new Option(resp[i].name, resp[i].id));
-                }
+                $("#batches").empty();
+                addOptionTag(resp);
             },
             error: function (err) {
                 console.log(err);
@@ -291,6 +288,14 @@
             }
         });
     })
+
+    function addOptionTag(resp) {
+        $("#batches").append(`<option value="">Please Select</option>`);
+        for (let i = 0; i < resp.length; i++) {
+            $("#batches").append(`<option value="${resp[i].id}">${resp[i].name}</option>`);
+        }
+
+    }
 
     //add new item and price
     $("#batches").bind('change', function () {
