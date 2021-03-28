@@ -9,6 +9,7 @@ import lk.succes_student_management.asset.batch.dao.BatchDao;
 import lk.succes_student_management.asset.batch.entity.Batch;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -62,7 +63,8 @@ public class BatchService implements AbstractService< Batch, Integer > {
     return batchDao.findByClassDay(classDay);
   }
 
-  public Batch findByYearAndClassDayAndStartAtAndEndAt(String year, ClassDay classDay, String startAt, String endAt) {
-  return batchDao.findByYearAndClassDayAndStartAtAndEndAt(year,classDay,startAt,endAt);
+  public Batch findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(String year, ClassDay classDay, LocalTime startAt, LocalTime endAt, LocalTime startAt1,
+                                                                         LocalTime endAt1) {
+  return batchDao.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(year,classDay,startAt,endAt,startAt1,endAt1);
   }
 }
