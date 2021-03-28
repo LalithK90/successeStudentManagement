@@ -18,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -45,9 +46,11 @@ public class Batch extends AuditEntity {
   @Enumerated( EnumType.STRING )
   private ClassDay classDay;
 
-  private String startAt;
+  @DateTimeFormat( pattern = "HH:mm" )
+  private LocalTime startAt;
 
-  private String endAt;
+  @DateTimeFormat( pattern = "HH:mm" )
+  private LocalTime endAt;
 
   @ManyToOne( fetch = FetchType.EAGER )
   private Teacher teacher;
