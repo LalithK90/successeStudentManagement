@@ -75,6 +75,7 @@ public class TeacherController implements AbstractController<Teacher, Integer> {
     @PostMapping("/save")
     public String persist(@Valid @ModelAttribute Teacher teacher, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(System.out::println);
             model.addAttribute("teacher", teacher);
             model.addAttribute("gender", Gender.values());
             model.addAttribute("addStatus",true);

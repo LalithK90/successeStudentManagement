@@ -10,10 +10,7 @@ import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.time_table.entity.TimeTable;
 import lk.succes_student_management.util.audit.AuditEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -26,6 +23,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @JsonFilter( "Batch" )
 public class Batch extends AuditEntity {
 
