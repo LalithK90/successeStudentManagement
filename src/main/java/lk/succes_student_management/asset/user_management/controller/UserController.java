@@ -89,7 +89,9 @@ public class UserController {
         .collect(Collectors.toList());
 
     if ( employees.size() == 1 ) {
-      model.addAttribute("user", new User());
+      User user  = new User();
+      user.setEmployee(employees.get(0));
+      model.addAttribute("user", user);
       model.addAttribute("employee", employees.get(0));
       model.addAttribute("addStatus", true);
       return commonCode(model);
@@ -165,7 +167,7 @@ public class UserController {
 
     List< Teacher > teachers = teacherService.search(teacher)
         .stream()
-        .filter(userService::findByTeacher)
+  e      .filter(userService::findByTeacher)
         .collect(Collectors.toList());
 
     if ( teachers.size() == 1 ) {
