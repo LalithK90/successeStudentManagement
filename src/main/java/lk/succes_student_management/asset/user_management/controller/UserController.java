@@ -13,6 +13,7 @@ import lk.succes_student_management.asset.user_management.entity.User;
 import lk.succes_student_management.asset.user_management.service.RoleService;
 import lk.succes_student_management.asset.user_management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,6 +68,19 @@ public class UserController {
 
   @GetMapping( value = "/edit/{id}" )
   public String editUserFrom(@PathVariable( "id" ) Integer id, Model model) {
+    User user = userService.findById(id);
+    //employee
+    if ( user.getEmployee() != null ) {
+      model.addAttribute("employee", user.getEmployee());
+    }
+    //teacher
+    if ( user.getTeacher() != null ) {
+      model.addAttribute("teacher", user.getTeacher());
+    }
+    //student
+    if ( user.getStudent() != null ) {
+      model.addAttribute("student", user.getStudent());
+    }
     model.addAttribute("user", userService.findById(id));
     model.addAttribute("addStatus", false);
     return commonCode(model);
@@ -113,15 +127,15 @@ public class UserController {
   @PostMapping( value = {"/save", "/update"} )
   public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
-    if (user.getEmployee() != null && userService.findUserByEmployee(user.getEmployee()) != null ) {
+    if ( user.getEmployee() != null && userService.findUserByEmployee(user.getEmployee()) != null ) {
       ObjectError error = new ObjectError("employee", "This employee already defined as a user");
       result.addError(error);
     }
-    if (user.getTeacher() != null && userService.findUserByTeacher(user.getTeacher()) != null ) {
+    if ( user.getTeacher() != null && userService.findUserByTeacher(user.getTeacher()) != null ) {
       ObjectError error = new ObjectError("teacher", "This teacher already defined as a user");
       result.addError(error);
     }
-    if (user.getStudent() != null && userService.findUserByStudent(user.getStudent()) != null ) {
+    if ( user.getStudent() != null && userService.findUserByStudent(user.getStudent()) != null ) {
       ObjectError error = new ObjectError("student", "This teacher student defined as a user");
       result.addError(error);
     }
