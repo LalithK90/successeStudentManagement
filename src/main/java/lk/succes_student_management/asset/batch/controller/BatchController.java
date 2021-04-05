@@ -93,7 +93,7 @@ public class BatchController implements AbstractController< Batch, Integer > {
       Batch batchDbDayAndStartAndEndTime =
           batchService.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(batch.getYear(), batch.getClassDay()
               , batch.getStartAt(), batch.getEndAt(), batch.getStartAt(), batch.getEndAt());
-         System.out.println(batchDbDayAndStartAndEndTime.toString());
+
 
       if ( batchDbDayAndStartAndEndTime != null ) {
         ObjectError error = new ObjectError("batch",

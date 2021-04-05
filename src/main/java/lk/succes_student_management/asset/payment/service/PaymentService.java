@@ -3,6 +3,7 @@ package lk.succes_student_management.asset.payment.service;
 
 import lk.succes_student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import lk.succes_student_management.util.interfaces.AbstractService;
 import lk.succes_student_management.asset.payment.dao.PaymentDao;
 import lk.succes_student_management.asset.payment.entity.Payment;
@@ -51,5 +52,9 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
   public Payment findByMonthAndBatchStudent(Month month, BatchStudent batchStudent) {
     return paymentDao.findByBatchStudentAndMonth(batchStudent, month);
+  }
+
+  public Payment findByMonthAndBatchStudentAndPaymentStatus(Month month, BatchStudent batchStudent, PaymentStatus noPaid) {
+    return paymentDao.findByMonthAndBatchStudentAndPaymentStatus(batchStudent, month,noPaid);
   }
 }

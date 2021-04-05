@@ -68,10 +68,9 @@ public class PaymentController {
     batchStudents.forEach(y -> {
       List< Payment > payments = new ArrayList<>();
       months.forEach(x -> {
-        Payment payment = paymentService.findByMonthAndBatchStudent(x, y);
+        Payment payment = paymentService.findByMonthAndBatchStudentAndPaymentStatus(x, y, PaymentStatus.NO_PAID);
         if ( payment == null ) {
           Payment newPayment = new Payment();
-          newPayment.setPaymentStatus(PaymentStatus.NO_PAID);
           newPayment.setLiveDead(LiveDead.STOP);
           newPayment.setBatchStudent(y);
           newPayment.setAmount(y.getBatch().getTeacher().getFee());
@@ -121,11 +120,10 @@ public class PaymentController {
     }
     HashSet< Payment > payments = new HashSet<>();
     student.getBatchStudents().forEach(x -> x.getPayments().forEach(y -> {
-      if ( !y.getPaymentStatus().equals(PaymentStatus.NO_PAID) ) {
-        y.setBatchStudent(x);
-        commonSave(y);
-        payments.add(paymentService.persist(y));
-      }
+      y.setBatchStudent(x);
+      commonSave(y);
+      payments.add(paymentService.persist(y));
+
     }));
 
     //todo -> need to do print
