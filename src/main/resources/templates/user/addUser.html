@@ -175,7 +175,7 @@
           <label class="control-label col-md-4" for="username" >User Name :</label >
           <div class="col-md-8" >
             <input class="form-control" data-th-field="*{username}" id="username"
-                   placeholder="Enter User Name Here" required type="text" />
+                   placeholder="Enter User Name Here" required type="text" data-th-readonly="${addStatus==false}"/>
           </div >
         </div >
         <!--Password-->
