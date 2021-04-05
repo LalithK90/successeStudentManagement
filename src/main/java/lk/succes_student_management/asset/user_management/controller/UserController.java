@@ -89,7 +89,7 @@ public class UserController {
         .collect(Collectors.toList());
 
     if ( employees.size() == 1 ) {
-      User user  = new User();
+      User user = new User();
       user.setEmployee(employees.get(0));
       model.addAttribute("user", user);
       model.addAttribute("employee", employees.get(0));
@@ -113,12 +113,21 @@ public class UserController {
   @PostMapping( value = {"/save", "/update"} )
   public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
-    if ( userService.findUserByEmployee(user.getEmployee()) != null ) {
+    if (user.getEmployee() != null && userService.findUserByEmployee(user.getEmployee()) != null ) {
       ObjectError error = new ObjectError("employee", "This employee already defined as a user");
       result.addError(error);
     }
+    if (user.getTeacher() != null && userService.findUserByTeacher(user.getTeacher()) != null ) {
+      ObjectError error = new ObjectError("teacher", "This teacher already defined as a user");
+      result.addError(error);
+    }
+    if (user.getStudent() != null && userService.findUserByStudent(user.getStudent()) != null ) {
+      ObjectError error = new ObjectError("student", "This teacher student defined as a user");
+      result.addError(error);
+    }
     if ( result.hasErrors() ) {
-      model.addAttribute("addStatus", false);
+      result.getAllErrors().forEach(System.out::println);
+      model.addAttribute("addStatus", true);
       model.addAttribute("user", user);
       return commonCode(model);
     }
@@ -131,10 +140,12 @@ public class UserController {
       userService.persist(dbUser);
       return "redirect:/user";
     }
-    Employee employee = employeeService.findById(user.getEmployee().getId());
 
-    // userService.persist(user);
-    user.setEnabled(employee.getEmployeeStatus().equals(EmployeeStatus.WORKING));
+
+    if ( user.getEmployee() != null ) {
+      Employee employee = employeeService.findById(user.getEmployee().getId());
+      user.setEnabled(employee.getEmployeeStatus().equals(EmployeeStatus.WORKING));
+    }
     user.setRoles(user.getRoles());
     user.setEnabled(true);
     userService.persist(user);
@@ -167,12 +178,14 @@ public class UserController {
 
     List< Teacher > teachers = teacherService.search(teacher)
         .stream()
-  e      .filter(userService::findByTeacher)
+        .filter(userService::findByTeacher)
         .collect(Collectors.toList());
 
     if ( teachers.size() == 1 ) {
-      model.addAttribute("user", new User());
-      model.addAttribute("employee", teachers.get(0));
+      User user = new User();
+      user.setTeacher(teachers.get(0));
+      model.addAttribute("user", user);
+      model.addAttribute("teacher", teachers.get(0));
       model.addAttribute("addStatus", true);
       return commonCode(model);
     }
@@ -204,8 +217,10 @@ public class UserController {
         .collect(Collectors.toList());
 
     if ( students.size() == 1 ) {
-      model.addAttribute("user", new User());
-      model.addAttribute("employee", students.get(0));
+      User user = new User();
+      user.setStudent(students.get(0));
+      model.addAttribute("user", user);
+      model.addAttribute("student", students.get(0));
       model.addAttribute("addStatus", true);
       return commonCode(model);
     }

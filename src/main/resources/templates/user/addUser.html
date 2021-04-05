@@ -149,9 +149,9 @@
           </div >
         </div >
         <!--Teacher name-->
-        <div class="form-row" data-th-if="${user.teacher != null}" >
+        <div class="form-row" data-th-if="${user.student != null}" >
           <div class="col-md-4" >
-            <label class="control-label" for="employee" >Teacher :</label >
+            <label class="control-label" for="employee" >Student :</label >
           </div >
           <div class="col-md-8" >
             <select class="form-control" data-th-field="*{student}" data-th-each="e : ${student}" name="student"
