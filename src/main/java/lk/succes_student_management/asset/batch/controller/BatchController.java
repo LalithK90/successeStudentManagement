@@ -89,22 +89,23 @@ public class BatchController implements AbstractController< Batch, Integer > {
   @PostMapping( "/save" )
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult,
                         RedirectAttributes redirectAttributes, Model model) {
-
-
-    if ( bindingResult.hasErrors() ) {
-      return commonMethod(model, batch, true);
-    }
-
     if ( batch.getId() == null ) {
       Batch batchDbDayAndStartAndEndTime =
           batchService.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(batch.getYear(), batch.getClassDay()
               , batch.getStartAt(), batch.getEndAt(), batch.getStartAt(), batch.getEndAt());
+         System.out.println(batchDbDayAndStartAndEndTime.toString());
+
       if ( batchDbDayAndStartAndEndTime != null ) {
         ObjectError error = new ObjectError("batch",
                                             "This batch is already in the system. ");
         bindingResult.addError(error);
         return commonMethod(model, batch, true);
       }
+
+      if ( bindingResult.hasErrors() ) {
+        return commonMethod(model, batch, true);
+      }
+
       // need to create auto generated registration number
       Batch lastBatch = batchService.lastBatchOnDB();
       if ( lastBatch != null ) {

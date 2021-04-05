@@ -28,14 +28,14 @@
         <div class="form-group" data-th-if="${addStatus==false}">
             <label class="col-sm-3 control-label" data-th-for="${id}">Index</label>
             <div class="col-sm-9">
-                <input type="text" data-th-field="*{id}" id="id" placeholder="Index" class="form-control" autofocus>
+                <input type="text" data-th-field="*{id}" id="id" placeholder="Index" class="form-control" readonly>
             </div>
         </div>
         <!--subjectCode-->
-        <div class="form-group">
+        <div class="form-group" data-th-if="${addStatus==false}">
             <label class="col-sm-2 control-label" data-th-for="${code}">Subject code</label>
             <div class="col-sm-4">
-                <input type="text" id="code" placeholder="Subject Code" class="form-control" data-th-field="*{code}">
+                <input type="text" id="code" placeholder="Subject Code" class="form-control" data-th-field="*{code}" readonly>
             </div>
         </div>
         <input type="text" data-th-field="*{liveDead}" hidden>
@@ -61,5 +61,7 @@
         </div>
     </form>
 </div>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 </body>
 </html>

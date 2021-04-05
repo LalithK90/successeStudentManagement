@@ -3,7 +3,7 @@
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Success Educational Institute</title >
+  <title >Thymeleaf Springboot </title >
 </head >
 <body >
 <!--Nav bar is included-->
@@ -13,11 +13,11 @@
   <div class="col-4" >
   </div >
   <div class="col-4" >
-    <h1 >Add new Class</h1 >
+    <h1 >Create a Batch</h1 >
   </div >
   <div class="col-4" >
     <a href="/batch" >
-      <button class="btn btn-primary" >All Classes</button >
+      <button class="btn btn-primary" >All Batch</button >
     </a >
   </div >
 </div >
@@ -27,9 +27,9 @@
 <div class="container" >
   <form action="/batch/save" data-th-object="${batch}" method="post" >
     <!--id-->
-    <div class="form-group" data-th-if="${addStatus==false}" >
+    <div class="form-group text-right" data-th-if="${addStatus==false}" >
       <div class="col-6" >
-        <label data-th-for="${id}" >ID</label >
+        <label data-th-for="${id}" >Id</label >
       </div >
       <div class="col-6" >
         <label >
@@ -40,7 +40,7 @@
     </div >
     <!--reference-->
     <div class="form-group" data-th-if="${addStatus==false}" >
-      <label class="col-6 control-label" data-th-for="${'code'}" >Class Referance</label >
+      <label class="col-6 control-label" data-th-for="${'code'}" >Batch Ref</label >
       <div class="col-6" >
         <input type="text" data-th-field="*{code}" id="batchId" placeholder="Batch ID" class="form-control"
                autofocus readonly >
@@ -117,14 +117,14 @@
         <label data-th-for="${name}" class="col-6 control-label" >Time Period</label >
         <div class="row" >
           <div class="container">
-            <div class="form-group col-6" >
+            <div class="form-group" >
               <label for="startAt" >FROM (opening hours 08:00 to 20:00) :</label >
               <input class="form-control" id="startAt" data-th-field="*{startAt}" type="time" step="3600" min="08:00"
                      max="20:00" />
             </div >
           </div>
           <div class="container">
-            <div class="form-group col-6" >
+            <div class="form-group" >
               <label for="endAt" >TO (opening hours 08:00 to 20:00) :</label >
               <input class="form-control" id="endAt" data-th-field="*{endAt}" type="time" step="3600" min="08:00"
                      max="20:00" />
@@ -135,10 +135,11 @@
     </div>
     <div class="row">
       <!--batchName-->
-      <div class="form-group" >
-        <label data-th-for="${name}" class="col-6" >Class Name</label >
-        <div class="container-fluid" >
-          <input type="text" data-th-field="*{name}" id="name" placeholder="Class Name" class="form-control" autofocus readonly>
+      <div class="col-12" >
+        <label data-th-for="${name}" class="control-label col-4" >Batch Name</label >
+        <div class="col-8" >
+          <input type="text" data-th-field="*{name}" id="name" placeholder="Batch Name" class="form-control"
+                 autofocus readonly >
         </div >
       </div >
     </div>
@@ -170,7 +171,7 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
-    $("#teacher, #grade, #year,#startAt, #endAt").change(function () {
+    $("#teacher, #grade, #year,#startAt, #endAt, #classDay").change(function () {
         let id = $("#teacher").val();
         let startDateTime = $(`#startAt`).val();
         let endDateTime = $("#endAt").val();

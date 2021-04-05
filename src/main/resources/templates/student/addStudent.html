@@ -133,9 +133,9 @@
     </div >
     <!--school-->
     <div class="form-group" >
-      <label class="col-6 control-label" >School</label >
+      <label class="col-6 control-label" for="school">School</label >
       <div class="col-6" >
-        <select id="school" class="form-control" data-th-field="*{school}" >
+        <select id="school" class="form-control" data-th-field="*{school}" required>
           <option value="" selected disabled >Please select</option >
           <option data-th-each="school : ${schools}"
                   data-th-text="${school.name}"

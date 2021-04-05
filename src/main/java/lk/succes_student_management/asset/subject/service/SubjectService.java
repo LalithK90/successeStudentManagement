@@ -45,5 +45,7 @@ public class SubjectService implements AbstractService<Subject, Integer> {
     }
 
 
-
+  public Subject lastSubject() {
+        return subjectDao.findFirstByOrderByIdDesc();
+  }
 }

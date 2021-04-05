@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubjectDao extends JpaRepository<Subject, Integer> {
 
+  Subject findFirstByOrderByIdDesc();
 }
