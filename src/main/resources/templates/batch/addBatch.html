@@ -135,9 +135,9 @@
     </div>
     <div class="row">
       <!--batchName-->
-      <div class="form-group" >
-        <label data-th-for="${name}" class="container" >Batch Name</label >
-        <div class="container-fluid" >
+      <div class="col-12" >
+        <label data-th-for="${name}" class="control-label col-4" >Batch Name</label >
+        <div class="col-8" >
           <input type="text" data-th-field="*{name}" id="name" placeholder="Batch Name" class="form-control"
                  autofocus readonly >
         </div >
@@ -171,7 +171,7 @@
 <!--script include-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
 <script >
-    $("#teacher, #grade, #year,#startAt, #endAt").change(function () {
+    $("#teacher, #grade, #year,#startAt, #endAt, #classDay").change(function () {
         let id = $("#teacher").val();
         let startDateTime = $(`#startAt`).val();
         let endDateTime = $("#endAt").val();
