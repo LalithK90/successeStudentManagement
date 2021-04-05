@@ -1,10 +1,10 @@
 package lk.succes_student_management.asset.subject.controller;
 
 
-import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.subject.entity.Subject;
 import lk.succes_student_management.asset.subject.service.SubjectService;
 import lk.succes_student_management.util.interfaces.AbstractController;
+import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( "/subject" )
 public class SubjectController implements AbstractController< Subject, Integer > {
   private final SubjectService subjectService;
+  private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
 
-  public SubjectController(SubjectService subjectService) {
+  public SubjectController(SubjectService subjectService, MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
     this.subjectService = subjectService;
+    this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
   }
 
   @GetMapping
@@ -57,10 +58,18 @@ public class SubjectController implements AbstractController< Subject, Integer >
                         RedirectAttributes redirectAttributes, Model model) {
     if ( bindingResult.hasErrors() ) {
       model.addAttribute("subject", subject);
-
       model.addAttribute("addStatus", true);
       return "subject/addSubject";
     }
+    if ( subject.getId() == null ) {
+      Subject lastSubject = subjectService.lastSubject();
+      if ( lastSubject == null ) {
+        subject.setCode("SSSC" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+      } else {
+        subject.setCode("SSSC" + makeAutoGenerateNumberService.numberAutoGen(lastSubject.getCode().substring(4)).toString());
+      }
+    }
+
 
     subjectService.persist(subject);
     return "redirect:/subject";
