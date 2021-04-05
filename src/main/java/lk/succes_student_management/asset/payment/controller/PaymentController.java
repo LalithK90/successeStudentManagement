@@ -121,7 +121,7 @@ public class PaymentController {
     }
     HashSet< Payment > payments = new HashSet<>();
     student.getBatchStudents().forEach(x -> x.getPayments().forEach(y -> {
-      System.out.println(y.getPaymentStatus() + "  sdasdsa ");
+
       if ( y.getPaymentStatus() != null && !y.getPaymentStatus().equals(PaymentStatus.NO_PAID) ) {
         y.setBatchStudent(x);
         commonSave(y);
