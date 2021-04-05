@@ -98,5 +98,13 @@ public class UserService implements AbstractService< User, Integer > {
     return userDao.findByStudent(student) == null;
   }
 
+  public User findUserByTeacher(Teacher teacher) {
+    return userDao.findByTeacher(teacher);
+  }
+
+  public User findUserByStudent(Student student) {
+    return userDao.findByStudent(student);
+  }
+
 
 }
