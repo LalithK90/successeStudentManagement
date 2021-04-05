@@ -23,15 +23,17 @@ import java.util.List;
 @JsonFilter( "Subject" )
 public class Subject extends AuditEntity {
 
-    private String code;
+  @Column( unique = true )
+  private String code;
 
-    private String name;
+  @Column( unique = true )
+  private String name;
 
-    @Enumerated( EnumType.STRING)
-    private LiveDead liveDead;
+  @Enumerated( EnumType.STRING )
+  private LiveDead liveDead;
 
-    @OneToMany(mappedBy = "subject")
-    private List< Teacher > teachers;
+  @OneToMany( mappedBy = "subject" )
+  private List< Teacher > teachers;
 
 
 }
