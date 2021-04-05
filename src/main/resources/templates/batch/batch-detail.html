@@ -3,7 +3,7 @@
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Thymeleaf Springboot </title >
+  <title >Success Educational Institute</title >
 </head >
 <body >
 <!--Nav bar is included-->
@@ -14,48 +14,53 @@
 
   </div >
   <div class="col-4" >
-    <h1 >Batch Details</h1 >
+    <h1 >Class Details</h1 >
   </div >
   <div class="col-4" >
     <a href="/batch/add" >
-      <button class="btn btn-primary" align="center" >Batch Detail</button >
+      <button class="btn btn-primary" align="center" >Add new Class</button >
     </a >
   </div >
 </div >
 
-<div class="row container-fluid" >
-  <div class="col-sm-8" data-th-fragment="batchDetailsFragment" >
-    <div class="form-group" >
-      <label data-th-for="${code}" class="col-sm-3 control-label" >Class reference</label >
+<div class="container" >
+  <div class="row container-fluid" data-th-fragment="batchDetailsFragment" >
+    <div class="col-6" style="background-color:lavenderblush;">
+      <div class="form-group" >
+      <label data-th-for="${code}" class="col-sm-6 control-label" >Class reference</label >
       <div class="col-sm-6" >
         <p type="text" id="code" class="form-control" data-th-text="${batchDetail.code}" >
       </div >
     </div >
-    <div class="form-group" >
-      <label data-th-for="${year}" class="col-sm-3 control-label" >Academic Year</label >
+      <div class="form-group" >
+        <label data-th-for="${'name'}" class="col-sm-3 control-label" >Class name</label >
+        <div class="col-sm-12" >
+          <p type="text" id="name" class="form-control" data-th-text="${batchDetail.name}" >
+        </div >
+      </div >
+    </div>
+    <div class="col-6" style="background-color:lavender;">
+      <div class="form-group" >
+      <label data-th-for="${year}" class="col-sm-6 control-label" >Academic Year</label >
       <div class="col-sm-6" >
         <p type="text" id="year" class="form-control" data-th-text="${batchDetail.year}" >
       </div >
     </div >
-    <div class="form-group" >
-      <label data-th-for="${grade}" class="col-sm-3 control-label" >Grade</label >
-      <div class="col-sm-6" >
-        <p type="text" id="grade" class="form-control" data-th-text="${batchDetail.grade}" >
+      <div class="form-group" >
+        <label data-th-for="${grade}" class="col-sm-3 control-label" >Grade</label >
+        <div class="col-sm-6" >
+          <p type="text" id="grade" class="form-control" data-th-text="${batchDetail.grade}" >
+        </div >
       </div >
-    </div >
-    <div class="form-group" >
-      <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher</label >
-      <div class="col-sm-6" >
-        <p type="text" id="teacherName" class="form-control" data-th-text="${batchDetail.teacher.firstName}" >
+      <div class="form-group" >
+        <label data-th-for="${teacherName}" class="col-sm-3 control-label" >Teacher</label >
+        <div class="col-sm-6" >
+          <p type="text" id="teacherName" class="form-control" data-th-text="${batchDetail.teacher.firstName}" >
+        </div >
       </div >
-    </div >
-    <div class="form-group" >
-      <label data-th-for="${'name'}" class="col-sm-3 control-label" > Name</label >
-      <div class="col-sm-6" >
-        <p type="text" id="name" class="form-control" data-th-text="${batchDetail.name}" >
-      </div >
-    </div >
+    </div>
   </div >
+
 
     <div class="row container-fluid" >
         <div class="col-sm-2 col-sm-offset-2" >

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping( "/student" )
+  @RequestMapping( "/student" )
 public class StudentController implements AbstractController< Student, Integer > {
   private final StudentService studentService;
   private final BatchStudentService batchStudentService;
@@ -67,6 +67,7 @@ public class StudentController implements AbstractController< Student, Integer >
 
   @GetMapping( "/add" )
   public String form(Model model) {
+
     return commonThing(model, new Student(), true);
   }
 
