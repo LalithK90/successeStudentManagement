@@ -34,6 +34,8 @@ public class UserController {
   private final TeacherService teacherService;
   private final StudentService studentService;
 
+
+  //todo -> need to complete this
   @Autowired
   public UserController(UserService userService, EmployeeService employeeService, RoleService roleService,
                         TeacherService teacherService, StudentService studentService) {
@@ -106,7 +108,7 @@ public class UserController {
   // Above method support to send data to front end - All List, update, edit
   //Bellow method support to do back end function save, delete, update, search
 
-  @PostMapping( value = {"/add", "/update"} )
+  @PostMapping( value = {"/save", "/update"} )
   public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
     if ( userService.findUserByEmployee(user.getEmployee()) != null ) {

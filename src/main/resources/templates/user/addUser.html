@@ -91,7 +91,7 @@
 
 <!--User add from-->
 <div class="container-fluid bg-dark formBorder" data-th-if="${employeeDetailShow==true}" id="userFormShow" >
-  <form id="formUser" data-th-action="${addStatus==true?'/user/add':'/user/update'}" data-th-object="${user}"
+  <form id="formUser" data-th-action="${addStatus==true?'/user/save':'/user/update'}" data-th-object="${user}"
         class="form-horizontal" method="POST" autocomplete="false" >
     <div class="row" >
       <!--Left Side-->
