@@ -40,8 +40,8 @@
 <div class="container-fluid" >
   <form action="/batchExam" data-th-object="${batchExam}" method="post" >
     <div class="form-row" >
-      <div class="col-4" >
-        <p >New Exam</p >
+      <div class="col-3" >
+        <h1 style="font-family: 'Adobe Garamond Pro'"  >New Exam</h1 >
         <input class="form-control" data-th-field="*{batch.id}" readonly type="hidden" >
         <div class="form-group" data-th-if="${addStatus}" >
           <label class="control-label" data-th-for="${id}" >Exam Code</label >
@@ -75,8 +75,8 @@
           </div >
         </div >
       </div >
-      <div class="col-8" >
-        <p class="form-row" >Already created Exam on this batch</p >
+      <div class="col-9" >
+        <h2 style="font-family: 'Adobe Garamond Pro' ;" class="form-row" >Already created Exam on this batch</h2 >
         <div data-th-replace="~{batchExam/batchExam :: batchExamFragment}" ></div >
       </div >
     </div >
