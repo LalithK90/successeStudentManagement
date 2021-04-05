@@ -127,20 +127,21 @@ public class UserController {
   @PostMapping( value = {"/save", "/update"} )
   public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
-    if ( user.getEmployee() != null && userService.findUserByEmployee(user.getEmployee()) != null ) {
-      ObjectError error = new ObjectError("employee", "This employee already defined as a user");
-      result.addError(error);
-    }
-    if ( user.getTeacher() != null && userService.findUserByTeacher(user.getTeacher()) != null ) {
-      ObjectError error = new ObjectError("teacher", "This teacher already defined as a user");
-      result.addError(error);
-    }
-    if ( user.getStudent() != null && userService.findUserByStudent(user.getStudent()) != null ) {
-      ObjectError error = new ObjectError("student", "This teacher student defined as a user");
-      result.addError(error);
+    if ( user.getId() ==null ) {
+      if ( user.getEmployee() != null && userService.findUserByEmployee(user.getEmployee()) != null ) {
+        ObjectError error = new ObjectError("employee", "This employee already defined as a user");
+        result.addError(error);
+      }
+      if ( user.getTeacher() != null && userService.findUserByTeacher(user.getTeacher()) != null ) {
+        ObjectError error = new ObjectError("teacher", "This teacher already defined as a user");
+        result.addError(error);
+      }
+      if ( user.getStudent() != null && userService.findUserByStudent(user.getStudent()) != null ) {
+        ObjectError error = new ObjectError("student", "This teacher student defined as a user");
+        result.addError(error);
+      }
     }
     if ( result.hasErrors() ) {
-      result.getAllErrors().forEach(System.out::println);
       model.addAttribute("addStatus", true);
       model.addAttribute("user", user);
       return commonCode(model);
