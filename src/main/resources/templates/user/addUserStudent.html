@@ -8,7 +8,7 @@
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
 <!--Page header -->
-<div class="container-fluid bg-secondary form-Border" >
+<div class="container-fluid form-Border" >
   <div class="row text-center formManagement border-info" >
     <div class="col" >
       <a class="btn btn-primary" href="/home" >
@@ -30,7 +30,7 @@
   </div >
 </div >
 <!--Employee find-->
-<div class="container-fluid bg-dark formBorder" id="employeeFindForm" data-th-if="${employeeDetailShow==false}" >
+<div class="container-fluid formBorder" id="employeeFindForm" data-th-if="${employeeDetailShow==false}" >
   <div class="col-sm-12 flex-column " >
     <form id="form" method="POST" data-th-action="${'/user/student'}" data-th-object="${student}"
           enctype="multipart/form-data" >

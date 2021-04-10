@@ -2,12 +2,12 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Thymeleaf Springboot </title >
+  <title >Success Student Management System</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="container-fluid bg-secondary form-Border" >
+<div class="container-fluid form-Border" >
   <div class="row text-center formManagement border-info" >
     <div class="col-8" >
       <div class="form-row" >
@@ -28,7 +28,7 @@
     </div >
   </div >
 </div >
-<div class="container-fluid bg-dark formBorder" >
+<div class="container-fluid  formBorder" >
   <div class="col-sm-12 flex-column " >
     <div class="row" id="userListTable" data-th-if="${not #lists.isEmpty(users)}" >
       <div class="col-sm-12" >
