@@ -2,7 +2,7 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Thymeleaf Springboot </title >
+  <title >Success Student Management System</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
@@ -16,9 +16,9 @@
       </a >
     </div >
     <div class="col" >
-      <h4 class="text-light text-center" >
+      <h4 class="text-dark text-center" >
         <strong >
-          <span id="formHeader" data-th-text="${addStatus==true?'New User':'Update User'}" ></span >
+          <span id="formHeader" data-th-text="${addStatus==true?'Add New User':'Update User'}" ></span >
         </strong >
       </h4 >
     </div >
@@ -30,7 +30,7 @@
   </div >
 </div >
 <!--Employee find-->
-<div class="container-fluid bg-dark formBorder" id="employeeFindForm" data-th-if="${employeeDetailShow==false}" >
+<div class="container-fluid bg-transparent formBorder" id="employeeFindForm" data-th-if="${employeeDetailShow==false}" >
   <div class="col-sm-12 flex-column " >
     <form id="form" method="POST" data-th-action="${'/user/workingPlace'}" data-th-object="${employee}"
           enctype="multipart/form-data" >
@@ -38,7 +38,7 @@
         <div class="col-5 flex-column" >
           <div class="form-batch" >
             <div class="col-4" >
-              <label class="control-label" for="selectParameter" >Parameter :</label >
+              <label class="control-label" for="selectParameter" >Search by :</label >
             </div >
             <div class="col-8" >
               <select id="selectParameter" class="form-control" tabindex="1" required >

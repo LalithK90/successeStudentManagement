@@ -188,9 +188,29 @@
                     </div>
                 </div>
                 <div class="col-5 bg-light formBorder">
-                    <canvas id="myChart">
-
-                    </canvas>
+                    <div class="row">
+                        <div class="col-4" style="background-color: #36b9cc">
+                            <div class="card">
+                                <p align="center"><i class="fas fa-user-graduate" style='font-size:36px'></i></p>
+                                <h3 align="center">1100+</h3>
+                                <p align="center">Students</p>
+                            </div>
+                        </div>
+                        <div class="col-4" style="background-color: #f253aa">
+                            <div class="card">
+                                <p align="center"><i class="fa fa-graduation-cap" style='font-size:36px'></i></p>
+                                <h3 align="center">11+</h3>
+                                <p align="center">Teachers</p>
+                            </div>
+                        </div>
+                        <div class="col-4" style="background-color: #2ad416">
+                            <div class="card">
+                                <p align="center"><i class="fa fa-address-book" style='font-size:36px'></i></p>
+                                <h3 align="center">08</h3>
+                                <p align="center">Employee</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -207,7 +227,7 @@
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Total Income', 'Total Expences', 'Total Due'],
+            labels: ['Total Income', 'Total Expenses', 'Total Due'],
             datasets: [{
                 label: 'Lab Tests',
                 data: [12, 19, 3],
