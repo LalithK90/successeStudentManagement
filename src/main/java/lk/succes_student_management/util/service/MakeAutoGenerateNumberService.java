@@ -12,7 +12,6 @@ public class MakeAutoGenerateNumberService {
     }
 
     public Integer numberAutoGen(String lastNumber) {
-        System.out.println("last number "+lastNumber);
         int newNumber;
         int previousNumber;
         int newNumberFirstTwoCharacters;
@@ -21,6 +20,7 @@ public class MakeAutoGenerateNumberService {
                 Integer.parseInt(String.valueOf(dateTimeAgeService.getCurrentDate().getYear()).substring(2, 4));
 
         if ( lastNumber != null) {
+        //1.
             previousNumber = Integer.parseInt(lastNumber.substring(0, 6));
             newNumberFirstTwoCharacters = Integer.parseInt(lastNumber.substring(0, 2));
 

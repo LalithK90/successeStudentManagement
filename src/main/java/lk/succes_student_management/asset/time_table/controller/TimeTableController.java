@@ -167,7 +167,7 @@ public class TimeTableController {
           timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
         }
       }
-//todo need to send email to student who register in relevant batch
+//todo: need to send email to student who register in relevant batch
       timeTableService.persist(timeTable);
     }
 

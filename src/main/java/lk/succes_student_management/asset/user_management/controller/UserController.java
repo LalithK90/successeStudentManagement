@@ -36,7 +36,6 @@ public class UserController {
   private final StudentService studentService;
 
 
-  //todo -> need to complete this
   @Autowired
   public UserController(UserService userService, EmployeeService employeeService, RoleService roleService,
                         TeacherService teacherService, StudentService studentService) {
