@@ -2,13 +2,13 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Thymeleaf Springboot </title >
+  <title >Success Student Management</title >
 </head >
 <body >
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
 <!--Page header -->
-<div class="container-fluid bg-secondary form-Border" >
+<div class="container-fluid bg-light form-Border" >
   <div class="row text-center formManagement border-info" >
     <div class="col" >
       <a class="btn btn-primary" href="/home" >
@@ -16,7 +16,7 @@
       </a >
     </div >
     <div class="col" >
-      <h4 class="text-light text-center" >
+      <h4 class="text-dark text-center" >
         <strong >
           <span id="formHeader" data-th-text="${addStatus==true?'New User':'Update User'}" ></span >
         </strong >
@@ -30,7 +30,7 @@
   </div >
 </div >
 <!--Employee find-->
-<div class="container-fluid bg-dark formBorder" data-th-if="${employeeDetailShow==false}" >
+<div class="container-fluid bg-light formBorder" data-th-if="${employeeDetailShow==false}" >
   <div class="col-sm-12 flex-column " >
     <form id="form" method="POST" data-th-action="${'/user/teacher'}" data-th-object="${teacher}"
     >

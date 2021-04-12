@@ -1,97 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
-<!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Student Management System</title>
+    <title>Thymeleaf Springboot </title>
 </head>
 <body>
-<!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<h1 align="center" class="display-3 text-danger"><strong>Welcome to Success Student Management System</strong></h1>
+<div class="container-fluid">
+    <!--Breadcrumb-->
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--End of Breadcrumb-->
+    <div class="main-section">
+        <br>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-7">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Employees</div>
+                                            <a href="/employee" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_HR', 'ROLE_SQA', 'ROLE_QA','ROLE_TM', 'ROLE_LA','ROLE_CA')" >
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Employee Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
 
-<!-- Four equal columns -->
-<div class="row fixed ui-widget-content ">
-    <div class="jumbotron col-sm-3" >
-        <h2>Student Management</h2><br>
-        <i class="fas fa-book-reader" style="font-size:36px"></i><br><br>
-        <a href="/student/add"><buton type="button" class="btn btn-outline-primary">Registration</buton></a>
-        <a href="/student"><button type="button" class="btn btn-outline-warning">View all Students</button></a>
-    </div>
-    <div class="jumbotron col-sm-3 bg-light" >
-        <h2>Teacher Management</h2><br>
-        <i class="fas fa-chalkboard-teacher" style="font-size:36px"></i><br><br>
-        <a href="/teacher/add" ><button type="button" class="btn btn-outline-primary">Registration</button></a>
-        <a href="/teacher"><button type="button" class="btn btn-outline-warning">View All Teachers</button></a>
-    </div>
-    <div class="jumbotron col-sm-3" >
-        <h2>Class Management</h2><br>
-        <i class="fas fa-school" style="font-size:36px"></i><br><br>
-        <a href="/batch/add"><button type="button" class="btn btn-outline-primary">Add new Class</button></a>
-        <a href="/batch"><button type="button" class="btn btn-outline-warning">Modify Class details</button></a>
-        <a href="/batchStudent"><button type="button" class="btn btn-outline-success">View All Class Sessions</button></a>
-    </div>
-    <div class="jumbotron col-sm-3 bg-light" >
-        <h2>Payment Management</h2><br>
-        <i class="fab fa-amazon-pay" style="font-size:36px"></i><br><br>
-        <a href="/payment/add"><button type="button" class="btn btn-outline-primary">Make a Payment</button></a>
-        <a href="/payment"><button type="button" class="btn btn-outline-warning">Transaction Modify</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Students</div>
+                                            <a href="/student" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_HR')" >
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Student Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Teachers</div>
+                                            <a href="/teacher" data-sec-authorize="hasAnyAuthority('ROLE_HR','ROLE_ADMIN')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Teachers</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Exams</div>
+                                            <a href="/batchExam/teacher" data-sec-authorize="hasAnyAuthority('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_TM', 'ROLE_LA')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Exam Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-vial fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body ">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Classes</div>
+                                            <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_LA', 'ROLE_SQA', 'ROLE_QA')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Class Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-vials fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Payments</div>
+                                            <a href="/payment" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_ACC')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Payment Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Time Table</div>
+                                            <a href="/timeTable" data-sec-authorize="hasAnyAuthority('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_TM', 'ROLE_LA')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Exam Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-vial fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body ">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Halls</div>
+                                            <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_LA', 'ROLE_SQA', 'ROLE_QA')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Hall Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-vials fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card border-left-primary shadow">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Subjects</div>
+                                            <a href="/payment" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_ACC')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Subjects Details</div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 bg-light formBorder">
+                    <div class="row">
+                        <div class="col-4" style="background-color: #36b9cc">
+                            <div class="card">
+                                <p align="center"><i class="fas fa-user-graduate" style='font-size:36px'></i></p>
+                                <h3 align="center">1100+</h3>
+                                <p align="center">Students</p>
+                            </div>
+                        </div>
+                        <div class="col-4" style="background-color: #f253aa">
+                            <div class="card">
+                                <p align="center"><i class="fa fa-graduation-cap" style='font-size:36px'></i></p>
+                                <h3 align="center">11+</h3>
+                                <p align="center">Teachers</p>
+                            </div>
+                        </div>
+                        <div class="col-4" style="background-color: #2ad416">
+                            <div class="card">
+                                <p align="center"><i class="fa fa-address-book" style='font-size:36px'></i></p>
+                                <h3 align="center">08</h3>
+                                <p align="center">Employee</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row fixed ui-widget-content">
-    <div class="jumbotron col-sm-3 bg-light" >
-        <h2>Shedule Management</h2><br>
-        <i class="far fa-clock" style="font-size:36px"></i><br><br>
-        <a href="/timeTable/add"><button type="button" class="btn btn-outline-primary">Create Session</button></a>
-        <a href="/timeTable/teacher"><button type="button" class="btn btn-outline-warning">Session Status</button></a>
-        <a href="/timeTable"><button type="button" class="btn btn-outline-success">View time Table</button></a>
-    </div>
-    <div class="jumbotron col-sm-3" >
-        <h2>Hall Management</h2><br>
-        <i class="fas fa-hotel" style="font-size:36px"></i><br><br>
-        <a href="/hall/add"><button type="button" class="btn btn-outline-primary">Add new Hall</button></a>
-        <a href="/hall"><button type="button" class="btn btn-outline-warning">Hall Details</button></a>
-    </div>
-    <div class="jumbotron col-sm-3  bg-light" >
-        <h2>Subject Management</h2><br>
-        <i class="far fa-folder-open" style="font-size:36px"></i><br><br>
-        <a href="/subject/add"><button type="button" class="btn btn-outline-primary">Add new Subject</button></a>
-        <a href="/subject"><button type="button" class="btn btn-outline-warning">View all Subjects</button></a>
-    </div>
-    <div class="jumbotron col-md-3" >
-        <h2>Attendance Management</h2><br>
-        <i class="far fa-address-card" style="font-size:36px"></i><br><br>
-        <a href="/timeTableStudentAttendance"> <button type="button" class="btn btn-outline-primary">Mark Attendance</button></a>
-        <a href="/timeTable/teacher"><button type="button" class="btn btn-outline-warning">Update Attendance</button></a>
-    </div>
-</div>
-<div class="row">
-    <div class="jumbotron col-sm-6 bg-light" >
-        <h2>Exam Management</h2><br>
-        <i class="far fa-clock" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">Shedule an Exam</button>
-        <button type="button" class="btn btn-outline-warning">Modify Exam</button>
-        <button type="button" class="btn btn-outline-dark">View Result</button>
-        <button type="button" class="btn btn-outline-success">Exam Attendance</button>
-    </div>
-    <div class="jumbotron col-sm-6" >
-        <h2>Staff Management</h2><br>
-        <i class="fas fa-hotel" style="font-size:36px"></i><br><br>
-        <button type="button" class="btn btn-outline-primary">User Management</button>
-        <button type="button" class="btn btn-outline-warning">Role Management</button>
-        <button type="button" class="btn btn-outline-success">Employee Management</button>
-        <button type="button" class="btn btn-outline-info">Details Management</button>
-        <button type="button" class="btn btn-outline-dark">Privillage Management</button>
-    </div>
 
+<!--footer include-->
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<!--script include-->
+<script th:replace="~{fragments/script :: scriptFragment}"></script>
 
-</div>
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Total Income', 'Total Expenses', 'Total Due'],
+            datasets: [{
+                label: 'Lab Tests',
+                data: [12, 19, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
 
-
-<!--footer is included-->
-<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
-<!--script is included-->
-<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
 </body>
 </html>

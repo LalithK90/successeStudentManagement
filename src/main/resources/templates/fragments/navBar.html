@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
 
 
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" data-th-fragment="navBarFragment">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" th:fragment="navBarFragment">
 
     <div class="col">
         <a class="navbar-brand" href="/home">
@@ -14,49 +14,56 @@
 
     <div class="col">
         <ul class="navbar-nav">
-            <li class="nav-item dropdown mr-2 pr-2 ml-2 pl-2 no-arrow">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home" id="navbarLink"
+                   aria-haspopup="true" aria-expanded="false">
+                    Home
+                </a>
+            </li>
+            <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    General
+                    Management Functions
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
-                    <a class="dropdown-item" href="	/compound	"> Compound management </a>
-                    <a class="dropdown-item" href="	/customer	"> Customer management </a>
-                    <a class="dropdown-item" href="	/discountRatio	"> Discount details management </a>
-                    <a class="dropdown-item" href="	/employee	"> Employee management </a>
-                    <a class="dropdown-item" href="	/labTestResultEnter/form	"> Lab Test Results management </a>
-                    <a class="dropdown-item" href="	/payment	"> Payment management </a>
-                    <a class="dropdown-item" href="	/role	"> Role management </a>
-                    <a class="dropdown-item" href="	/sample/acceptability	"> Sample acceptance </a>
-                    <a class="dropdown-item" href="	/sampleReceiving	"> Sample Receiving </a>
-                    <a class="dropdown-item" href="	/user	"> User management </a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER', 'ROLE_MANAGER', 'ROLE_CASHIER')" class="dropdown-item" href="/student" >Student Management</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_HR')" class="dropdown-item" href="/teacher	">Teacher Management</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER')" class="dropdown-item" href="/batch	"> Class Management  </a>
+<!--               todo: meka wena ekakta wenama damu <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_HR', 'MANAGER',)" class="dropdown-item" href="/employee"> Employee Management </a>-->
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_CASHIER',)" class="dropdown-item" href="/payment">Payment Management</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER')" class="dropdown-item" href="/timeTable"> Timetable Managemet</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER',)" class="dropdown-item" href="/batchExam/teacher">Exam Management</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER')" class="dropdown-item" href="/batchStudent">Student-Class Allocation </a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_TEACHER' )" class="dropdown-item" href="/timeTable/teacher">Time slot Management</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_HR')" class="dropdown-item" href="/timeTable/byDate">Attendance Management</a>
                 </div>
             </li>
-            <li class="nav-item dropdown mr-2 pr-2 ml-2 pl-2 no-arrow">
+            <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Transaction
+                    Services
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                    <a class="dropdown-item" href="	/compound/add	">	New Compound	</a>
-                    <a class="dropdown-item" href="	/customer/add	">	New Customer 	</a>
-                    <a class="dropdown-item" href="	/discountRatio/add	">	New Discount	</a>
-                    <a class="dropdown-item" href="	/employee/add	">	New Employee	</a>
-                    <a class="dropdown-item" href="	/payment/add	">	New Payment 	</a>
-                    <a class="dropdown-item" href="	/role/add	">	New Role	</a>
-                    <a class="dropdown-item" href="	/user/add	">	New User 	</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_TEACHER')" class="dropdown-item" href="/school/add" >New School</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN')" class="dropdown-item" href="/hall/add">New Hall</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_ACC')" class="dropdown-item" href="/subject/add">New Subject</a>
+<!--                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR')" class="dropdown-item" href="	/employee/add	">	New Employee	</a>-->
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_CA', 'ROLE_ACC')" class="dropdown-item" href="	/payment/needToPay	">	New Payment 	</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR','ROLE_MANAGER')" class="dropdown-item" href="	/role/add	">New System Role</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR','ROLE_MANAGER')" class="dropdown-item" href="	/user/add	">	New User 	</a>
 
                 </div>
             </li>
-            <li class="nav-item dropdown mr-2 pr-2 ml-2 pl-2 no-arrow">
+            <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink3" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    Report
+                    Reports
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink3">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_SQA','ROLE_QA','ROLE_TM', 'ROLE_LA')" class="dropdown-item" href="/report/labTestName">Lab Test Name Report</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_CA','ROLE_ACC')" class="dropdown-item" href="/report/income">Income Report</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_CA','ROLE_ACC')" class="dropdown-item" href="/report/customer">Customer Report</a>
+                    <a data-sec-authorize="hasAnyAuthority('ROLE_SQA','ROLE_QA','ROLE_TM', 'ROLE_LA')" class="dropdown-item" href="/report/compound">Compound Report</a>
                 </div>
             </li>
         </ul>
@@ -64,7 +71,6 @@
     </div>
 
 
-    <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 
         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -109,10 +115,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                             <a class="dropdown-item dropdown-item btn btn-group-sm" href="/profile">
-                                <i class="fas fa-user-cog"></i> &nbsp;Profile
+                                <i class="fas fa-user-cog"></i>Profile
                             </a>
                             <a class="dropdown-item dropdown-item btn btn-group-sm" href="/passwordChange">
-                                <i class="fas fa-key "></i>&nbsp;Change Password</a>
+                                <i class="fas fa-key "></i>Change Password</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown " data-sec-authorize="isAuthenticated()">
@@ -129,5 +135,6 @@
     </ul>
 
 </nav>
+<!-- End of Topbar -->
 </body>
 </html>
