@@ -172,7 +172,7 @@ public class EmployeeController {
 
     } catch ( Exception e ) {
       ObjectError error = new ObjectError("employee",
-                                          "There is already in the system. <br>System message -->" + e.toString());
+                                          "There is already in the system. System message -->" + e.toString());
       result.addError(error);
       if ( employee.getId() != null ) {
         model.addAttribute("addStatus", true);

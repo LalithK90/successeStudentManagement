@@ -60,39 +60,6 @@
     </div >
     <div class="row" >
       <div class="col-sm-6" >
-        <!--Gender-->
-        <div class="form-group" >
-          <div class="col-6" >
-            <label class="control-label" for="gender" >Gender :</label >
-          </div >
-          <div class="col-6" >
-            <div class="custom-control custom-checkbox custom-control-inline "
-                 data-th-each="genders,index : ${gender}" >
-              <input class="custom-control-input gender" required
-                     data-th-name="${'gender'}"
-                     data-th-value="${genders}"
-                     data-th-id="${index.index}+${genders}" type="radio"
-                     data-th-checked="${genders==gender}" />
-              <label class="custom-control-label"
-                     data-th-for="${index.index}+${genders}"
-                     data-th-text="${genders.gender}" > radio
-              </label >
-            </div >
-          </div >
-        </div >
-      </div >
-      <div class="col-sm-6" >
-        <!--mobileNumber-->
-        <div class="form-group" >
-          <label class="col-6 control-label" data-th-for="${mobile}" >Mobile number</label >
-          <div class="col-6" >
-            <input type="tel" id="mobile" class="form-control" data-th-field="*{mobile}" >
-          </div >
-        </div >
-      </div >
-    </div >
-    <div class="row" >
-      <div class="col-sm-6" >
         <!--nic-->
         <div class="form-group" >
           <label class="col-6 control-label" data-th-for="${nic}" >NIC</label >
@@ -101,6 +68,39 @@
           </div >
         </div >
       </div >
+      <div class="col-sm-6" >
+        <!--mobileNumber-->
+        <div class="form-group" >
+          <label class="col-6 control-label" data-th-for="${mobile}" >Mobile number</label >
+          <div class="col-6" >
+            <input type="tel" id="mobile" class="form-control" minlength="9" maxlength="10" data-th-field="*{mobile}" >
+          </div >
+        </div >
+      </div >
+    </div >
+    <div class="row" >
+      <div class="col-sm-6" >
+      <!--Gender-->
+      <div class="form-group" >
+        <div class="col-6" >
+          <label class="control-label" for="gender" >Gender :</label >
+        </div >
+        <div class="col-6" >
+          <div class="custom-control custom-checkbox custom-control-inline "
+               data-th-each="genders,index : ${gender}" >
+            <input class="custom-control-input gender" required
+                   data-th-name="${'gender'}"
+                   data-th-value="${genders}"
+                   data-th-id="${index.index}+${genders}" type="radio"
+                   data-th-checked="${genders==gender}" />
+            <label class="custom-control-label"
+                   data-th-for="${index.index}+${genders}"
+                   data-th-text="${genders.gender}" > radio
+            </label >
+          </div >
+        </div >
+      </div >
+    </div >
       <div class="col-sm-6" >
         <!--dateOfBirth-->
         <div class="form-group" >
@@ -176,5 +176,7 @@
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
 <div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+
 </body >
 </html >
