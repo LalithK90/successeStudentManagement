@@ -1,69 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Success Student Management </title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management </title >
+</head >
+<body >
 <link data-th-href="@{/css/multi-select.css}" media="all" rel="stylesheet" type="text/css" />
 <link data-th-href="@{/css/studentAddCss.css}" media="all" rel="stylesheet" type="text/css" />
 
 
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-light">
-    <div class="col-4">
-    </div>
-    <div class="col-4">
-        <h1>Students On batch and New Student Add</h1>
-    </div>
-    <div class="col-4">
-        <a href="/student">
-            <button class="btn btn-primary">Add a Student</button>
-        </a>
-    </div>
-</div>
+<div class="row bg-light" >
+  <div class="col-4" >
+  </div >
+  <div class="col-4" >
+    <h1 >Students On batch and New Student Add</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/student" >
+      <button class="btn btn-primary" >Add a Student</button >
+    </a >
+  </div >
+</div >
 
-<div class="container-fluid">
-<div class="container-fluid">
-    <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}"></div>
-</div>
-    <div class="container-fluid">
-        <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}"></div>
-    </div>
-    <form action="/school/save" data-th-object="${student}" method="post" >
+<div class="container-fluid" >
+  <div class="container-fluid" >
+    <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}" ></div >
+  </div >
+  <div class="container-fluid" >
+    <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}" ></div >
+  </div >
 
-        <div class="form-row" >
-            <div class="form-group" >
-                <label class="col-sm-4 control-label" data-th-for="${'batches'}" >Batches:</label >
-                <div class="col-sm-8" >
-                    <select id="batches" class="form-control col-8"  multiple required >
-                        <option data-th-each="batch : ${batches}" ></option >
-                    </select >
-                </div >
-            </div >
-        </div >
 
-        <div class="row container">
-            <div class="col-sm-2 col-sm-offset-2">
-                <a href="/batchStudent"><button type="button" class="btn btn-danger btn-block">Back</button></a>
-            </div>
+  <div class="row container" >
+    <div class="col-sm-2 col-sm-offset-2" >
+      <a href="/batchStudent" >
+        <button type="button" class="btn btn-danger btn-block" >Back</button >
+      </a >
+    </div >
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="reset" class="btn btn-warning btn-block">Clear Data</button>
-            </div>
+  </div >
 
-            <div class="col-sm-2 col-sm-offset-2">
-                <button type="submit" class="btn btn-success btn-block">Submit</button>
-            </div>
-        </div>
-    </form>
-    <div class="container-fluid">
-        <div data-th-replace="~{student/student :: studentsFragment}"></div>
-    </div>
-</div>
+  <div class="container-fluid" >
+    <div data-th-replace="~{student/student :: studentsFragment}" ></div >
+  </div >
+</div >
 <!--footer is included-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
@@ -73,38 +57,5 @@
 <script data-th-src="@{/js/jquery.multi-select.js}" ></script >
 
 
-<script >
-
-    $('#batches').multiSelect({
-        selectableHeader: "<div class='control-label bg-info h3'>Available Batches</div>",
-        selectionHeader: "<div class='control-label bg-info h3'>Selected  Batches</div>",
-    });
-</script >
-<!--        afterSelect: function (values) {
-            $.ajax({
-                type: 'GET',
-                url: $("#batchUrl").val() + "id/" + values,
-                success: function (resp) {
-                    totalPrice += parseInt(resp.fee);
-                    $("#monthFee").val(totalPrice);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        },
-        afterDeselect: function (values) {
-            $.ajax({
-                type: 'GET',
-                url: $("#batchUrl").val() + "id/" + values,
-                success: function (resp) {
-                    totalPrice -= parseInt(resp.fee);
-                    $("#monthFee").val(totalPrice);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        },-->
-</body>
-</html>
+</body >
+</html >
