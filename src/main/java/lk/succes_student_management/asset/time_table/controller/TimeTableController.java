@@ -178,7 +178,7 @@ public class TimeTableController {
       timeTableDb.getBatch().getBatchStudents().forEach(x->{
         Student student = studentService.findById(x.getId());
         if(student.getEmail()!=null){
-          String message = "Dear "+ student.getFirstName()+"\n Your "+timeTableDb.getBatch().getName()+" class would be held from "+ timeTableDb.getStartAt()+" to "+ timeTableDb.getEndAt() +"\n Thanks \n Success Stundent";
+          String message = "Dear "+ student.getFirstName()+"\n Your "+timeTableDb.getBatch().getName()+" class would be held from "+ timeTableDb.getStartAt()+" to "+ timeTableDb.getEndAt() +"\n Thanks \n Success Student";
           emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
         }
       });
