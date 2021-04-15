@@ -115,7 +115,7 @@ public class PaymentController {
   }
 
   @PostMapping( "/batchStudent/save" )
-  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult) {
+  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,Model model) {
     if ( bindingResult.hasErrors() ) {
       return "redirect:/payment/add/" + student.getId();
     }
@@ -129,8 +129,8 @@ public class PaymentController {
       }
     }));
 
-    //todo -> need to do print
-    return "redirect:/payment";
+  model.addAttribute("payments", payments);
+    return "payment/paymentPrint";
   }
 
   private void commonSave(Payment payment) {
