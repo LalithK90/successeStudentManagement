@@ -26,11 +26,11 @@
     </div>
 </div>
 
-<div class="container">
-<div class="container">
+<div class="container-fluid">
+<div class="container-fluid">
     <div data-th-replace="~{batch/batch-detail :: batchDetailsFragment}"></div>
 </div>
-    <div class="container">
+    <div class="container-fluid">
         <div data-th-replace="~{teacher/teacher-detail :: teacherDetail}"></div>
     </div>
     <form action="/school/save" data-th-object="${student}" method="post" >
@@ -60,7 +60,7 @@
             </div>
         </div>
     </form>
-    <div class="container">
+    <div class="container-fluid">
         <div data-th-replace="~{student/student :: studentsFragment}"></div>
     </div>
 </div>
