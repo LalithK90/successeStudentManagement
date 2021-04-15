@@ -3,6 +3,7 @@ package lk.succes_student_management.asset.time_table.service;
 
 import lk.succes_student_management.asset.batch.entity.Batch;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes_student_management.asset.time_table.entity.enums.TimeTableStatus;
 import lk.succes_student_management.util.interfaces.AbstractService;
 import lk.succes_student_management.asset.time_table.dao.TimeTableDao;
 import lk.succes_student_management.asset.time_table.entity.TimeTable;
@@ -31,6 +32,7 @@ public class TimeTableService implements AbstractService< TimeTable, Integer > {
   public TimeTable persist(TimeTable timeTable) {
     if ( timeTable.getId() == null ) {
       timeTable.setLiveDead(LiveDead.ACTIVE);
+      timeTable.setTimeTableStatus(TimeTableStatus.NOTMARKED);
     }
     return timeTableDao.save(timeTable);
   }
@@ -52,7 +54,8 @@ public class TimeTableService implements AbstractService< TimeTable, Integer > {
   }
 
   public boolean availableTimeTableCheck(LocalDateTime from, LocalDateTime to, Batch batch) {
-    List< TimeTable > timeTables = timeTableDao.findByBatchAndStartAtIsBetween(batch, from, to);
+    TimeTableStatus timeTableStatus = TimeTableStatus.NOTMARKED;
+    List< TimeTable > timeTables = timeTableDao.findByBatchAndStartAtIsBetweenAndTimeTableStatus(batch, from, to,timeTableStatus);
     return timeTables.isEmpty();
   }
 

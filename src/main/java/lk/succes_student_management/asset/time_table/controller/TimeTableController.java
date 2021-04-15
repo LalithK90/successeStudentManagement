@@ -80,12 +80,12 @@ public class TimeTableController {
   @GetMapping( "/teacher" )
   public String byTeacher(Model model) {
     User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-//todo need to think teacher as user
+
     Teacher teacher = new Teacher();
-    List< TimeTable > timeTables = timeTableService.findAll();
-//        .stream()
-//        .filter(x -> x.getBatch().getTeacher().equals(teacher))
-//        .collect(Collectors.toList());
+    List< TimeTable > timeTables = timeTableService.findAll()
+        .stream()
+        .filter(x -> x.getBatch().getTeacher().equals(teacher))
+        .collect(Collectors.toList());
 
     return common(timeTables, model);
   }
@@ -202,19 +202,14 @@ public class TimeTableController {
         timeTable.setBatch(batch1);
         timeTables.add(timeTable);
       }
-      System.out.println("time table size " + timeTables.size());
       batchSend.setTimeTables(timeTables);
     } else {
-      System.out.println("add status false");
       List< TimeTable > timeTables = timeTableService.findByCreatedAtIsBetween(from, to);
-      System.out.println("date " + date + "  form " + from + "size " + timeTables.size());
       batchSend.setTimeTables(timeTables);
     }
 
 
     model.addAttribute("batches", batchSend);
-//    model.addAttribute("batches", batchService.findAll());
-
     model.addAttribute("addStatus", addStatus);
     model.addAttribute("date", date);
     model.addAttribute("liveDeads", LiveDead.values());
