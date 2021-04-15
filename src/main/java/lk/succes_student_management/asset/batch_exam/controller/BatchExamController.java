@@ -65,7 +65,7 @@ public class BatchExamController {
     Teacher teacher =teacherService.findById(batchExam.getBatch().getTeacher().getId());
         model.addAttribute("teacherDetail", teacher);
     model.addAttribute("batchExamDetail", batchExam);
-    model.addAttribute("studentDetail", teacher.getSubject());
+    model.addAttribute("subjectDetail", teacher.getSubject());
     return "batchExam/batchExam-detail";
   }
 
