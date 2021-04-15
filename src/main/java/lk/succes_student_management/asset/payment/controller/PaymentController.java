@@ -135,7 +135,6 @@ public class PaymentController {
 
   private void commonSave(Payment payment) {
     if ( payment.getId() == null ) {
-      // need to create auto generated registration number
       Payment lastPayment = paymentService.lastStudentOnDB();
       if ( lastPayment == null ) {
         payment.setCode("SSP" + makeAutoGenerateNumberService.numberAutoGen(null));
