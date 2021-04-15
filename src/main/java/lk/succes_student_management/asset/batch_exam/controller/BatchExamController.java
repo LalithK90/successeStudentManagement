@@ -5,10 +5,13 @@ import lk.succes_student_management.asset.batch.service.BatchService;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
 import lk.succes_student_management.asset.batch_exam.service.BatchExamService;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes_student_management.asset.student.entity.Student;
+import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.teacher.service.TeacherService;
 import lk.succes_student_management.asset.user_management.entity.User;
 import lk.succes_student_management.asset.user_management.service.UserService;
+import lk.succes_student_management.util.service.EmailService;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,15 +30,20 @@ public class BatchExamController {
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
   private final TeacherService teacherService;
   private final UserService userService;
+  private final StudentService studentService;
+  private final EmailService emailService;
 
   public BatchExamController(BatchService batchService, BatchExamService batchExamService,
                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                             TeacherService teacherService, UserService userService) {
+                             TeacherService teacherService, UserService userService, StudentService studentService,
+                             EmailService emailService) {
     this.batchService = batchService;
     this.batchExamService = batchExamService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.teacherService = teacherService;
     this.userService = userService;
+    this.studentService = studentService;
+    this.emailService = emailService;
   }
 
   @GetMapping
@@ -113,7 +121,14 @@ public class BatchExamController {
       }
     }
 
-    batchExamService.persist(batchExam);
+   BatchExam batchExamDb =  batchExamService.persist(batchExam);
+    batchExamDb.getBatch().getBatchStudents().forEach(x->{
+      Student student = studentService.findById(x.getId());
+      if(student.getEmail()!=null){
+        String message = "Dear "+ student.getFirstName()+"\n Your "+batchExamDb.getBatch().getName()+" exam would be held from "+ batchExamDb.getStartAt()+" to "+ batchExamDb.getEndAt() +".\n Thanks \n Success Student";
+        emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
+      }
+    });
     return "redirect:/batchExam/teacher";
   }
 
