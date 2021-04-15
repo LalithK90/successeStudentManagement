@@ -52,6 +52,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label data-th-for="${address}" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-6">
+                <p type="text" id="address" class="form-control"   data-th-text="${studentDetail.email}">
+            </div>
+        </div>
+        <div class="form-group">
             <label data-th-for="${school}" class="col-sm-3 control-label">School</label>
             <div class="col-sm-6">
                 <p type="text" id="school" class="form-control"   data-th-text="${studentDetail.school.name}">

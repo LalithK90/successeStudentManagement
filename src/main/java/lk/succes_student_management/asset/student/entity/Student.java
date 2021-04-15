@@ -48,6 +48,9 @@ public class Student extends AuditEntity {
 
   private String home;
 
+  @Column( unique = true )
+  private String email;
+
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
 
