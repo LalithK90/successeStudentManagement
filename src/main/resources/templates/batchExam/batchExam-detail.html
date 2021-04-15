@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="row bg-link" >
+  <div class="col-4" >
+
+  </div >
+  <div class="col-4" >
+    <h1 >Subject Details</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/batchExam/teacher" >
+      <button class="btn btn-primary" align="center" >Exams</button >
+    </a >
+  </div >
+</div >
+<!--subject detail-->
+<div class=" row container-fluid" data-th-fragment="subjectDetail" >
+  <div class="col-sm-8" >
+    <div class="form-group" >
+      <label data-th-for="${id}" class="col-sm-3 control-label" >Index</label >
+      <div class="col-sm-6" >
+        <p type="text" id="id" class="form-control" data-th-text="${subjectDetail.id}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${name}" class="col-sm-3 control-label" >Subject name</label >
+      <div class="col-sm-6" >
+        <p type="text" id="name" class="form-control" data-th-text="${subjectDetail.name}" >
+      </div >
+    </div >
+    <div class="form-group" >
+      <label data-th-for="${code}" class="col-sm-3 control-label" >Subject code</label >
+      <div class="col-sm-6" >
+        <p type="text" id="code" class="form-control" data-th-text="${subjectDetail.code}" >
+      </div >
+    </div >
+  </div >
+</div >
+<!--teacher Detail-->
+<div class="container-fluid" >
+  <div data-th-replace="~{teacher/teacher-detail :: teacherDetailsFragment}" ></div >
+</div >
+<!--Exam Result-->
+<div class="container-fluid" >
+  <table class="table table-striped table-inverse table-responsive" >
+    <thead class="thead-inverse" >
+    <tr >
+      <th >Index</th >
+      <th >Student Name</th >
+      <th >Exam Code</th >
+      <th >Attendance</th >
+      <th >Mark</th >
+      <th >Result Grade</th >
+    </tr >
+    </thead >
+    <tbody >
+    <tr data-th-each="batchStudentExamResult, index : ${batchExam.batchStudentExamResults}" >
+      <td data-th-text="${index.count}" ></td >
+      <td data-th-text="${batchStudentExamResult.batchStudent.student.firstName}" ></td >
+      <td data-th-text="${batchStudentExamResult.code}" ></td >
+      <td data-th-text="${batchStudentExamResult.attendanceStatus.attendanceStatus}" ></td >
+      <td data-th-text="${batchStudentExamResult.mark}" ></td >
+      <td data-th-text="${batchStudentExamResult.resultGrade.resultGrade}" >
+      </td >
+    </tr >
+    </tbody >
+  </table >
+</div >
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >

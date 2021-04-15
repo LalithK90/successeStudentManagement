@@ -44,17 +44,20 @@
                 <td data-th-text="${#temporals.format(batchExam.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
                 <td data-th-text="${#temporals.format(batchExam.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
                 <td>
-                    <a data-th-href="${'/batchExam/edit/'+ batchExam.id}">
+                    <a data-th-if="${#strings.equals(batchExam.examStatus,'PENDING')}" data-th-href="${'/batchExam/edit/'+ batchExam.id}">
                         <button type="button" class="btn btn-info">Edit</button>
                     </a>
-                    <a data-th-href="${'/batchExam/delete/'+ batchExam.id}">
+                    <a data-th-if="${#strings.equals(batchExam.examStatus,'PENDING')}" data-th-href="${'/batchExam/delete/'+ batchExam.id}">
                         <button type="button" class="btn btn-danger">Delete</button>
                     </a>
-                    <a data-th-href="${'/batchStudentExamResult/addAttendance/'+ batchExam.id}">
+                    <a data-th-if="${#strings.equals(batchExam.examStatus,'PENDING')}" data-th-href="${'/batchStudentExamResult/addAttendance/'+ batchExam.id}">
                         <button type="button" class="btn btn-primary">Mark Attendance</button>
                     </a>
-                    <a data-th-href="${'/batchStudentExamResult/addResult/'+ batchExam.id}">
+                    <a data-th-if="${#strings.equals(batchExam.examStatus,'RESULTED')}" data-th-href="${'/batchStudentExamResult/addResult/'+ batchExam.id}">
                         <button type="button" class="btn btn-success">Add Result</button>
+                    </a>
+                    <a data-th-if="${#strings.equals(batchExam.examStatus,'DETAIL')}" data-th-href="${'/batchExam/view/'+ batchExam.id}">
+                        <button type="button" class="btn btn-success">View</button>
                     </a>
                 </td>
             </tr>

@@ -3,6 +3,7 @@ package lk.succes_student_management.asset.batch_exam.service;
 import lk.succes_student_management.asset.batch.entity.Batch;
 import lk.succes_student_management.asset.batch_exam.dao.BatchExamDao;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
+import lk.succes_student_management.asset.batch_exam.entity.enums.ExamStatus;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class BatchExamService implements AbstractService< BatchExam, Integer > {
   public BatchExam persist(BatchExam batchExam) {
     if ( batchExam.getId() == null ) {
       batchExam.setLiveDead(LiveDead.ACTIVE);
+      batchExam.setExamStatus(ExamStatus.PENDING);
     }
     return batchExamDao.save(batchExam);
   }

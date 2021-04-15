@@ -5,6 +5,8 @@ import lk.succes_student_management.asset.batch.service.BatchService;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
 import lk.succes_student_management.asset.batch_exam.service.BatchExamService;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
+import lk.succes_student_management.asset.teacher.service.TeacherService;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +22,14 @@ public class BatchExamController {
   private final BatchService batchService;
   private final BatchExamService batchExamService;
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
+  private final TeacherService teacherService;
 
   public BatchExamController(BatchService batchService, BatchExamService batchExamService,
-                             MakeAutoGenerateNumberService makeAutoGenerateNumberService) {
+                             MakeAutoGenerateNumberService makeAutoGenerateNumberService, TeacherService teacherService) {
     this.batchService = batchService;
     this.batchExamService = batchExamService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
+    this.teacherService = teacherService;
   }
 
   @GetMapping
@@ -57,7 +61,11 @@ public class BatchExamController {
 
   @GetMapping( "/view/{id}" )
   public String findById(@PathVariable Integer id, Model model) {
-    model.addAttribute("batchExamDetail", batchService.findById(id));
+    BatchExam batchExam = batchExamService.findById(id);
+    Teacher teacher =teacherService.findById(batchExam.getBatch().getTeacher().getId());
+        model.addAttribute("teacherDetail", teacher);
+    model.addAttribute("batchExamDetail", batchExam);
+    model.addAttribute("studentDetail", teacher.getSubject());
     return "batchExam/batchExam-detail";
   }
 

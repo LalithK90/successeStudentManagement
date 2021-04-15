@@ -2,6 +2,7 @@ package lk.succes_student_management.asset.batch_exam.entity;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lk.succes_student_management.asset.batch.entity.Batch;
+import lk.succes_student_management.asset.batch_exam.entity.enums.ExamStatus;
 import lk.succes_student_management.asset.batch_student_exam_result.entity.BatchStudentExamResult;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.util.audit.AuditEntity;
@@ -30,6 +31,9 @@ public class BatchExam extends AuditEntity {
 
   @Enumerated( EnumType.STRING )
   private LiveDead liveDead;
+
+  @Enumerated(EnumType.STRING)
+  private ExamStatus examStatus;
 
   @DateTimeFormat( pattern = "yyyy-MM-dd'T'HH:mm" )
   private LocalDateTime startAt;
