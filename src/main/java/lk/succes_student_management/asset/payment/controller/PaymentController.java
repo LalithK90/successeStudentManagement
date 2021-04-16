@@ -3,12 +3,14 @@ package lk.succes_student_management.asset.payment.controller;
 
 import lk.succes_student_management.asset.batch_student.entity.BatchStudent;
 import lk.succes_student_management.asset.batch_student.service.BatchStudentService;
+import lk.succes_student_management.asset.common_asset.model.TwoDate;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.payment.entity.Payment;
 import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import lk.succes_student_management.asset.payment.service.PaymentService;
 import lk.succes_student_management.asset.student.entity.Student;
 import lk.succes_student_management.asset.student.service.StudentService;
+import lk.succes_student_management.util.service.DateTimeAgeService;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,23 +31,49 @@ public class PaymentController {
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
   private final StudentService studentService;
   private final BatchStudentService batchStudentService;
+  private final DateTimeAgeService dateTimeAgeService;
 
   public PaymentController(PaymentService paymentService, MakeAutoGenerateNumberService makeAutoGenerateNumberService
-      , StudentService studentService, BatchStudentService batchStudentService) {
+      , StudentService studentService, BatchStudentService batchStudentService, DateTimeAgeService dateTimeAgeService) {
     this.paymentService = paymentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.studentService = studentService;
     this.batchStudentService = batchStudentService;
+    this.dateTimeAgeService = dateTimeAgeService;
+  }
+
+  private String commonFindAll(LocalDate from, LocalDate to, Model model) {
+
+    LocalDateTime startAt = dateTimeAgeService.dateTimeToLocalDateStartInDay(from);
+    LocalDateTime endAt = dateTimeAgeService.dateTimeToLocalDateEndInDay(to);
+
+
+    model.addAttribute("payments",
+                       paymentService.findByCreatedAtIsBetween(startAt, endAt));
+
+    model.addAttribute("message",
+                       "Following table show details belongs from " + startAt.toString() + " to " + endAt.toString() +
+                           "there month. if you need to more please search using above method");
+    return "payment/payment";
   }
 
   @GetMapping
   public String findAll(Model model) {
-    model.addAttribute("payments",
+    // todo need to remove
+    //return( LocalDate.now(),LocalDate.now(), model);
+/*     model.addAttribute("payments",
                        paymentService.findAll()
                            .stream()
                            .filter(x -> x.getCreatedAt().toLocalDate().equals(LocalDate.now()))
-                           .collect(Collectors.toList()));
+                           .collect(Collectors.toList()));  */
+    model.addAttribute("payments",
+                       paymentService.findAll());
     return "payment/payment";
+  }
+
+  @PostMapping
+  public String findAllSearch(@ModelAttribute TwoDate twoDate, Model model) {
+    return commonFindAll(twoDate.getStartDate(), twoDate.getEndDate(), model);
   }
 
   @GetMapping( "/add" )
@@ -115,25 +144,33 @@ public class PaymentController {
   }
 
   @PostMapping( "/batchStudent/save" )
-  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult,Model model) {
+  public String persist(@Valid @ModelAttribute Student student, BindingResult bindingResult, Model model) {
     if ( bindingResult.hasErrors() ) {
       return "redirect:/payment/add/" + student.getId();
     }
-    HashSet< Payment > payments = new HashSet<>();
+    List< Payment > payments = new ArrayList<>();
+
     student.getBatchStudents().forEach(x -> x.getPayments().forEach(y -> {
 
       if ( y.getPaymentStatus() != null && !y.getPaymentStatus().equals(PaymentStatus.NO_PAID) ) {
         y.setBatchStudent(x);
-        commonSave(y);
-        payments.add(paymentService.persist(y));
+        payments.add(paymentService.persist(commonSave(y)));
       }
     }));
 
-  model.addAttribute("payments", payments);
+    List< Payment > withBatchStudent = new ArrayList<>();
+    payments.forEach(x -> {
+      x.setBatchStudent(batchStudentService.findById(x.getBatchStudent().getId()));
+      withBatchStudent.add(x);
+
+    });
+
+
+    model.addAttribute("payments", withBatchStudent);
     return "payment/paymentPrint";
   }
 
-  private void commonSave(Payment payment) {
+  private Payment commonSave(Payment payment) {
     if ( payment.getId() == null ) {
       Payment lastPayment = paymentService.lastStudentOnDB();
       if ( lastPayment == null ) {
@@ -143,6 +180,7 @@ public class PaymentController {
         payment.setCode("SSP" + makeAutoGenerateNumberService.numberAutoGen(lastNumber));
       }
     }
+    return payment;
   }
 
   @GetMapping( "/delete/{id}" )
