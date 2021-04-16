@@ -41,8 +41,8 @@
   </div >
 </div >
 <div class="container-fluid form-row" >
-  <div class="col-6 text-right" >Total Amount</div >
-  <div class="col-6 text-left" ><span id="totalAmount" ></span ></div >
+  <div class="col-6 text-right h2 font-weight-bold" >Total Amount</div >
+  <div class="col-6 text-left h2 font-weight-bold" ><span id="totalAmount" ></span ></div >
 </div >
 <form action="/payment/batchStudent/save" data-th-object="${student}" method="post" >
   <input type="hidden" data-th-field="*{id}" hidden />
@@ -126,10 +126,10 @@
                           <input class="custom-control-input" required onchange="paymentCheck(this)"
                                  data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
                                  data-th-value="${paymentStatus}"
-                                 data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
+                                 data-th-id="${paymentIndex.index+'pb'+index.index+batchIndex.index}" type="radio"
                                  data-th-checked="${paymentStatus==payment.paymentStatus}" />
                           <label class="custom-control-label"
-                                 data-th-for="${paymentIndex.index+'pb'+index.index}"
+                                 data-th-for="${paymentIndex.index+'pb'+index.index+batchIndex.index}"
                                  data-th-text="${paymentStatus.paymentStatus}" > radio
                           </label >
                         </div >
