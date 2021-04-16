@@ -92,7 +92,7 @@
         <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
       </div >
       <div class="col-sm-2 col-sm-offset-2" >
-        <button type="submit" class="btn btn-success btn-block" >Submit</button >
+        <button id="submit" type="submit" class="btn btn-success btn-block" >Submit</button >
       </div >
     </div >
   </form >
@@ -112,17 +112,19 @@
     $("#startAt, #endAt").change(function (){
         let startAt =$("#startAt").val();
         let endAt =$("#endAt").val();
-        if (Date.parse(startAt) > Date.parse(endAt)) {
+        if (Date.parse(startAt) > Date.parse(endAt) || Date.parse(startAt) === Date.parse(endAt)) {
             swal({
                 title: "Could you accept those days.. !",
                 icon: "warning",
-                text: "Please check your date \n Start Date can not be less than End Date",
+                text: "Please check your date \n Start Date can not be less than End Date Or Equal On Both date",
             })
             $("#startAt").addClass('bg-danger').removeClass('bg-success bg-white');
             $("#endAt").val(startAt).addClass('bg-danger').removeClass('bg-success bg-white');
+            $("#submit").hide();
         }else {
             $("#startAt").addClass('bg-success').removeClass('bg-danger bg-white');
             $("#endAt").addClass('bg-success').removeClass('bg-danger bg-white');
+            $("#submit").show();
         }
     });
 
