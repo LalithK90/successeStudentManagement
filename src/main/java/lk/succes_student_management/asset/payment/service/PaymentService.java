@@ -9,6 +9,7 @@ import lk.succes_student_management.asset.payment.dao.PaymentDao;
 import lk.succes_student_management.asset.payment.entity.Payment;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
@@ -56,5 +57,9 @@ public class PaymentService implements AbstractService< Payment, Integer > {
 
   public Payment findByMonthAndBatchStudentAndPaymentStatus(Month month, BatchStudent batchStudent, PaymentStatus noPaid) {
     return paymentDao.findByMonthAndBatchStudentAndPaymentStatus(batchStudent, month,noPaid);
+  }
+
+  public List< Payment > findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt) {
+    return paymentDao.findByCreatedAtIsBetween(startAt, endAt);
   }
 }
