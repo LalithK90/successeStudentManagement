@@ -121,11 +121,13 @@ public class BatchExamController {
       }
     }
 
-   BatchExam batchExamDb =  batchExamService.persist(batchExam);
-    batchExamDb.getBatch().getBatchStudents().forEach(x->{
+    BatchExam batchExamDb = batchExamService.persist(batchExam);
+    batchService.findById(batchExamDb.getBatch().getId()).getBatchStudents().forEach(x -> {
       Student student = studentService.findById(x.getId());
-      if(student.getEmail()!=null){
-        String message = "Dear "+ student.getFirstName()+"\n Your "+batchExamDb.getBatch().getName()+" exam would be held from "+ batchExamDb.getStartAt()+" to "+ batchExamDb.getEndAt() +".\n Thanks \n Success Student";
+      if ( student.getEmail() != null ) {
+        String message = "Dear " + student.getFirstName() + "\n Your " + batchExamDb.getBatch().getName() + " exam " +
+            "would be held from " + batchExamDb.getStartAt() + " to " + batchExamDb.getEndAt() + ".\n Thanks \n " +
+            "Success Student";
         emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
       }
     });

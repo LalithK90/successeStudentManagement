@@ -25,6 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonFilter( "TimeTable" )
 public class TimeTable extends AuditEntity {
+
   @Column( unique = true )
   private String code;
 
