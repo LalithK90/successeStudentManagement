@@ -11,6 +11,7 @@ import lk.succes_student_management.asset.payment.service.PaymentService;
 import lk.succes_student_management.asset.student.entity.Student;
 import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.util.service.DateTimeAgeService;
+import lk.succes_student_management.util.service.EmailService;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,14 +33,16 @@ public class PaymentController {
   private final StudentService studentService;
   private final BatchStudentService batchStudentService;
   private final DateTimeAgeService dateTimeAgeService;
+  private final EmailService emailService;
 
   public PaymentController(PaymentService paymentService, MakeAutoGenerateNumberService makeAutoGenerateNumberService
-      , StudentService studentService, BatchStudentService batchStudentService, DateTimeAgeService dateTimeAgeService) {
+      , StudentService studentService, BatchStudentService batchStudentService, DateTimeAgeService dateTimeAgeService, EmailService emailService) {
     this.paymentService = paymentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.studentService = studentService;
     this.batchStudentService = batchStudentService;
     this.dateTimeAgeService = dateTimeAgeService;
+    this.emailService = emailService;
   }
 
   private String commonFindAll(LocalDate from, LocalDate to, Model model) {
@@ -59,16 +62,7 @@ public class PaymentController {
 
   @GetMapping
   public String findAll(Model model) {
-    // todo need to remove
-    //return( LocalDate.now(),LocalDate.now(), model);
-/*     model.addAttribute("payments",
-                       paymentService.findAll()
-                           .stream()
-                           .filter(x -> x.getCreatedAt().toLocalDate().equals(LocalDate.now()))
-                           .collect(Collectors.toList()));  */
-    model.addAttribute("payments",
-                       paymentService.findAll());
-    return "payment/payment";
+    return commonFindAll( LocalDate.now(),LocalDate.now(), model);
   }
 
   @PostMapping
