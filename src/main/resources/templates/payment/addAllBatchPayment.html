@@ -47,7 +47,7 @@
 <form action="/payment/batchStudent/save" data-th-object="${student}" method="post" >
   <input type="hidden" data-th-field="*{id}" hidden />
   <div class="container-fluid" id="payment" role="tablist" aria-multiselectable="true" >
-    <div class="card" data-th-each="batchStudent, batchIndex : ${student.batchStudents}" >
+    <div class="card"  data-th-each="batchStudent, batchIndex : ${student.batchStudents}">
       <a data-toggle="collapse" data-parent="#payment" data-th-href="${'#acc'+batchIndex.index}" aria-expanded="true"
          da-th-aria-controls="${'acc'+batchIndex.index}" >
         <div class="card-header" role="tab" data-th-id="${'ac'+batchIndex.index}" >
