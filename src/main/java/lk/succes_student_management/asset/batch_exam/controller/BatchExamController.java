@@ -123,12 +123,12 @@ public class BatchExamController {
 
     BatchExam batchExamDb = batchExamService.persist(batchExam);
     batchService.findById(batchExamDb.getBatch().getId()).getBatchStudents().forEach(x -> {
-      Student student = studentService.findById(x.getId());
+      Student student = studentService.findById(x.getStudent().getId());
       if ( student.getEmail() != null ) {
-        String message = "Dear " + student.getFirstName() + "\n Your " + batchExamDb.getBatch().getName() + " exam " +
+        String message = "Dear " + student.getFirstName() + "\n Your " + batchService.findById( batchExamDb.getBatch().getId()).getName() + " exam " +
             "would be held from " + batchExamDb.getStartAt() + " to " + batchExamDb.getEndAt() + ".\n Thanks \n " +
             "Success Student";
-        emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
+        emailService.sendEmail(student.getEmail(), "Exam - Notification", message);
       }
     });
     return "redirect:/batchExam/teacher";

@@ -56,7 +56,7 @@
         </div >
       </a >
       <div data-th-id="${'acc'+batchIndex.index}" class="collapse in" role="tabpanel"
-           data-th-aria-labelledby="${'ac'+batchIndex.index}" >
+           data-th-aria-labelledby="${'acc'+batchIndex.index}" >
         <div class="card-body" >
           <div class="form-row" >
             <div class="col-6" >
@@ -92,6 +92,7 @@
               </div >
             </div >
             <div class="col-6" >
+              <span>Size [[${#lists.size(batchStudent.payments)}]] </span>
               <div class="container-fluid" >
                 <table class="table table-striped table-inverse table-responsive"
                        data-th-id="${'tb'+batchIndex.index}" >
@@ -103,7 +104,7 @@
                   </tr >
                   </thead >
                   <tbody >
-                  <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" >
+                  <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}"  >
                     <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
                       <!--id-->
                       <input type="hidden"

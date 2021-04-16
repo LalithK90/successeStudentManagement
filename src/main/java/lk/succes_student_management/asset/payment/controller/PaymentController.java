@@ -146,13 +146,20 @@ public class PaymentController {
     }
     List< Payment > payments = new ArrayList<>();
 
-    student.getBatchStudents().forEach(x -> x.getPayments().forEach(y -> {
 
-      if ( y.getPaymentStatus() != null && !y.getPaymentStatus().equals(PaymentStatus.NO_PAID) ) {
-        y.setBatchStudent(x);
-        payments.add(paymentService.persist(commonSave(y)));
+    for ( int i = 0; i < student.getBatchStudents().size(); i++ ) {
+      if ( student.getBatchStudents().get(i).getPayments() != null ) {
+        for ( int k = 0; k < student.getBatchStudents().get(i).getPayments().size(); k++ ) {
+          if ( student.getBatchStudents().get(i).getPayments().get(k).getAmount() != null ) {
+            if ( student.getBatchStudents().get(i).getPayments().get(k).getPaymentStatus() != null && !student.getBatchStudents().get(i).getPayments().get(k).getPaymentStatus().equals(PaymentStatus.NO_PAID) ) {
+              student.getBatchStudents().get(i).getPayments().get(k).setBatchStudent(student.getBatchStudents().get(i));
+              payments.add(paymentService.persist(commonSave(student.getBatchStudents().get(i).getPayments().get(k))));
+            }
+          }
+        }
       }
-    }));
+    }
+
 
     List< Payment > withBatchStudent = new ArrayList<>();
     payments.forEach(x -> {
@@ -161,10 +168,10 @@ public class PaymentController {
 
     });
 
-    StringBuilder paymentInfo = new StringBuilder("\n\n \t\t\t Payment Code \t\t\t\t Month \t\t\t\t Amount \t\t\t\t " +
-                                                      "Paid At \t\t\t\t Created By");
+    StringBuilder paymentInfo = new StringBuilder();
     for ( Payment payment : withBatchStudent ) {
-      paymentInfo.append("\n\t\t\t").append(payment.getCode()).append("\t\t\t\t ").append(payment.getMonth()).append(" \t\t\t\t ").append(payment.getAmount()).append(" ").append("\t\t\t\t ").append(payment.getCreatedAt().toLocalDate()).append(" \t\t\t\t").append(payment.getCreatedBy());
+      paymentInfo.append("\n\t\t\t\t Payment Code \t\t").append(payment.getCode()).append("\t\t\t\t Month \t\t").append(payment.getMonth()).append(
+          " \t\t\t\t Amount \t\t ").append(payment.getAmount()).append("\t\t\t\t Paid At \t\t").append(payment.getCreatedAt().toLocalDate()).append(" \t\t\t\tCreated By\t\t").append(payment.getCreatedBy());
     }
 
 
