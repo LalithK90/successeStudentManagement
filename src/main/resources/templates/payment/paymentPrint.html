@@ -38,6 +38,7 @@
         <th >Code</th >
         <th >Batch Name</th >
         <th >Month</th >
+        <th >Year</th >
         <th >Amount</th >
         <th >Created Time</th >
         <th >Created By</th >
@@ -49,6 +50,7 @@
         <td data-th-text="${payment.code}" ></td >
         <td data-th-text="${payment.batchStudent.batch.name}" ></td >
         <td data-th-text="${payment.month}" ></td >
+        <td data-th-text="${payment.year}" ></td >
         <td data-th-text="${payment.amount}" ></td >
         <td data-th-text="${#temporals.format(payment.createdAt, 'dd-MM-yyyy HH:mm')}" ></td >
         <td data-th-text="${payment.createdBy}" ></td >

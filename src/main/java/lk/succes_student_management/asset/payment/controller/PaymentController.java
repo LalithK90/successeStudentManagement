@@ -20,9 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -89,11 +87,11 @@ public class PaymentController {
 
     List< BatchStudent > batchStudentPayment = new ArrayList<>();
 
-
+    Year year = Year.now();
     batchStudents.forEach(y -> {
       List< Payment > payments = new ArrayList<>();
       months.forEach(x -> {
-        Payment payment = paymentService.findByMonthAndBatchStudent(x, y);
+        Payment payment = paymentService.findByMonthAndBatchStudent(x, y, year);
         if ( payment == null ) {
           Payment newPayment = new Payment();
           newPayment.setPaymentStatus(PaymentStatus.NO_PAID);
@@ -101,6 +99,7 @@ public class PaymentController {
           newPayment.setBatchStudent(y);
           newPayment.setAmount(y.getBatch().getTeacher().getFee());
           newPayment.setMonth(x);
+          newPayment.setYear(year);
           payments.add(newPayment);
         } else {
           payments.add(payment);
@@ -170,7 +169,7 @@ public class PaymentController {
 
     StringBuilder paymentInfo = new StringBuilder();
     for ( Payment payment : withBatchStudent ) {
-      paymentInfo.append("\n\t\t\t\t Payment Code \t\t").append(payment.getCode()).append("\t\t\t\t Month \t\t").append(payment.getMonth()).append(
+      paymentInfo.append("\n\t\t\t\t Payment Code \t\t").append(payment.getCode()).append("\t\t\t\t Month \t\t").append(payment.getMonth()).append("\tYear \t\t").append(payment.getYear()).append(
           " \t\t\t\t Amount \t\t ").append(payment.getAmount()).append("\t\t\t\t Paid At \t\t").append(payment.getCreatedAt().toLocalDate()).append(" \t\t\t\tCreated By\t\t").append(payment.getCreatedBy());
     }
 

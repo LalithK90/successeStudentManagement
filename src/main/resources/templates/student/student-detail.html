@@ -138,6 +138,7 @@
               <tr >
                 <th >Index</th >
                 <th >Code</th >
+                <th >Month Year</th >
                 <th >Amount</th >
                 <th >Created Time</th >
                 <th >Created By</th >
@@ -148,6 +149,7 @@
               <tr data-th-each="payment, index : ${batchStudent.payments}" >
                 <td data-th-text="${index.count}" ></td >
                 <td data-th-text="${payment.code}" ></td >
+                <td data-th-text="${payment.month+' - '+payment.year}" ></td >
                 <td data-th-text="${payment.amount}" ></td >
                 <td data-th-text="${#temporals.format(payment.createdAt, 'dd-MM-yyyy HH:mm')}" ></td >
                 <td data-th-text="${payment.createdBy}" ></td >

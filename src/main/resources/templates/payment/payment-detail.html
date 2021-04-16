@@ -72,9 +72,9 @@
         </div >
       </div >
       <div class="form-group" >
-        <label data-th-for="${createdTime}" class="col-sm-3 control-label" >Time</label >
+        <label data-th-for="${createdTime}" class="col-sm-3 control-label" >Month and Year</label >
         <div >
-          <p type="text" id="createdTime" class="form-control" data-th-text="${paymentDetail.month}" >
+          <p type="text" id="createdTime" class="form-control" data-th-text="${paymentDetail.month +' ' + paymentDetail.year}" >
         </div >
       </div >
       <div class="form-group" >
