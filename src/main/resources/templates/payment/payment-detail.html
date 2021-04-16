@@ -1,88 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}">
-    <meta charset="UTF-8">
-    <title>Success Student Management</title>
-</head>
-<body>
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management</title >
+</head >
+<body >
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
-<div class="row bg-link">
-    <div class="col-4">
+<div class="row bg-link" >
+  <div class="col-4" >
 
-    </div>
-    <div class="col-4">
-        <h1>Payment Details</h1>
-    </div>
-    <div class="col-4">
-        <a href="/payment/add">
-            <button class="btn btn-primary" align="center">Make a Payment</button>
-        </a>
-    </div>
-</div>
+  </div >
+  <div class="col-4" >
+    <h1 >Payment Details</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/payment/add" >
+      <button class="btn btn-primary" align="center" >Make a Payment</button >
+    </a >
+  </div >
+</div >
 <!--Discount detail-->
-<div class=" row container-fluid" data-th-fragment="paymentDetail">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-8">
-        <div class="form-group">
-            <label data-th-for="${id}" class="col-sm-3 control-label">Transaction ID</label>
-            <div class="col-sm-6">
-                <p type="text" id="id" class="form-control"   data-th-text="${paymentDetail.code}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${discountStatus}" class="col-sm-3 control-label">Discount status</label>
-            <div class="col-sm-6">
-                <p type="text" id="discountStatus" class="form-control"   data-th-text="${paymentDetail.amount}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${discountStatus}" class="col-sm-3 control-label">Student Name</label>
-            <div class="col-sm-6">
-                <p type="text" id="studentName" class="form-control"   data-th-text="${paymentDetail.batchStudent.student.firstName}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${amount}" class="col-sm-3 control-label">Amount</label>
-            <div class="col-sm-6">
-                <p type="text" id="amount" class="form-control"   data-th-text="${paymentDetail.paymentStatus.paymentStatus}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${createdTime}" class="col-sm-3 control-label">Time</label>
-            <div class="col-sm-6">
-                <p type="text" id="createdTime" class="form-control"   data-th-text="${paymentDetail.month}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${createdDate}" class="col-sm-3 control-label">Date</label>
-            <div class="col-sm-6">
-                <p type="text" id="createdDate" class="form-control"   data-th-text="${paymentDetail.liveDead.liveDead}">
-            </div>
-        </div>
-        <div class="form-group">
-            <label data-th-for="${createdBy}" class="col-sm-3 control-label">Created by</label>
-            <div class="col-sm-6">
-                <p type="text" id="createdBy" class="form-control"   data-th-text="${paymentDetail.createdBy}">
-            </div>
-        </div>
-
-        <div class="row container-fluid">
-            <div class="col-sm-2 col-sm-offset-2">
-                <a href="/payment">
-                    <button type="button"  class="btn btn-danger btn-block" >Back</button>
-                </a>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-sm-1"></div>
-</div>
+<div class="container" data-th-fragment="paymentDetail" id="printContent" >
+  <div class="container text-center" >
+    <p >Success Student Institute</p >
+    <p >Kalawana </p >
+    <p >Rathnapura</p >
+    <p >Tp: 07837733</p >
+  </div >
+  <div class="row" >
+    <div class="col-md-6" >
+      <div class="form-group" >
+        <label data-th-for="${id}" class="col-sm-3 control-label" >Transaction ID</label >
+        <div >
+          <p type="text" id="id" class="form-control" data-th-text="${paymentDetail.code}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${discountStatus}" class="col-sm-3 control-label" >Student Name</label >
+        <div >
+          <p type="text" id="studentName" class="form-control"
+             data-th-text="${paymentDetail.batchStudent.student.firstName}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${amount}" class="col-sm-3 control-label" >Amount</label >
+        <div >
+          <p type="text" id="amount" class="form-control" data-th-text="${paymentDetail.paymentStatus.paymentStatus}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${createdDate}" class="col-sm-3 control-label" >Date</label >
+        <div >
+          <p type="text" id="createdDate" class="form-control" data-th-text="${paymentDetail.liveDead.liveDead}" >
+        </div >
+      </div >
+    </div >
+    <div class="col-md-6" >
+      <div class="form-group" >
+        <label data-th-for="${discountStatus}" class="col-sm-3 control-label" >Discount status</label >
+        <div >
+          <p type="text" id="discountStatus" class="form-control" data-th-text="${paymentDetail.amount}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${discountStatus}" class="col-sm-3 control-label" >Batch Name</label >
+        <div >
+          <p type="text" id="batchName" class="form-control" data-th-text="${paymentDetail.batchStudent.batch.name}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${createdTime}" class="col-sm-3 control-label" >Time</label >
+        <div >
+          <p type="text" id="createdTime" class="form-control" data-th-text="${paymentDetail.month}" >
+        </div >
+      </div >
+      <div class="form-group" >
+        <label data-th-for="${createdBy}" class="col-sm-3 control-label" >Created by</label >
+        <div >
+          <p type="text" id="createdBy" class="form-control" data-th-text="${paymentDetail.createdBy}" >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<div class=" container-fluid text-center" >
+  <a href="/payment" >
+    <button type="button" class="btn btn-danger" >Back</button >
+  </a >
+  <!--print button-->
+  <button class="btn btn-success" type="button" id="printButton" >
+    <i class="fa fa-print" style="font-size: 20px" ></i >
+    Print
+  </button >
+</div >
 <!--footer is included-->
-<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
 <!--script is included-->
-<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
-</body>
-</html>
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $("#printButton").click(function () {
+        printContent("printContent");
+    });
+</script >
+</body >
+</html >
