@@ -13,6 +13,7 @@ import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.util.service.DateTimeAgeService;
 import lk.succes_student_management.util.service.EmailService;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,8 @@ public class PaymentController {
   private final EmailService emailService;
 
   public PaymentController(PaymentService paymentService, MakeAutoGenerateNumberService makeAutoGenerateNumberService
-      , StudentService studentService, BatchStudentService batchStudentService, DateTimeAgeService dateTimeAgeService, EmailService emailService) {
+      , StudentService studentService, BatchStudentService batchStudentService, DateTimeAgeService dateTimeAgeService
+      , EmailService emailService) {
     this.paymentService = paymentService;
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.studentService = studentService;
@@ -55,14 +57,14 @@ public class PaymentController {
                        paymentService.findByCreatedAtIsBetween(startAt, endAt));
 
     model.addAttribute("message",
-                       "Following table show details belongs from " + startAt.toString() + " to " + endAt.toString() +
+                       "Following table show details belongs from " + from + " to " + to +
                            "there month. if you need to more please search using above method");
     return "payment/payment";
   }
 
   @GetMapping
   public String findAll(Model model) {
-    return commonFindAll( LocalDate.now(),LocalDate.now(), model);
+    return commonFindAll(LocalDate.now(), LocalDate.now(), model);
   }
 
   @PostMapping
@@ -159,6 +161,21 @@ public class PaymentController {
 
     });
 
+    StringBuilder paymentInfo = new StringBuilder("\n\n \t\t\t Payment Code \t\t\t\t Month \t\t\t\t Amount \t\t\t\t " +
+                                                      "Paid At \t\t\t\t Created By");
+    for ( Payment payment : withBatchStudent ) {
+      paymentInfo.append("\n\t\t\t").append(payment.getCode()).append("\t\t\t\t ").append(payment.getMonth()).append(" \t\t\t\t ").append(payment.getAmount()).append(" ").append("\t\t\t\t ").append(payment.getCreatedAt().toLocalDate()).append(" \t\t\t\t").append(payment.getCreatedBy());
+    }
+
+
+    Student studentDb = studentService.findById(student.getId());
+    if ( studentDb.getEmail() != null ) {
+      String message =
+          "Dear " + studentDb.getFirstName() + "\n Your following payment was accepted\n" + paymentInfo + "\n Thanks " +
+              "\n\n Success Student";
+      System.out.println(message);
+      emailService.sendEmail(studentDb.getEmail(), "Payment - Notification", message);
+    }
 
     model.addAttribute("payments", withBatchStudent);
     return "payment/paymentPrint";
