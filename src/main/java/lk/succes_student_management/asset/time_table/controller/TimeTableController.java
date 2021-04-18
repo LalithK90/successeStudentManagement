@@ -164,26 +164,27 @@ public class TimeTableController {
       System.out.println(bindingResult.toString());
       return commonThing(model, batch.getDate(), true);
     }
+// todo: methana error ekak hdnn thynwa code segment eke
 
-    for ( TimeTable timeTable : batch.getTimeTables() ) {
-      if ( timeTable.getId() == null ) {
-        TimeTable lastTimeTable = timeTableService.lastTimeTable();
-        if ( lastTimeTable == null ) {
-          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
-        } else {
-          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
-        }
-      }
-     TimeTable timeTableDb = timeTableService.persist(timeTable);
-      timeTableDb.getBatch().getBatchStudents().forEach(x->{
-        Student student = studentService.findById(x.getId());
-        if(student.getEmail()!=null){
-          String message = "Dear "+ student.getFirstName()+"\n Your "+timeTableDb.getBatch().getName()+" class would be held from "+ timeTableDb.getStartAt()+" to "+ timeTableDb.getEndAt() +"\n Thanks \n Success Student";
-          emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
-        }
-      });
-
-    }
+//    for ( TimeTable timeTable : batch.getTimeTables() ) {
+//      if ( timeTable.getId() == null ) {
+//        TimeTable lastTimeTable = timeTableService.lastTimeTable();
+//        if ( lastTimeTable == null ) {
+//          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(null).toString());
+//        } else {
+//          timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
+//        }
+//      }
+//     TimeTable timeTableDb = timeTableService.persist(timeTable);
+//      timeTableDb.getBatch().getBatchStudents().forEach(x->{
+//        Student student = studentService.findById(x.getId());
+//        if(student.getEmail()!=null){
+//          String message = "Dear "+ student.getFirstName()+"\n Your "+timeTableDb.getBatch().getName()+" class would be held from "+ timeTableDb.getStartAt()+" to "+ timeTableDb.getEndAt() +"\n Thanks \n Success Student";
+//          emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
+//        }
+//      });
+//
+//    }
 
     return "redirect:/timeTable";
 
