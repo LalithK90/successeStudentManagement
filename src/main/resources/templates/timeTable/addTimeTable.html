@@ -6,21 +6,6 @@
   <title >Success TimeTable Management</title >
 </head >
 <body >
-<!--Nav bar is included-->
-<!--<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >-->
-
-<!--<div class="row bg-secondary" >-->
-<!--  <div class="col-4" >-->
-<!--  </div >-->
-<!--  <div class="col-4" >-->
-<!--    <h1 >TimeTable Management - Add New TimeTable</h1 >-->
-<!--  </div >-->
-<!--  <div class="col-4" >-->
-<!--    <a href="/timeTable" >-->
-<!--      <button class="btn btn-primary" >View All On Time Table</button >-->
-<!--    </a >-->
-<!--  </div >-->
-<!--</div >-->
 
 <!--Nav bar is included-->
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
@@ -60,6 +45,9 @@
           <th data-th-if="${!addStatus}" >
             <input type="text" class="form-control" data-th-name="${'batches.timeTables[__${index.index}__].code'}"
                    data-th-value="${batches.timeTables[__${index.index}__].code}" required
+                   readonly >
+            <input type="text" class="form-control" data-th-name="${'batches.timeTables[__${index.index}__].id'}"
+                   data-th-value="${batches.timeTables[__${index.index}__].id}" required
                    readonly >
           </th >
           <th >

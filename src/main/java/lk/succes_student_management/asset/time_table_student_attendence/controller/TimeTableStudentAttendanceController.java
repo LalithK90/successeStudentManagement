@@ -4,6 +4,7 @@ import lk.succes_student_management.asset.batch_student.service.BatchStudentServ
 import lk.succes_student_management.asset.common_asset.model.enums.AttendanceStatus;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.time_table.entity.TimeTable;
+import lk.succes_student_management.asset.time_table.entity.enums.TimeTableStatus;
 import lk.succes_student_management.asset.time_table.service.TimeTableService;
 import lk.succes_student_management.asset.time_table_student_attendence.entity.TimeTableStudentAttendance;
 import lk.succes_student_management.asset.time_table_student_attendence.service.TimeTableStudentAttendanceService;
@@ -40,11 +41,11 @@ public class TimeTableStudentAttendanceController {
   @GetMapping( "/{id}" )
   public String attendanceForm(@PathVariable( "id" ) Integer id, Model model) {
     TimeTable timeTable = timeTableService.findById(id);
-    List<TimeTableStudentAttendance> timeTableStudentAttendances = new ArrayList<>();
+    List< TimeTableStudentAttendance > timeTableStudentAttendances = new ArrayList<>();
     batchStudentService.findByBatch(timeTableService.findById(id).getBatch())
         .stream()
         .filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE))
-        .collect(Collectors.toList()).forEach(x->{
+        .collect(Collectors.toList()).forEach(x -> {
       TimeTableStudentAttendance timeTableStudentAttendance = new TimeTableStudentAttendance();
       timeTableStudentAttendance.setTimeTable(timeTable);
       timeTableStudentAttendance.setBatchStudent(x);
@@ -76,10 +77,14 @@ public class TimeTableStudentAttendanceController {
             x.setCode("SSA" + makeAutoGenerateNumberService.numberAutoGen(null));
           }
         }
-    var y=    timeTableStudentAttendanceService.persist(x);
+        var y = timeTableStudentAttendanceService.persist(x);
         System.out.println(y.getCode());
       }
     });
+    TimeTable timeTableDb = timeTableService.findById(timeTable.getId());
+    timeTableDb.setTimeTableStatus(TimeTableStatus.MARK);
+    timeTableService.persist(timeTable);
+
     return "redirect:/timeTable/teacher";
   }
 }

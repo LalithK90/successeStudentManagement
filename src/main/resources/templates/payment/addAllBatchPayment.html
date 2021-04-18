@@ -41,13 +41,13 @@
   </div >
 </div >
 <div class="container-fluid form-row" >
-  <div class="col-6 text-right" >Total Amount</div >
-  <div class="col-6 text-left" ><span id="totalAmount" ></span ></div >
+  <div class="col-6 text-right h2 font-weight-bold" >Total Amount</div >
+  <div class="col-6 text-left h2 font-weight-bold" ><span id="totalAmount" ></span ></div >
 </div >
 <form action="/payment/batchStudent/save" data-th-object="${student}" method="post" >
   <input type="hidden" data-th-field="*{id}" hidden />
   <div class="container-fluid" id="payment" role="tablist" aria-multiselectable="true" >
-    <div class="card" data-th-each="batchStudent, batchIndex : ${student.batchStudents}" >
+    <div class="card"  data-th-each="batchStudent, batchIndex : ${student.batchStudents}">
       <a data-toggle="collapse" data-parent="#payment" data-th-href="${'#acc'+batchIndex.index}" aria-expanded="true"
          da-th-aria-controls="${'acc'+batchIndex.index}" >
         <div class="card-header" role="tab" data-th-id="${'ac'+batchIndex.index}" >
@@ -56,7 +56,7 @@
         </div >
       </a >
       <div data-th-id="${'acc'+batchIndex.index}" class="collapse in" role="tabpanel"
-           data-th-aria-labelledby="${'ac'+batchIndex.index}" >
+           data-th-aria-labelledby="${'acc'+batchIndex.index}" >
         <div class="card-body" >
           <div class="form-row" >
             <div class="col-6" >
@@ -98,12 +98,13 @@
                   <thead class="thead-inverse" >
                   <tr >
                     <th >Month</th >
+                    <th >Year</th >
                     <th >Amount</th >
                     <th >Payment Status</th >
                   </tr >
                   </thead >
                   <tbody >
-                  <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" >
+                  <tr data-th-each="payment, paymentIndex : ${batchStudent.payments}" data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}"  >
                     <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
                       <!--id-->
                       <input type="hidden"
@@ -113,6 +114,12 @@
                              data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].month}"
                              readonly required >
                     </td >
+                    <td>
+                    <!--  year-->
+                      <input type="text" class="form-control"
+                             data-th-field="*{batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].year}"
+                             readonly required >
+                    </td>
                     <td data-th-if="${!#strings.equals(payment.paymentStatus, 'PAID')}" >
                       <!--amount-->
                       <input type="text" class="form-control" data-th-id="${'vl'+paymentIndex.index}"
@@ -126,10 +133,10 @@
                           <input class="custom-control-input" required onchange="paymentCheck(this)"
                                  data-th-name="${'batchStudents[__${batchIndex.index}__].payments[__${paymentIndex.index}__].paymentStatus'}"
                                  data-th-value="${paymentStatus}"
-                                 data-th-id="${paymentIndex.index+'pb'+index.index}" type="radio"
+                                 data-th-id="${paymentIndex.index+'pb'+index.index+batchIndex.index}" type="radio"
                                  data-th-checked="${paymentStatus==payment.paymentStatus}" />
                           <label class="custom-control-label"
-                                 data-th-for="${paymentIndex.index+'pb'+index.index}"
+                                 data-th-for="${paymentIndex.index+'pb'+index.index+batchIndex.index}"
                                  data-th-text="${paymentStatus.paymentStatus}" > radio
                           </label >
                         </div >
@@ -151,19 +158,19 @@
     </div >
   </div >
 
-  <div class="row container-fluid" >
-    <div class="col-sm-2 col-sm-offset-2" >
-      <a href="/payment" >
-        <button type="button" class="btn btn-danger btn-block" >Back</button >
-      </a >
+    <div class="row" >
+      <div class="col-4 text-right" >
+        <a href="/payment" >
+          <button type="button" class="btn btn-danger " >Back</button >
+        </a >
+      </div >
+      <div class="col-4 text-center" >
+        <button type="reset" class="btn btn-warning " >Clear Data</button >
+      </div >
+      <div class="col-4 text-left" >
+        <button type="submit" class="btn btn-success " >Submit</button >
+      </div >
     </div >
-    <div class="col-sm-2 col-sm-offset-2" >
-      <button type="reset" class="btn btn-warning btn-block" >Clear Data</button >
-    </div >
-    <div class="col-sm-2 col-sm-offset-2" >
-      <button type="submit" class="btn btn-success btn-block" >Submit</button >
-    </div >
-  </div >
 </form >
 <!--footer is included-->
 <div data-th-replace="~{fragments/footer :: footerFragment}" ></div >

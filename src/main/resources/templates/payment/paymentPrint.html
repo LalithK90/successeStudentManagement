@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Success Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="row bg-light" >
+  <div class="col-4" ></div >
+  <div class="col-4" >
+    <h1 >Payment Management</h1 >
+  </div >
+  <div class="col-4" >
+    <a href="/payment/add" >
+      <button class="btn btn-primary" >Make a Payment</button >
+    </a >
+  </div >
+</div >
+
+<div class="container" id="printContent" >
+  <div class=" row " >
+    <div class="col text-center" >
+      <p >Success Student Institute</p >
+      <p >Kalawana </p >
+      <p >Rathnapura</p >
+      <p >Tp: 07837733</p >
+    </div >
+  </div >
+  <div class="row" >
+    <table class="table table-striped table-inverse" >
+      <thead class="thead-inverse" >
+      <tr >
+        <th >Index</th >
+        <th >Code</th >
+        <th >Batch Name</th >
+        <th >Month</th >
+        <th >Year</th >
+        <th >Amount</th >
+        <th >Created Time</th >
+        <th >Created By</th >
+      </tr >
+      </thead >
+      <tbody >
+      <tr data-th-each="payment, index : ${payments }" >
+        <td data-th-text="${index.count}" ></td >
+        <td data-th-text="${payment.code}" ></td >
+        <td data-th-text="${payment.batchStudent.batch.name}" ></td >
+        <td data-th-text="${payment.month}" ></td >
+        <td data-th-text="${payment.year}" ></td >
+        <td data-th-text="${payment.amount}" ></td >
+        <td data-th-text="${#temporals.format(payment.createdAt, 'dd-MM-yyyy HH:mm')}" ></td >
+        <td data-th-text="${payment.createdBy}" ></td >
+      </tr >
+      </tbody >
+    </table >
+  </div >
+</div >
+
+<div class="form-group col-md-12 col-sm-12 mt-2 text-center flex-column " >
+  <a href="/payment" >
+    <button class="btn btn-dark" type="button" tabindex="3" >
+      <i class="fas fa-arrow-circle-left" style="font-size: 20px" ></i >&nbsp; &nbsp;Back
+    </button >
+  </a >
+  <!--print button-->
+  <button class="btn btn-success" type="button" id="printButton" >
+    <i class="fa fa-print" style="font-size: 20px" ></i >
+    Print
+  </button >
+</div >
+
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+<script >
+    $("#printButton").click(function () {
+        printContent("printContent");
+    });
+</script >
+</body >
+</html >

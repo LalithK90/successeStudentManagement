@@ -2,6 +2,7 @@ package lk.succes_student_management.asset.batch_student_exam_result.controller;
 
 import lk.succes_student_management.asset.batch.service.BatchService;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
+import lk.succes_student_management.asset.batch_exam.entity.enums.ExamStatus;
 import lk.succes_student_management.asset.batch_exam.service.BatchExamService;
 import lk.succes_student_management.asset.batch_student.service.BatchStudentService;
 import lk.succes_student_management.asset.batch_student_exam_result.entity.BatchStudentExamResult;
@@ -93,8 +94,10 @@ public class BatchStudentExamResultController {
         }
       }
       batchStudentExamResultService.persist(x);
-
     });
+  BatchExam batchExamDb =   batchExamService.findById(batchExam.getId());
+  batchExamDb.setExamStatus(batchExam.getExamStatus());
+  batchExamService.persist(batchExamDb);
     return "redirect:/batchExam/teacher";
   }
 }

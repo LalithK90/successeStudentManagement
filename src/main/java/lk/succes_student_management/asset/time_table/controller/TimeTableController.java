@@ -9,6 +9,7 @@ import lk.succes_student_management.asset.common_asset.model.DateTimeTable;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.hall.service.HallService;
 import lk.succes_student_management.asset.student.entity.Student;
+import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.asset.subject.service.SubjectService;
 import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.teacher.service.TeacherService;
@@ -17,6 +18,7 @@ import lk.succes_student_management.asset.time_table.service.TimeTableService;
 import lk.succes_student_management.asset.user_management.entity.User;
 import lk.succes_student_management.asset.user_management.service.UserService;
 import lk.succes_student_management.util.service.DateTimeAgeService;
+import lk.succes_student_management.util.service.EmailService;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,13 +48,16 @@ public class TimeTableController {
   private final MakeAutoGenerateNumberService makeAutoGenerateNumberService;
   private final DateTimeAgeService dateTimeAgeService;
   private final UserService userService;
+  private final StudentService studentService;
+  private final EmailService emailService;
 
 
   public TimeTableController(TimeTableService timeTableService, HallService hallService,
                              SubjectService subjectService, TeacherService teacherService, BatchService batchService,
                              BatchStudentService batchStudentService,
                              MakeAutoGenerateNumberService makeAutoGenerateNumberService,
-                             DateTimeAgeService dateTimeAgeService, UserService userService) {
+                             DateTimeAgeService dateTimeAgeService, UserService userService,
+                             StudentService studentService, EmailService emailService) {
     this.timeTableService = timeTableService;
     this.hallService = hallService;
     this.subjectService = subjectService;
@@ -62,6 +67,8 @@ public class TimeTableController {
     this.makeAutoGenerateNumberService = makeAutoGenerateNumberService;
     this.dateTimeAgeService = dateTimeAgeService;
     this.userService = userService;
+    this.studentService = studentService;
+    this.emailService = emailService;
   }
 
   @GetMapping
@@ -80,12 +87,12 @@ public class TimeTableController {
   @GetMapping( "/teacher" )
   public String byTeacher(Model model) {
     User authUser = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
-//todo need to think teacher as user
+
     Teacher teacher = new Teacher();
-    List< TimeTable > timeTables = timeTableService.findAll();
-//        .stream()
-//        .filter(x -> x.getBatch().getTeacher().equals(teacher))
-//        .collect(Collectors.toList());
+    List< TimeTable > timeTables = timeTableService.findAll()
+        .stream()
+        .filter(x -> x.getBatch().getTeacher().equals(teacher))
+        .collect(Collectors.toList());
 
     return common(timeTables, model);
   }
@@ -167,8 +174,15 @@ public class TimeTableController {
           timeTable.setCode("SSTM" + makeAutoGenerateNumberService.numberAutoGen(lastTimeTable.getCode().substring(4)).toString());
         }
       }
-//todo: need to send email to student who register in relevant batch
-      timeTableService.persist(timeTable);
+     TimeTable timeTableDb = timeTableService.persist(timeTable);
+      timeTableDb.getBatch().getBatchStudents().forEach(x->{
+        Student student = studentService.findById(x.getId());
+        if(student.getEmail()!=null){
+          String message = "Dear "+ student.getFirstName()+"\n Your "+timeTableDb.getBatch().getName()+" class would be held from "+ timeTableDb.getStartAt()+" to "+ timeTableDb.getEndAt() +"\n Thanks \n Success Student";
+          emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
+        }
+      });
+
     }
 
     return "redirect:/timeTable";
@@ -202,19 +216,14 @@ public class TimeTableController {
         timeTable.setBatch(batch1);
         timeTables.add(timeTable);
       }
-      System.out.println("time table size " + timeTables.size());
       batchSend.setTimeTables(timeTables);
     } else {
-      System.out.println("add status false");
       List< TimeTable > timeTables = timeTableService.findByCreatedAtIsBetween(from, to);
-      System.out.println("date " + date + "  form " + from + "size " + timeTables.size());
       batchSend.setTimeTables(timeTables);
     }
 
 
     model.addAttribute("batches", batchSend);
-//    model.addAttribute("batches", batchService.findAll());
-
     model.addAttribute("addStatus", addStatus);
     model.addAttribute("date", date);
     model.addAttribute("liveDeads", LiveDead.values());

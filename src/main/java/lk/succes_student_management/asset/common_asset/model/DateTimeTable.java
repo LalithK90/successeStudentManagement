@@ -1,6 +1,7 @@
 package lk.succes_student_management.asset.common_asset.model;
 
 import lk.succes_student_management.asset.time_table.entity.TimeTable;
+import lk.succes_student_management.asset.time_table.entity.enums.TimeTableStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

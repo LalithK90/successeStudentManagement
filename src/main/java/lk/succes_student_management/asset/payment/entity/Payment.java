@@ -10,10 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Month;
+import java.time.Year;
+import java.time.YearMonth;
 
 @Entity
 @Getter
@@ -27,6 +30,9 @@ public class Payment extends AuditEntity {
     private String code;
 
     private BigDecimal amount;
+
+    @DateTimeFormat( pattern = "yyyy" )
+    private Year year;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
