@@ -8,9 +8,8 @@ import lombok.Getter;
 public enum Designation {
   ADMIN("Admin"),
     MANAGER("Manager"),
-    SECTION("Section Head "),
-    HR_MANAGER("HR Manager"),
-    CASHIER("Cashier");
+    STUDENT("Student"),
+  OFFICE_ASSISTANT("Office Assistant");
 
     private final String designation;
 }
