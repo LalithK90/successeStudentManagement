@@ -10,6 +10,7 @@ import lk.succes_student_management.asset.payment.entity.Payment;
 import org.springframework.stereotype.Service;
 
 import java.time.*;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -61,4 +62,8 @@ public class PaymentService implements AbstractService< Payment, Integer > {
   public List< Payment > findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt) {
     return paymentDao.findByCreatedAtIsBetween(startAt, endAt);
   }
+
+    public List<Payment> findByCreatedAtIsBetween(LocalDate startDateTime, LocalDate endDateTime) {
+    return paymentDao.findByCreatedAtIsBetween(startDateTime,endDateTime);
+    }
 }

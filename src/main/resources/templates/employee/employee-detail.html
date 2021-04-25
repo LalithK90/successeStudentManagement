@@ -2,7 +2,7 @@
 <html lang="en" >
 <head data-th-replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Success Student Management System</title>
 </head>
 <body>
 <nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
@@ -24,7 +24,7 @@
         <div class="col">
             <h4 class="text-info text-center">
                 <strong>
-                    <p data-th-text="${employeeDetail.title.title} +${' '} +${employeeDetail.name}"></p>
+                    <p data-th-text="${employeeDetail.title.title} +${' '} +${employeeDetail.callingName}"></p>
                 </strong>
             </h4>
         </div>
