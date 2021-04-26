@@ -1,5 +1,6 @@
 package lk.succes_student_management.asset.employee.entity.enums;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -7,10 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Designation {
   ADMIN("Admin"),
-    MANAGER("Manager"),
-    SECTION("Section Head "),
-    HR_MANAGER("HR Manager"),
-    CASHIER("Cashier");
+  TEACHER("Teacher"),
+  MANAGER("Manager"),
+  STUDENT("Student"),
+  OFFICE_ASSISTANT("Office Assistant");
 
     private final String designation;
 }

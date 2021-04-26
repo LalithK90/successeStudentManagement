@@ -36,7 +36,7 @@ public class ApplicationCreateRestController {
     @GetMapping( "/select/user" )
     public String saveUser() {
         //roles list start
-        String[] roles = {"ADMIN", "TEACHER","STUDENT","MANAGER","CASHIER","SECTION_HEAD"};
+        String[] roles = {"ADMIN", "TEACHER","STUDENT","MANAGER","OFFICE_ASSISTANT",};
         for ( String s : roles ) {
             Role role = new Role();
             role.setRoleName(s);
@@ -47,11 +47,11 @@ public class ApplicationCreateRestController {
         Employee employee = new Employee();
         employee.setName("Admin User");
         employee.setCallingName("Admin");
-        employee.setName("908670000V");
-        employee.setMobileOne("0750000000");
-        employee.setTitle(Title.DR);
+        employee.setNic("199812400731");
+        employee.setMobileOne("0701330440");
+        employee.setTitle(Title.MR);
         employee.setGender(Gender.MALE);
-        employee.setDesignation(Designation.CASHIER);
+        employee.setDesignation(Designation.ADMIN);
         employee.setCivilStatus(CivilStatus.UNMARRIED);
         employee.setEmployeeStatus(EmployeeStatus.WORKING);
         employee.setDateOfBirth(LocalDate.now().minusYears(18));

@@ -83,7 +83,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //to see actuator details
                     .antMatchers(ALL_PERMIT_URL).permitAll()
                     //this is used the normal admin to give access every url mapping
-                    .antMatchers("/category/**").hasAnyRole("ADMIN", "MANAGER")
+                    .antMatchers("/batch/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/batch_exam/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/batch_student_exam_result/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/employee/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/hall/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/payment/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/report/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/school/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/student/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/subject/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/teacher/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/time_table/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/time_table_student_attendance/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/user_management/**").hasAnyRole("ADMIN", "MANAGER")
+                        .antMatchers("/report/**").hasAnyRole("ADMIN", "MANAGER")
+
 //todo: security configuration
                     .anyRequest()
                     .authenticated())

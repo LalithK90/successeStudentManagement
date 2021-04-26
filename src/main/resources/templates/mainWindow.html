@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Success Student Management System</title>
 </head>
 <body>
 <nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
@@ -31,7 +31,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Employees</div>
-                                            <a href="/employee" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_HR', 'ROLE_SQA', 'ROLE_QA','ROLE_TM', 'ROLE_LA','ROLE_CA')" >
+                                            <a href="/employee" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')" >
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Employee Details</div>
                                             </a>
                                         </div>
@@ -49,12 +49,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Students</div>
-                                            <a href="/student" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_HR')" >
+                                            <a href="/student" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_STUDENT','ROLE_MANAGER','ROLE_TEACHER','ROLE_OFFICE_ASSISTANT')" >
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Student Details</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
+                                            <i class="fas fa-user-graduate fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -66,12 +66,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Teachers</div>
-                                            <a href="/teacher" data-sec-authorize="hasAnyAuthority('ROLE_HR','ROLE_ADMIN')">
+                                            <a href="/teacher" data-sec-authorize="hasAnyAuthority('ROLE_MANAGER','ROLE_ADMIN','ROLE_TEACHER')">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Teachers</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                                            <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -86,12 +86,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Exams</div>
-                                            <a href="/batchExam/teacher" data-sec-authorize="hasAnyAuthority('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_TM', 'ROLE_LA')">
+                                            <a href="/batchExam/teacher" data-sec-authorize="hasAnyAuthority('ROLE_TEACHER', 'ROLE_ADMIN','ROLE_MANAGER', 'ROLE_OFFICE_ASSISTANT')">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Exam Details</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-vial fa-2x text-gray-300"></i>
+                                            <i class="fas fa-book-reader fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -103,12 +103,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Classes</div>
-                                            <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_LA', 'ROLE_SQA', 'ROLE_QA')">
+                                            <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_TEACHER', 'ROLE_OFFICE_ASSISTANT')">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Class Details</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-vials fa-2x text-gray-300"></i>
+                                            <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -120,12 +120,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Payments</div>
-                                            <a href="/payment" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_ACC')">
+                                            <a href="/payment" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_OFFICE_ASSISTANT','ROLE_MANAGER')">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Payment Details</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-cash-register fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -140,12 +140,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Time Table</div>
-                                            <a href="/timeTable" data-sec-authorize="hasAnyAuthority('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_TM', 'ROLE_LA')">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Exam Details</div>
+                                            <a href="/timeTable" data-sec-authorize="hasAnyAuthority('ROLE_TEACHER', 'ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_OFFICE_ASSISTANT')">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Timetable</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-vial fa-2x text-gray-300"></i>
+                                            <i class="fas fa-calendar-alt fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -157,12 +157,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Halls</div>
-                                            <a href="/batch" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_LA', 'ROLE_SQA', 'ROLE_QA')">
+                                            <a href="/hall" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MANAGER','ROLE_OFFICE_ASSISTANT')">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Hall Details</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-vials fa-2x text-gray-300"></i>
+                                            <i class="fas fa-school fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -174,12 +174,12 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Subjects</div>
-                                            <a href="/payment" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_ACC')">
+                                            <a href="/subject" data-sec-authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER','ROLE_OFFICE_ASSISTANT')">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Manage Subjects Details</div>
                                             </a>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-swatchbook fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>

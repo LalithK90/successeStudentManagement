@@ -1,65 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <!--Styles, meta data, and title are included-->
-<head data-th-replace="~{fragments/header :: headerFragment}" >
-  <meta charset="UTF-8" >
-  <title >Success Student Management</title >
-</head >
-<body >
+<head data-th-replace="~{fragments/header :: headerFragment}">
+    <meta charset="UTF-8">
+    <title>Success Student Management</title>
+</head>
+<body>
 <!--Nav bar is included-->
-<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<div class="row bg-link" >
-  <div class="col-4" >
+<div class="row bg-link">
+    <div class="col-4">
 
-  </div >
-  <div class="col-4" >
-    <h1 >Subject Management</h1 >
-  </div >
-  <div class="col-4" >
-    <a href="/subject/add" >
-      <button class="btn btn-primary" align="center" >New Subject</button >
-    </a >
-  </div >
-</div >
+    </div>
+    <div class="col-4">
+        <h1>Subject Management</h1>
+    </div>
+    <div class="col-4">
+        <a href="/subject/add">
+            <button class="btn btn-primary" align="center">New Subject</button>
+        </a>
+    </div>
+</div>
 
-<div class="row" >
-  <div class="container table-responsive" >
-    <table class="table table-striped table-inverse " id="myTable" >
-      <thead class="thead-inverse" >
-      <tr >
-        <th >Index</th >
-        <th >Name</th >
-        <th >Code</th >
-        <th >Modify</th >
+<div class="row">
+    <div class="container table-responsive">
+        <table class="table table-striped table-inverse " id="myTable">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Modify</th>
 
-      </tr >
-      </thead >
-      <tbody >
-      <tr data-th-each="subject, index : ${subjects}" >
-        <td data-th-text="${index.count}" ></td >
-        <td data-th-text="${subject.name}" ></td >
-        <td data-th-text="${subject.code}" ></td >
-        <td >
-          <a data-th-href="${'/subject/edit/'+ subject.id}" >
-            <button class="btn btn-success" >Edit</button >
-          </a >
-          <a data-th-if="${addStatus==false}" data-th-href="${'/subject/delete/'+ subject.id}" >
-            <button class="btn btn-danger" >Delete</button >
-          </a >
-          <a data-th-if="${addStatus==true}" data-th-href="${'/subject/active/'+ subject.id}" >
-            <button class="btn btn-info" >Active</button >
-          </a >
-        </td >
-      </tr >
-      </tbody >
-    </table >
-  </div >
-</div >
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-th-each="subject, index : ${subjects}">
+                <td data-th-text="${index.count}"></td>
+                <td data-th-text="${subject.name}"></td>
+                <td data-th-text="${subject.code}"></td>
+                <td>
+                    <a data-th-href="${'/subject/edit/'+ subject.id}">
+                        <button class="btn btn-success">Edit</button>
+                    </a>
+                    <a data-th-if="${addStatus==false}" data-th-href="${'/subject/delete/'+ subject.id}">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
+                    <a data-th-if="${addStatus==true}" data-th-href="${'/subject/active/'+ subject.id}">
+                        <button class="btn btn-info">Active</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!--footer is included-->
-<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<div data-th-replace="~{fragments/footer :: footerFragment}"></div>
 <!--script is included-->
-<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
-</body >
-</html >
+<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
+</body>
+</html>

@@ -7,10 +7,7 @@ import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.Year;
-import java.time.YearMonth;
+import java.time.*;
 import java.util.List;
 
 @Repository
@@ -25,4 +22,8 @@ public interface PaymentDao extends JpaRepository<Payment, Integer> {
   List< Payment> findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt);
 
   Payment findByBatchStudentAndMonthAndYear(BatchStudent batchStudent, Month month, Year year);
+
+    List<Payment> findByCreatedAtIsBetween(LocalDate startDateTime, LocalDate endDateTime);
+
+  List<Payment> findByCreatedAtIsBetween(LocalDateTime startDateTime, LocalDate endDateTime ,String username);
 }
