@@ -8,6 +8,7 @@ import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -54,4 +55,12 @@ public class BatchExamService implements AbstractService< BatchExam, Integer > {
     return batchExamDao.findFirstByOrderByIdDesc();
   }
 
+  public List< BatchExam > findByStartAtBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    return batchExamDao.findByStartAtBetween(startDateTime, endDateTime);
+  }
+
+  public List< BatchExam > findByStartAtBetweenAndBatch(LocalDateTime startDateTime, LocalDateTime endDateTime,
+                                                        Batch batch) {
+    return batchExamDao.findByStartAtBetweenAndBatch(startDateTime, endDateTime, batch);
+  }
 }
