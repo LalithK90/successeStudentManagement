@@ -13,8 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TwoDate {
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate startDate;
-    @DateTimeFormat( pattern = "yyyy-MM-dd" )
-    private LocalDate endDate;
+  @DateTimeFormat( pattern = "yyyy-MM-dd" )
+  private LocalDate startDate;
+  @DateTimeFormat( pattern = "yyyy-MM-dd" )
+  private LocalDate endDate;
+  private Integer id;
 }

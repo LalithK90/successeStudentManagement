@@ -5,6 +5,7 @@ import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -14,4 +15,8 @@ public interface BatchExamDao extends JpaRepository< BatchExam, Integer> {
   BatchExam findFirstByOrderByIdDesc();
 
   List< BatchExam> findByBatch(Batch batch);
+
+  List< BatchExam> findByStartAtBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+
+  List< BatchExam> findByStartAtBetweenAndBatch(LocalDateTime startDateTime, LocalDateTime endDateTime, Batch batch);
 }
