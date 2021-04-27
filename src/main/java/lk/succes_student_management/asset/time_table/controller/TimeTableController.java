@@ -161,10 +161,9 @@ public class TimeTableController {
   @PostMapping( "/save" )
   public String persist(@Valid @ModelAttribute Batch batch, BindingResult bindingResult, Model model) {
     if ( bindingResult.hasErrors() ) {
-      System.out.println(bindingResult.toString());
       return commonThing(model, batch.getDate(), true);
     }
-// todo: methana error ekak hdnn thynwa code segment eke
+
 
     for ( TimeTable timeTable : batch.getTimeTables() ) {
       if ( timeTable.getId() == null ) {
