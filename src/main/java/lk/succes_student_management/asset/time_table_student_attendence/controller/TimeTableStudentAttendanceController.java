@@ -77,13 +77,12 @@ public class TimeTableStudentAttendanceController {
             x.setCode("SSA" + makeAutoGenerateNumberService.numberAutoGen(null));
           }
         }
-        var y = timeTableStudentAttendanceService.persist(x);
-        System.out.println(y.getCode());
+       timeTableStudentAttendanceService.persist(x);
       }
     });
     TimeTable timeTableDb = timeTableService.findById(timeTable.getId());
     timeTableDb.setTimeTableStatus(TimeTableStatus.MARK);
-    timeTableService.persist(timeTable);
+    timeTableService.persist(timeTableDb);
 
     return "redirect:/timeTable/teacher";
   }
