@@ -17,13 +17,10 @@ public interface PaymentDao extends JpaRepository<Payment, Integer> {
 
   Payment findByBatchStudentAndMonth(BatchStudent batchStudent, Month month);
 
-  Payment findByMonthAndBatchStudentAndPaymentStatus(BatchStudent batchStudent, Month month, PaymentStatus noPaid);
 
   List< Payment> findByCreatedAtIsBetween(LocalDateTime startAt, LocalDateTime endAt);
 
   Payment findByBatchStudentAndMonthAndYear(BatchStudent batchStudent, Month month, Year year);
 
-    List<Payment> findByCreatedAtIsBetween(LocalDate startDateTime, LocalDate endDateTime);
 
-  List<Payment> findByCreatedAtIsBetween(LocalDateTime startDateTime, LocalDate endDateTime ,String username);
 }

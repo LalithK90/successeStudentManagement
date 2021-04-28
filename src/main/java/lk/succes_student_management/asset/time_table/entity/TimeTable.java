@@ -51,6 +51,6 @@ public class TimeTable extends AuditEntity {
   @ManyToOne
   private Hall hall;
 
-  @OneToMany( mappedBy = "timeTable", cascade = CascadeType.PERSIST )
+  @OneToMany( mappedBy = "timeTable" )
   private List< TimeTableStudentAttendance > timeTableStudentAttendances;
 }
