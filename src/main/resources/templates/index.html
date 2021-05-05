@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head   data-th-replace="~{fragments/header :: headerFragment}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: headerFragment}">
     <meta charset="UTF-8">
-    <title>Thymeleaf Springboot </title>
+    <title>Success Educational Institute</title>
 </head>
 <body>
-<nav   data-th-replace="~{fragments/navBar :: navBarFragment}"></nav>
+<nav th:replace="~{fragments/navBar :: navBarFragment}"></nav>
 
-<h1> I am index page</h1>
-
-<div    data-th-replace="~{fragments/footer :: footerFragment}"></div>
+<div class="row" >
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-6" >
+        <h5>Welcome to Success Student Management Student</h5>
+        <h1 style="color: #1f6abb; "><strong>Student<br> Management System</strong></h1>
+        <br>
+        <button class="btn btn-outline-secondary btn-sm"><a href="\home">Go to project</a></button>
+        <button class="btn btn-outline-secondary btn-sm"><a href="https://success.edu.lk/">About Us</a></button>
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+<!--footer include-->
+<footer th:replace="~{fragments/footer :: footerFragment}"></footer>
 <!--script include-->
-<div data-th-replace="~{fragments/script :: scriptFragment}"></div>
+<script th:replace="~{fragments/script :: scriptFragment}"></script>
 
 </body>
 </html>

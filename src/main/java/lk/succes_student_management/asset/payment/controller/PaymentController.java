@@ -52,7 +52,7 @@ public class PaymentController {
 
 
     model.addAttribute("payments",
-                       paymentService.findByCreatedAtIsBetween(startAt, endAt));
+                       paymentService.findByCreatedAtIsBetween(startAt,endAt));
 
     model.addAttribute("message",
                        "Following table show details belongs from " + from + " to " + to +

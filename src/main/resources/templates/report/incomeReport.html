@@ -3,7 +3,7 @@
 <!--Styles, meta data, and title are included-->
 <head data-th-replace="~{fragments/header :: headerFragment}" >
   <meta charset="UTF-8" >
-  <title >Wisdom Student Management System</title >
+  <title >success Student Management System</title >
 </head >
 <body >
 <!--Nav bar is included-->
@@ -101,10 +101,10 @@
           <td data-th-text="${batchAmount.count}"></td >
           <td data-th-text="${batchAmount.amount}"></td >
           <td data-th-text="${batchAmount.batch.endAt}"></td >
-          <td data-th-text="${batchAmount.batch.courseFee}"></td >
+          <td data-th-text="${batchAmount.teacher.fee}"></td >
           <td data-th-text="${#lists.size(batchAmount.batch.batchStudents)}"></td >
-          <td data-th-text="${#lists.size(batchAmount.batch.batchStudents) * batchAmount.batch.courseFee}"></td >
-          <td data-th-text="${(#lists.size(batchAmount.batch.batchStudents) * batchAmount.batch.courseFee) - batchAmount.amount}"></td >
+          <td data-th-text="${#lists.size(batchAmount.batch.batchStudents) * batchAmount.teacher.fee}"></td >
+          <td data-th-text="${(#lists.size(batchAmount.batch.batchStudents) * batchAmount.teacher.fee) - batchAmount.amount}"></td >
         </tr >
 
         </tbody >
