@@ -220,8 +220,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> aPlusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-      model.addAttribute("aPlusStudents", aPlusStudents);
       batchExamResultStudent.setAPlusStudents(aPlusStudents);
+
       List< Student > aStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -230,8 +230,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> aStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-      model.addAttribute("aStudents", aStudents);
       batchExamResultStudent.setAStudents(aStudents);
+
       List< Student > aMinusStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -240,8 +240,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> aMinusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-      model.addAttribute("aMinusStudents", aMinusStudents);
       batchExamResultStudent.setAMinusStudents(aMinusStudents);
+
       List< Student > bPlusStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -250,8 +250,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> bPlusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-      model.addAttribute("bPlusStudents", bPlusStudents);
       batchExamResultStudent.setBPlusStudents(bPlusStudents);
+
       List< Student > bStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -260,8 +260,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> bStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-      model.addAttribute("bStudents", bStudents);
       batchExamResultStudent.setBStudents(bStudents);
+
       List< Student > bMinusStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -270,8 +270,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> bMinusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-      model.addAttribute("bMinusStudents", bMinusStudents);
       batchExamResultStudent.setBMinusStudents(bMinusStudents);
+
       List< Student > cPlusStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -280,7 +280,6 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> cPlusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-
       batchExamResultStudent.setCPlusStudents(cPlusStudents);
 
       List< Student > cStudents = new ArrayList<>();
@@ -291,7 +290,6 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> cStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-
       batchExamResultStudent.setCStudents(cStudents);
 
       List< Student > cMinusStudents = new ArrayList<>();
@@ -302,7 +300,6 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> cMinusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-
       batchExamResultStudent.setCMinusStudents(cMinusStudents);
 
       List< Student > dPlusStudents = new ArrayList<>();
@@ -313,8 +310,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> dPlusStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-
       batchExamResultStudent.setDPlusStudents(dPlusStudents);
+
       List< Student > dStudents = new ArrayList<>();
       batchStudentExamResults.stream().filter(x -> {
         if ( x.getResultGrade() != null ) {
@@ -323,7 +320,6 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> dStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-
       batchExamResultStudent.setDStudents(dStudents);
 
       List< Student > eStudents = new ArrayList<>();
@@ -334,8 +330,8 @@ public class ReportController {
           return false;
         }
       }).collect(Collectors.toList()).forEach(batchStudentExamResult -> eStudents.add(studentService.findById(batchStudentExamResult.getBatchStudent().getStudent().getId())));
-
       batchExamResultStudent.setEStudents(eStudents);
+
       batchExamResultStudents.add(batchExamResultStudent);
     }
     model.addAttribute("batchExamResultStudents", batchExamResultStudents);
