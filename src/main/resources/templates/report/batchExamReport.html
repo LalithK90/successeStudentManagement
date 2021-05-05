@@ -82,7 +82,7 @@
       <button type="button" class="btn btn-success btn-block mb-2" data-toggle="collapse"
               data-th-attr="data-target='#content'+${index.count}"
               aria-expanded="false" aria-controls="" > Exam Details <span
-            data-th-text="${batchExamResultStudent.batchExam.batch.name+' - '+ batchExamResultStudent.batchExam.subject.name}" ></span >
+            data-th-text="${batchExamResultStudent.batchExam.batch.name+' - '+ batchExamResultStudent.batchExam.batch.teacher.subject.name}" ></span >
 
       </button >
     </div >
@@ -106,7 +106,7 @@
           <tbody >
           <tr >
             <td data-th-text="${batchExamResultStudent.batchExam.batch.name}" ></td >
-            <td data-th-text="${batchExamResultStudent.batchExam.subject.name}" ></td >
+            <td data-th-text="${batchExamResultStudent.batchExam.batch.teacher.subject.name}" ></td >
             <td data-th-text="${#temporals.format(batchExamResultStudent.batchExam.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
             <td data-th-text="${#temporals.format(batchExamResultStudent.batchExam.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
             <td >
@@ -297,7 +297,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.attendStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -340,7 +340,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.absentStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -383,7 +383,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.aPlusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -426,7 +426,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.aStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -469,7 +469,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.aMinusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -512,7 +512,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.bPlusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -555,7 +555,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.bStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -598,7 +598,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.bMinusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -641,7 +641,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.cPlusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -684,7 +684,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.cStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -727,7 +727,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.cMinusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -770,7 +770,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.dPlusStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -813,7 +813,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.dStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
@@ -856,7 +856,7 @@
                 <tr data-th-each="student, index :  ${batchExamResultStudent.eStudents}" >
                   <td data-th-text="${index.count}" ></td >
                   <td data-th-text="${student.regNo}" ></td >
-                  <td data-th-text="${student.name}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
                   <td data-th-text="${student.gender.gender}" ></td >
                   <td data-th-text="${student.email}" ></td >
                   <td data-th-text="${student.mobile}" ></td >
