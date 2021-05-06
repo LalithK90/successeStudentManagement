@@ -1,6 +1,7 @@
 package lk.succes_student_management.asset.report.controller;
 
-import com.twilio.rest.api.v2010.account.call.FeedbackSummary;
+
+import lk.succes_student_management.asset.StudentSchool.StudentSchool;
 import lk.succes_student_management.asset.batch.entity.Batch;
 import lk.succes_student_management.asset.batch.service.BatchService;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
@@ -15,12 +16,12 @@ import lk.succes_student_management.asset.employee.service.EmployeeFilesService;
 import lk.succes_student_management.asset.employee.service.EmployeeService;
 import lk.succes_student_management.asset.hall.service.HallService;
 import lk.succes_student_management.asset.payment.entity.Payment;
-import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import lk.succes_student_management.asset.payment.service.PaymentService;
 import lk.succes_student_management.asset.report.model.BatchAmount;
 import lk.succes_student_management.asset.report.model.BatchExamResultStudent;
 import lk.succes_student_management.asset.report.model.PaymentStatusAmount;
 import lk.succes_student_management.asset.report.model.StudentAmount;
+import lk.succes_student_management.asset.school.entity.School;
 import lk.succes_student_management.asset.school.service.SchoolService;
 import lk.succes_student_management.asset.student.entity.Student;
 import lk.succes_student_management.asset.student.service.StudentService;
@@ -37,14 +38,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Controller
 @RequestMapping( "/report" )
@@ -103,17 +102,17 @@ public class ReportController {
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
     System.out.println(" astar " + startDateTime + "  end " + endDateTime);
-    List< Payment > payments = paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime);
+    List<Payment> payments = paymentService.findByCreatedAtIsBetween(startDateTime,endDateTime);
 
-    List< BigDecimal > totalPaymentAmount = new ArrayList<>();
+    List<BigDecimal> totalPaymentAmount = new ArrayList<>();
     List< Batch > batches = new ArrayList<>();
-    List< Student > students = new ArrayList<>();
+    List<Student> students = new ArrayList<>();
     payments.forEach(x -> {
       totalPaymentAmount.add(x.getAmount());
       batches.add(x.getBatchStudent().getBatch());
       students.add(x.getBatchStudent().getStudent());
     });
-    List< BatchAmount > batchAmounts = new ArrayList<>();
+    List<BatchAmount> batchAmounts = new ArrayList<>();
     batches.stream().distinct().collect(Collectors.toList()).forEach(x -> {
       List< Payment > batchPayments =
           payments.stream().filter(y -> y.getBatchStudent().getBatch().equals(x)).collect(Collectors.toList());
@@ -125,7 +124,7 @@ public class ReportController {
       batchAmount.setBatch(batchService.findById(x.getId()));
       batchAmounts.add(batchAmount);
     });
-    List< StudentAmount > studentAmounts = new ArrayList<>();
+    List<StudentAmount> studentAmounts = new ArrayList<>();
     students.stream().distinct().collect(Collectors.toList()).forEach(x -> {
       List< Payment > studentPayments =
           payments.stream().filter(y -> y.getBatchStudent().getStudent().equals(x)).collect(Collectors.toList());
@@ -165,7 +164,7 @@ public class ReportController {
 
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDayWithOutNano(today);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDayWithOutNano(today.minusDays(7));
-    List< BatchExam > batchExams = batchExamService.findByStartAtBetween(startDateTime, endDateTime);
+    List<BatchExam> batchExams = batchExamService.findByStartAtBetween(startDateTime, endDateTime);
     String message = "This report is belongs from " + today.minusDays(7) + " to " + today;
     return commonExam(model, batchExams, message);
   }
@@ -190,12 +189,12 @@ public class ReportController {
   }
 
   private String commonExam(Model model, List< BatchExam > batchExams, String message) {
-    List< BatchExamResultStudent > batchExamResultStudents = new ArrayList<>();
+    List<BatchExamResultStudent> batchExamResultStudents = new ArrayList<>();
     for ( BatchExam batchExam : batchExams ) {
       BatchExamResultStudent batchExamResultStudent = new BatchExamResultStudent();
       batchExamResultStudent.setBatchExam(batchExam);
       batchExamResultStudent.setBatch(batchService.findById(batchExam.getBatch().getId()));
-      List< BatchStudentExamResult > batchStudentExamResults =
+      List<BatchStudentExamResult> batchStudentExamResults =
           batchExamService.findById(batchExam.getId()).getBatchStudentExamResults();
 
       List< BatchStudentExamResult > presentBatchStudentExamResults =

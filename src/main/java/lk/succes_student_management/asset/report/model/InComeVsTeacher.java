@@ -16,4 +16,5 @@ private Teacher teacher;
 private Batch batch;
 private BigDecimal totalPaymentAmount;
 private BigDecimal areasAmount;
+    private BigDecimal fee;
 }
