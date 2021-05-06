@@ -47,6 +47,22 @@ School wala View ek explicit error ekak enawa
 
 Process tika hdnn one.
 
+TimeTable timeTableDb = timeTableService.persist(timeTable);
+if ( !timeTableDb.getBatch().getBatchStudents().isEmpty() ) {
+  batchService.findById(timeTableDb.getBatch().getId()).getBatchStudents()
+      .forEach(x -> {
+        Student student = studentService.findById(x.getId());
+        if ( student.getEmail() != null ) {
+          String message = "Dear " + student.getFirstName() + "\n Your " + timeTableDb.getBatch().getName() +
+              " " +
+              "class would be held from " + timeTableDb.getStartAt() + " to " + timeTableDb.getEndAt() + "\n " +
+              "Thanks" +
+              " \n Wasity Institute";
+          emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
+        }
+      });
+}
+
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class StudentService implements AbstractService< Student, Integer > {
         this.studentDao = studentDao;
     }
 
-    public List< Student > findAll() {
+    public List<Student> findAll() {
         return studentDao.findAll();
     }
 
@@ -29,33 +30,33 @@ public class StudentService implements AbstractService< Student, Integer > {
     }
 
     public Student persist(Student student) {
-        if(student.getId()==null){
+        if (student.getId() == null) {
             student.setLiveDead(LiveDead.ACTIVE);
         }
         return studentDao.save(student);
     }
 
     public boolean delete(Integer id) {
-      Student student = studentDao.getOne(id);
-      student.setLiveDead(LiveDead.STOP);
-      studentDao.save(student);
+        Student student = studentDao.getOne(id);
+        student.setLiveDead(LiveDead.STOP);
+        studentDao.save(student);
         return false;
     }
 
-    public List< Student > search(Student student) {
+    public List<Student> search(Student student) {
         ExampleMatcher matcher = ExampleMatcher
-            .matching()
-            .withIgnoreCase()
-            .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example< Student > studentExample = Example.of(student, matcher);
+                .matching()
+                .withIgnoreCase()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<Student> studentExample = Example.of(student, matcher);
         return studentDao.findAll(studentExample);
     }
 
-    public Student lastStudentOnDB() {
-        return studentDao.findFirstByOrderByIdDesc();
+    public Collection<Object> findByGrade(Grade batchGrade) {
+        return null;
     }
 
-  public List< Student > findByGrade(Grade grade) {
-      return studentDao.findByGrade(grade);
-  }
+    public Student lastStudentOnDB() {
+        return null;
+    }
 }

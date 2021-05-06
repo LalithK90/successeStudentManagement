@@ -175,19 +175,19 @@ public class TimeTableController {
         }
       }
       TimeTable timeTableDb = timeTableService.persist(timeTable);
-      if ( !timeTableDb.getBatch().getBatchStudents().isEmpty() ) {
-        timeTableDb.getBatch().getBatchStudents().forEach(x -> {
-          Student student = studentService.findById(x.getId());
-          if ( student.getEmail() != null ) {
-            String message = "Dear " + student.getFirstName() + "\n Your " + timeTableDb.getBatch().getName() + " " +
-                "class" +
-                " would be held from " + timeTableDb.getStartAt() + " to " + timeTableDb.getEndAt() + "\n Thanks \n " +
-                "Success Student";
-            emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
-          }
-        });
-      }
-
+//      if ( !timeTableDb.getBatch().getBatchStudents().isEmpty() ) {
+//        timeTableDb.getBatch().getBatchStudents().forEach(x -> {
+//          Student student = studentService.findById(x.getId());
+//          if ( student.getEmail() != null ) {
+//            String message = "Dear " + student.getFirstName() + "\n Your " + timeTableDb.getBatch().getName() + " " +
+//                "class" +
+//                " would be held from " + timeTableDb.getStartAt() + " to " + timeTableDb.getEndAt() + "\n Thanks \n " +
+//                "Success Student";
+//            emailService.sendEmail(student.getEmail(), "Time Table - Notification", message);
+//          }
+//        });
+//      }
+//
     }
 
     return "redirect:/timeTable";
@@ -234,7 +234,11 @@ public class TimeTableController {
     model.addAttribute("liveDeads", LiveDead.values());
     return "timeTable/addTimeTable";
   }
-
+  @GetMapping("/delete/{id}")
+  public String delete(@PathVariable Integer id, Model model) {
+    timeTableService.delete(id);
+    return "redirect:/timeTable";
+  }
 
 }
 
