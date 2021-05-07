@@ -1,7 +1,6 @@
 package lk.succes_student_management.asset.report.controller;
 
 
-import lk.succes_student_management.asset.StudentSchool.StudentSchool;
 import lk.succes_student_management.asset.batch.entity.Batch;
 import lk.succes_student_management.asset.batch.entity.enums.Grade;
 import lk.succes_student_management.asset.batch.service.BatchService;
@@ -20,21 +19,17 @@ import lk.succes_student_management.asset.hall.service.HallService;
 import lk.succes_student_management.asset.payment.entity.Payment;
 import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import lk.succes_student_management.asset.payment.service.PaymentService;
-import lk.succes_student_management.asset.report.model.BatchAmount;
-import lk.succes_student_management.asset.report.model.BatchExamResultStudent;
-import lk.succes_student_management.asset.report.model.PaymentStatusAmount;
-import lk.succes_student_management.asset.report.model.StudentAmount;
-import lk.succes_student_management.asset.school.entity.School;
+import lk.succes_student_management.asset.report.model.*;
 import lk.succes_student_management.asset.school.service.SchoolService;
 import lk.succes_student_management.asset.student.entity.Student;
 import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.asset.subject.service.SubjectService;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.teacher.service.TeacherService;
 import lk.succes_student_management.asset.time_table.service.TimeTableService;
 import lk.succes_student_management.asset.time_table_student_attendence.service.TimeTableStudentAttendanceService;
 import lk.succes_student_management.asset.user_management.service.UserService;
 import lk.succes_student_management.util.service.DateTimeAgeService;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +38,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -347,8 +343,9 @@ public class ReportController {
     model.addAttribute("allStudents", studentService.findAll());
     return "report/allStudent";
   }
+
   @GetMapping( "/student/grade" )
-  public String allStudentReportGrade( Model model) {
+  public String allStudentReportGrade(Model model) {
     model.addAttribute("grades", Grade.values());
     return "report/allGradeStudent";
   }
@@ -363,8 +360,9 @@ public class ReportController {
   }
 
   @GetMapping( "/student/batch" )
-  public String allStudentBatchYear( Model model) {
-    model.addAttribute("batches", batchService.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+  public String allStudentBatchYear(Model model) {
+    model.addAttribute("batches",
+                       batchService.findAll().stream().filter(x -> x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
     return "report/allBatchStudent";
   }
 
@@ -389,14 +387,12 @@ public class ReportController {
 
   }
 
-
   @PostMapping( "/payment" )
   public String paymentsForPeriodSearch(@ModelAttribute TwoDate twoDate, Model model) {
     String message = "This report for " + twoDate.getStartDate() + " to " + twoDate.getEndDate();
     model.addAttribute("message", message);
     return commonPaymentStatus(twoDate.getStartDate(), twoDate.getEndDate(), model);
   }
-
 
   private String commonPaymentStatus(LocalDate startDate, LocalDate endDate, Model model) {
 
@@ -423,6 +419,74 @@ public class ReportController {
 
 
     return "report/paymentsForPeriod";
+  }
+
+  @GetMapping( "/teacher" )
+  public String paymentsTeacherForPeriod(Model model) {
+    LocalDate localDate = LocalDate.now();
+    String message = "This report for" + localDate.toString();
+    model.addAttribute("message", message);
+    model.addAttribute("teachers", teacherService.findAll());
+    return commonTeacherPaymentStatus(localDate, localDate, model, null);
+
+  }
+
+  @PostMapping( "/teacher" )
+  public String paymentsTeacherForPeriodSearch(@ModelAttribute TwoDate twoDate, Model model) {
+    String message = "This report for " + twoDate.getStartDate() + " to " + twoDate.getEndDate();
+    if ( twoDate.getId() != null ) {
+      Teacher teacher = teacherService.findById(twoDate.getId());
+      message = message + "  Teacher Name  " + teacher.getFirstName() + "  " + teacher.getLastName();
+    }
+
+    model.addAttribute("message", message);
+    model.addAttribute("teachers", teacherService.findAll());
+    return commonTeacherPaymentStatus(twoDate.getStartDate(), twoDate.getEndDate(), model, twoDate.getId());
+  }
+
+  private String commonTeacherPaymentStatus(LocalDate startDate, LocalDate endDate, Model model, Integer id) {
+
+    LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
+    LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
+
+    List< Payment > payments = paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime);
+    List< BigDecimal > amounts = new ArrayList<>();
+
+    HashSet< Teacher > teachers = new HashSet<>();
+    for ( Payment payment : payments ) {
+      teachers.add(teacherService.findById(payment.getBatchStudent().getBatch().getTeacher().getId()));
+    }
+    List< TeacherDetail > teacherDetails = new ArrayList<>();
+
+    if ( id == null ) {
+      for ( Teacher teacher : teachers ) {
+        teacherDetailsCommon(payments, teacherDetails, teacher);
+      }
+    } else {
+      Teacher teacher = teacherService.findById(id);
+      teacherDetailsCommon(payments, teacherDetails, teacher);
+    }
+
+
+    model.addAttribute("teacherDetails", teacherDetails);
+
+
+    return "report/teacherPayment";
+  }
+
+  private void teacherDetailsCommon(List< Payment > payments, List< TeacherDetail > teacherDetails, Teacher teacher) {
+    List< BigDecimal > teacherAmount = new ArrayList<>();
+    for ( Payment payment : payments
+        .stream()
+        .filter(x -> x.getBatchStudent().getBatch().getTeacher().equals(teacher)).collect(Collectors.toList()) ) {
+      teacherAmount.add(payment.getAmount());
+    }
+    TeacherDetail teacherDetail = new TeacherDetail();
+    teacherDetail.setTeacher(teacher);
+    teacherDetail.setPaymentCount(teacherAmount.size());
+    teacherDetail.setAmount(teacherAmount.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
+
+    teacherDetails.add(teacherDetail);
   }
 
 }

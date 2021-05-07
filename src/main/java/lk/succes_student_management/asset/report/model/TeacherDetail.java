@@ -14,9 +14,7 @@ public class TeacherDetail {
 
 private Teacher teacher;
 private long paymentCount;
-private BigDecimal totalPay;
+private BigDecimal amount;
 
-private long areasCount;
-private BigDecimal totalAreaPay;
 
 }
