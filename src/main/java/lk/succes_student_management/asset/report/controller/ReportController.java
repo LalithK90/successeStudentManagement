@@ -600,28 +600,26 @@ public class ReportController {
 
     if ( id == null ) {
       for ( Batch batch : batches ) {
-        BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
-        batchStudentAttendance.setBatch(batch);
-        List< TimeTableStudentAttendance > timeTableStudentAttendancesDb = new ArrayList<>();
-        timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batch)).collect(Collectors.toList()).forEach(
-            y ->                timeTableStudentAttendancesDb.add(timeTableStudentAttendanceService.findById(y.getId()))                                                                                                                                           );
-        batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendancesDb);
-        batchStudentAttendances.add(batchStudentAttendance);
+        attendanceCommon(timeTableStudentAttendances, batchStudentAttendances, batch);
       }
     } else {
       Batch batchDb = batchService.findById(id);
-      BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
-      batchStudentAttendance.setBatch(batchDb);
-      List< TimeTableStudentAttendance > timeTableStudentAttendancesDb = new ArrayList<>();
-      timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batchDb)).collect(Collectors.toList()).forEach(
-          y ->                timeTableStudentAttendancesDb.add(timeTableStudentAttendanceService.findById(y.getId()))                                                                                                                                           );
-      batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendancesDb);
-      batchStudentAttendances.add(batchStudentAttendance);
+      attendanceCommon(timeTableStudentAttendances, batchStudentAttendances, batchDb);
     }
 
 
     model.addAttribute("batchStudentAttendances", batchStudentAttendances);
     return "report/attendanceReport";
+  }
+
+  private void attendanceCommon(List< TimeTableStudentAttendance > timeTableStudentAttendances, List< BatchStudentAttendance > batchStudentAttendances, Batch batch) {
+    BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
+    batchStudentAttendance.setBatch(batch);
+    List< TimeTableStudentAttendance > timeTableStudentAttendancesDb = new ArrayList<>();
+    timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batch)).collect(Collectors.toList()).forEach(
+        y ->                timeTableStudentAttendancesDb.add(timeTableStudentAttendanceService.findById(y.getId())));
+    batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendancesDb);
+    batchStudentAttendances.add(batchStudentAttendance);
   }
 
 }
