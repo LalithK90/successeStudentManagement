@@ -3,6 +3,7 @@ package lk.succes_student_management.asset.report.controller;
 
 import lk.succes_student_management.asset.StudentSchool.StudentSchool;
 import lk.succes_student_management.asset.batch.entity.Batch;
+import lk.succes_student_management.asset.batch.entity.enums.Grade;
 import lk.succes_student_management.asset.batch.service.BatchService;
 import lk.succes_student_management.asset.batch_exam.entity.BatchExam;
 import lk.succes_student_management.asset.batch_exam.service.BatchExamService;
@@ -11,11 +12,13 @@ import lk.succes_student_management.asset.batch_student_exam_result.entity.Batch
 import lk.succes_student_management.asset.batch_student_exam_result.service.BatchStudentExamResultService;
 import lk.succes_student_management.asset.common_asset.model.TwoDate;
 import lk.succes_student_management.asset.common_asset.model.enums.AttendanceStatus;
+import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.common_asset.model.enums.ResultGrade;
 import lk.succes_student_management.asset.employee.service.EmployeeFilesService;
 import lk.succes_student_management.asset.employee.service.EmployeeService;
 import lk.succes_student_management.asset.hall.service.HallService;
 import lk.succes_student_management.asset.payment.entity.Payment;
+import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import lk.succes_student_management.asset.payment.service.PaymentService;
 import lk.succes_student_management.asset.report.model.BatchAmount;
 import lk.succes_student_management.asset.report.model.BatchExamResultStudent;
@@ -31,12 +34,10 @@ import lk.succes_student_management.asset.time_table.service.TimeTableService;
 import lk.succes_student_management.asset.time_table_student_attendence.service.TimeTableStudentAttendanceService;
 import lk.succes_student_management.asset.user_management.service.UserService;
 import lk.succes_student_management.util.service.DateTimeAgeService;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -101,17 +102,17 @@ public class ReportController {
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
     System.out.println(" astar " + startDateTime + "  end " + endDateTime);
-    List<Payment> payments = paymentService.findByCreatedAtIsBetween(startDateTime,endDateTime);
+    List< Payment > payments = paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime);
 
-    List<BigDecimal> totalPaymentAmount = new ArrayList<>();
+    List< BigDecimal > totalPaymentAmount = new ArrayList<>();
     List< Batch > batches = new ArrayList<>();
-    List<Student> students = new ArrayList<>();
+    List< Student > students = new ArrayList<>();
     payments.forEach(x -> {
       totalPaymentAmount.add(x.getAmount());
       batches.add(x.getBatchStudent().getBatch());
       students.add(x.getBatchStudent().getStudent());
     });
-    List<BatchAmount> batchAmounts = new ArrayList<>();
+    List< BatchAmount > batchAmounts = new ArrayList<>();
     batches.stream().distinct().collect(Collectors.toList()).forEach(x -> {
       List< Payment > batchPayments =
           payments.stream().filter(y -> y.getBatchStudent().getBatch().equals(x)).collect(Collectors.toList());
@@ -125,7 +126,7 @@ public class ReportController {
       batchAmount.setTeacher(batch.getTeacher());
       batchAmounts.add(batchAmount);
     });
-    List<StudentAmount> studentAmounts = new ArrayList<>();
+    List< StudentAmount > studentAmounts = new ArrayList<>();
     students.stream().distinct().collect(Collectors.toList()).forEach(x -> {
       List< Payment > studentPayments =
           payments.stream().filter(y -> y.getBatchStudent().getStudent().equals(x)).collect(Collectors.toList());
@@ -165,7 +166,7 @@ public class ReportController {
 
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDayWithOutNano(today);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDayWithOutNano(today.minusDays(7));
-    List<BatchExam> batchExams = batchExamService.findByStartAtBetween(startDateTime, endDateTime);
+    List< BatchExam > batchExams = batchExamService.findByStartAtBetween(startDateTime, endDateTime);
     String message = "This report is belongs from " + today.minusDays(7) + " to " + today;
     return commonExam(model, batchExams, message);
   }
@@ -190,12 +191,12 @@ public class ReportController {
   }
 
   private String commonExam(Model model, List< BatchExam > batchExams, String message) {
-    List<BatchExamResultStudent> batchExamResultStudents = new ArrayList<>();
+    List< BatchExamResultStudent > batchExamResultStudents = new ArrayList<>();
     for ( BatchExam batchExam : batchExams ) {
       BatchExamResultStudent batchExamResultStudent = new BatchExamResultStudent();
       batchExamResultStudent.setBatchExam(batchExam);
       batchExamResultStudent.setBatch(batchService.findById(batchExam.getBatch().getId()));
-      List<BatchStudentExamResult> batchStudentExamResults =
+      List< BatchStudentExamResult > batchStudentExamResults =
           batchExamService.findById(batchExam.getId()).getBatchStudentExamResults();
 
       List< BatchStudentExamResult > presentBatchStudentExamResults =
@@ -340,97 +341,88 @@ public class ReportController {
     return "report/batchExamReport";
   }
 
-/*    //1.total students up to now
-    @GetMapping("/student")
-    public String allStudentReport( Model model) {
-        model.addAttribute("allStudents", studentService.findAll());
-        return "report/allStudent";
+  //1.total students up to now
+  @GetMapping( "/student" )
+  public String allStudentReport(Model model) {
+    model.addAttribute("allStudents", studentService.findAll());
+    return "report/allStudent";
+  }
+  @GetMapping( "/student/grade" )
+  public String allStudentReportGrade( Model model) {
+    model.addAttribute("grades", Grade.values());
+    return "report/allGradeStudent";
+  }
+
+  @PostMapping( "/student/grade" )
+  public String allStudentReportGrade(@ModelAttribute Student student, Model model) {
+    model.addAttribute("grades", Grade.values());
+    model.addAttribute("message", "This report is belong to below grade " + student.getGrade().getGrade());
+    model.addAttribute("allStudents",
+                       studentService.findAll().stream().filter(x -> x.getGrade().equals(student.getGrade())).collect(Collectors.toList()));
+    return "report/allGradeStudent";
+  }
+
+  @GetMapping( "/student/batch" )
+  public String allStudentBatchYear( Model model) {
+    model.addAttribute("batches", batchService.findAll().stream().filter(x->x.getLiveDead().equals(LiveDead.ACTIVE)).collect(Collectors.toList()));
+    return "report/allBatchStudent";
+  }
+
+  @PostMapping( "/student/batch" )
+  public String allStudentBatchYear(@ModelAttribute Batch batchF, Model model) {
+    Batch batch = batchService.findById(batchF.getId());
+    model.addAttribute("message", "This report is belong to below batch " + batch.getName());
+    List< Student > students = new ArrayList<>();
+    batchStudentService.findByBatch(batch).forEach(x -> students.add(x.getStudent()));
+    model.addAttribute("allStudents", students);
+    return "report/allBatchStudent";
+  }
+
+
+  //2.total payments received up to now
+  @GetMapping( "/payment" )
+  public String paymentsForPeriod(Model model) {
+    LocalDate localDate = LocalDate.now();
+    String message = "This report for" + localDate.toString();
+    model.addAttribute("message", message);
+    return commonPaymentStatus(localDate, localDate, model);
+
+  }
+
+
+  @PostMapping( "/payment" )
+  public String paymentsForPeriodSearch(@ModelAttribute TwoDate twoDate, Model model) {
+    String message = "This report for " + twoDate.getStartDate() + " to " + twoDate.getEndDate();
+    model.addAttribute("message", message);
+    return commonPaymentStatus(twoDate.getStartDate(), twoDate.getEndDate(), model);
+  }
+
+
+  private String commonPaymentStatus(LocalDate startDate, LocalDate endDate, Model model) {
+
+    LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
+    LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
+
+    List< Payment > payment = paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime);
+    List< BigDecimal > amounts = new ArrayList<>();
+
+    List< PaymentStatusAmount > paymentStatusAmounts = new ArrayList<>();
+    for ( PaymentStatus paymentStatus : PaymentStatus.values() ) {
+      List< Payment > paymentsStatusNotPaid = payment
+          .stream()
+          .filter(x -> x.getPaymentStatus().equals(paymentStatus)).collect(Collectors.toList());
+      PaymentStatusAmount paymentStatusAmount = new PaymentStatusAmount();
+      paymentStatusAmount.setPaymentStatus(paymentStatus);
+      paymentStatusAmount.setRecordCount(paymentsStatusNotPaid.size());
+      paymentsStatusNotPaid.forEach(x -> amounts.add(x.getAmount()));
+      paymentStatusAmount.setAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
+
+      paymentStatusAmounts.add(paymentStatusAmount);
     }
+    model.addAttribute("paymentStatusAmounts", paymentStatusAmounts);
 
 
-    //2.total payments received up to now
-    @GetMapping("/payment")
-
-    public String paymentsForPeriod( Model model) {
-        //this line for test purpose
-//        List<Payment> paymentStatus = paymentService.findByPaymentStatus(PaymentStatus.NO_PAID);
-        LocalDate localDate = LocalDate.now();
-        String message = "This report for" + localDate.toString();
-        model.addAttribute("Mess",message);
-        return commonPaymentStatus(localDate, localDate);
-
-    }
-
-
-    private String commonPaymentStatus(LocalDate startDate, LocalDate endDate , Model model) {
-        LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
-        LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
-
-        List<Payment> payment = paymentService.findByCreatedAtIsBetween(startDate, endDate);
-        List<BigDecimal> amounts = new ArrayList<>();
-
-        List<PaymentStatusAmount> paymentStatusAmounts = new ArrayList<>();
-        for (PaymentStatus paymentStatus : PaymentStatus.values()) {
-            List<Payment> paymentsStatusNotPaid = new ArrayList<>();
-            paymentsStatusNotPaid.addAll(payment
-                    .stream()
-                    .filter(x -> x.getPaymentStatus().equals(paymentStatus))
-                    .collect(Collectors.toList()));
-
-            paymentStatusAmount.setPaymentStatus(paymentStatus);
-            paymentStatusAmount.setRecordCount(paymentsStatusNotPaid.size());
-            paymentsStatusNotPaid.forEach(x -> amounts.add(x.getAmount()));
-            paymentStatusAmount.setAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
-
-            paymentStatusAmounts.add(paymentStatusAmount);
-        }
-        model.addAttribute("paymentStatusAmounts",paymentStatusAmounts);
-
-        PaymentStatusAmount paymentStatusAmount = new PaymentStatusAmount();
-
-
-        paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime)
-                .stream()
-                .filter(x -> x.getPaymentStatus().equals(PaymentStatus.NO_PAID))
-                .collect(Collectors.toList());
-        List<BigDecimal> amounts = new ArrayList<>();
-
-        paymentStatus.forEach(x -> {
-            amounts.add(x.getAmount());
-        });
-
-        PaymentStatusAmount paymentStatusAmount = new PaymentStatusAmount();
-        paymentStatusAmount.setPaymentStatus(PaymentStatus.NO_PAID);
-        paymentStatusAmount.setAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
-        paymentStatusAmount.setRecordCount(List < Payment > paymentStatus = paymentService.findAll()
-                .stream()
-                .filter(x -> x.getPaymentStatus().equals(PaymentStatus.NO_PAID))
-                .count());
-
-        return "report/paymentsForPeriod";
-    }
-
-
-    private String commonPaymentStatus(LocalDate localDate, LocalDate date) {
-        LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(twoDate.getStartDate());
-        LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(twoDate.getEndDate());
-
-        List<BigDecimal> amounts = new ArrayList<>();
-        paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime)
-                .stream()
-                .filter(x -> x.getPaymentStatus().equals(PaymentStatus.NO_PAID))
-                .collect(Collectors.toList()).forEach(x -> amounts.add(x.getAmount()));
-        return "report/paymentStatus";
-    }
-
-    @PostMapping("/payment")
-
-    public String paymentsForPeriodSearch(@ModelAttribute TwoDate twoDate, Model model) {
-        String message = "This report for" + twoDate.getStartDate()+"00"+twoDate.getEndDate();
-        model.addAttribute("Mess",message);
-        return commonPaymentStatus(twoDate.getStartDate(), twoDate.getEndDate(),model);
-    }
-    */
-
+    return "report/paymentsForPeriod";
+  }
 
 }

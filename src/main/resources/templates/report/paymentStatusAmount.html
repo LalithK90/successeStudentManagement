@@ -1,119 +1,101 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head data-th-replace="~{fragments/headerSection :: headerSectionFragment}"></head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper"><!-- wrapper start -->
-    <nav data-th-replace="~{fragments/navbarSection :: navbarSectionFragment}"></nav><!-- navbar Section -->
-    <aside data-th-replace="~{fragments/sidebarSection :: sidebarSectionFragment}"></aside><!-- navbar Section -->
-    <div class="content-wrapper"><!-- content-wrapper Start -->
-        <section data-th-replace="~{fragments/contentHeader :: contentHeaderSectionFragment}"></section>
-        <!-- content-header Start -->
-        <!--action button layer---------------------------------------------------------     -->
-        <!--        <div class="row m-1">-->
-        <!--            <div class="col-12">-->
-        <!--                <div class="text-right">-->
-        <!--                    <div text-right>-->
-        <!--                        <button type="button" class="btn btn-info btn-sm">-->
-        <!--                            <a  data-th-href="${'/employee/add'}" >-->
-        <!--                                <span class="info-box-icon text-white"><i class="fa fa-plus mr-1" ></i ></span >-->
-        <!--                                <span class="text-white"> Add Employee </span></a>-->
-        <!--                        </button>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--form action end button---------------------------------------------------------     -->
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >success Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
 
+<div class="container" >
+  <div class="row bg-light" >
+    <div class="col" ></div >
+    <div class="col" >
+      <h4 >Payment Vs Student Management</h4 >
+    </div >
+    <div class="col" >
 
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <!--Custom search-->
-                                                    <button type="button"
-                                                            class="btn btn-info mb-5 btn-block text-capitalize"
-                                                            data-toggle="collapse"
-                                                            data-target="#dataTargetCollapse"
-                                                            aria-expanded="false" aria-controls="dataTargetCollapse"
-                                                    > Custom Payment Search
-                                                    </button>
-                                                    <div class="collapse mx-auto" id="dataTargetCollapse">
-                                                        <div class="container-fluid text-center">
-                                                            <div class="row">
-                                                                <div class="col-sm-6 col-sm-offset-3">
-                                                                    <h4 class="text-info"><b> Custom Search</b></h4>
-                                                                    <form class="form-inline"
-                                                                          data-th-action="@{/report/otherFundReceivingType}"
-                                                                          data-th-method="POST">
-                                                                        <div class="form-group">
-                                                                            <label for="startDate">FROM :</label>
-                                                                            <input class="form-control" id="startDate"
-                                                                                   name="startDate" type="date"/>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="endDate">TO :</label>
-                                                                            <input class="form-control" id="endDate"
-                                                                                   name="endDate" type="date"/>
-                                                                        </div>
-                                                                        <button class="btn btn-success"
-                                                                                id="btnSummaryFind" type="submit"><span
-                                                                                class="glyphicon glyphicon-search"></span>&nbsp;Search
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+    </div >
+  </div >
+</div >
 
-                                        </div>
+<div class="container-fluid" >
+  <div class="row" >
+    <div class="container-fluid" >
+      <div class="row" >
+        <!--Custom search-->
+        <button type="button"
+                class="btn btn-info mb-5 btn-block text-capitalize"
+                data-toggle="collapse"
+                data-target="#dataTargetCollapse"
+                aria-expanded="false" aria-controls="dataTargetCollapse"
+        > Custom Payment Search
+        </button >
+        <div class="collapse mx-auto" id="dataTargetCollapse" >
+          <div class="container-fluid text-center" >
+            <div class="row" >
+              <div class="col-sm-6 col-sm-offset-3" >
+                <h4 class="text-info" ><b > Custom Search</b ></h4 >
+                <form class="form-inline"
+                      data-th-action="@{/report/payment}"
+                      data-th-method="POST" >
+                  <div class="form-group" >
+                    <label for="startDate" >FROM :</label >
+                    <input class="form-control" id="startDate"
+                           name="startDate" type="date" />
+                  </div >
+                  <div class="form-group" >
+                    <label for="endDate" >TO :</label >
+                    <input class="form-control" id="endDate"
+                           name="endDate" type="date" />
+                  </div >
+                  <button class="btn btn-success"
+                          id="btnSummaryFind" type="submit" ><span
+                        class="glyphicon glyphicon-search" ></span >&nbsp;Search
+                  </button >
+                </form >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
 
-                                        <div class="row">
-                                            <col class=" col text-center">
-                                            <h4>Instalment Type </h4>
-                                            <h3 data-th-text="${message}"></h3></col >
-                                        </div>
-                                    </div>
-                                    <div class="container-fluid">
-                                        <table class="table table-hover" id="myTable">
-                                            <thead class="thead-inverse">
-                                            <tr>
-                                                <th>Index</th>
-                                                <th>Fund Source</th>
-                                                <th>Record Count</th>
-                                                <th>Amount</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr th:each="paymentStatusAmount, index : ${paymentStatusAmounts}">
-                                                <td th:text="${index.count}"></td>
-                                                <td th:text="${paymentStatusAmounts.paymentStatus.paymentStatus}"></td>
-                                                <td th:text="${paymentStatusAmounts.recordCount}"></td>
-                                                <td th:text="${paymentStatusAmounts.amount}"></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!-- content-wrapper end -->
-</div>
-<!--footer include-->
-<div data-th-replace="~{fragments/footerSection :: footerSectionFragment}"></div><!-- footer Section -->
-</div><!-- wrapper end -->
-<div data-th-replace="~{fragments/scriptSection :: scriptSectionFragment}"></div><!-- script Fragment -->
-</body>
-</html>
+  </div >
+
+  <div class="row" >
+    <div class=" col text-center" >
+      <h4 >Instalment Type </h4 >
+      <h3 data-th-text="${message}" ></h3 >
+    </div >
+  </div >
+</div >
+<div class="container-fluid" >
+  <table class="table table-hover" id="myTable" >
+    <thead class="thead-inverse" >
+    <tr >
+      <th >Index</th >
+      <th >Fund Source</th >
+      <th >Record Count</th >
+      <th >Amount</th >
+    </tr >
+    </thead >
+    <tbody >
+    <tr data-th-each="paymentStatusAmount, index : ${paymentStatusAmounts}" >
+      <td data-th-text="${index.count}" ></td >
+      <td data-th-text="${paymentStatusAmounts.paymentStatus.paymentStatus}" ></td >
+      <td data-th-text="${paymentStatusAmounts.recordCount}" ></td >
+      <td data-th-text="${paymentStatusAmounts.amount}" ></td >
+    </tr >
+    </tbody >
+  </table >
+</div >
+
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >
