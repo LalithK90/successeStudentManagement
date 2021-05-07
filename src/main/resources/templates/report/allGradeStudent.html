@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+    <meta charset="UTF-8" >
+    <title >Success Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="row bg-light" >
+    <div class="col-4" ></div >
+    <div class="col-4" >
+        <h1 >Student For Grade</h1 >
+    </div >
+    <div class="col-4" ></div >
+</div >
+<div class="row text-center" >
+    <div class="col-4" >
+        <a href="/report/student" class="btn btn-outline-info" >All Student</a >
+    </div >
+    <div class="col-4" >
+        <a href="/report/student/grade" class="btn btn-outline-secondary" >According to Grade</a >
+    </div >
+    <div class="col-4" >
+        <a href="/report/student/batch" class="btn btn-outline-primary" >According to Batch</a >
+    </div >
+</div >
+<div class="row">
+    <div class="col-6 offset-3" >
+        <form class="form-inline"
+              data-th-action="@{/report/student/grade}"
+              data-th-method="POST" >
+            <div class="form-group" >
+                <label for="grade" >Grade :</label >
+                <select name="grade" id="grade" class="form-control" >
+                    <option value="" >Please Select</option >
+                    <option data-th-each="grade : ${grades}" data-th-value="${grade}"
+                            data-th-text="${grade.grade}" ></option >
+                </select >
+            </div >
+            <button class="btn btn-success"
+                    id="btnSummaryFind" type="submit" ><span
+                  class="glyphicon glyphicon-search" ></span >&nbsp;Search
+            </button >
+        </form >
+    </div >
+</div>
+<div class="container-fluid" data-th-if="${message != null}">
+    <div class="row">
+        <p data-th-text="${message}" class="bg-secondary text-white"></p>
+    </div>
+
+<div class="row" >
+    <div class="container-fluid" >
+        <div data-th-fragment="studentsFragment" >
+            <table class="table table-striped table-inverse" id="myTable" >
+                <thead class="thead-inverse" >
+                <tr >
+                    <th >Index</th >
+                    <th >Registration ID</th >
+                    <th >First Name</th >
+                    <th >Gender</th >
+                    <th >School</th >
+                    <th >Guardian</th >
+                    <th >Mobile Number</th >
+                    <th >Home Number</th >
+                    <th >Remark</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index : ${allStudents}" >
+                    <td data-th-text="${index.count}" ></td >
+                    <td data-th-text="${student.regNo}" ></td >
+                    <td data-th-text="${student.firstName}" ></td >
+                    <td data-th-text="${student.gender.gender}" ></td >
+                    <td data-th-text="${student.school.name}" ></td >
+                    <td data-th-text="${student.guardian}" ></td >
+                    <td data-th-text="${student.mobile}" ></td >
+                    <td data-th-text="${student.home}" ></td >
+                    <td >
+                        <a data-th-href="${'/student/view/'+ student.id}" >
+                            <button class="btn btn-info" >View</button >
+                        </a >
+
+                    </td >
+                </tr >
+                </tbody >
+            </table >
+        </div >
+    </div >
+
+</div >
+</div>
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+</body >
+</html >
