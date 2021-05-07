@@ -4,6 +4,7 @@ package lk.succes_student_management.asset.batch.service;
 import lk.succes_student_management.asset.batch.entity.enums.ClassDay;
 import lk.succes_student_management.asset.batch.entity.enums.Grade;
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.util.interfaces.AbstractService;
 import lk.succes_student_management.asset.batch.dao.BatchDao;
 import lk.succes_student_management.asset.batch.entity.Batch;
@@ -66,5 +67,10 @@ public class BatchService implements AbstractService< Batch, Integer > {
   public Batch findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(String year, ClassDay classDay, LocalTime startAt, LocalTime endAt, LocalTime startAt1,
                                                                          LocalTime endAt1) {
   return batchDao.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(year,classDay,startAt,endAt,startAt1,endAt1);
+  }
+
+  public Batch findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetweenAndTeacher(String year, ClassDay classDay, LocalTime startAt, LocalTime endAt,
+                                                                                   LocalTime startAt1, LocalTime endAt1, Teacher teacher) {
+  return batchDao.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetweenAndTeacher(year,classDay,startAt,endAt,startAt1,endAt1,teacher);
   }
 }

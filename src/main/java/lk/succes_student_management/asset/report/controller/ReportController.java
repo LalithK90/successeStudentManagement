@@ -68,7 +68,6 @@ public class ReportController {
   private PaymentStatusAmount paymentStatusAmount;
   private boolean paymentStatus;
 
-  ;
 
   public ReportController(BatchService batchService, BatchExamService batchExamService,
                           BatchStudentService batchStudentService,
