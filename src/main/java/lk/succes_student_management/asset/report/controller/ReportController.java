@@ -1,6 +1,7 @@
 package lk.succes_student_management.asset.report.controller;
 
 
+import lk.succes_student_management.asset.StudentSchool.StudentSchool;
 import lk.succes_student_management.asset.batch.entity.Batch;
 import lk.succes_student_management.asset.batch.entity.enums.Grade;
 import lk.succes_student_management.asset.batch.service.BatchService;
@@ -20,6 +21,7 @@ import lk.succes_student_management.asset.payment.entity.Payment;
 import lk.succes_student_management.asset.payment.entity.enums.PaymentStatus;
 import lk.succes_student_management.asset.payment.service.PaymentService;
 import lk.succes_student_management.asset.report.model.*;
+import lk.succes_student_management.asset.school.entity.School;
 import lk.succes_student_management.asset.school.service.SchoolService;
 import lk.succes_student_management.asset.student.entity.Student;
 import lk.succes_student_management.asset.student.service.StudentService;
@@ -488,5 +490,76 @@ public class ReportController {
 
     teacherDetails.add(teacherDetail);
   }
+  @GetMapping("/studentSchool")
+  public String StudentSchool(Model model){
+    model.addAttribute("school",schoolService.findAll());
+    return "report/studentSchoolReport";
 
+
+  }
+  @PostMapping("/studentSchool")
+  public String StudentSchool(@ModelAttribute TwoDate twoDate,Model model){
+    List< School > schools = schoolService.findAll();
+    LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(twoDate.getStartDate());
+    LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(twoDate.getEndDate());
+//    System.out.println(twoDate.getStartDate());
+//    System.out.println(twoDate.getEndDate());
+    List<Student> students = studentService.findByCreatedAtIsBetween(startDateTime,endDateTime);
+//    System.out.println(students);
+    List< StudentSchool > studentSchools = new ArrayList<>();
+
+//    School school = schoolService.findById(twoDate.getId());
+    schools.forEach(x-> {
+      long count = 0;
+      for (Student student : students) {
+        if (student.getSchool().equals(x)) {
+          count = count + 1;
+        }
+      }
+
+      StudentSchool studentSchool = new StudentSchool();
+      studentSchool.setSchool(x);
+      studentSchool.setCount(count);
+      studentSchools.add(studentSchool);
+    });
+    model.addAttribute("schools",schoolService.findAll());
+
+    String message="This report is belong from" +twoDate.getStartDate()+ "to" +twoDate.getEndDate();
+    model.addAttribute("message",message);
+    model.addAttribute("studentSchools",studentSchools);
+    return "report/studentSchoolReport";
+  }
+
+  @GetMapping("/teacherBatch")
+  public String TeacherBatch(Model model){
+    model.addAttribute("teacher",teacherService.findAll());
+    return"report/teacherBatchReport";
+
+  }
+  @PostMapping("/teacherBatch")
+  public String TeacherBatch(@ModelAttribute TwoDate twoDate,Model model){
+    List<Teacher> teachers=teacherService.findAll();
+    LocalDateTime startDateTime= dateTimeAgeService.dateTimeToLocalDateStartInDay(twoDate.getStartDate());
+    LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(twoDate.getEndDate());
+    List<Batch> batches = batchService.findByCreatedAtIsBetween(startDateTime,endDateTime);
+    List<TeacherBatch> teacherBatches = new ArrayList<>();
+
+    teachers.forEach(x->{
+      long count = 0;
+      for(Batch batch :batches){
+        if(batch.getTeacher().equals(x)){
+          count = count +1 ;
+        }
+      }
+      TeacherBatch teacherBatch =new TeacherBatch();
+      teacherBatch.setTeacher(x);
+      teacherBatch.setCount(count);
+      teacherBatches.add(teacherBatch);
+    });
+    model.addAttribute("teachers",teacherService.findAll());
+    String message="This report is belong from" +twoDate.getStartDate()+ "to" +twoDate.getEndDate();
+    model.addAttribute("message",message);
+    model.addAttribute("teacherBatches",teacherBatches);
+    return"report/teacherBatchReport";
+  }
 }

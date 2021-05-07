@@ -10,6 +10,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -59,4 +60,8 @@ public class StudentService implements AbstractService< Student, Integer > {
     public Student lastStudentOnDB() {
         return null;
     }
+
+  public List< Student> findByCreatedAtIsBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return studentDao.findByCreatedAtIsBetween(startDateTime, endDateTime);
+  }
 }

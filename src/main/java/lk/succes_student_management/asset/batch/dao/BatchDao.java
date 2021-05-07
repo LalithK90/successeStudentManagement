@@ -8,6 +8,7 @@ import lk.succes_student_management.asset.teacher.entity.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -24,7 +25,13 @@ public interface BatchDao extends JpaRepository< Batch, Integer > {
   List< Batch > findByClassDay(ClassDay classDay);
 
   Batch findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(String year, ClassDay classDay, LocalTime startAt,
-                                                                  LocalTime endAt, LocalTime startAt1, LocalTime endAt1);
+                                                                  LocalTime endAt, LocalTime startAt1,
+                                                                  LocalTime endAt1);
 
-  Batch findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetweenAndTeacher(String year, ClassDay classDay, LocalTime startAt, LocalTime endAt, LocalTime startAt1, LocalTime endAt1, Teacher teacher);
+  Batch findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetweenAndTeacher(String year, ClassDay classDay,
+                                                                            LocalTime startAt, LocalTime endAt,
+                                                                            LocalTime startAt1, LocalTime endAt1,
+                                                                            Teacher teacher);
+
+  List< Batch > findByCreatedAtIsBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }
