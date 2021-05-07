@@ -400,15 +400,17 @@ public class ReportController {
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
 
     List< Payment > payment = paymentService.findByCreatedAtIsBetween(startDateTime, endDateTime);
-    List< BigDecimal > amounts = new ArrayList<>();
+
 
     List< PaymentStatusAmount > paymentStatusAmounts = new ArrayList<>();
     for ( PaymentStatus paymentStatus : PaymentStatus.values() ) {
+      List< BigDecimal > amounts = new ArrayList<>();
       List< Payment > paymentsStatusNotPaid = payment
           .stream()
           .filter(x -> x.getPaymentStatus().equals(paymentStatus)).collect(Collectors.toList());
       PaymentStatusAmount paymentStatusAmount = new PaymentStatusAmount();
       paymentStatusAmount.setPaymentStatus(paymentStatus);
+
       paymentStatusAmount.setRecordCount(paymentsStatusNotPaid.size());
       paymentsStatusNotPaid.forEach(x -> amounts.add(x.getAmount()));
       paymentStatusAmount.setAmount(amounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
