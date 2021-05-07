@@ -13,6 +13,7 @@ import lk.succes_student_management.asset.batch_student.service.BatchStudentServ
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.student.service.StudentService;
 import lk.succes_student_management.asset.teacher.controller.TeacherController;
+import lk.succes_student_management.asset.teacher.entity.Teacher;
 import lk.succes_student_management.asset.teacher.service.TeacherService;
 import lk.succes_student_management.util.interfaces.AbstractController;
 import lk.succes_student_management.util.service.MakeAutoGenerateNumberService;
@@ -91,8 +92,8 @@ public class BatchController implements AbstractController< Batch, Integer > {
                         RedirectAttributes redirectAttributes, Model model) {
     if ( batch.getId() == null ) {
       Batch batchDbDayAndStartAndEndTime =
-          batchService.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetween(batch.getYear(), batch.getClassDay()
-              , batch.getStartAt(), batch.getEndAt(), batch.getStartAt(), batch.getEndAt());
+          batchService.findByYearAndClassDayAndStartAtIsBetweenAndEndAtIsBetweenAndTeacher(batch.getYear(), batch.getClassDay()
+              , batch.getStartAt(), batch.getEndAt(), batch.getStartAt(), batch.getEndAt(), batch.getTeacher());
 
 
       if ( batchDbDayAndStartAndEndTime != null ) {
