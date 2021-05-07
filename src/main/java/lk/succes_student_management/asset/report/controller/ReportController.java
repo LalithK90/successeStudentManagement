@@ -590,7 +590,6 @@ public class ReportController {
     model.addAttribute("batches", batchService.findAll());
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
-    Batch batchDb = batchService.findById(id);
     List< TimeTableStudentAttendance > timeTableStudentAttendances =
         timeTableStudentAttendanceService.findByCreatedAtIsBetween(startDateTime, endDateTime);
 
@@ -601,21 +600,26 @@ public class ReportController {
 
     if ( id == null ) {
       for ( Batch batch : batches ) {
-        BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
-        batchStudentAttendance.setBatch(batch);
-        batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batch)).collect(Collectors.toList()));
-        batchStudentAttendances.add(batchStudentAttendance);
+        attendanceCommon(timeTableStudentAttendances, batchStudentAttendances, batch);
       }
     } else {
-      BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
-      batchStudentAttendance.setBatch(batchDb);
-      batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batchDb)).collect(Collectors.toList()));
-      batchStudentAttendances.add(batchStudentAttendance);
+      Batch batchDb = batchService.findById(id);
+      attendanceCommon(timeTableStudentAttendances, batchStudentAttendances, batchDb);
     }
 
 
     model.addAttribute("batchStudentAttendances", batchStudentAttendances);
     return "report/attendanceReport";
+  }
+
+  private void attendanceCommon(List< TimeTableStudentAttendance > timeTableStudentAttendances, List< BatchStudentAttendance > batchStudentAttendances, Batch batch) {
+    BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
+    batchStudentAttendance.setBatch(batch);
+    List< TimeTableStudentAttendance > timeTableStudentAttendancesDb = new ArrayList<>();
+    timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batch)).collect(Collectors.toList()).forEach(
+        y ->                timeTableStudentAttendancesDb.add(timeTableStudentAttendanceService.findById(y.getId())));
+    batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendancesDb);
+    batchStudentAttendances.add(batchStudentAttendance);
   }
 
 }

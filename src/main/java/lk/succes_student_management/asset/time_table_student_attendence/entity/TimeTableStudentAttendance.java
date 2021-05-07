@@ -33,6 +33,6 @@ public class TimeTableStudentAttendance extends AuditEntity {
   @ManyToOne
   private BatchStudent batchStudent;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   private TimeTable timeTable;
 }
