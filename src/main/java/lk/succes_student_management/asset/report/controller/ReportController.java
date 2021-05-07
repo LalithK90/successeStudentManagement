@@ -120,7 +120,9 @@ public class ReportController {
       BatchAmount batchAmount = new BatchAmount();
       batchAmount.setAmount(batchPaymentAmounts.stream().reduce(BigDecimal.ZERO, BigDecimal::add));
       batchAmount.setCount(batchPayments.size());
-      batchAmount.setBatch(batchService.findById(x.getId()));
+      Batch batch = batchService.findById(x.getId());
+      batchAmount.setBatch(x);
+      batchAmount.setTeacher(batch.getTeacher());
       batchAmounts.add(batchAmount);
     });
     List<StudentAmount> studentAmounts = new ArrayList<>();
