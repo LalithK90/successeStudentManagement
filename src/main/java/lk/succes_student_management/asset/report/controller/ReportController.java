@@ -590,7 +590,6 @@ public class ReportController {
     model.addAttribute("batches", batchService.findAll());
     LocalDateTime startDateTime = dateTimeAgeService.dateTimeToLocalDateStartInDay(startDate);
     LocalDateTime endDateTime = dateTimeAgeService.dateTimeToLocalDateEndInDay(endDate);
-    Batch batchDb = batchService.findById(id);
     List< TimeTableStudentAttendance > timeTableStudentAttendances =
         timeTableStudentAttendanceService.findByCreatedAtIsBetween(startDateTime, endDateTime);
 
@@ -607,6 +606,7 @@ public class ReportController {
         batchStudentAttendances.add(batchStudentAttendance);
       }
     } else {
+      Batch batchDb = batchService.findById(id);
       BatchStudentAttendance batchStudentAttendance = new BatchStudentAttendance();
       batchStudentAttendance.setBatch(batchDb);
       batchStudentAttendance.setTimeTableStudentAttendances(timeTableStudentAttendances.stream().filter(x -> x.getBatchStudent().getBatch().equals(batchDb)).collect(Collectors.toList()));
