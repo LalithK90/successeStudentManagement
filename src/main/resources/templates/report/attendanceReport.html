@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en" >
+<!--Styles, meta data, and title are included-->
+<head data-th-replace="~{fragments/header :: headerFragment}" >
+  <meta charset="UTF-8" >
+  <title >Wisdom Student Management System</title >
+</head >
+<body >
+<!--Nav bar is included-->
+<nav data-th-replace="~{fragments/navBar :: navBarFragment}" ></nav >
+
+<div class="container" >
+  <div class="row bg-light" >
+    <div class="col" ></div >
+    <div class="col" >
+      <h4 >Batch Student Vs Attendance </h4 >
+    </div >
+    <div class="col" >
+
+    </div >
+  </div >
+</div >
+<div class="container-fluid" >
+  <div class="row" >
+    <!--Custom Invoice search-->
+    <button type="button" class="btn btn-info btn-block  mt-2 mb-2 text-capitalize" data-toggle="collapse"
+            data-target="#dataTargetCollapse"
+            aria-expanded="false" aria-controls="dataTargetCollapse"
+    > Custom Search
+    </button >
+    <div class="collapse mx-auto" id="dataTargetCollapse" >
+      <div class="container-fluid text-center" >
+        <div class="row" >
+          <form class="form-inline" data-th-action="${'/report/attendance'}" data-th-method="POST" >
+            <div class="form-group mr-2" >
+              <label for="startDate" >Batch :</label >
+              <select class="form-control" id="batchExam" name="id" >
+                <option value="" >Please Select</option >
+                <option data-th-each="batch : ${batches}"
+                        data-th-value="${batch.id}"
+                        data-th-text="${batch.name }" ></option >
+              </select >
+            </div >
+            <div class="form-group mr-2" >
+              <label for="startDate" >FROM :</label >
+              <input class="form-control" id="startDate" name="startDate" type="date" required />
+            </div >
+            <div class="form-group mr-2" >
+              <label for="endDate" >TO :</label >
+              <input class="form-control" id="endDate" name="endDate" type="date" required />
+            </div >
+            <div class="form-group mr-2" >
+              <button class="btn btn-success mt-2" id="btnSummaryFind" type="submit" ><span
+                    class="glyphicon glyphicon-search" ></span >&nbsp;Search
+              </button >
+            </div >
+          </form >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+<div class="container-fluid" >
+  <div class="row" >
+    <div class="col" >
+      <p data-th-text="${message}" class="text-center bg-secondary text-white p-2" ></p >
+    </div >
+  </div >
+  <hr />
+  <!--All Payment -->
+  <div class="row" data-th-each="batchStudentAttendance, index : ${batchStudentAttendances}" >
+    <!--exam name-->
+    <div class="container-fluid" >
+      <button type="button" class="btn btn-success btn-block mb-2" data-toggle="collapse"
+              data-th-attr="data-target='#content'+${index.count}"
+              aria-expanded="false" aria-controls="" > Exam Details <span
+            data-th-text="${batchStudentAttendance.batch.name+' - '+ batchStudentAttendance.batch.teacher.subject.name}" ></span >
+
+      </button >
+    </div >
+
+    <div class="container-fluid collapse" data-th-id="${'content'+index.count}" >
+      <!--batch name-->
+      <div class="container-fluid" >
+        <table class="table table-striped table-inverse " id="myTable" >
+          <thead class="thead-inverse" >
+          <tr >
+            <th >Batch Name</th >
+            <th >Teacher Name</th >
+            <th >Start At</th >
+            <th >End At</th >
+            <th >Present Or Not</th >
+          </tr >
+          </thead >
+          <tbody >
+          <tr data-th-each="timeTableStudentAttendance, rowCount : ${batchStudentAttendance.timeTableStudentAttendances}" >
+            <td data-th-text="${batchStudentAttendance.batch.name}" ></td >
+            <td data-th-text="${batchStudentAttendance.teacher.name}" ></td >
+            <td data-th-text="${#temporals.format(batchStudentAttendance.timeTable.startAt, 'dd-MM-yyyy HH:mm')}" ></td >
+            <td data-th-text="${#temporals.format(batchStudentAttendance.timeTable.endAt, 'dd-MM-yyyy HH:mm')}" ></td >
+            <td data-th-text="${timeTableStudentAttendance.attendanceStatus.attendanceStatus}" ></td >
+          </tr >
+          </tbody >
+        </table >
+      </div >
+      <hr />
+      <!--  exam summary -->
+      <div class="container-fluid" >
+        <div class="container-fluid" >
+          <h5 class="text-center p-2 btn-block bg-secondary text-white" >Student Attendance Detail </h5 >
+        </div >
+        <table class="table table-striped table-inverse " >
+          <thead class="thead-inverse" >
+          <tr >
+            <th >Students Count</th >
+            <th >Present Count</th >
+            <th >Present List</th >
+            <th >Absent Count</th >
+            <th >Absent List</th >
+          </tr >
+          </thead >
+          <tbody >
+          <tr >
+            <td data-th-text="${#lists.size(batchExamResultStudent.batch.batchStudents)}" ></td >
+            <td data-th-text="${batchExamResultStudent.attendCount}" ></td >
+            <td >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#pList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > Present List
+              </button >
+            </td >
+            <td data-th-text="${batchExamResultStudent.absentCount}" ></td >
+            <td >
+              <button type="button" class="btn btn-danger" data-toggle="collapse"
+                      data-th-attr="data-target='#abList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > Absent List
+              </button >
+            </td >
+          </tr >
+          </tbody >
+        </table >
+      </div >
+      <hr />
+      <!--  Result summary -->
+      <div class="container-fluid" >
+        <div class="container-fluid" >
+          <h5 class="text-center p-2 btn-block bg-secondary text-white" >Student Result Detail </h5 >
+        </div >
+        <table class="table table-striped table-inverse " >
+          <thead class="thead-inverse" >
+          <tr >
+            <th >A+</th >
+            <th >A</th >
+            <th >A-</th >
+            <th >B+</th >
+            <th >B</th >
+            <th >B-</th >
+            <th >C+</th >
+            <th >C</th >
+            <th >C-</th >
+            <th >D+</th >
+            <th >D</th >
+            <th >E</th >
+          </tr >
+          </thead >
+          <tbody >
+          <tr >
+            <td data-th-text="${#lists.size(batchExamResultStudent.aPlusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.aStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.aMinusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.bPlusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.bStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.bMinusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.cPlusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.cStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.cMinusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.dPlusStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.dStudents)}" ></td >
+            <td data-th-text="${#lists.size(batchExamResultStudent.eStudents)}" ></td >
+          </tr >
+          <tr >
+            <th >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#apList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > A+ Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#aList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > A Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#amList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > A- Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#bpList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > B+ Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#bList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > B Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-success" data-toggle="collapse"
+                      data-th-attr="data-target='#bmList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > B- Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-primary" data-toggle="collapse"
+                      data-th-attr="data-target='#cpList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > C+ Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-primary" data-toggle="collapse"
+                      data-th-attr="data-target='#cList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > C Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-warning" data-toggle="collapse"
+                      data-th-attr="data-target='#cmList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > C- Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-warning" data-toggle="collapse"
+                      data-th-attr="data-target='#dpList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > D+ Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-warning" data-toggle="collapse"
+                      data-th-attr="data-target='#dList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > D Student List
+              </button >
+            </th >
+            <th >
+              <button type="button" class="btn btn-danger" data-toggle="collapse"
+                      data-th-attr="data-target='#eList'+${index.index}"
+                      aria-expanded="false" aria-controls="" > E Student List
+              </button >
+            </th >
+          </tr >
+          </tbody >
+        </table >
+      </div >
+      <hr />
+      <div class="container-fluid" >
+        <!--Present student-->
+        <div class="collapse" data-th-id="${'pList'+ index.index}" >
+          <div class="card card-body bg-gradient-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >Present Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.attendStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.attendStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.attendStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--Absent student-->
+        <div class="collapse" data-th-id="${'abList'+ index.index}" >
+          <div class="card card-body bg-gradient-danger" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >Absent Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.absentStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.absentStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.absentStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--A plus student-->
+        <div class="collapse" data-th-id="${'apList'+ index.index}" >
+          <div class="card card-body bg-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >A Plus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.aPlusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.aPlusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.aPlusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--A plus student-->
+        <div class="collapse" data-th-id="${'aList'+ index.index}" >
+          <div class="card card-body bg-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >A Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.aStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.aStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.aStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--A minus student-->
+        <div class="collapse" data-th-id="${'amList'+ index.index}" >
+          <div class="card card-body bg-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >A Minus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.aMinusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.aMinusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.aMinusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--B plus student-->
+        <div class="collapse" data-th-id="${'bpList'+ index.index}" >
+          <div class="card card-body bg-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >B Plus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.bPlusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.bPlusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.bPlusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--B student-->
+        <div class="collapse" data-th-id="${'bList'+ index.index}" >
+          <div class="card card-body bg-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >B Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.bStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.bStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.bStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--B Minus student-->
+        <div class="collapse" data-th-id="${'bmList'+ index.index}" >
+          <div class="card card-body bg-success" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >B Minus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.bMinusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.bMinusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-info" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.bMinusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--C plus student-->
+        <div class="collapse" data-th-id="${'cpList'+ index.index}" >
+          <div class="card card-body bg-info" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >C Plus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.cPlusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.cPlusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-warning" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.cPlusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--C student-->
+        <div class="collapse" data-th-id="${'cList'+ index.index}" >
+          <div class="card card-body bg-info" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >C Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.cStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.cStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-warning" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.cStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--C minus student-->
+        <div class="collapse" data-th-id="${'cmList'+ index.index}" >
+          <div class="card card-body bg-warning" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >C Minus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.cMinusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.cMinusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-dark" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.cMinusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--D plus student-->
+        <div class="collapse" data-th-id="${'dpList'+ index.index}" >
+          <div class="card card-body bg-warning" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >D Plus Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.dPlusStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.dPlusStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-warning" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.dPlusStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--D student-->
+        <div class="collapse" data-th-id="${'dList'+ index.index}" >
+          <div class="card card-body bg-warning" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >D Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.dStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.dStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-warning" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.dStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+        <!--E student-->
+        <div class="collapse" data-th-id="${'eList'+ index.index}" >
+          <div class="card card-body bg-danger" >
+            <div class="container-fluid" >
+              <h5 class="text-center p-2 btn-block bg-secondary text-white" >E Student List </h5 >
+            </div >
+            <div class="container-fluid" >
+              <table class="table table-striped table-inverse"
+                     data-th-if="${!#lists.isEmpty(batchExamResultStudent.eStudents)}" >
+                <thead class="thead-inverse" >
+                <tr >
+                  <th >Index</th >
+                  <th >Registration No</th >
+                  <th >Name</th >
+                  <th >Gender</th >
+                  <th >Email</th >
+                  <th >Mobile Number</th >
+                  <th >View</th >
+                </tr >
+                </thead >
+                <tbody >
+                <tr data-th-each="student, index :  ${batchExamResultStudent.eStudents}" >
+                  <td data-th-text="${index.count}" ></td >
+                  <td data-th-text="${student.regNo}" ></td >
+                  <td data-th-text="${student.firstName}" ></td >
+                  <td data-th-text="${student.gender.gender}" ></td >
+                  <td data-th-text="${student.email}" ></td >
+                  <td data-th-text="${student.mobile}" ></td >
+                  <td >
+                    <a data-th-href="${'/student/view/'+ student.id}" >
+                      <button class="btn btn-warning" >View</button >
+                    </a >
+                  </td >
+                </tr >
+                </tbody >
+              </table >
+              <div class="container-fluid text-center alert alert-success" role="alert"
+                   data-th-if="${#lists.isEmpty(batchExamResultStudent.eStudents)}" >
+                <p class="text-center font-weight-bold h3" >There is not student to show</p >
+              </div >
+            </div >
+          </div >
+        </div >
+      </div >
+    </div >
+  </div >
+</div >
+
+<!--footer is included-->
+<div data-th-replace="~{fragments/footer :: footerFragment}" ></div >
+<!--script is included-->
+<div data-th-replace="~{fragments/script :: scriptFragment}" ></div >
+
+
+</body >
+</html >

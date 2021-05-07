@@ -1,13 +1,13 @@
 package lk.succes_student_management.asset.time_table_student_attendence.service;
 
 
-
 import lk.succes_student_management.asset.common_asset.model.enums.LiveDead;
 import lk.succes_student_management.asset.time_table_student_attendence.dao.TimeTableStudentAttendanceDao;
 import lk.succes_student_management.asset.time_table_student_attendence.entity.TimeTableStudentAttendance;
 import lk.succes_student_management.util.interfaces.AbstractService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,4 +49,8 @@ public class TimeTableStudentAttendanceService implements AbstractService< TimeT
     return timeTableStudentAttendanceDao.findFirstByOrderByIdDesc();
   }
 
+  public List< TimeTableStudentAttendance > findByCreatedAtIsBetween(LocalDateTime startDateTime,
+                                                                     LocalDateTime endDateTime) {
+    return timeTableStudentAttendanceDao.findByCreatedAtIsBetween(startDateTime, endDateTime);
+  }
 }
