@@ -58,7 +58,7 @@ public class StudentService implements AbstractService< Student, Integer > {
     }
 
     public Student lastStudentOnDB() {
-        return null;
+        return studentDao.findFirstByOrderByIdDesc();
     }
 
   public List< Student> findByCreatedAtIsBetween(LocalDateTime startDateTime, LocalDateTime endDateTime) {
